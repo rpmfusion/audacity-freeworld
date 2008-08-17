@@ -3,7 +3,7 @@ Conflicts: %{realname}
 
 Name: audacity-freeworld
 Version: 1.3.5
-Release: 0.1.beta%{?dist}
+Release: 0.2.beta%{?dist}
 Summary: Multitrack audio editor
 Group: Applications/Multimedia
 License: GPLv2
