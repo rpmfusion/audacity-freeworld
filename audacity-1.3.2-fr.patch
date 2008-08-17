@@ -1,0 +1,3744 @@
+diff -Nur audacity-src-1.3.2-beta-orig/locale/fr.po audacity-src-1.3.2-beta/locale/fr.po
+--- audacity-src-1.3.2-beta-orig/locale/fr.po	2006-10-29 01:06:02.000000000 +0200
++++ audacity-src-1.3.2-beta/locale/fr.po	2007-02-15 23:28:47.000000000 +0100
+@@ -17,7 +17,7 @@
+ "Max spike width (higher is more sensitive)"
+ msgstr ""
+ "\n"
+-"Largeur maximum du pic (la sensibilité augmente avec la largeur)"
++"Largeur maximum du pic (la sensibilitÈ augmente avec la largeur)"
+ 
+ #: ../src/Menus.cpp:3703
+ msgid ""
+@@ -34,11 +34,11 @@
+ msgstr ""
+ "\n"
+ " \n"
+-"Sélectionnez le seuil (la sensibilité diminue avec le seuil)"
++"SÈlectionnez le seuil (la sensibilitÈ diminue avec le seuil)"
+ 
+ #: ../src/widgets/AButton.cpp:181
+ msgid " (disabled)"
+-msgstr " (désactivé)"
++msgstr " (dÈsactivÈ)"
+ 
+ #: ../src/import/Import.cpp:86
+ msgid ""
+@@ -82,14 +82,14 @@
+ "\n"
+ "It has been removed from the history list."
+ msgstr ""
+-"%s n'existe pas et ne peut être ouvert.\n"
++"%s n'existe pas et ne peut Ítre ouvert.\n"
+ "\n"
+-"Il a été retiré de l'historique."
++"Il a ÈtÈ retirÈ de l'historique."
+ 
+ #: ../src/AudacityApp.cpp:279 ../src/Project.cpp:1891
+ #, c-format
+ msgid "%s is already open in another window."
+-msgstr "%s est déjà ouvert dans une autre fenêtre."
++msgstr "%s est dÈj‡ ouvert dans une autre fenÍtre."
+ 
+ #  i18n-hint: This is the pattern for filenames that are created
+ #  when a file needs to be backed up to a different name.  For
+@@ -111,7 +111,7 @@
+ 
+ #: ../src/Menus.cpp:328
+ msgid "&All\tCtrl+A"
+-msgstr "&Tout sélectionner\tCtrl+A"
++msgstr "&Tout sÈlectionner\tCtrl+A"
+ 
+ #: ../src/Menus.cpp:563
+ msgid "&Analyze"
+@@ -127,7 +127,7 @@
+ 
+ #: ../src/Menus.cpp:603
+ msgid "&Contents..."
+-msgstr "&Table des matières..."
++msgstr "&Table des matiËres..."
+ 
+ #: ../src/Menus.cpp:294
+ msgid "&Copy\tCtrl+C"
+@@ -153,7 +153,7 @@
+ #: ../src/Menus.cpp:751
+ #, c-format
+ msgid "&Export Selection As %s..."
+-msgstr "&Exporter la sélection en %s..."
++msgstr "&Exporter la sÈlection en %s..."
+ 
+ #: ../src/Menus.cpp:148
+ msgid "&File"
+@@ -161,11 +161,11 @@
+ 
+ #: ../src/Menus.cpp:410
+ msgid "&Fit in Window\tCtrl+F"
+-msgstr "&Adapter à la fenêtre\tCtrl+F"
++msgstr "&Adapter ‡ la fenÍtre\tCtrl+F"
+ 
+ #: ../src/Menus.cpp:504
+ msgid "&Generate"
+-msgstr "&Générer"
++msgstr "&GÈnÈrer"
+ 
+ #: ../src/Menus.cpp:598 ../src/Menus.cpp:601
+ msgid "&Help"
+@@ -205,11 +205,11 @@
+ #: ../src/AudacityApp.cpp:532 ../src/Menus.cpp:387
+ #, fuzzy
+ msgid "&Preferences...\tCtrl+,"
+-msgstr "&Préférences...\tCtrl+P"
++msgstr "&PrÈfÈrences...\tCtrl+P"
+ 
+ #: ../src/Menus.cpp:391
+ msgid "&Preferences...\tCtrl+P"
+-msgstr "&Préférences...\tCtrl+P"
++msgstr "&PrÈfÈrences...\tCtrl+P"
+ 
+ #: ../src/Menus.cpp:436
+ msgid "&Project"
+@@ -238,7 +238,7 @@
+ 
+ #: ../src/Menus.cpp:299
+ msgid "&Trim\tCtrl+T"
+-msgstr "&Ne garder que la sélection\tCtrl+T"
++msgstr "&Ne garder que la sÈlection\tCtrl+T"
+ 
+ #: ../src/Menus.cpp:271
+ msgid "&Undo\tCtrl+Z"
+@@ -259,7 +259,7 @@
+ 
+ #: ../src/Menus.cpp:412
+ msgid "&Zoom to Selection\tCtrl+E"
+-msgstr "&Zoomer sur la sélection\tCtrl+E"
++msgstr "&Zoomer sur la sÈlection\tCtrl+E"
+ 
+ #: ../src/TrackPanel.cpp:4847
+ msgid "'left' channel"
+@@ -278,7 +278,7 @@
+ "(Not all combinations of headers\n"
+ "and encodings are possible.)"
+ msgstr ""
+-"(Les combinaison d'entête\n"
++"(Les combinaison d'entÍte\n"
+ "et d'encodage ne sont pas\n"
+ "toutes possibles."
+ 
+@@ -328,19 +328,19 @@
+ 
+ #: ../src/prefs/GUIPrefs.cpp:391
+ msgid "-145 dB (PCM range of 24 bit samples)"
+-msgstr "-145 dB (amplitude PCM en échantillonnage 24 bits)"
++msgstr "-145 dB (amplitude PCM en Èchantillonnage 24 bits)"
+ 
+ #: ../src/prefs/GUIPrefs.cpp:383
+ msgid "-36 dB (shallow range for high-amplitude editing)"
+-msgstr "-36 dB (pour édition de grande amplitude)"
++msgstr "-36 dB (pour Èdition de grande amplitude)"
+ 
+ #: ../src/prefs/GUIPrefs.cpp:385
+ msgid "-48 dB (PCM range of 8 bit samples)"
+-msgstr "-48 dB (amplitude PCM en échantillonnage 8 bits)"
++msgstr "-48 dB (amplitude PCM en Èchantillonnage 8 bits)"
+ 
+ #: ../src/prefs/GUIPrefs.cpp:387
+ msgid "-96 dB (PCM range of 16 bit samples)"
+-msgstr "-96 dB (amplitude PCM en échantillonnage 16 bits)"
++msgstr "-96 dB (amplitude PCM en Èchantillonnage 16 bits)"
+ 
+ #: ../src/effects/ChangeLength.cpp:113 ../src/effects/ChangeLength.cpp:127
+ #: ../src/effects/ChangeLength.cpp:162
+@@ -357,19 +357,19 @@
+ 
+ #: ../src/prefs/AudioIOPrefs.cpp:235
+ msgid "2 (Stereo)"
+-msgstr "2 (Stéréo)"
++msgstr "2 (StÈrÈo)"
+ 
+ #: ../src/import/ImportRaw.cpp:361
+ msgid "2 Channels (Stereo)"
+-msgstr "2 Canaux (Stéréo)"
++msgstr "2 Canaux (StÈrÈo)"
+ 
+ #: ../src/prefs/SpectrumPrefs.cpp:44
+ msgid "256 - default"
+-msgstr "256 - par défaut"
++msgstr "256 - par dÈfaut"
+ 
+ #: ../src/prefs/SpectrumPrefs.cpp:48
+ msgid "4096 - most narrowband"
+-msgstr "4096 - bande plus étroite"
++msgstr "4096 - bande plus Ètroite"
+ 
+ #: ../src/prefs/SpectrumPrefs.cpp:39
+ #, fuzzy
+@@ -382,7 +382,7 @@
+ 
+ #: ../src/AboutDialog.cpp:186
+ msgid "A Free Digital Audio Editor"
+-msgstr "Un éditeur audio numérique libre"
++msgstr "Un Èditeur audio numÈrique libre"
+ 
+ #: ../src/AboutDialog.cpp:100
+ msgid "About Audacity..."
+@@ -400,7 +400,7 @@
+ #: ../src/TranscriptionToolBar.cpp:246
+ #, fuzzy
+ msgid "Add Label"
+-msgstr "Marqueur ajouté"
++msgstr "Marqueur ajoutÈ"
+ 
+ #: ../src/Menus.cpp:495
+ msgid "Add Label At Playback Position\tCtrl+M"
+@@ -408,16 +408,16 @@
+ 
+ #: ../src/Menus.cpp:494
+ msgid "Add Label At Selection\tCtrl+B"
+-msgstr "Ajouter un marqueur à  la sélection\tCtrl+B"
++msgstr "Ajouter un marqueur ‡  la sÈlection\tCtrl+B"
+ 
+ #: ../src/TranscriptionToolBar.cpp:245
+ #, fuzzy
+ msgid "Add label at selection"
+-msgstr "Ajouter un marqueur à  la sélection\tCtrl+B"
++msgstr "Ajouter un marqueur ‡  la sÈlection\tCtrl+B"
+ 
+ #: ../src/Menus.cpp:3495
+ msgid "Added label"
+-msgstr "Marqueur ajouté"
++msgstr "Marqueur ajoutÈ"
+ 
+ #: ../src/TranscriptionToolBar.cpp:252
+ msgid "Adjust Sensitivity"
+@@ -442,28 +442,28 @@
+ #: ../src/TrackPanel.cpp:4453
+ #, fuzzy
+ msgid "Adjusted Pan"
+-msgstr "Enveloppe ajustée."
++msgstr "Enveloppe ajustÈe."
+ 
+ #: ../src/TrackPanel.cpp:1634
+ msgid "Adjusted envelope."
+-msgstr "Enveloppe ajustée."
++msgstr "Enveloppe ajustÈe."
+ 
+ #: ../src/TrackPanel.cpp:4518
+ #, fuzzy
+ msgid "Adjusted gain"
+-msgstr "Enveloppe ajustée."
++msgstr "Enveloppe ajustÈe."
+ 
+ #: ../src/effects/AvcCompressor.cpp:588
+ msgid "Adjustment Delay:"
+-msgstr "Délai d'ajustement :"
++msgstr "DÈlai d'ajustement :"
+ 
+ #: ../src/effects/AvcCompressor.cpp:571
+ msgid "Adjustment Settings"
+-msgstr "Réglages d'ajustement"
++msgstr "RÈglages d'ajustement"
+ 
+ #: ../src/effects/AvcCompressor.cpp:576
+ msgid "Adjustment Window:"
+-msgstr "Fenêtre d'ajustement :"
++msgstr "FenÍtre d'ajustement :"
+ 
+ #: ../src/Tags.cpp:474
+ msgid "Album"
+@@ -483,11 +483,11 @@
+ 
+ #: ../src/Menus.cpp:474
+ msgid "Align End with Selection End"
+-msgstr "Aligner la fin avec la fin de la sélection"
++msgstr "Aligner la fin avec la fin de la sÈlection"
+ 
+ #: ../src/Menus.cpp:473
+ msgid "Align End with Selection Start"
+-msgstr "Aligner la fin avec le début de la sélection"
++msgstr "Aligner la fin avec le dÈbut de la sÈlection"
+ 
+ #: ../src/Menus.cpp:475
+ msgid "Align Tracks Together"
+@@ -499,7 +499,7 @@
+ 
+ #: ../src/Menus.cpp:486
+ msgid "Align and move cursor..."
+-msgstr "Aligner et déplacer le curseur..."
++msgstr "Aligner et dÈplacer le curseur..."
+ 
+ #: ../src/Menus.cpp:469
+ msgid "Align with &Cursor"
+@@ -507,47 +507,47 @@
+ 
+ #: ../src/Menus.cpp:468
+ msgid "Align with &Zero"
+-msgstr "Aligner avec le &Zéro"
++msgstr "Aligner avec le &ZÈro"
+ 
+ #: ../src/Menus.cpp:471
+ msgid "Align with Selection &End"
+-msgstr "Aligner avec la fin de la sél&ection"
++msgstr "Aligner avec la fin de la sÈl&ection"
+ 
+ #: ../src/Menus.cpp:470
+ msgid "Align with Selection &Start"
+-msgstr "Aligner avec le début de la &Sélection"
++msgstr "Aligner avec le dÈbut de la &SÈlection"
+ 
+ #: ../src/Menus.cpp:3326
+ msgid "Aligned"
+-msgstr "Aligné"
++msgstr "AlignÈ"
+ 
+ #: ../src/Menus.cpp:3302
+ msgid "Aligned cursor"
+-msgstr "Curseur aligné"
++msgstr "Curseur alignÈ"
+ 
+ #: ../src/Menus.cpp:3314
+ msgid "Aligned end with cursor"
+-msgstr "Fin alignée avec le curseur"
++msgstr "Fin alignÈe avec le curseur"
+ 
+ #: ../src/Menus.cpp:3322
+ msgid "Aligned end with selection end"
+-msgstr "Fin alignée avec la fin de la sélection"
++msgstr "Fin alignÈe avec la fin de la sÈlection"
+ 
+ #: ../src/Menus.cpp:3318
+ msgid "Aligned end with selection start"
+-msgstr "Fin alignée avec le début de la sélection"
++msgstr "Fin alignÈe avec le dÈbut de la sÈlection"
+ 
+ #: ../src/Menus.cpp:3310
+ msgid "Aligned with selection end"
+-msgstr "Aligné avec la fin de la sélection"
++msgstr "AlignÈ avec la fin de la sÈlection"
+ 
+ #: ../src/Menus.cpp:3306
+ msgid "Aligned with selection start"
+-msgstr "Aligné avec le début de la sélection"
++msgstr "AlignÈ avec le dÈbut de la sÈlection"
+ 
+ #: ../src/Menus.cpp:3298
+ msgid "Aligned with zero"
+-msgstr "Aligné avec le zéro"
++msgstr "AlignÈ avec le zÈro"
+ 
+ #: ../src/UploadDialog.cpp:1320 ../src/UploadDialog.cpp:1347
+ #, fuzzy
+@@ -623,7 +623,7 @@
+ 
+ #: ../src/import/ImportRaw.cpp:387
+ msgid "Amount to import:"
+-msgstr "Portion à importer :"
++msgstr "Portion ‡ importer :"
+ 
+ #: ../src/effects/Amplify.cpp:148
+ msgid "Amplification (dB):"
+@@ -631,7 +631,7 @@
+ 
+ #: ../src/effects/AvcCompressor.cpp:652
+ msgid "Amplification Settings"
+-msgstr "Réglages d'amplification"
++msgstr "RÈglages d'amplification"
+ 
+ #: ../src/effects/Amplify.cpp:76
+ msgid "Amplify"
+@@ -651,7 +651,7 @@
+ 
+ #: ../src/effects/ToneGen.cpp:306
+ msgid "Amplitude (0-1)"
+-msgstr "Amplitude (0 à 1)"
++msgstr "Amplitude (0 ‡ 1)"
+ 
+ #: ../src/prefs/MousePrefs.cpp:114 ../src/prefs/MousePrefs.cpp:115
+ msgid "Any"
+@@ -660,22 +660,22 @@
+ #: ../src/effects/Effect.h:100
+ #, c-format
+ msgid "Applied effect: %s"
+-msgstr "Effet appliqué : %s"
++msgstr "Effet appliquÈ : %s"
+ 
+ #: ../src/effects/Amplify.cpp:41
+ #, c-format
+ msgid "Applied effect: %s %.1f dB"
+-msgstr "Effet appliqué : %s %.1f dB"
++msgstr "Effet appliquÈ : %s %.1f dB"
+ 
+ #: ../src/effects/ChangeSpeed.cpp:42 ../src/effects/ChangeTempo.cpp:46
+ #, c-format
+ msgid "Applied effect: %s %.1f%%"
+-msgstr "Effet Appliqué : %s %.1f%%"
++msgstr "Effet AppliquÈ : %s %.1f%%"
+ 
+ #: ../src/effects/ChangePitch.cpp:56
+ #, c-format
+ msgid "Applied effect: %s %.2f semitones"
+-msgstr "Effet Appliqué : %s %.2f demi-tons"
++msgstr "Effet AppliquÈ : %s %.2f demi-tons"
+ 
+ #: ../src/effects/Phaser.cpp:53
+ #, fuzzy, c-format
+@@ -683,18 +683,18 @@
+ "Applied effect: %s %d stages, %.0f%% wet, frequency = %.1f Hz, start phase = "
+ "%.0f deg, depth = %d, feedback = %.0f%%"
+ msgstr ""
+-"Effet appliqué: %s %d phases, %.0f%% maxi, fréquence = %.1f Hz, phase de départ "
++"Effet appliquÈ: %s %d phases, %.0f%% maxi, frÈquence = %.1f Hz, phase de dÈpart "
+ "= %.0f deg, amplitude = %d, retour = %.0f%%"
+ 
+ #: ../src/effects/Echo.cpp:37
+ #, c-format
+ msgid "Applied effect: %s delay = %f seconds, decay factor = %f"
+-msgstr "Effet appliqué : %s délai = %f secondes, facteur de décroissance = %f"
++msgstr "Effet appliquÈ : %s dÈlai = %f secondes, facteur de dÈcroissance = %f"
+ 
+ #: ../src/effects/BassBoost.cpp:41
+ #, c-format
+ msgid "Applied effect: %s frequency = %.0f Hz, boost = %.0f dB"
+-msgstr "Effet appliqué : %s fréquence = %.0f Hz, amplification = %.0f dB"
++msgstr "Effet appliquÈ : %s frÈquence = %.0f Hz, amplification = %.0f dB"
+ 
+ #: ../src/effects/Wahwah.cpp:46
+ #, c-format
+@@ -702,8 +702,8 @@
+ "Applied effect: %s frequency = %.1f Hz, start phase = %.0f deg, depth = %.0f%"
+ "%, resonance = %.1f, frequency offset = %.0f%%"
+ msgstr ""
+-"Effet appliqué : %s fréquence = %.1f Hz, phase de départ = %.0f deg, amplitude "
+-"= %.0f%%, résonnance = %.1f, fréquence offset = %.0f%%"
++"Effet appliquÈ : %s frÈquence = %.1f Hz, phase de dÈpart = %.0f deg, amplitude "
++"= %.0f%%, rÈsonnance = %.1f, frÈquence offset = %.0f%%"
+ 
+ #: ../src/effects/ToneGen.cpp:40
+ #, c-format
+@@ -711,18 +711,18 @@
+ "Applied effect: Generate %s %s wave, frequency = %.2f Hz, amplitude = %.2f, "
+ "%.6lf seconds"
+ msgstr ""
+-"Effet appliqué : Générer %s %s onde, fréquence = %.2f Hz, amplitude = %.2f, "
++"Effet appliquÈ : GÈnÈrer %s %s onde, frÈquence = %.2f Hz, amplitude = %.2f, "
+ "%.6lf secondes"
+ 
+ #: ../src/effects/Silence.h:44
+ #, c-format
+ msgid "Applied effect: Generate Silence, %.6lf seconds"
+-msgstr "Effet appliqué : Générer un silence de, %.6lf secondes"
++msgstr "Effet appliquÈ : GÈnÈrer un silence de, %.6lf secondes"
+ 
+ #: ../src/effects/Noise.h:31
+ #, c-format
+ msgid "Applied effect: Generate White Noise, %.6lf seconds"
+-msgstr "Effet appliqué : Générer un bruit blanc de, %.6lf secondes"
++msgstr "Effet appliquÈ : GÈnÈrer un bruit blanc de, %.6lf secondes"
+ 
+ #: ../src/BatchCommands.cpp:455
+ #, fuzzy, c-format
+@@ -768,7 +768,7 @@
+ 
+ #: ../src/export/Export.cpp:205
+ msgid "Are you sure you want to save the file as \""
+-msgstr "Etes-vous sûr(e) d'enregistrer le fichier sous \""
++msgstr "Etes-vous s˚r(e) d'enregistrer le fichier sous \""
+ 
+ #: ../src/Tags.cpp:464
+ msgid "Artist"
+@@ -799,24 +799,24 @@
+ 
+ #: ../src/ControlToolBar.cpp:148
+ msgid "Audacity Control Toolbar"
+-msgstr "Barre d'outils de contrôle Audacity"
++msgstr "Barre d'outils de contrÙle Audacity"
+ 
+ #: ../src/EditToolBar.cpp:80
+ msgid "Audacity Edit Toolbar"
+-msgstr "Barre d'outils d'édition Audacity"
++msgstr "Barre d'outils d'Èdition Audacity"
+ 
+ #: ../src/UploadDialog.cpp:232
+ #, fuzzy
+ msgid "Audacity FTP"
+-msgstr "Premier démarrage d'Audacity"
++msgstr "Premier dÈmarrage d'Audacity"
+ 
+ #: ../src/LangChoice.cpp:47
+ msgid "Audacity First Run"
+-msgstr "Premier démarrage d'Audacity"
++msgstr "Premier dÈmarrage d'Audacity"
+ 
+ #: ../src/MeterToolBar.cpp:53
+ msgid "Audacity Meter Toolbar"
+-msgstr "Vu mètre Audacity"
++msgstr "Vu mËtre Audacity"
+ 
+ #: ../src/MixerToolBar.cpp:101
+ msgid "Audacity Mixer Toolbar"
+@@ -824,7 +824,7 @@
+ 
+ #: ../src/prefs/PrefsDialog.cpp:54
+ msgid "Audacity Preferences"
+-msgstr "Préférences d'Audacity"
++msgstr "PrÈfÈrences d'Audacity"
+ 
+ #: ../src/AudacityApp.cpp:1120
+ msgid "Audacity Project Files"
+@@ -833,12 +833,12 @@
+ #: ../src/prefs/GUIPrefs.cpp:360
+ #, fuzzy
+ msgid "Audacity Tester"
+-msgstr "Vu mètre Audacity"
++msgstr "Vu mËtre Audacity"
+ 
+ #: ../src/TranscriptionToolBar.cpp:109
+ #, fuzzy
+ msgid "Audacity Transcription Toolbar"
+-msgstr "Barre d'outils d'édition Audacity"
++msgstr "Barre d'outils d'Èdition Audacity"
+ 
+ #: ../src/AudacityApp.cpp:747
+ msgid ""
+@@ -855,7 +855,7 @@
+ msgstr ""
+ "Audacity ne peut pas trouver de place pour stocker les fichiers "
+ "temporaires.\n"
+-"Veuillez entrer un répertoire approprié dans la boîte de dialogue des préférences."
++"Veuillez entrer un rÈpertoire appropriÈ dans la boÓte de dialogue des prÈfÈrences."
+ 
+ #: ../src/import/Import.cpp:174
+ msgid ""
+@@ -863,7 +863,7 @@
+ "If it is uncompressed, try importing it using \"Import Raw\""
+ msgstr ""
+ "Audacity n'a pas reconnu ce type de fichier.\n"
+-"S'il est non compressé, essayez de l'importer en utilisant \"Importer Raw\""
++"S'il est non compressÈ, essayez de l'importer en utilisant \"Importer Raw\""
+ 
+ #. i18n-hint: This message is used on Mac OS X.  This particular
+ #: ../src/export/ExportMP3.cpp:558 ../src/export/ExportMP3.cpp:872
+@@ -875,10 +875,10 @@
+ "Would you like to locate LameLib now?"
+ msgstr ""
+ "Audacity n'exporte pasde fichiers MP3  directement, mais utilise LAME, une "
+-"librairie d'export MP3 disponible séparément. Voir la documentation pour plus "
++"librairie d'export MP3 disponible sÈparÈment. Voir la documentation pour plus "
+ "d'information.\n"
+ "\n"
+-"Où se trouve l'encodeur Lame ?"
++"O˘ se trouve l'encodeur Lame ?"
+ 
+ #  i18n-hint: This message is used on Windows.
+ #. i18n-hint: This message is used on Windows.
+@@ -893,8 +893,8 @@
+ msgstr ""
+ "Audacity n'exporte pas directement de fichier MP3, mais utilise la librairie "
+ "LAME, disponible gratuitement, pour prendre en charge l'encodage MP3. Vous "
+-"devez d'abord obtenir séparément le fichier lame_enc.dll, en téléchargeant "
+-"l'encodeur LAME MP3, et en indiquant ensuite son emplacement à Audacity.  "
++"devez d'abord obtenir sÈparÈment le fichier lame_enc.dll, en tÈlÈchargeant "
++"l'encodeur LAME MP3, et en indiquant ensuite son emplacement ‡ Audacity.  "
+ "Vous n'aurez besoin de faire ceci qu'une seule fois.\n"
+ "\n"
+ "Voulez-vous indiquer l'emplacement du fichier lame_enc.dll maintenant?"
+@@ -911,14 +911,14 @@
+ "\n"
+ "Would you like to locate libmp3lame.so now?"
+ msgstr ""
+-"Audacity n'exporte pas directement les fichiers MP3, mais utilise à la place\n"
++"Audacity n'exporte pas directement les fichiers MP3, mais utilise ‡ la place\n"
+ "la librairie LAME gratuite pour prendre en charge l'encodage des fichiers "
+ "MP3.\n"
+-"Vous devez obtenir séparément cette librairie en la téléchargeant, ou en la "
+-"créant\n"
+-"à partir des codes source, et en indiquant ensuite son emplacement à "
++"Vous devez obtenir sÈparÈment cette librairie en la tÈlÈchargeant, ou en la "
++"crÈant\n"
++"‡ partir des codes source, et en indiquant ensuite son emplacement ‡ "
+ "Audacity.\n"
+-"Vous n'aurez à faire ceci qu'une fois.\n"
++"Vous n'aurez ‡ faire ceci qu'une fois.\n"
+ "\n"
+ "Voulez-vous indiquer l'emplacement de libmp3lame.so ?"
+ 
+@@ -941,12 +941,12 @@
+ "\n"
+ "Delete temporary files?"
+ msgstr ""
+-"Audacity a trouvé des fichiers temporaires qui n'ont pas été effacés ou "
+-"sauvegardés \n"
+-"lors de la dernière utilisation d' Audacity.\n"
++"Audacity a trouvÈ des fichiers temporaires qui n'ont pas ÈtÈ effacÈs ou "
++"sauvegardÈs \n"
++"lors de la derniËre utilisation d' Audacity.\n"
+ "\n"
+-"Audacity ne peut les récupérer automatiquement mais si vous choisissez\n"
+-"de ne pas les effacer, vous pouvez les récupérer manuellement.\n"
++"Audacity ne peut les rÈcupÈrer automatiquement mais si vous choisissez\n"
++"de ne pas les effacer, vous pouvez les rÈcupÈrer manuellement.\n"
+ "\n"
+ "Effacer les fichiers temporaires ?"
+ 
+@@ -959,16 +959,16 @@
+ "available for Windows 98 and newer, Mac OS X, Linux, and other Unix-like "
+ "operating systems. Older versions of Audacity are available for Mac OS 9."
+ msgstr ""
+-"Audacity est un programme gratuit écrit par une équipe internationale de "
+-"développeurs bénévoles. La coordination remercie SourceForge.net, un service en "
++"Audacity est un programme gratuit Ècrit par une Èquipe internationale de "
++"dÈveloppeurs bÈnÈvoles. La coordination remercie SourceForge.net, un service en "
+ "ligne qui fournit des outils aux projets de programmes en source libre. "
+ "Audacity est disponible pour Windows 98 et plus, MacOS9 et X, Linux, et "
+-"d'autres systèmes basés sur Unix. Des versions plus anciennes d'Audacity  sont "
++"d'autres systËmes basÈs sur Unix. Des versions plus anciennes d'Audacity  sont "
+ "disponibles pour Mac OS 9. "
+ 
+ #: ../src/AudacityApp.cpp:859
+ msgid "Audacity is already running"
+-msgstr "Audacity est déjà ouvert"
++msgstr "Audacity est dÈj‡ ouvert"
+ 
+ #: ../src/AboutDialog.cpp:202
+ msgid "Audacity is based on code from the following projects:"
+@@ -981,7 +981,7 @@
+ "temporary directory."
+ msgstr ""
+ "Audacity va maintenant se fermer.  Veuillez relancer Audacity pour utiliser "
+-"le nouveau répertoire temporaire."
++"le nouveau rÈpertoire temporaire."
+ 
+ #: ../src/export/ExportMultiple.cpp:267
+ msgid ""
+@@ -999,7 +999,7 @@
+ "Associate them, so they open on double-click?"
+ msgstr ""
+ "Les projets Audacity(.AUP) ne sont pas actuellement\n"
+-"associés à  Audacity. \n"
++"associÈs ‡  Audacity. \n"
+ "\n"
+ "Voulez-vous les associer afin de pouvoir les ouvrir d'un double clic ?"
+ 
+@@ -1016,11 +1016,11 @@
+ msgstr ""
+ "Les projets Audacity (.aup) vous permettent d'enregister votre travail "
+ "exactement tel t\n"
+-"qu'il apparaît à l'écran, mais la plupart des autres programmes ne peuvent les "
++"qu'il apparaÓt ‡ l'Ècran, mais la plupart des autres programmes ne peuvent les "
+ "ouvrir.\n"
+ "\n"
+-"Si vous voulez enregister un fichier pouvant être ouvert par d'autres "
+-"programmes, sélectionnez\n"
++"Si vous voulez enregister un fichier pouvant Ítre ouvert par d'autres "
++"programmes, sÈlectionnez\n"
+ "une des commandes d'exportation."
+ 
+ #: ../src/Project.cpp:2567
+@@ -1033,7 +1033,7 @@
+ "Audacity was expecting a library named \"%s\". Are you sure you want to "
+ "attempt to export MP3 files using \"%s\"?"
+ msgstr ""
+-"Audacity attend une librairie nommée  \"%s\".  Etes-vous sûr de vouloir "
++"Audacity attend une librairie nommÈe  \"%s\".  Etes-vous s˚r de vouloir "
+ "exporter des MP3 en utilisant \"%s\" ?"
+ 
+ #: ../src/AudacityApp.cpp:844
+@@ -1045,10 +1045,10 @@
+ "\n"
+ "Do you still want to start Audacity?"
+ msgstr ""
+-"Audacity ne peut pas verrouiller le répertoire temporaire.\n"
+-"Ce répertoire est peut être déjà utilisé par une autre session d'Audacity.\n"
+-"Exécuter simultannément deux sessions d'Audacity peut causer\n"
+-"des pertes de données ou un crash système.\n"
++"Audacity ne peut pas verrouiller le rÈpertoire temporaire.\n"
++"Ce rÈpertoire est peut Ítre dÈj‡ utilisÈ par une autre session d'Audacity.\n"
++"ExÈcuter simultannÈment deux sessions d'Audacity peut causer\n"
++"des pertes de donnÈes ou un crash systËme.\n"
+ "\n"
+ "Voulez-vous toujours lancer Audacity ?"
+ 
+@@ -1082,15 +1082,15 @@
+ 
+ #: ../src/effects/AvcCompressor.cpp:122
+ msgid "Automatic Volume Control"
+-msgstr "Contrôle du volume automatique"
++msgstr "ContrÙle du volume automatique"
+ 
+ #: ../src/effects/AvcCompressor.cpp:558
+ msgid "Automatic Volume Control by Vincent A. Busam"
+-msgstr "Contrôle du Volume Automatique par Vincent A. Busam"
++msgstr "ContrÙle du Volume Automatique par Vincent A. Busam"
+ 
+ #: ../src/effects/AvcCompressor.h:66
+ msgid "Automatic Volume Control..."
+-msgstr "Contrôle du Volume automatique..."
++msgstr "ContrÙle du Volume automatique..."
+ 
+ #: ../src/TranscriptionToolBar.cpp:242
+ msgid "Automatically make labels from words"
+@@ -1098,7 +1098,7 @@
+ 
+ #: ../src/prefs/GUIPrefs.cpp:308
+ msgid "Autoscroll while playing"
+-msgstr "Défilement auto de la piste pendant la lecture"
++msgstr "DÈfilement auto de la piste pendant la lecture"
+ 
+ #: ../src/effects/BassBoost.cpp:74
+ #, fuzzy
+@@ -1174,7 +1174,7 @@
+ 
+ #: ../src/prefs/FileFormatPrefs.cpp:197
+ msgid "Bit Rate:"
+-msgstr "Débit :"
++msgstr "DÈbit :"
+ 
+ #: ../src/effects/BassBoost.cpp:314
+ msgid "Boost (dB):"
+@@ -1182,7 +1182,7 @@
+ 
+ #: ../src/effects/BassBoost.h:46
+ msgid "Boosting Bass Frequencies"
+-msgstr "Amplification des basses fréquences"
++msgstr "Amplification des basses frÈquences"
+ 
+ #: ../src/prefs/MousePrefs.cpp:86
+ msgid "Buttons"
+@@ -1265,7 +1265,7 @@
+ #: ../src/effects/PopClick.cpp:70
+ msgid "Cannot remove a pop or click at the very beginning of a track."
+ msgstr ""
+-"Impossible d'enlever un \"pop\" ou un \"clic\" au tout début d'une piste."
++"Impossible d'enlever un \"pop\" ou un \"clic\" au tout dÈbut d'une piste."
+ 
+ #: ../src/effects/PopClick.cpp:65
+ msgid "Cannot remove a pop or click longer than one second."
+@@ -1273,7 +1273,7 @@
+ 
+ #: ../src/widgets/ASlider.cpp:600
+ msgid "Center"
+-msgstr "Centré"
++msgstr "CentrÈ"
+ 
+ #  i18n-hint: This is a technical term, derived from the word
+ #  "spectrum".  Do not translate it unless you are sure you
+@@ -1306,7 +1306,7 @@
+ 
+ #: ../src/prefs/MousePrefs.cpp:107
+ msgid "Change ONE Sample only"
+-msgstr "Changer un seul échantillon :"
++msgstr "Changer un seul Èchantillon :"
+ 
+ #: ../src/effects/ChangePitch.cpp:119
+ msgid "Change Pitch"
+@@ -1322,11 +1322,11 @@
+ 
+ #: ../src/prefs/MousePrefs.cpp:104
+ msgid "Change Sample"
+-msgstr "Modifier l'échantillon"
++msgstr "Modifier l'Èchantillon"
+ 
+ #: ../src/prefs/MousePrefs.cpp:106
+ msgid "Change Several Samples"
+-msgstr "Changer plusieurs échantillons"
++msgstr "Changer plusieurs Èchantillons"
+ 
+ #: ../src/effects/ChangeSpeed.cpp:49
+ msgid "Change Speed"
+@@ -1358,7 +1358,7 @@
+ 
+ #: ../src/TrackPanel.cpp:5088
+ msgid "Change lower speed limit (%) to:"
+-msgstr "Passer la vitesse minimale de (%) à :"
++msgstr "Passer la vitesse minimale de (%) ‡ :"
+ 
+ #: ../src/Menus.cpp:671
+ msgid "Change pan on first selected track\tShift+P"
+@@ -1370,32 +1370,32 @@
+ 
+ #: ../src/TrackPanel.cpp:5095
+ msgid "Change upper speed limit (%) to:"
+-msgstr "Passer la vitesse maximale de (%) à :"
++msgstr "Passer la vitesse maximale de (%) ‡ :"
+ 
+ #: ../src/effects/AvcCompressor.cpp:405
+ msgid ""
+ "Change window size must be less than or equal to Adjustment window size."
+ msgstr ""
+-"La nouvelle taille de fenêtre doit être inférieure ou égale à celle de la fenêtre "
+-"ajustée."
++"La nouvelle taille de fenÍtre doit Ítre infÈrieure ou Ègale ‡ celle de la fenÍtre "
++"ajustÈe."
+ 
+ #: ../src/TrackPanel.cpp:4930
+ #, c-format
+ msgid "Changed '%s' to %d Hz"
+-msgstr " '%s' changé en %d Hz"
++msgstr " '%s' changÈ en %d Hz"
+ 
+ #: ../src/TrackPanel.cpp:4857 ../src/TrackPanel.cpp:4966
+ #, c-format
+ msgid "Changed '%s' to %s"
+-msgstr " '%s' changé en %s"
++msgstr " '%s' changÈ en %s"
+ 
+ #: ../src/prefs/DirectoriesPrefs.cpp:216
+ msgid ""
+ "Changes to temporary directory will not take effect until Audacity is "
+ "restarted"
+ msgstr ""
+-"Les changements de dossier temporaire ne prendront effet qu'après avoir "
+-"redémarré Audacity "
++"Les changements de dossier temporaire ne prendront effet qu'aprËs avoir "
++"redÈmarrÈ Audacity "
+ 
+ #: ../src/effects/ChangeLength.h:30
+ #, fuzzy
+@@ -1441,7 +1441,7 @@
+ 
+ #: ../src/prefs/DirectoriesPrefs.cpp:136
+ msgid "Choose a location to place the temporary directory"
+-msgstr "Choisir un emplacement pour placer le répertoire temporaire"
++msgstr "Choisir un emplacement pour placer le rÈpertoire temporaire"
+ 
+ #: ../src/export/ExportMultiple.cpp:901
+ msgid "Choose a location to save the exported files"
+@@ -1458,7 +1458,7 @@
+ #: ../src/BatchCommandDialog.cpp:74
+ #, fuzzy
+ msgid "Choose from the list below"
+-msgstr "Collé depuis le presse-papier"
++msgstr "CollÈ depuis le presse-papier"
+ 
+ #: ../src/export/ExportMultiple.cpp:700 ../src/prefs/DirectoriesPrefs.cpp:82
+ msgid "Choose..."
+@@ -1528,7 +1528,7 @@
+ 
+ #: ../src/TrackPanel.cpp:1146
+ msgid "Click and drag to adjust relative size of stereo tracks."
+-msgstr "Cliquer-glisser pour ajuster la taille relative des pistes stéréo"
++msgstr "Cliquer-glisser pour ajuster la taille relative des pistes stÈrÈo"
+ 
+ #: ../src/ControlToolBar.cpp:78
+ msgid "Click and drag to edit the amplitude envelope"
+@@ -1536,7 +1536,7 @@
+ 
+ #: ../src/ControlToolBar.cpp:79
+ msgid "Click and drag to edit the samples"
+-msgstr "Cliquer-glisser pour modifier les échantillons."
++msgstr "Cliquer-glisser pour modifier les Èchantillons."
+ 
+ #: ../src/ControlToolBar.cpp:87
+ msgid "Click and drag to move a track in time"
+@@ -1544,11 +1544,11 @@
+ 
+ #: ../src/TrackPanel.cpp:1222
+ msgid "Click and drag to move left selection boundary."
+-msgstr "Cliquer et glisser pour déplacer à gauche les limites de la sélection."
++msgstr "Cliquer et glisser pour dÈplacer ‡ gauche les limites de la sÈlection."
+ 
+ #: ../src/TrackPanel.cpp:1227
+ msgid "Click and drag to move right selection boundary."
+-msgstr "Cliquer-glisser pour déplacer à droite les limites de la sélection."
++msgstr "Cliquer-glisser pour dÈplacer ‡ droite les limites de la sÈlection."
+ 
+ #: ../src/TrackPanel.cpp:1149
+ msgid "Click and drag to resize the track."
+@@ -1556,19 +1556,19 @@
+ 
+ #: ../src/ControlToolBar.cpp:77
+ msgid "Click and drag to select audio"
+-msgstr "Cliquer-glisser pour sélectionner l'audio."
++msgstr "Cliquer-glisser pour sÈlectionner l'audio."
+ 
+ #: ../src/ControlToolBar.cpp:81
+ msgid "Click to Zoom In, Shift-Click to Zoom Out"
+-msgstr "Clic pour Zoom avant, Maj + Clic pour Zoom arrière"
++msgstr "Clic pour Zoom avant, Maj + Clic pour Zoom arriËre"
+ 
+ #: ../src/TrackPanel.cpp:1121
+ msgid ""
+ "Click to vertically zoom in, Shift-click to zoom out, Drag to create a "
+ "particular zoom region."
+ msgstr ""
+-"Clic pour zoom vertical, Maj+clic pour zoom arrière, glisser pour ajuster le "
+-"zoom à une zone"
++"Clic pour zoom vertical, Maj+clic pour zoom arriËre, glisser pour ajuster le "
++"zoom ‡ une zone"
+ 
+ #: ../src/prefs/GUIPrefs.cpp:351
+ msgid "Clips"
+@@ -1607,7 +1607,7 @@
+ 
+ #: ../src/export/Export.cpp:391
+ msgid "Command-line exporting is only supported on UNIX"
+-msgstr "L'exportation de lignes de commandes est supporté seulement sous UNIX"
++msgstr "L'exportation de lignes de commandes est supportÈ seulement sous UNIX"
+ 
+ #. i18n-hint: '-help', '-test' and
+ #: ../src/AudacityApp.cpp:591 ../src/AudacityApp.cpp:655
+@@ -1624,7 +1624,7 @@
+ "Options actives de la ligne de commande :\n"
+ "  -help (ce message)\n"
+ "  -test (lance des diagnostics)\n"
+-"  -blocksize ### (régle la taille maxi  en octets pour un bloc du disque)\n"
++"  -blocksize ### (rÈgle la taille maxi  en octets pour un bloc du disque)\n"
+ "\n"
+ "En plus, donner le nom d'un fichier audio ou d'un projet Audacity\n"
+ "pour l'ouvrir.\n"
+@@ -1662,7 +1662,7 @@
+ #: ../src/UploadDialog.cpp:347
+ #, fuzzy
+ msgid "Connecting..."
+-msgstr "&Table des matières..."
++msgstr "&Table des matiËres..."
+ 
+ #: ../src/UploadDialog.cpp:407
+ msgid "Connection cannot be established"
+@@ -1680,7 +1680,7 @@
+ #: ../src/ControlToolBar.cpp:149
+ #, fuzzy
+ msgid "Control"
+-msgstr "Centré"
++msgstr "CentrÈ"
+ 
+ #: ../src/Legacy.cpp:338
+ #, c-format
+@@ -1689,7 +1689,7 @@
+ "The old file has been saved as '%s'"
+ msgstr ""
+ "Conversion d'un projet version 1.0 au nouveau format.\n"
+-"L'ancien fichier a été sauvegardé sous '%s'"
++"L'ancien fichier a ÈtÈ sauvegardÈ sous '%s'"
+ 
+ #: ../src/EditToolBar.cpp:148 ../src/TrackPanel.cpp:432
+ msgid "Copy"
+@@ -1720,7 +1720,7 @@
+ "Could not save project. Perhaps %s is not writeable,\n"
+ "or the disk is full."
+ msgstr ""
+-"Impossible de sauver le projet. %s est peut-être protégé en écriture, \n"
++"Impossible de sauver le projet. %s est peut-Ítre protÈgÈ en Ècriture, \n"
+ "ou le disque est plein"
+ 
+ #: ../src/BatchCommands.cpp:324
+@@ -1733,7 +1733,7 @@
+ #: ../src/Project.cpp:2095
+ #, c-format
+ msgid "Couldn't find the project data folder: \"%s\""
+-msgstr "Impossible de trouver le répertoire de données du projet : \"%s\""
++msgstr "Impossible de trouver le rÈpertoire de donnÈes du projet : \"%s\""
+ 
+ #: ../src/Help.cpp:73
+ msgid "Couldn't open the Audacity Help file."
+@@ -1746,35 +1746,35 @@
+ 
+ #: ../src/Menus.cpp:3383
+ msgid "Created new audio track"
+-msgstr "Nouvelle piste audio créée"
++msgstr "Nouvelle piste audio crÈÈe"
+ 
+ #: ../src/Menus.cpp:3423
+ msgid "Created new label track"
+-msgstr "Nouvelle piste de marqueurs créée"
++msgstr "Nouvelle piste de marqueurs crÈÈe"
+ 
+ #: ../src/Project.cpp:2604
+ msgid "Created new project"
+-msgstr "Nouveau projet créé"
++msgstr "Nouveau projet crÈÈ"
+ 
+ #: ../src/Menus.cpp:3407
+ msgid "Created new stereo audio track"
+-msgstr "Nouvelle piste audio stéréo créée"
++msgstr "Nouvelle piste audio stÈrÈo crÈÈe"
+ 
+ #: ../src/Menus.cpp:3459
+ msgid "Created new time track"
+-msgstr "Nouvelle piste de temps créée"
++msgstr "Nouvelle piste de temps crÈÈe"
+ 
+ #: ../src/effects/NoiseRemoval.h:40
+ msgid "Creating Noise Profile"
+-msgstr "Création d'un profil du bruit"
++msgstr "CrÈation d'un profil du bruit"
+ 
+ #: ../src/AboutDialog.cpp:192
+ msgid "Credits"
+-msgstr "Crédits"
++msgstr "CrÈdits"
+ 
+ #: ../src/prefs/MousePrefs.cpp:100 ../src/prefs/MousePrefs.cpp:107
+ msgid "Ctrl-Left-Drag"
+-msgstr "Ctrl + glisser à gauche"
++msgstr "Ctrl + glisser ‡ gauche"
+ 
+ #: ../src/prefs/MousePrefs.cpp:115
+ msgid "Ctrl-Wheel-Rotate"
+@@ -1786,7 +1786,7 @@
+ 
+ #: ../src/FreqWindow.cpp:131
+ msgid "Cuberoot Autocorrelation"
+-msgstr "Autocorrélation racine cubique"
++msgstr "AutocorrÈlation racine cubique"
+ 
+ #: ../src/effects/ChangeLength.cpp:123
+ msgid "Current Length (minutes): "
+@@ -1802,17 +1802,17 @@
+ 
+ #: ../src/Menus.cpp:338
+ msgid "Cursor to End"
+-msgstr "Du curseur à la fin"
++msgstr "Du curseur ‡ la fin"
+ 
+ #: ../src/FreqWindow.cpp:750
+ #, c-format
+ msgid "Cursor: %.4f sec (%d Hz) (%s) = %f,    Peak: %.4f sec (%d Hz) (%s)"
+-msgstr "Curseur: %.4f sec (%d Hz) (%s) = %f,   Crête : %.4f sec (%d Hz) (%s)"
++msgstr "Curseur: %.4f sec (%d Hz) (%s) = %f,   CrÍte : %.4f sec (%d Hz) (%s)"
+ 
+ #: ../src/FreqWindow.cpp:742
+ #, c-format
+ msgid "Cursor: %d Hz (%s) = %d dB    Peak: %d Hz (%s)"
+-msgstr "Curseur: %d Hz (%s) = %d dB    Crête : %d Hz (%s)"
++msgstr "Curseur: %d Hz (%s) = %d dB    CrÍte : %d Hz (%s)"
+ 
+ #: ../src/EditToolBar.cpp:146 ../src/Menus.cpp:2021 ../src/TrackPanel.cpp:431
+ msgid "Cut"
+@@ -1833,11 +1833,11 @@
+ #: ../src/effects/nyquist/Nyquist.cpp:748
+ #: ../src/effects/nyquist/Nyquist.cpp:894
+ msgid "Debug"
+-msgstr "Débogage"
++msgstr "DÈbogage"
+ 
+ #: ../src/effects/Echo.cpp:222
+ msgid "Decay factor:"
+-msgstr "Facteur de décroissance :"
++msgstr "Facteur de dÈcroissance :"
+ 
+ #: ../src/Menus.cpp:676
+ msgid "Decrease gain on first selected track\tAlt+Shift+Down"
+@@ -1845,22 +1845,22 @@
+ 
+ #: ../src/prefs/QualityPrefs.cpp:125
+ msgid "Default Sample Format:"
+-msgstr "Format d'échantillonnage par défaut :"
++msgstr "Format d'Èchantillonnage par dÈfaut :"
+ 
+ #: ../src/prefs/QualityPrefs.cpp:92
+ msgid "Default Sample Rate:"
+-msgstr "Fréquence d'échantillonnage par défaut :"
++msgstr "FrÈquence d'Èchantillonnage par dÈfaut :"
+ 
+ #  i18n-hint: Refers to byte-order.  Don't translate "endianness" if you don't
+ #  know the correct technical word.
+ #. i18n-hint: Refers to byte-order.  Don't translate "endianness" if you don't
+ #: ../src/import/ImportRaw.cpp:336
+ msgid "Default endianness"
+-msgstr "\"Boutisme\" par défaut."
++msgstr "\"Boutisme\" par dÈfaut."
+ 
+ #: ../src/prefs/KeyConfigPrefs.cpp:124
+ msgid "Defaults"
+-msgstr "Réglages par défaut"
++msgstr "RÈglages par dÈfaut"
+ 
+ #: ../src/effects/Leveller.cpp:205
+ msgid "Degree of Leveling"
+@@ -1872,7 +1872,7 @@
+ 
+ #: ../src/effects/Echo.cpp:203
+ msgid "Delay time (seconds):"
+-msgstr "Durée du délai (secondes) :"
++msgstr "DurÈe du dÈlai (secondes) :"
+ 
+ #: ../src/Project.cpp:2724 ../src/UploadDialog.cpp:508
+ #: ../src/UploadDialog.cpp:642
+@@ -1898,7 +1898,7 @@
+ 
+ #: ../src/Menus.cpp:651
+ msgid "DeleteKey\tBackspace"
+-msgstr "Touche d'effacement\tRetour arrière"
++msgstr "Touche d'effacement\tRetour arriËre"
+ 
+ #: ../src/Menus.cpp:656
+ msgid "DeleteKey2\tDelete"
+@@ -1907,12 +1907,12 @@
+ #: ../src/Project.cpp:2721
+ #, c-format
+ msgid "Deleted %.2f seconds at t=%.2f"
+-msgstr "Effacé de  %.2f secondes à %.2f"
++msgstr "EffacÈ de  %.2f secondes ‡ %.2f"
+ 
+ #: ../src/UploadDialog.cpp:741
+ #, fuzzy
+ msgid "Deleting directories"
+-msgstr "Répertoires"
++msgstr "RÈpertoires"
+ 
+ #: ../src/UploadDialog.cpp:733
+ #, fuzzy
+@@ -1922,7 +1922,7 @@
+ #: ../src/UploadDialog.cpp:594
+ #, fuzzy
+ msgid "Deleting..."
+-msgstr "Sélectionner..."
++msgstr "SÈlectionner..."
+ 
+ #: ../src/effects/Wahwah.cpp:515
+ msgid "Depth (%):"
+@@ -1938,11 +1938,11 @@
+ 
+ #: ../src/AboutDialog.cpp:198
+ msgid "Developers:"
+-msgstr "Développeurs :"
++msgstr "DÈveloppeurs :"
+ 
+ #: ../src/prefs/AudioIOPrefs.cpp:144 ../src/prefs/AudioIOPrefs.cpp:219
+ msgid "Device:"
+-msgstr "Périphérique :"
++msgstr "PÈriphÈrique :"
+ 
+ #: ../src/VoiceKey.cpp:827
+ #, c-format
+@@ -1959,22 +1959,22 @@
+ 
+ #: ../src/prefs/PrefsDialog.cpp:87 ../src/prefs/PrefsDialog.cpp:210
+ msgid "Directories"
+-msgstr "Répertoires"
++msgstr "RÈpertoires"
+ 
+ #: ../src/prefs/DirectoriesPrefs.cpp:183
+ #, c-format
+ msgid "Directory %s does not exist. Create it?"
+-msgstr "Le répertoire %s n'existe pas. Le créer ?"
++msgstr "Le rÈpertoire %s n'existe pas. Le crÈer ?"
+ 
+ #: ../src/prefs/DirectoriesPrefs.cpp:204
+ #, c-format
+ msgid "Directory %s is not writable"
+-msgstr "Le répertoire %s est protégé en écriture."
++msgstr "Le rÈpertoire %s est protÈgÈ en Ècriture."
+ 
+ #: ../src/widgets/Meter.cpp:325
+ #, fuzzy
+ msgid "Disable Meter"
+-msgstr " (désactivé)"
++msgstr " (dÈsactivÈ)"
+ 
+ #: ../src/HistoryWindow.cpp:90
+ msgid "Discard"
+@@ -1982,7 +1982,7 @@
+ 
+ #: ../src/HistoryWindow.cpp:66
+ msgid "Discard undo data"
+-msgstr "Effacer les données d'annulation"
++msgstr "Effacer les donnÈes d'annulation"
+ 
+ #: ../src/UploadDialog.cpp:273
+ msgid "Disconnect"
+@@ -1991,7 +1991,7 @@
+ #: ../src/Project.cpp:2904
+ #, fuzzy, c-format
+ msgid "Disk space remains for recording %d hours and %d minutes."
+-msgstr "Durée d'enregistrement restante : %d heures et %d minutes"
++msgstr "DurÈe d'enregistrement restante : %d heures et %d minutes"
+ 
+ #: ../src/Project.cpp:2910
+ #, c-format
+@@ -2006,7 +2006,7 @@
+ #: ../src/Project.cpp:2907
+ #, fuzzy, c-format
+ msgid "Disk space remains for recording 1 hour and %d minutes."
+-msgstr "Durée d'enregistrement restante : 1 heure et %d minutes"
++msgstr "DurÈe d'enregistrement restante : 1 heure et %d minutes"
+ 
+ #: ../src/prefs/SpectrumPrefs.cpp:99
+ msgid "Display"
+@@ -2014,15 +2014,15 @@
+ 
+ #: ../src/Menus.cpp:926
+ msgid "Dock Control Toolbar"
+-msgstr "Verrouiller la barre de contrôle"
++msgstr "Verrouiller la barre de contrÙle"
+ 
+ #: ../src/Menus.cpp:931
+ msgid "Dock Edit Toolbar"
+-msgstr "Verrouiller la barre d'édition"
++msgstr "Verrouiller la barre d'Èdition"
+ 
+ #: ../src/Menus.cpp:941
+ msgid "Dock Meter Toolbar"
+-msgstr "Verrouiller le vu-mètre"
++msgstr "Verrouiller le vu-mËtre"
+ 
+ #: ../src/Menus.cpp:936
+ msgid "Dock Mixer Toolbar"
+@@ -2031,12 +2031,12 @@
+ #: ../src/ToolBar.cpp:524
+ #, fuzzy
+ msgid "Dock Toolbar"
+-msgstr "Verrouiller la barre d'édition"
++msgstr "Verrouiller la barre d'Èdition"
+ 
+ #: ../src/Menus.cpp:946
+ #, fuzzy
+ msgid "Dock Transcription Toolbar"
+-msgstr "Verrouiller la barre d'édition"
++msgstr "Verrouiller la barre d'Èdition"
+ 
+ #: ../src/widgets/Warning.cpp:53
+ msgid "Don't show this warning again"
+@@ -2044,7 +2044,7 @@
+ 
+ #: ../src/TrackPanel.cpp:412
+ msgid "Down Octave"
+-msgstr "Octave inférieure"
++msgstr "Octave infÈrieure"
+ 
+ #: ../src/UploadDialog.cpp:510
+ msgid "Download"
+@@ -2086,12 +2086,12 @@
+ 
+ #: ../src/ControlToolBar.cpp:83
+ msgid "Drag to Zoom Into Region, Right-Click to Zoom Out"
+-msgstr "Glisser pour Zoom dans une zone, clic-droit pour Zoom arrière"
++msgstr "Glisser pour Zoom dans une zone, clic-droit pour Zoom arriËre"
+ 
+ #: ../src/prefs/GUIPrefs.cpp:317
+ #, fuzzy
+ msgid "Dragging of left and right selection edges"
+-msgstr "Autoriser l'ajustement de la sélection par glissement gauche/droite."
++msgstr "Autoriser l'ajustement de la sÈlection par glissement gauche/droite."
+ 
+ #: ../src/ControlToolBar.cpp:367
+ msgid "Draw Tool"
+@@ -2117,7 +2117,7 @@
+ 
+ #: ../src/Menus.cpp:2390
+ msgid "Duplicated"
+-msgstr "Dupliqué"
++msgstr "DupliquÈ"
+ 
+ #: ../src/effects/Compressor.cpp:43
+ msgid "Dynamic Range Compressor"
+@@ -2178,7 +2178,7 @@
+ 
+ #: ../src/effects/ladspa/LadspaEffect.cpp:453
+ msgid "Effect Settings"
+-msgstr "Réglages de l'effet"
++msgstr "RÈglages de l'effet"
+ 
+ #: ../src/prefs/GUIPrefs.cpp:354
+ msgid "Effects Graph"
+@@ -2190,16 +2190,16 @@
+ 
+ #: ../src/prefs/GUIPrefs.cpp:327
+ msgid "Enable Edit Toolbar"
+-msgstr "Activer la barre d'édition"
++msgstr "Activer la barre d'Èdition"
+ 
+ #: ../src/widgets/Meter.cpp:323
+ #, fuzzy
+ msgid "Enable Meter"
+-msgstr "Activer le VU mètre"
++msgstr "Activer le VU mËtre"
+ 
+ #: ../src/prefs/GUIPrefs.cpp:331
+ msgid "Enable Meter Toolbar"
+-msgstr "Activer le VU mètre"
++msgstr "Activer le VU mËtre"
+ 
+ #: ../src/prefs/GUIPrefs.cpp:329
+ msgid "Enable Mixer Toolbar"
+@@ -2208,16 +2208,16 @@
+ #: ../src/prefs/GUIPrefs.cpp:333
+ #, fuzzy
+ msgid "Enable Transcription Toolbar"
+-msgstr "Activer la barre d'édition"
++msgstr "Activer la barre d'Èdition"
+ 
+ #: ../src/prefs/GUIPrefs.cpp:336
+ #, fuzzy
+ msgid "Enable cut lines"
+-msgstr "Impossible à déterminer"
++msgstr "Impossible ‡ dÈterminer"
+ 
+ #: ../src/effects/AvcCompressor.cpp:659
+ msgid "Enabled"
+-msgstr "Activé"
++msgstr "ActivÈ"
+ 
+ #: ../src/prefs/FileFormatPrefs.cpp:437
+ msgid "Encoding: "
+@@ -2242,7 +2242,7 @@
+ 
+ #: ../src/FreqWindow.cpp:132
+ msgid "Enhanced Autocorrelation"
+-msgstr "Autocorrélation Avancée"
++msgstr "AutocorrÈlation AvancÈe"
+ 
+ #: ../src/effects/nyquist/Nyquist.cpp:285
+ msgid "Enter Nyquist Command: "
+@@ -2251,7 +2251,7 @@
+ #: ../src/TrackPanel.cpp:5058
+ msgid "Enter a sample rate in Hz (per second) between 1 and 100000:"
+ msgstr ""
+-"Entrer un taux d'échantillonnage en Hz (par seconde) entre 1 et 100 000 :"
++"Entrer un taux d'Èchantillonnage en Hz (par seconde) entre 1 et 100 000 :"
+ 
+ #: ../src/effects/NoiseRemoval.cpp:531
+ msgid ""
+@@ -2304,7 +2304,7 @@
+ #: ../src/prefs/GUIPrefs.cpp:320
+ #, fuzzy
+ msgid "Ergonomic order of audio I/O buttons"
+-msgstr "Activer l'ergonomie des boutons magnétophone"
++msgstr "Activer l'ergonomie des boutons magnÈtophone"
+ 
+ #: ../src/ControlToolBar.cpp:775 ../src/ControlToolBar.cpp:965
+ #: ../src/UploadDialog.cpp:370 ../src/UploadDialog.cpp:1278
+@@ -2315,7 +2315,7 @@
+ #: ../src/export/ExportPCM.cpp:167
+ #, fuzzy, c-format
+ msgid "Error (file may not have been written): %hs"
+-msgstr "Erreur (le fichier peut ne pas avoir été écrit) : %s"
++msgstr "Erreur (le fichier peut ne pas avoir ÈtÈ Ècrit) : %s"
+ 
+ #: ../src/AudioIO.cpp:181
+ msgid "Error Initializing Audio"
+@@ -2336,7 +2336,7 @@
+ 
+ #: ../src/AudacityApp.cpp:846
+ msgid "Error locking temporary folder"
+-msgstr "Erreur de verrouillage du répertoire temporaire"
++msgstr "Erreur de verrouillage du rÈpertoire temporaire"
+ 
+ #: ../src/Project.cpp:1941 ../src/Project.cpp:1949
+ msgid "Error opening file"
+@@ -2382,16 +2382,16 @@
+ "Error while opening sound device. Please check the input device settings and "
+ "the project sample rate."
+ msgstr ""
+-"Erreur à l 'ouverture du périphérique son. Vérifiez les réglages du périphérique et "
+-"l'échantillonnage du projet."
++"Erreur ‡ l 'ouverture du pÈriphÈrique son. VÈrifiez les rÈglages du pÈriphÈrique et "
++"l'Èchantillonnage du projet."
+ 
+ #: ../src/ControlToolBar.cpp:774 ../src/effects/Effect.cpp:339
+ msgid ""
+ "Error while opening sound device. Please check the output device settings "
+ "and the project sample rate."
+ msgstr ""
+-"Erreur à l 'ouverture du périphérique son. Vérifiez les réglages du périphérique et "
+-"l'échantillonnage du projet."
++"Erreur ‡ l 'ouverture du pÈriphÈrique son. VÈrifiez les rÈglages du pÈriphÈrique et "
++"l'Èchantillonnage du projet."
+ 
+ #: ../src/AudioIO.cpp:178
+ msgid "Error: "
+@@ -2400,11 +2400,11 @@
+ #: ../src/xml/XMLFileReader.cpp:59
+ #, fuzzy, c-format
+ msgid "Error: %hs at line %d"
+-msgstr "Erreur : %s à la ligne %d"
++msgstr "Erreur : %s ‡ la ligne %d"
+ 
+ #: ../src/DirManager.cpp:954
+ msgid "Error: is directory write-protected or disk full?"
+-msgstr "Erreur : répertoire protégé en écriture ou disque plein ?."
++msgstr "Erreur : rÈpertoire protÈgÈ en Ècriture ou disque plein ?."
+ 
+ #: ../src/TrackPanel.cpp:3469
+ msgid "Expand"
+@@ -2417,7 +2417,7 @@
+ #: ../src/Sequence.cpp:788
+ #, c-format
+ msgid "Expected to read %d samples, got %d samples.\n"
+-msgstr "Au lieu de %d échantillons attendus en lecture, %d reçus.\n"
++msgstr "Au lieu de %d Èchantillons attendus en lecture, %d reÁus.\n"
+ 
+ #: ../src/export/ExportMultiple.cpp:818 ../src/export/ExportOGG.cpp:197
+ #: ../src/export/ExportPCM.cpp:142
+@@ -2447,7 +2447,7 @@
+ #: ../src/Menus.cpp:212
+ #, fuzzy
+ msgid "Export CleanSpeech Presets..."
+-msgstr "&Exporter la sélection en %s..."
++msgstr "&Exporter la sÈlection en %s..."
+ 
+ #: ../src/prefs/KeyConfigPrefs.cpp:160
+ msgid "Export Keyboard Shortcuts As:"
+@@ -2468,19 +2468,19 @@
+ 
+ #: ../src/Menus.cpp:174
+ msgid "Export Selection As MP3..."
+-msgstr "Exporter la sélection en MP3..."
++msgstr "Exporter la sÈlection en MP3..."
+ 
+ #: ../src/Menus.cpp:187
+ msgid "Export Selection As Ogg Vorbis..."
+-msgstr "Exporter la sélection en Ogg Vorbis..."
++msgstr "Exporter la sÈlection en Ogg Vorbis..."
+ 
+ #: ../src/Menus.cpp:171
+ msgid "Export Selection As..."
+-msgstr "&Exporter la sélection en %s..."
++msgstr "&Exporter la sÈlection en %s..."
+ 
+ #: ../src/FreqWindow.cpp:996
+ msgid "Export Spectral Data As:"
+-msgstr "Exporter les données spectrales sous :"
++msgstr "Exporter les donnÈes spectrales sous :"
+ 
+ #: ../src/export/ExportMultiple.cpp:670
+ msgid "Export format:"
+@@ -2518,7 +2518,7 @@
+ #: ../src/export/ExportMP3.cpp:1419
+ #, fuzzy, c-format
+ msgid "Exporting selected audio at %d kbps"
+-msgstr "Exportation de la sélection audio en MP3"
++msgstr "Exportation de la sÈlection audio en MP3"
+ 
+ #: ../src/export/ExportOGG.cpp:194
+ msgid "Exporting the entire project as Ogg Vorbis"
+@@ -2532,25 +2532,25 @@
+ #: ../src/export/ExportCL.cpp:146
+ msgid "Exporting the entire project using command-line encoder"
+ msgstr ""
+-"Exportation du projet entier en utilisant un encodeur à ligne de commande"
++"Exportation du projet entier en utilisant un encodeur ‡ ligne de commande"
+ 
+ #: ../src/export/ExportOGG.cpp:193
+ msgid "Exporting the selected audio as Ogg Vorbis"
+-msgstr "Exportation de la sélection audio en Ogg Vorbis"
++msgstr "Exportation de la sÈlection audio en Ogg Vorbis"
+ 
+ #: ../src/export/ExportPCM.cpp:133
+ #, c-format
+ msgid "Exporting the selected audio as a %s file"
+-msgstr "Exportation de la sélection audio en fichier %s"
++msgstr "Exportation de la sÈlection audio en fichier %s"
+ 
+ #: ../src/export/ExportCL.cpp:144
+ msgid "Exporting the selected audio using command-line encoder"
+ msgstr ""
+-"Exportation de la sélection audio en utilisant un encodeur à ligne de commande"
++"Exportation de la sÈlection audio en utilisant un encodeur ‡ ligne de commande"
+ 
+ #: ../src/prefs/MousePrefs.cpp:91
+ msgid "Extend Selection Range"
+-msgstr "Etendre la sélection"
++msgstr "Etendre la sÈlection"
+ 
+ #: ../src/effects/NoiseRemoval.cpp:585
+ msgid "Extreme (May Distort)"
+@@ -2621,7 +2621,7 @@
+ #: ../src/UploadDialog.cpp:259
+ #, fuzzy
+ msgid "File Manager"
+-msgstr "Préfixe de nom de fichier :"
++msgstr "PrÈfixe de nom de fichier :"
+ 
+ #: ../src/Project.cpp:1955
+ #, c-format
+@@ -2637,7 +2637,7 @@
+ 
+ #: ../src/export/ExportMultiple.cpp:779
+ msgid "File name prefix:"
+-msgstr "Préfixe de nom de fichier :"
++msgstr "PrÈfixe de nom de fichier :"
+ 
+ #: ../src/DirManager.cpp:1263
+ msgid "Fill in silence for missing display data [this session only]"
+@@ -2649,7 +2649,7 @@
+ 
+ #: ../src/Menus.cpp:344
+ msgid "Find Zero Crossings\tZ"
+-msgstr "Rechercher les croisements avec le zéro\tZ"
++msgstr "Rechercher les croisements avec le zÈro\tZ"
+ 
+ #: ../src/export/ExportMultiple.cpp:748
+ msgid "First file name:"
+@@ -2667,27 +2667,27 @@
+ #: ../src/EditToolBar.cpp:172
+ #, fuzzy
+ msgid "Fit Selection"
+-msgstr "Curseur à la fin de la sélection"
++msgstr "Curseur ‡ la fin de la sÈlection"
+ 
+ #: ../src/EditToolBar.cpp:174
+ msgid "Fit project in window"
+-msgstr "Adapter le projet à la fenêtre"
++msgstr "Adapter le projet ‡ la fenÍtre"
+ 
+ #: ../src/EditToolBar.cpp:172
+ msgid "Fit selection in window"
+-msgstr "Adapter la sélection à la fenêtre"
++msgstr "Adapter la sÈlection ‡ la fenÍtre"
+ 
+ #: ../src/Menus.cpp:927
+ msgid "Float Control Toolbar"
+-msgstr "Barre de contrôle flottante"
++msgstr "Barre de contrÙle flottante"
+ 
+ #: ../src/Menus.cpp:932
+ msgid "Float Edit Toolbar"
+-msgstr "Barre d'édition flottante"
++msgstr "Barre d'Èdition flottante"
+ 
+ #: ../src/Menus.cpp:426 ../src/Menus.cpp:942
+ msgid "Float Meter Toolbar"
+-msgstr "Vu mètre flottant"
++msgstr "Vu mËtre flottant"
+ 
+ #: ../src/Menus.cpp:937
+ msgid "Float Mixer Toolbar"
+@@ -2696,7 +2696,7 @@
+ #: ../src/Menus.cpp:947
+ #, fuzzy
+ msgid "Float Transcription Toolbar"
+-msgstr "Barre d'édition flottante"
++msgstr "Barre d'Èdition flottante"
+ 
+ #: ../src/TrackPanel.cpp:417
+ msgid "Font..."
+@@ -2720,11 +2720,11 @@
+ 
+ #: ../src/FreqWindow.cpp:1017
+ msgid "Frequency (Hz)\tLevel (dB)"
+-msgstr "Fréquence (Hz)\tNiveau (dB)"
++msgstr "FrÈquence (Hz)\tNiveau (dB)"
+ 
+ #: ../src/effects/BassBoost.cpp:298
+ msgid "Frequency (Hz):"
+-msgstr "Fréquence (Hz) :"
++msgstr "FrÈquence (Hz) :"
+ 
+ #: ../src/effects/ChangePitch.cpp:324
+ msgid "Frequency (Hz):   from"
+@@ -2732,11 +2732,11 @@
+ 
+ #: ../src/effects/ToneGen.cpp:290
+ msgid "Frequency / Hz"
+-msgstr "Fréquence / Hz"
++msgstr "FrÈquence / Hz"
+ 
+ #: ../src/FreqWindow.cpp:68
+ msgid "Frequency Analysis"
+-msgstr "Analyse de fréquence"
++msgstr "Analyse de frÈquence"
+ 
+ #. i18n-hint: Title of the Gain slider, used to adjust the volume
+ #: ../src/TrackPanel.cpp:2766 ../src/TrackPanel.cpp:4518
+@@ -2746,27 +2746,27 @@
+ 
+ #: ../src/effects/Noise.cpp:35
+ msgid "Generate Noise"
+-msgstr "Générer du bruit"
++msgstr "GÈnÈrer du bruit"
+ 
+ #: ../src/effects/Silence.cpp:31
+ msgid "Generate Silence"
+-msgstr "Générer du silence"
++msgstr "GÈnÈrer du silence"
+ 
+ #: ../src/effects/ToneGen.cpp:338
+ msgid "Generate Tone"
+-msgstr "Générer un son"
++msgstr "GÈnÈrer un son"
+ 
+ #: ../src/effects/Silence.h:39
+ msgid "Generating Silence"
+-msgstr "Générer du silence"
++msgstr "GÈnÈrer du silence"
+ 
+ #: ../src/effects/ToneGen.h:43
+ msgid "Generating Tone"
+-msgstr "Géneration d'un son"
++msgstr "GÈneration d'un son"
+ 
+ #: ../src/effects/Noise.h:35
+ msgid "Generating White Noise"
+-msgstr "Génération d'un Bruit blanc"
++msgstr "GÈnÈration d'un Bruit blanc"
+ 
+ #: ../src/Tags.cpp:701
+ msgid "Genre:"
+@@ -2787,23 +2787,23 @@
+ #: ../src/prefs/AudioIOPrefs.cpp:290
+ msgid "Hardware Playthrough (Play new track while recording it)"
+ msgstr ""
+-"Passage audio matériel (Lire la nouvelle piste pendant son enregistrement)"
++"Passage audio matÈriel (Lire la nouvelle piste pendant son enregistrement)"
+ 
+ #: ../src/prefs/FileFormatPrefs.cpp:414
+ msgid "Header: "
+-msgstr "Entête :"
++msgstr "EntÍte :"
+ 
+ #: ../src/Resample.cpp:46
+ msgid "High-quality Sinc Interpolation"
+-msgstr "Interpolation de haute qualité"
++msgstr "Interpolation de haute qualitÈ"
+ 
+ #: ../src/prefs/QualityPrefs.cpp:189
+ msgid "High-quality dither:"
+-msgstr "Lissage de haute qualité."
++msgstr "Lissage de haute qualitÈ."
+ 
+ #: ../src/prefs/QualityPrefs.cpp:154
+ msgid "High-quality sample rate converter:"
+-msgstr "Convertisseur d'échantillonnage de haute qualité :"
++msgstr "Convertisseur d'Èchantillonnage de haute qualitÈ :"
+ 
+ #: ../src/widgets/Meter.cpp:334
+ msgid "Horizontal Stereo"
+@@ -2820,11 +2820,11 @@
+ 
+ #: ../src/AboutDialog.cpp:126
+ msgid "ID3 tag exporting disabled"
+-msgstr "Exportation de tag ID3 désactivée"
++msgstr "Exportation de tag ID3 dÈsactivÈe"
+ 
+ #: ../src/AboutDialog.cpp:124
+ msgid "ID3 tag exporting enabled"
+-msgstr "Exportation de tag ID3 activée"
++msgstr "Exportation de tag ID3 activÈe"
+ 
+ #: ../src/Tags.cpp:626
+ msgid "ID3v1 (more compatible)"
+@@ -2844,8 +2844,8 @@
+ "export multiple files."
+ msgstr ""
+ "Si vous avez plus d'une piste audio, il est possible d'exporter chacune dans "
+-"un fichier indépendant,\n"
+-"ou si vous avez une piste de marqueurs, vous pouvez créer un nouveau fichier "
++"un fichier indÈpendant,\n"
++"ou si vous avez une piste de marqueurs, vous pouvez crÈer un nouveau fichier "
+ "pour chaque marqueur.\n"
+ "\n"
+ "Ce projet n'ayant pas de pistes multiples, ni de piste de marqueurs, vous ne "
+@@ -2867,7 +2867,7 @@
+ 
+ #: ../src/Menus.cpp:441
+ msgid "Import &Raw Data..."
+-msgstr "Importer des données brutes (&Raw)..."
++msgstr "Importer des donnÈes brutes (&Raw)..."
+ 
+ #: ../src/Menus.cpp:213
+ msgid "Import CleanSpeech Presets..."
+@@ -2883,22 +2883,22 @@
+ 
+ #: ../src/import/ImportRaw.cpp:267
+ msgid "Import Raw Data"
+-msgstr "Importer des données brutes (Raw)"
++msgstr "Importer des donnÈes brutes (Raw)"
+ 
+ #: ../src/Project.cpp:2475
+ #, c-format
+ msgid "Imported '%s'"
+-msgstr " '%s' importé"
++msgstr " '%s' importÈ"
+ 
+ #: ../src/Menus.cpp:3068
+ #, c-format
+ msgid "Imported MIDI from '%s'"
+-msgstr "Midi importé depuis '%s'"
++msgstr "Midi importÈ depuis '%s'"
+ 
+ #: ../src/Menus.cpp:3036
+ #, c-format
+ msgid "Imported labels from '%s'"
+-msgstr "Marqueurs importés depuis '%s'"
++msgstr "Marqueurs importÈs depuis '%s'"
+ 
+ #: ../src/Project.cpp:2426
+ #, c-format
+@@ -2924,15 +2924,15 @@
+ 
+ #: ../src/AudacityApp.cpp:362
+ msgid "Input Meter"
+-msgstr "Vu mètre d'entrée"
++msgstr "Vu mËtre d'entrÈe"
+ 
+ #: ../src/MixerToolBar.cpp:139
+ msgid "Input Volume"
+-msgstr "Volume d'entrée"
++msgstr "Volume d'entrÈe"
+ 
+ #: ../src/MeterToolBar.cpp:68
+ msgid "Input level meter - click to monitor input"
+-msgstr "VU mètre d'entrée - cliquer pour visualiser"
++msgstr "VU mËtre d'entrÈe - cliquer pour visualiser"
+ 
+ #: ../src/DirManager.cpp:1089
+ #, fuzzy
+@@ -2949,12 +2949,12 @@
+ 
+ #: ../src/import/ImportOGG.cpp:133
+ msgid "Invalid Vorbis bitstream header"
+-msgstr "Entête Vorbis bitstream invalide"
++msgstr "EntÍte Vorbis bitstream invalide"
+ 
+ #. i18n-hint: You do not need to translate "LOF"
+ #: ../src/import/ImportLOF.cpp:289
+ msgid "Invalid duration in LOF file."
+-msgstr "Durée invalide dans le fichier LOF."
++msgstr "DurÈe invalide dans le fichier LOF."
+ 
+ #: ../src/TrackPanel.cpp:5068
+ msgid "Invalid rate."
+@@ -2986,7 +2986,7 @@
+ #: ../src/Menus.cpp:2332
+ #, fuzzy, c-format
+ msgid "Joined %.2f seconds at t=%.2f"
+-msgstr "Effacé de  %.2f secondes à %.2f"
++msgstr "EffacÈ de  %.2f secondes ‡ %.2f"
+ 
+ #: ../src/prefs/KeyConfigPrefs.cpp:80
+ msgid "Key Combination"
+@@ -3003,19 +3003,19 @@
+ 
+ #: ../src/AboutDialog.cpp:133
+ msgid "LADSPA plug-in support disabled"
+-msgstr "Support du plug-in LADSPA désactivé"
++msgstr "Support du plug-in LADSPA dÈsactivÈ"
+ 
+ #: ../src/AboutDialog.cpp:131
+ msgid "LADSPA plug-in support enabled"
+-msgstr "Support du plug-in LADSPA activé"
++msgstr "Support du plug-in LADSPA activÈ"
+ 
+ #: ../src/effects/Phaser.cpp:513 ../src/effects/Wahwah.cpp:483
+ msgid "LFO Frequency (Hz):"
+-msgstr "Fréquence LFO (Hz) :"
++msgstr "FrÈquence LFO (Hz) :"
+ 
+ #: ../src/effects/Phaser.cpp:529 ../src/effects/Wahwah.cpp:499
+ msgid "LFO Start Phase (deg.):"
+-msgstr "Phase de départ LFO (deg.) :"
++msgstr "Phase de dÈpart LFO (deg.) :"
+ 
+ #  i18n-hint: You do not need to translate "LOF"
+ #. i18n-hint: You do not need to translate "LOF"
+@@ -3047,7 +3047,7 @@
+ 
+ #: ../src/FreqWindow.cpp:1023
+ msgid "Lag (seconds)\tFrequency (Hz)\tLevel"
+-msgstr "Décalage (secondes)\tFréquence (Hz)\tNiveau"
++msgstr "DÈcalage (secondes)\tFrÈquence (Hz)\tNiveau"
+ 
+ #: ../src/prefs/GUIPrefs.cpp:100
+ #, fuzzy
+@@ -3061,7 +3061,7 @@
+ #: ../src/AboutDialog.cpp:263
+ #, fuzzy
+ msgid "Lead Developer"
+-msgstr "Développeurs :"
++msgstr "DÈveloppeurs :"
+ 
+ #: ../src/widgets/ASlider.cpp:604
+ msgid "Left"
+@@ -3077,7 +3077,7 @@
+ 
+ #: ../src/prefs/MousePrefs.cpp:110
+ msgid "Left Drag"
+-msgstr "Glisser à gauche"
++msgstr "Glisser ‡ gauche"
+ 
+ #: ../src/Menus.cpp:332
+ #, fuzzy
+@@ -3097,7 +3097,7 @@
+ #: ../src/prefs/MousePrefs.cpp:98 ../src/prefs/MousePrefs.cpp:102
+ #: ../src/prefs/MousePrefs.cpp:106
+ msgid "Left-Drag"
+-msgstr "Glisser à gauche"
++msgstr "Glisser ‡ gauche"
+ 
+ #: ../src/TranscriptionToolBar.cpp:228
+ msgid "Left-to-Off"
+@@ -3109,15 +3109,15 @@
+ 
+ #: ../src/ControlToolBar.cpp:85
+ msgid "Left=Zoom In, Right=Zoom Out, Middle=Normal"
+-msgstr "Gauche=Zoom avant, Droit=Zoom arrière, Milieu=Normal"
++msgstr "Gauche=Zoom avant, Droit=Zoom arriËre, Milieu=Normal"
+ 
+ #: ../src/effects/Silence.cpp:127 ../src/effects/ToneGen.cpp:319
+ msgid "Length (seconds)"
+-msgstr "Durée (secondes)"
++msgstr "DurÈe (secondes)"
+ 
+ #: ../src/effects/ChangeTempo.cpp:249
+ msgid "Length (seconds):   from"
+-msgstr "Durée (secondes): depuis"
++msgstr "DurÈe (secondes): depuis"
+ 
+ #: ../src/SelectionBar.cpp:107
+ #, fuzzy
+@@ -3127,7 +3127,7 @@
+ #: ../src/BatchCommands.cpp:103 ../src/effects/Leveller.cpp:114
+ #, fuzzy
+ msgid "Leveller"
+-msgstr "Développeurs :"
++msgstr "DÈveloppeurs :"
+ 
+ #: ../src/effects/Leveller.cpp:199
+ msgid "Leveller by Lynn Allan"
+@@ -3139,7 +3139,7 @@
+ 
+ #: ../src/HistoryWindow.cpp:81
+ msgid "Levels to discard: "
+-msgstr "Niveaux à supprimer :"
++msgstr "Niveaux ‡ supprimer :"
+ 
+ #: ../src/Resample.cpp:35
+ msgid "Libresample by Dominic Mazzoni and Julius Smith"
+@@ -3147,7 +3147,7 @@
+ 
+ #: ../src/AboutDialog.cpp:138
+ msgid "Libresample support enabled"
+-msgstr "Support Libresample activé"
++msgstr "Support Libresample activÈ"
+ 
+ #: ../src/Resample.cpp:118
+ msgid "Libsamplerate by Erik de Castro Lopo"
+@@ -3160,15 +3160,15 @@
+ 
+ #: ../src/AboutDialog.cpp:140
+ msgid "Libsamplerate support enabled"
+-msgstr "Support LibSampleRate activé"
++msgstr "Support LibSampleRate activÈ"
+ 
+ #: ../src/widgets/Meter.cpp:343
+ msgid "Linear"
+-msgstr "Linéaire"
++msgstr "LinÈaire"
+ 
+ #: ../src/FreqWindow.cpp:177
+ msgid "Linear frequency"
+-msgstr "Fréquence linéaire"
++msgstr "FrÈquence linÈaire"
+ 
+ #: ../src/import/ImportLOF.cpp:151 ../src/import/ImportLOF.cpp:177
+ msgid "List of Files in basic text format"
+@@ -3191,7 +3191,7 @@
+ 
+ #: ../src/effects/Equalization.cpp:706
+ msgid "Load Predefined Curve"
+-msgstr "Charger une courbe prédéfinie"
++msgstr "Charger une courbe prÈdÈfinie"
+ 
+ #: ../src/prefs/KeyConfigPrefs.cpp:128
+ msgid "Load..."
+@@ -3222,17 +3222,17 @@
+ #, fuzzy
+ msgid "MIDI tracks cannot be offset individually, only audio files can be."
+ msgstr ""
+-"Les pistes MIDI ne peuvent être compensées individuellement, seules les pistes "
++"Les pistes MIDI ne peuvent Ítre compensÈes individuellement, seules les pistes "
+ "audio le peuvent."
+ 
+ #: ../src/export/ExportMultiple.cpp:711
+ #, fuzzy
+ msgid "MP3 Bit Rate: "
+-msgstr "Débit :"
++msgstr "DÈbit :"
+ 
+ #: ../src/prefs/FileFormatPrefs.cpp:172
+ msgid "MP3 Export Setup"
+-msgstr "Réglage de l'exportation MP3"
++msgstr "RÈglage de l'exportation MP3"
+ 
+ #: ../src/prefs/FileFormatPrefs.cpp:180
+ msgid "MP3 Library Version:"
+@@ -3240,20 +3240,20 @@
+ 
+ #: ../src/prefs/FileFormatPrefs.cpp:261
+ msgid "MP3 exporting plugin not found"
+-msgstr "Module d'exportation MP3 non trouvé"
++msgstr "Module d'exportation MP3 non trouvÈ"
+ 
+ #: ../src/AboutDialog.cpp:112
+ msgid "MP3 importing disabled"
+-msgstr "Importation MP3 désactivée"
++msgstr "Importation MP3 dÈsactivÈe"
+ 
+ #: ../src/AboutDialog.cpp:110
+ msgid "MP3 importing enabled"
+-msgstr "Importation MP3 activée"
++msgstr "Importation MP3 activÈe"
+ 
+ #: ../src/TrackPanel.cpp:4892
+ #, c-format
+ msgid "Made '%s' a stereo track"
+-msgstr " '%s' transformé en piste stéréo"
++msgstr " '%s' transformÈ en piste stÈrÈo"
+ 
+ #: ../src/Project.cpp:489
+ msgid "Main Mix"
+@@ -3270,19 +3270,19 @@
+ 
+ #: ../src/TrackPanel.cpp:4895
+ msgid "Make Stereo"
+-msgstr "Rendre stéréo"
++msgstr "Rendre stÈrÈo"
+ 
+ #: ../src/TrackPanel.cpp:398
+ msgid "Make Stereo Track"
+-msgstr "Transformer en piste stéréo"
++msgstr "Transformer en piste stÈrÈo"
+ 
+ #: ../src/prefs/FileFormatPrefs.cpp:72
+ msgid "Make a copy of the file before editing (safer)"
+-msgstr "Faire une copie du fichier avant d'éditer (plus sûr)"
++msgstr "Faire une copie du fichier avant d'Èditer (plus s˚r)"
+ 
+ #: ../src/AudacityApp.cpp:361
+ msgid "Master Gain Control"
+-msgstr "Contrôle du niveau Master"
++msgstr "ContrÙle du niveau Master"
+ 
+ #: ../src/effects/ClickRemoval.cpp:372 ../src/effects/ClickRemoval.cpp:401
+ #, fuzzy
+@@ -3303,22 +3303,22 @@
+ 
+ #: ../src/prefs/SpectrumPrefs.cpp:112
+ msgid "Maximum Frequency (Hz):"
+-msgstr "Fréquence maximum (Hz) :"
++msgstr "FrÈquence maximum (Hz) :"
+ 
+ #: ../src/prefs/SpectrumPrefs.cpp:162
+ msgid "Maximum frequency must be in the range 100 Hz - 100,000 Hz"
+-msgstr "La fréquence maximum doit se situer entre 100 Hz et 100 000 Hz"
++msgstr "La frÈquence maximum doit se situer entre 100 Hz et 100 000 Hz"
+ 
+ #: ../src/Tags.cpp:448
+ #, c-format
+ msgid "Maximum length of attribute '%s' is %d characters. Data was truncated."
+ msgstr ""
+-"La longueur maximale des attributs de  '%s' est de %d caractères. Les données "
+-"seront tronquées."
++"La longueur maximale des attributs de  '%s' est de %d caractËres. Les donnÈes "
++"seront tronquÈes."
+ 
+ #: ../src/import/ImportOGG.cpp:124
+ msgid "Media read error"
+-msgstr "Erreur de lecture du média"
++msgstr "Erreur de lecture du mÈdia"
+ 
+ #: ../src/effects/ClickRemoval.cpp:369 ../src/effects/ClickRemoval.cpp:398
+ #: ../src/effects/NoiseRemoval.cpp:579
+@@ -3328,12 +3328,12 @@
+ #: ../src/MeterToolBar.cpp:54
+ #, fuzzy
+ msgid "Meter"
+-msgstr "Centré"
++msgstr "CentrÈ"
+ 
+ #: ../src/widgets/Meter.cpp:1045
+ #, fuzzy
+ msgid "Meter Perferences"
+-msgstr "Préférences d'Audacity"
++msgstr "PrÈfÈrences d'Audacity"
+ 
+ #: ../src/widgets/Meter.cpp:1044
+ msgid "Meter refresh rate per second [1-100]: "
+@@ -3396,7 +3396,7 @@
+ 
+ #: ../src/TrackPanel.cpp:3261
+ msgid "Modified Label"
+-msgstr "Marqueur modifié"
++msgstr "Marqueur modifiÈ"
+ 
+ #: ../src/TrackPanel.cpp:395
+ msgid "Mono"
+@@ -3416,25 +3416,25 @@
+ 
+ #: ../src/prefs/MousePrefs.cpp:71
+ msgid "Mouse Bindings (default values, not configurable)"
+-msgstr "Souris (réglages par défaut, non modifiables)"
++msgstr "Souris (rÈglages par dÈfaut, non modifiables)"
+ 
+ #: ../src/Menus.cpp:346
+ msgid "Move Cursor..."
+-msgstr "Déplacer le curseur..."
++msgstr "DÈplacer le curseur..."
+ 
+ #: ../src/TrackPanel.cpp:5126
+ msgid "Move Track"
+-msgstr "Déplacer la piste"
++msgstr "DÈplacer la piste"
+ 
+ #: ../src/TrackPanel.cpp:388 ../src/TrackPanel.cpp:409
+ #: ../src/TrackPanel.cpp:420 ../src/TrackPanel.cpp:426
+ msgid "Move Track Down"
+-msgstr "Déplacer la piste vers le bas"
++msgstr "DÈplacer la piste vers le bas"
+ 
+ #: ../src/TrackPanel.cpp:387 ../src/TrackPanel.cpp:408
+ #: ../src/TrackPanel.cpp:419 ../src/TrackPanel.cpp:425
+ msgid "Move Track Up"
+-msgstr "Déplacer la piste vers le haut"
++msgstr "DÈplacer la piste vers le haut"
+ 
+ #: ../src/prefs/MousePrefs.cpp:100
+ msgid "Move clip up/down between tracks"
+@@ -3443,21 +3443,21 @@
+ #: ../src/Menus.cpp:663
+ #, fuzzy
+ msgid "Move to Next Track\tDown"
+-msgstr "Déplacer la piste vers le bas"
++msgstr "DÈplacer la piste vers le bas"
+ 
+ #: ../src/Menus.cpp:662
+ #, fuzzy
+ msgid "Move to Previous Track\tUp"
+-msgstr "Déplacer la piste vers le haut"
++msgstr "DÈplacer la piste vers le haut"
+ 
+ #: ../src/TrackPanel.cpp:5120
+ #, c-format
+ msgid "Moved '%s' %s"
+-msgstr "Déplacé '%s' %s"
++msgstr "DÈplacÈ '%s' %s"
+ 
+ #: ../src/TrackPanel.cpp:2565
+ msgid "Moved Sample"
+-msgstr "Echantillon déplacé"
++msgstr "Echantillon dÈplacÈ"
+ 
+ #: ../src/TrackPanel.cpp:1762
+ msgid "Moved clip to another track"
+@@ -3465,11 +3465,11 @@
+ 
+ #: ../src/TrackPanel.cpp:2765
+ msgid "Moved gain slider"
+-msgstr "Curseur de niveau déplacé"
++msgstr "Curseur de niveau dÈplacÈ"
+ 
+ #: ../src/TrackPanel.cpp:2765
+ msgid "Moved pan slider"
+-msgstr "Curseur de panoramique déplacé"
++msgstr "Curseur de panoramique dÈplacÈ"
+ 
+ #: ../src/prefs/BatchPrefs.cpp:131
+ msgid "Mp3 Conversion Chain"
+@@ -3491,12 +3491,12 @@
+ #. i18n-hint: This string is for the Mac OS, which uses Command-, as the shortcut for Preferences
+ #: ../src/TrackPanel.cpp:1199
+ msgid "Multi-Tool Mode: Cmd-, for Mouse and Keyboard Preferences"
+-msgstr "Mode multi-outils : Cmd pour Préférences souris et clavier"
++msgstr "Mode multi-outils : Cmd pour PrÈfÈrences souris et clavier"
+ 
+ #. i18n-hint: This string is for Windows and Linux, which uses Control-P as the shortcut for Preferences
+ #: ../src/TrackPanel.cpp:1202
+ msgid "Multi-Tool Mode: Ctrl-P for Mouse and Keyboard Preferences"
+-msgstr "Mode multi-outils : Ctrl+P pour Préférences souris et clavier"
++msgstr "Mode multi-outils : Ctrl+P pour PrÈfÈrences souris et clavier"
+ 
+ #: ../src/ControlToolBar.cpp:401
+ #, fuzzy
+@@ -3547,7 +3547,7 @@
+ 
+ #: ../src/Menus.cpp:457
+ msgid "New &Stereo Track"
+-msgstr "Nouvelle piste &Stéréo"
++msgstr "Nouvelle piste &StÈrÈo"
+ 
+ #: ../src/Menus.cpp:459
+ msgid "New &Time Track"
+@@ -3564,7 +3564,7 @@
+ 
+ #: ../src/effects/Amplify.cpp:168
+ msgid "New Peak Amplitude (dB):"
+-msgstr "Nouvelle crête (dB ):"
++msgstr "Nouvelle crÍte (dB ):"
+ 
+ #: ../src/UploadDialog.cpp:389 ../src/UploadDialog.cpp:1409
+ msgid "New Site"
+@@ -3572,7 +3572,7 @@
+ 
+ #: ../src/prefs/DirectoriesPrefs.cpp:185
+ msgid "New Temporary Directory"
+-msgstr "Nouveau Répertoire Temporaire"
++msgstr "Nouveau RÈpertoire Temporaire"
+ 
+ #: ../src/Menus.cpp:3383 ../src/Menus.cpp:3407 ../src/Menus.cpp:3423
+ #: ../src/Menus.cpp:3459
+@@ -3585,7 +3585,7 @@
+ 
+ #: ../src/effects/Repeat.cpp:252 ../src/effects/Repeat.cpp:291
+ msgid "New selection length: "
+-msgstr "Longueur de la nouvelle sélection :"
++msgstr "Longueur de la nouvelle sÈlection :"
+ 
+ #: ../src/Menus.cpp:632
+ msgid "Next Tool\tD"
+@@ -3615,7 +3615,7 @@
+ 
+ #: ../src/AboutDialog.cpp:142
+ msgid "No resampling support enabled"
+-msgstr "Pas de support de rééchantillonnage activé"
++msgstr "Pas de support de rÈÈchantillonnage activÈ"
+ 
+ #: ../src/export/Export.cpp:123
+ #, fuzzy
+@@ -3623,7 +3623,7 @@
+ "No tracks are selected! Use Ctrl-A (Select All)\n"
+ "Choose Export... to export all tracks."
+ msgstr ""
+-"Aucune piste n'est sélectionnée!\n"
++"Aucune piste n'est sÈlectionnÈe!\n"
+ "Choisissez Exporter... pour exporter toutes les pistes"
+ 
+ #: ../src/BatchCommands.cpp:220
+@@ -3665,7 +3665,7 @@
+ 
+ #: ../src/effects/Normalize.cpp:302
+ msgid "Normalize maximum amplitude to -3 dB"
+-msgstr "Normaliser l'amplitude maximum à -3dB"
++msgstr "Normaliser l'amplitude maximum ‡ -3dB"
+ 
+ #: ../src/prefs/BatchPrefs.cpp:379
+ #, fuzzy
+@@ -3674,7 +3674,7 @@
+ 
+ #: ../src/effects/Compressor.cpp:469
+ msgid "Normalize to 0dB after compressing"
+-msgstr "Normaliser à 0dB après la compression."
++msgstr "Normaliser ‡ 0dB aprËs la compression."
+ 
+ #: ../src/effects/Normalize.h:31
+ msgid "Normalize..."
+@@ -3686,7 +3686,7 @@
+ 
+ #: ../src/export/ExportMP3.cpp:1329
+ msgid "Not a valid or supported MP3 encoding library!"
+-msgstr "La librairie d'encodage MP3 n'est pas valide ou pas supportée !"
++msgstr "La librairie d'encodage MP3 n'est pas valide ou pas supportÈe !"
+ 
+ #: ../src/import/ImportOGG.cpp:127
+ msgid "Not an Ogg Vorbis file"
+@@ -3694,7 +3694,7 @@
+ 
+ #: ../src/FreqWindow.cpp:463
+ msgid "Not enough data selected."
+-msgstr "Pas assez de données sélectionnées"
++msgstr "Pas assez de donnÈes sÈlectionnÈes"
+ 
+ #: ../src/NoteTrack.cpp:30
+ msgid "Note Track"
+@@ -3707,19 +3707,19 @@
+ 
+ #: ../src/Menus.cpp:1941
+ msgid "Nothing to redo"
+-msgstr "Rien à refaire"
++msgstr "Rien ‡ refaire"
+ 
+ #: ../src/Menus.cpp:1922
+ msgid "Nothing to undo"
+-msgstr "Rien à annuler"
++msgstr "Rien ‡ annuler"
+ 
+ #: ../src/effects/Repeat.cpp:240
+ msgid "Number of times to repeat: "
+-msgstr "Nombre de répétitions :"
++msgstr "Nombre de rÈpÈtitions :"
+ 
+ #: ../src/export/ExportMultiple.cpp:774
+ msgid "Numbering consecutively"
+-msgstr "Numérotation continue"
++msgstr "NumÈrotation continue"
+ 
+ #: ../src/effects/nyquist/Nyquist.cpp:402
+ msgid "Nyquist"
+@@ -3744,29 +3744,29 @@
+ 
+ #: ../src/effects/nyquist/Nyquist.cpp:606
+ msgid "Nyquist did not return audio.\n"
+-msgstr "Nyquist n'a pas retourné d'audio.\n"
++msgstr "Nyquist n'a pas retournÈ d'audio.\n"
+ 
+ #: ../src/effects/nyquist/Nyquist.cpp:565
+ #, c-format
+ msgid "Nyquist returned the value: %d"
+-msgstr "Nyquist a retourné la valeur : %d"
++msgstr "Nyquist a retournÈ la valeur : %d"
+ 
+ #: ../src/effects/nyquist/Nyquist.cpp:555
+ #, c-format
+ msgid "Nyquist returned the value: %f"
+-msgstr "Nyquist a retourné la valeur : %f"
++msgstr "Nyquist a retournÈ la valeur : %f"
+ 
+ #: ../src/effects/nyquist/Nyquist.cpp:617
+ msgid "Nyquist returned too many audio channels.\n"
+-msgstr "Nyquist a retourné trop de canaux audio.\n"
++msgstr "Nyquist a retournÈ trop de canaux audio.\n"
+ 
+ #: ../src/prefs/FileFormatPrefs.cpp:138
+ msgid "OGG Export Setup"
+-msgstr "Réglage de l'exportation OGG"
++msgstr "RÈglage de l'exportation OGG"
+ 
+ #: ../src/prefs/FileFormatPrefs.cpp:147
+ msgid "OGG Quality:"
+-msgstr "Qualité OGG :"
++msgstr "QualitÈ OGG :"
+ 
+ #: ../src/BatchCommandDialog.cpp:103 ../src/BatchProcessDialog.cpp:87
+ #: ../src/LangChoice.cpp:94 ../src/Tags.cpp:740 ../src/effects/Amplify.cpp:202
+@@ -3794,11 +3794,11 @@
+ 
+ #: ../src/AboutDialog.cpp:119
+ msgid "Ogg Vorbis importing disabled"
+-msgstr "Importation Ogg Vorbis désactivée"
++msgstr "Importation Ogg Vorbis dÈsactivÈe"
+ 
+ #: ../src/AboutDialog.cpp:117
+ msgid "Ogg Vorbis importing enabled"
+-msgstr "Importation Ogg Vorbis activée"
++msgstr "Importation Ogg Vorbis activÈe"
+ 
+ #: ../src/export/Export.cpp:375
+ msgid "Ogg Vorbis support is not included in this build of Audacity"
+@@ -3826,7 +3826,7 @@
+ "Extended Libraries (*.so*)|*.so*|All Files (*)|*"
+ msgstr ""
+ "Seulement libmp3lame.so|libmp3lame.so|Fichiers Primary Shared Object (*.so)|"
+-"*.so|Libraries étendues (*.so*)|*.so*|Tous fichiers (*)|*"
++"*.so|Libraries Ètendues (*.so*)|*.so*|Tous fichiers (*)|*"
+ 
+ #: ../src/Menus.cpp:3621
+ msgid "Open CleanSpeech Preset File:"
+@@ -3870,7 +3870,7 @@
+ 
+ #: ../src/AudacityApp.cpp:363
+ msgid "Output Meter"
+-msgstr "VU mètre de sortie"
++msgstr "VU mËtre de sortie"
+ 
+ #: ../src/MixerToolBar.cpp:136
+ msgid "Output Volume"
+@@ -3878,7 +3878,7 @@
+ 
+ #: ../src/MeterToolBar.cpp:67
+ msgid "Output level meter"
+-msgstr "VU mètre de sortie"
++msgstr "VU mËtre de sortie"
+ 
+ #: ../src/export/ExportMultiple.cpp:796
+ msgid "Overwrite existing files"
+@@ -3905,12 +3905,12 @@
+ #: ../src/prefs/BatchPrefs.cpp:158
+ #, fuzzy
+ msgid "Parameters"
+-msgstr "Paramètres des modules VST (plugins)"
++msgstr "ParamËtres des modules VST (plugins)"
+ 
+ #: ../src/BatchCommandDialog.cpp:66
+ #, fuzzy
+ msgid "Parameters:"
+-msgstr "Paramètres des modules VST (plugins)"
++msgstr "ParamËtres des modules VST (plugins)"
+ 
+ #: ../src/UploadDialog.cpp:301
+ msgid "Password:"
+@@ -3923,7 +3923,7 @@
+ 
+ #: ../src/Menus.cpp:2194 ../src/Menus.cpp:2246
+ msgid "Pasted from the clipboard"
+-msgstr "Collé depuis le presse-papier"
++msgstr "CollÈ depuis le presse-papier"
+ 
+ #: ../src/ControlToolBar.cpp:519 ../src/ControlToolBar.cpp:528
+ msgid "Pause"
+@@ -3963,7 +3963,7 @@
+ 
+ #: ../src/effects/Repeat.h:36
+ msgid "Performing Repeat"
+-msgstr "Répétition en cours"
++msgstr "RÈpÈtition en cours"
+ 
+ #: ../src/effects/Phaser.cpp:65
+ msgid "Phaser"
+@@ -4008,7 +4008,7 @@
+ 
+ #: ../src/Menus.cpp:641
+ msgid "Play To Selection\tB"
+-msgstr "Lire jusqu'à la sélection\tB"
++msgstr "Lire jusqu'‡ la sÈlection\tB"
+ 
+ #: ../src/TranscriptionToolBar.cpp:207
+ msgid "Play at selected speed"
+@@ -4062,12 +4062,12 @@
+ #: ../src/commands/CommandManager.cpp:338
+ #, c-format
+ msgid "Plugins %i to %i"
+-msgstr "Modules de %i à %i"
++msgstr "Modules de %i ‡ %i"
+ 
+ #: ../src/commands/CommandManager.cpp:324
+ #, c-format
+ msgid "Plugins 1 to %i"
+-msgstr "Modules de 1 à %i"
++msgstr "Modules de 1 ‡ %i"
+ 
+ #: ../src/effects/PopClick.h:29
+ msgid "Pop and Click Removal..."
+@@ -4075,12 +4075,12 @@
+ 
+ #: ../src/effects/Equalization.cpp:729
+ msgid "Predefined:"
+-msgstr "Prédéfini :"
++msgstr "PrÈdÈfini :"
+ 
+ #: ../src/widgets/Meter.cpp:352
+ #, fuzzy
+ msgid "Preferences..."
+-msgstr "&Préférences...\tCtrl+P"
++msgstr "&PrÈfÈrences...\tCtrl+P"
+ 
+ #: ../src/effects/NoiseRemoval.cpp:538
+ msgid "Preparation Steps"
+@@ -4100,11 +4100,11 @@
+ #: ../src/effects/Effect.cpp:257 ../src/effects/Equalization.cpp:748
+ #: ../src/effects/Phaser.cpp:582 ../src/effects/Wahwah.cpp:568
+ msgid "Preview"
+-msgstr "Prévisualisation"
++msgstr "PrÈvisualisation"
+ 
+ #: ../src/Menus.cpp:633
+ msgid "Previous Tool\tA"
+-msgstr "Outi précédent\tA"
++msgstr "Outi prÈcÈdent\tA"
+ 
+ #: ../src/Printing.cpp:182
+ msgid "Print"
+@@ -4129,7 +4129,7 @@
+ #: ../src/AboutDialog.cpp:151
+ #, fuzzy
+ msgid "Program build date: "
+-msgstr "Date de création du programme :"
++msgstr "Date de crÈation du programme :"
+ 
+ #: ../src/DirManager.cpp:151 ../src/DirManager.cpp:233
+ #: ../src/DirManager.cpp:347
+@@ -4139,7 +4139,7 @@
+ #: ../src/SelectionBar.cpp:87
+ #, fuzzy
+ msgid "Project Rate (Hz):"
+-msgstr "Projet à :"
++msgstr "Projet ‡ :"
+ 
+ #: ../src/DirManager.cpp:1219
+ #, c-format
+@@ -4201,11 +4201,11 @@
+ 
+ #: ../src/prefs/PrefsDialog.cpp:84
+ msgid "Quality"
+-msgstr "Qualité"
++msgstr "QualitÈ"
+ 
+ #: ../src/prefs/GUIPrefs.cpp:314
+ msgid "Quit Audacity upon closing last window"
+-msgstr "Quitter Audacity à la fermeture de la dernière fenêtre"
++msgstr "Quitter Audacity ‡ la fermeture de la derniËre fenÍtre"
+ 
+ #. i18n-hint: One-letter abbreviation for Right, in the Pan slider
+ #: ../src/widgets/ASlider.cpp:447 ../src/widgets/Meter.cpp:189
+@@ -4233,7 +4233,7 @@
+ #. i18n-hint: This refers to files that are opened directly
+ #: ../src/Project.cpp:2421
+ msgid "Raw"
+-msgstr "données brutes (Raw)"
++msgstr "donnÈes brutes (Raw)"
+ 
+ #: ../src/prefs/FileFormatPrefs.cpp:79
+ msgid "Read directly from the original file (faster)"
+@@ -4241,11 +4241,11 @@
+ 
+ #: ../src/prefs/QualityPrefs.cpp:176
+ msgid "Real-time dither:"
+-msgstr "Lissage en temps réel :"
++msgstr "Lissage en temps rÈel :"
+ 
+ #: ../src/prefs/QualityPrefs.cpp:145
+ msgid "Real-time sample rate converter:"
+-msgstr "Convertisseur d'échantillonnage en temps réel :"
++msgstr "Convertisseur d'Èchantillonnage en temps rÈel :"
+ 
+ #: ../src/effects/ChangeLength.cpp:170
+ #, fuzzy
+@@ -4255,7 +4255,7 @@
+ #. i18n-hint: This is the name of the menu item on Windows and Linux
+ #: ../src/Menus.cpp:698
+ msgid "Recent &Files..."
+-msgstr "Projets récents..."
++msgstr "Projets rÈcents..."
+ 
+ #: ../src/ControlToolBar.cpp:518 ../src/ControlToolBar.cpp:526
+ #: ../src/Project.cpp:1818 ../src/TrackPanel.cpp:816
+@@ -4268,7 +4268,7 @@
+ 
+ #: ../src/Project.cpp:1818 ../src/TrackPanel.cpp:816
+ msgid "Recorded Audio"
+-msgstr "Audio enregistré"
++msgstr "Audio enregistrÈ"
+ 
+ #: ../src/prefs/AudioIOPrefs.cpp:161
+ msgid "Recording"
+@@ -4314,7 +4314,7 @@
+ 
+ #: ../src/effects/Normalize.cpp:297
+ msgid "Remove any DC offset (center on 0 vertically)"
+-msgstr "Supprimer tout décalage DC (centrer verticalement à 0)"
++msgstr "Supprimer tout dÈcalage DC (centrer verticalement ‡ 0)"
+ 
+ #: ../src/effects/ClickRemoval.cpp:412
+ msgid "Remove clicks"
+@@ -4327,12 +4327,12 @@
+ 
+ #: ../src/Menus.cpp:3797
+ msgid "Removed audio track(s)"
+-msgstr "Piste(s) audio supprimée(s)"
++msgstr "Piste(s) audio supprimÈe(s)"
+ 
+ #: ../src/TrackPanel.cpp:2652
+ #, c-format
+ msgid "Removed track '%s.'"
+-msgstr " '%s' piste supprimée"
++msgstr " '%s' piste supprimÈe"
+ 
+ #: ../src/effects/NoiseRemoval.h:42
+ msgid "Removing Noise"
+@@ -4344,12 +4344,12 @@
+ 
+ #: ../src/effects/PopClick.h:33
+ msgid "Removing unwanted noise"
+-msgstr "Suppression du bruit non désiré"
++msgstr "Suppression du bruit non dÈsirÈ"
+ 
+ #: ../src/UploadDialog.cpp:509 ../src/UploadDialog.cpp:672
+ #, fuzzy
+ msgid "Rename"
+-msgstr "Résonnance:"
++msgstr "RÈsonnance:"
+ 
+ #: ../src/UploadDialog.cpp:509
+ #, fuzzy
+@@ -4359,7 +4359,7 @@
+ #: ../src/TrackPanel.cpp:5157
+ #, c-format
+ msgid "Renamed '%s' to '%s'"
+-msgstr " '%s' renommé en '%s'"
++msgstr " '%s' renommÈ en '%s'"
+ 
+ #: ../src/DirManager.cpp:984
+ #, c-format
+@@ -4369,43 +4369,43 @@
+ #: ../src/Menus.cpp:3178
+ #, fuzzy
+ msgid "Render"
+-msgstr "Centré"
++msgstr "CentrÈ"
+ 
+ #: ../src/Menus.cpp:3177
+ #, fuzzy, c-format
+ msgid "Rendered all audio in track '%s'"
+-msgstr "Piste(s) audio supprimée(s)"
++msgstr "Piste(s) audio supprimÈe(s)"
+ 
+ #: ../src/Project.cpp:2049
+ #, fuzzy
+ msgid "Repair"
+-msgstr "Répéter"
++msgstr "RÈpÈter"
+ 
+ #: ../src/effects/Repeat.cpp:63 ../src/effects/Repeat.cpp:67
+ msgid "Repeat"
+-msgstr "Répéter"
++msgstr "RÈpÈter"
+ 
+ #: ../src/Menus.cpp:1677
+ #, c-format
+ msgid "Repeat %s\tCtrl+R"
+-msgstr "Répéter %s\tCtrl+R"
++msgstr "RÈpÈter %s\tCtrl+R"
+ 
+ #: ../src/Menus.cpp:531
+ msgid "Repeat Last Effect\tCtrl+R"
+-msgstr "Répéter le dernier effet\tCtrl+R"
++msgstr "RÈpÈter le dernier effet\tCtrl+R"
+ 
+ #: ../src/effects/Repeat.cpp:233
+ msgid "Repeat by Dominic Mazzoni && Vaughan Johnson"
+-msgstr "Répétition par Dominic Mazzoni && Vaughan Johnson"
++msgstr "RÈpÈtition par Dominic Mazzoni && Vaughan Johnson"
+ 
+ #: ../src/effects/Repeat.h:32
+ msgid "Repeat..."
+-msgstr "Répéter..."
++msgstr "RÈpÈter..."
+ 
+ #: ../src/effects/Repeat.cpp:36
+ #, c-format
+ msgid "Repeated %d times"
+-msgstr "Répété %d fois"
++msgstr "RÈpÈtÈ %d fois"
+ 
+ #: ../src/DirManager.cpp:1293
+ msgid "Replace missing data with silence [permanent immediately]"
+@@ -4417,15 +4417,15 @@
+ 
+ #: ../src/Resample.cpp:233 ../src/Resample.cpp:243
+ msgid "Resampling disabled."
+-msgstr "Rééchantillonnage désactivé."
++msgstr "RÈÈchantillonnage dÈsactivÈ."
+ 
+ #: ../src/effects/Wahwah.cpp:531
+ msgid "Resonance:"
+-msgstr "Résonnance:"
++msgstr "RÈsonnance:"
+ 
+ #: ../src/effects/AvcCompressor.cpp:711
+ msgid "Restore Defaults"
+-msgstr "Réglages par défaut"
++msgstr "RÈglages par dÈfaut"
+ 
+ #: ../src/effects/Reverse.h:30
+ msgid "Reverse"
+@@ -4466,7 +4466,7 @@
+ 
+ #: ../src/prefs/MousePrefs.cpp:96
+ msgid "Right-Drag"
+-msgstr "Glisser à droite"
++msgstr "Glisser ‡ droite"
+ 
+ #: ../src/TranscriptionToolBar.cpp:225
+ msgid "Right-to-Off"
+@@ -4479,11 +4479,11 @@
+ 
+ #: ../src/TrackPanel.cpp:2566
+ msgid "Sample Edit"
+-msgstr "Edition d'échantillon"
++msgstr "Edition d'Èchantillon"
+ 
+ #: ../src/import/ImportRaw.cpp:398
+ msgid "Sample rate:"
+-msgstr "Fréquence d'échantillonnage :"
++msgstr "FrÈquence d'Èchantillonnage :"
+ 
+ #: ../src/prefs/QualityPrefs.cpp:85
+ #, fuzzy
+@@ -4528,7 +4528,7 @@
+ #: ../src/Project.cpp:2393
+ #, c-format
+ msgid "Saved %s"
+-msgstr " %s enregistré"
++msgstr " %s enregistrÈ"
+ 
+ #: ../src/DirManager.cpp:348
+ #, fuzzy
+@@ -4541,7 +4541,7 @@
+ 
+ #: ../src/prefs/MousePrefs.cpp:114
+ msgid "Scroll up or down"
+-msgstr "Défilement haut/bas"
++msgstr "DÈfilement haut/bas"
+ 
+ #: ../src/Help.cpp:111
+ msgid "Search for?"
+@@ -4549,12 +4549,12 @@
+ 
+ #: ../src/Help.cpp:112
+ msgid "Search help for keyword"
+-msgstr "Aide par mot-clé"
++msgstr "Aide par mot-clÈ"
+ 
+ #: ../src/prefs/MousePrefs.cpp:89 ../src/prefs/MousePrefs.cpp:90
+ #: ../src/prefs/MousePrefs.cpp:91
+ msgid "Select"
+-msgstr "Sélection"
++msgstr "SÈlection"
+ 
+ #: ../src/BatchCommandDialog.cpp:45
+ #, fuzzy
+@@ -4586,8 +4586,8 @@
+ "choose how much noise you want filtered out,\n"
+ "and then click 'OK' to remove noise.\n"
+ msgstr ""
+-"Sélectionner tout l'audio que vous voulez filtrer,\n"
+-"choisir la quantité de bruit vous voulez filtrer,\n"
++"SÈlectionner tout l'audio que vous voulez filtrer,\n"
++"choisir la quantitÈ de bruit vous voulez filtrer,\n"
+ "cliquer alors sur Supprimer le bruit.\n"
+ 
+ #: ../src/prefs/KeyConfigPrefs.cpp:190
+@@ -4596,7 +4596,7 @@
+ 
+ #: ../src/Menus.cpp:3083
+ msgid "Select any uncompressed audio file..."
+-msgstr "Choisir un fichier audio non compressé..."
++msgstr "Choisir un fichier audio non compressÈ..."
+ 
+ #: ../src/Menus.cpp:3710
+ msgid "Select file(s) for batch processing..."
+@@ -4628,60 +4628,60 @@
+ "Find best setting with Ctrl-Z to Undo, Select All, and change Slider "
+ "position."
+ msgstr ""
+-"Sélectionner tout l'audio que vous voulez filtrer,\n"
+-"choisir la quantité de bruit vous voulez filtrer,\n"
++"SÈlectionner tout l'audio que vous voulez filtrer,\n"
++"choisir la quantitÈ de bruit vous voulez filtrer,\n"
+ "cliquer alors sur Supprimer le bruit.\n"
+ 
+ #: ../src/TranscriptionToolBar.cpp:239
+ #, fuzzy
+ msgid "Select-Silence"
+-msgstr "Générer du silence"
++msgstr "GÈnÈrer du silence"
+ 
+ #: ../src/TranscriptionToolBar.cpp:235
+ #, fuzzy
+ msgid "Select-Sound"
+-msgstr "Sélection"
++msgstr "SÈlection"
+ 
+ #: ../src/Menus.cpp:327
+ msgid "Select..."
+-msgstr "Sélectionner..."
++msgstr "SÈlectionner..."
+ 
+ #: ../src/Menus.cpp:668
+ msgid "Selection Contract Left\tCtrl+Shift+Right"
+-msgstr "Réduire la sélection à gauche\tCtrl+Maj+Droite"
++msgstr "RÈduire la sÈlection ‡ gauche\tCtrl+Maj+Droite"
+ 
+ #: ../src/Menus.cpp:669
+ msgid "Selection Contract Right\tCtrl+Shift+Left"
+-msgstr "Réduire la sélection à droite\tCtrl+Maj+Gauche"
++msgstr "RÈduire la sÈlection ‡ droite\tCtrl+Maj+Gauche"
+ 
+ #: ../src/Menus.cpp:666
+ msgid "Selection Extend Left\tShift+Left"
+-msgstr "Etendre la sélection à gauche\tMaj+Gauche"
++msgstr "Etendre la sÈlection ‡ gauche\tMaj+Gauche"
+ 
+ #: ../src/Menus.cpp:667
+ msgid "Selection Extend Right\tShift+Right"
+-msgstr "Etendre la sélection à droite\tMaj+Droite"
++msgstr "Etendre la sÈlection ‡ droite\tMaj+Droite"
+ 
+ #: ../src/Menus.cpp:362
+ msgid "Selection Restore"
+-msgstr "Restaurer la sélection"
++msgstr "Restaurer la sÈlection"
+ 
+ #: ../src/Menus.cpp:361
+ msgid "Selection Save"
+-msgstr "Enregistrer la sélection"
++msgstr "Enregistrer la sÈlection"
+ 
+ #: ../src/SelectionBar.cpp:92
+ #, fuzzy
+ msgid "Selection Start:"
+-msgstr "Curseur au début de la sélection"
++msgstr "Curseur au dÈbut de la sÈlection"
+ 
+ #: ../src/ControlToolBar.cpp:363
+ msgid "Selection Tool"
+-msgstr "Outil de sélection"
++msgstr "Outil de sÈlection"
+ 
+ #: ../src/Menus.cpp:625
+ msgid "Selection Tool\tF1"
+-msgstr "Outil de sélection\tF1"
++msgstr "Outil de sÈlection\tF1"
+ 
+ #: ../src/VoiceKey.cpp:69 ../src/VoiceKey.cpp:219 ../src/VoiceKey.cpp:357
+ #: ../src/VoiceKey.cpp:498
+@@ -4690,16 +4690,16 @@
+ 
+ #: ../src/Menus.cpp:649
+ msgid "Selection to End\tShift+End"
+-msgstr "Sélectionner jusqu'à la fin\tMaj.+Fin"
++msgstr "SÈlectionner jusqu'‡ la fin\tMaj.+Fin"
+ 
+ #: ../src/Menus.cpp:648
+ msgid "Selection to Start\tShift+Home"
+-msgstr "Sélectionner depuis le début\tMaj.t+Début"
++msgstr "SÈlectionner depuis le dÈbut\tMaj.t+DÈbut"
+ 
+ #: ../src/ControlToolBar.cpp:396
+ #, fuzzy
+ msgid "SelectionTool"
+-msgstr "Outil de sélection"
++msgstr "Outil de sÈlection"
+ 
+ #: ../src/effects/ChangePitch.cpp:305
+ msgid "Semitones (half-steps):"
+@@ -4716,45 +4716,45 @@
+ #: ../src/Menus.cpp:1407
+ #, fuzzy
+ msgid "Set Left Selection Bound"
+-msgstr "Définir un point de sélection"
++msgstr "DÈfinir un point de sÈlection"
+ 
+ #: ../src/TrackPanel.cpp:5108
+ msgid "Set Range"
+-msgstr "Régler l'étendue"
++msgstr "RÈgler l'Ètendue"
+ 
+ #: ../src/TrackPanel.cpp:428
+ msgid "Set Range..."
+-msgstr "Régler l'amplitude..."
++msgstr "RÈgler l'amplitude..."
+ 
+ #: ../src/TrackPanel.cpp:403 ../src/TrackPanel.cpp:5059
+ msgid "Set Rate"
+-msgstr "Régler le taux"
++msgstr "RÈgler le taux"
+ 
+ #: ../src/Menus.cpp:1445
+ #, fuzzy
+ msgid "Set Right Selection Bound"
+-msgstr "Définir un point de sélection"
++msgstr "DÈfinir un point de sÈlection"
+ 
+ #: ../src/TrackPanel.cpp:401
+ msgid "Set Sample Format"
+-msgstr "Choisir un format d'échantillon"
++msgstr "Choisir un format d'Èchantillon"
+ 
+ #: ../src/prefs/MousePrefs.cpp:89 ../src/prefs/MousePrefs.cpp:109
+ msgid "Set Selection Point"
+-msgstr "Définir un point de sélection"
++msgstr "DÈfinir un point de sÈlection"
+ 
+ #: ../src/prefs/MousePrefs.cpp:90 ../src/prefs/MousePrefs.cpp:110
+ msgid "Set Selection Range"
+-msgstr "Régler la sélection"
++msgstr "RÈgler la sÈlection"
+ 
+ #: ../src/TrackPanel.cpp:5105
+ #, c-format
+ msgid "Set range to '%d' - '%d'"
+-msgstr "Passer la sélection de  '%d' à '%d'"
++msgstr "Passer la sÈlection de  '%d' ‡ '%d'"
+ 
+ #: ../src/effects/ClickRemoval.cpp:355
+ msgid "Settings"
+-msgstr "Réglages de l'effet"
++msgstr "RÈglages de l'effet"
+ 
+ #: ../src/prefs/QualityPrefs.cpp:170
+ msgid "Shaped"
+@@ -4767,7 +4767,7 @@
+ #: ../src/prefs/MousePrefs.cpp:99
+ #, fuzzy
+ msgid "Shift-Left-Drag"
+-msgstr "Ctrl + glisser à gauche"
++msgstr "Ctrl + glisser ‡ gauche"
+ 
+ #: ../src/prefs/BatchPrefs.cpp:69 ../src/prefs/GUIPrefs.cpp:37
+ msgid "Show / Hide"
+@@ -4800,7 +4800,7 @@
+ 
+ #: ../src/EditToolBar.cpp:154
+ msgid "Silence selection"
+-msgstr "Rendre la sélection muette"
++msgstr "Rendre la sÈlection muette"
+ 
+ #: ../src/effects/Silence.h:35
+ #, fuzzy
+@@ -4810,16 +4810,16 @@
+ #: ../src/Menus.cpp:2354
+ #, c-format
+ msgid "Silenced selected tracks for %.2f seconds at %.2f"
+-msgstr "Pistes sélectionnées rendues muettes de %.2f secondes à %.2f"
++msgstr "Pistes sÈlectionnÈes rendues muettes de %.2f secondes ‡ %.2f"
+ 
+ #: ../src/effects/ToneGen.cpp:55
+ msgid "Sine"
+-msgstr "Sinusoïde"
++msgstr "SinusoÔde"
+ 
+ #: ../src/UploadDialog.cpp:260
+ #, fuzzy
+ msgid "Site Manager"
+-msgstr "Régler l'étendue"
++msgstr "RÈgler l'Ètendue"
+ 
+ #: ../src/HistoryWindow.cpp:59
+ msgid "Size"
+@@ -4827,23 +4827,23 @@
+ 
+ #: ../src/ControlToolBar.cpp:530
+ msgid "Skip to End"
+-msgstr "Aller à la fin"
++msgstr "Aller ‡ la fin"
+ 
+ #: ../src/Menus.cpp:646
+ msgid "Skip to End\tEnd"
+-msgstr "Aller à la fin\tFin"
++msgstr "Aller ‡ la fin\tFin"
+ 
+ #: ../src/ControlToolBar.cpp:524
+ msgid "Skip to Start"
+-msgstr "Retour au début"
++msgstr "Retour au dÈbut"
+ 
+ #: ../src/Menus.cpp:645
+ msgid "Skip to Start\tHome"
+-msgstr "Retour au début\tDébut"
++msgstr "Retour au dÈbut\tDÈbut"
+ 
+ #: ../src/prefs/MousePrefs.cpp:105
+ msgid "Smooth at Sample"
+-msgstr "Lisser l'échantillon"
++msgstr "Lisser l'Èchantillon"
+ 
+ #  i18n-hint: Set snap-to mode on or off
+ #. i18n-hint: Set snap-to mode on or off
+@@ -4858,7 +4858,7 @@
+ 
+ #: ../src/Menus.cpp:367
+ msgid "Snap-To..."
+-msgstr "Sélection..."
++msgstr "SÈlection..."
+ 
+ #: ../src/prefs/AudioIOPrefs.cpp:296
+ msgid "Software Playthrough (Play new track while recording it)"
+@@ -4878,8 +4878,8 @@
+ "Some of your preferences were from an earlier version of Audacity and have "
+ "been reset."
+ msgstr ""
+-"Certaines de vos préférences provenaient d'une version antérieur d'Audacity et "
+-"ont été réinitialisées."
++"Certaines de vos prÈfÈrences provenaient d'une version antÈrieur d'Audacity et "
++"ont ÈtÈ rÈinitialisÈes."
+ 
+ #: ../src/effects/ladspa/LadspaEffect.cpp:158
+ #, fuzzy
+@@ -4888,8 +4888,8 @@
+ "stereo tracks where the individual                             channels of "
+ "the track do not match."
+ msgstr ""
+-"Désolé, les effets du module (plugin) ne peuvent être réalisés sur des pistes "
+-"stéréo dans lesquelles les canaux individuels de la piste ne correspondent pas."
++"DÈsolÈ, les effets du module (plugin) ne peuvent Ítre rÈalisÈs sur des pistes "
++"stÈrÈo dans lesquelles les canaux individuels de la piste ne correspondent pas."
+ 
+ #: ../src/effects/StereoToMono.cpp:89
+ #, fuzzy
+@@ -4897,7 +4897,7 @@
+ "Sorry, This effect can only be performed on stereo tracks where the "
+ "individual channels of the track match."
+ msgstr ""
+-"Désolé, les effets VST ne peuvent être réalisés sur des pistes stéréo dans "
++"DÈsolÈ, les effets VST ne peuvent Ítre rÈalisÈs sur des pistes stÈrÈo dans "
+ "lesquelles les canaux individuels de la piste ne correspondent pas."
+ 
+ #: ../src/effects/VST/VSTEffect.cpp:180
+@@ -4905,19 +4905,19 @@
+ "Sorry, VST Effects cannot be performed on stereo tracks where the individual "
+ "channels of the track do not match."
+ msgstr ""
+-"Désolé, les effets VST ne peuvent être réalisés sur des pistes stéréo dans "
++"DÈsolÈ, les effets VST ne peuvent Ítre rÈalisÈs sur des pistes stÈrÈo dans "
+ "lesquelles les canaux individuels de la piste ne correspondent pas."
+ 
+ #: ../src/effects/nyquist/Nyquist.cpp:375
+ msgid ""
+ "Sorry, cannot apply effect on stereo tracks where the tracks don't match."
+ msgstr ""
+-"Désolé, l'effet ne peut être réalisé sur des pistes stéréo dans lesquelles les "
++"DÈsolÈ, l'effet ne peut Ítre rÈalisÈ sur des pistes stÈrÈo dans lesquelles les "
+ "canaux individuels de la piste ne correspondent pas."
+ 
+ #: ../src/Menus.cpp:3549 ../src/export/Export.cpp:188
+ msgid "Sorry, pathnames longer than 256 characters not supported."
+-msgstr "Désolé, les noms de plus de 256 caractères ne sont pas supportés."
++msgstr "DÈsolÈ, les noms de plus de 256 caractËres ne sont pas supportÈs."
+ 
+ #: ../src/effects/TruncSilence.cpp:51
+ msgid "Sorry. Truncate Silence only valid with mono track"
+@@ -4942,7 +4942,7 @@
+ #: ../src/effects/SpikeCleaner.h:27
+ #, fuzzy
+ msgid "Spike Cleaner..."
+-msgstr "Régler l'amplitude..."
++msgstr "RÈgler l'amplitude..."
+ 
+ #: ../src/effects/SpikeCleaner.cpp:143
+ msgid "SpikeCleaner by Lynn Allan"
+@@ -4950,16 +4950,16 @@
+ 
+ #: ../src/Menus.cpp:305
+ msgid "Spl&it"
+-msgstr "S&éparer"
++msgstr "S&Èparer"
+ 
+ #: ../src/Menus.cpp:2416 ../src/TrackPanel.cpp:4875
+ msgid "Split"
+-msgstr "Séparer"
++msgstr "SÈparer"
+ 
+ #: ../src/Menus.cpp:2062
+ #, fuzzy
+ msgid "Split Cut"
+-msgstr "Séparer"
++msgstr "SÈparer"
+ 
+ #: ../src/Menus.cpp:293
+ #, fuzzy
+@@ -4978,20 +4978,20 @@
+ 
+ #: ../src/TrackPanel.cpp:399
+ msgid "Split Stereo Track"
+-msgstr "Séparer la piste stéréo"
++msgstr "SÈparer la piste stÈrÈo"
+ 
+ #: ../src/Menus.cpp:2549
+ msgid "Split at labels"
+-msgstr "Séparer au marqueur"
++msgstr "SÈparer au marqueur"
+ 
+ #: ../src/export/ExportMultiple.cpp:731
+ msgid "Split files based on:"
+-msgstr "Séparer en fichier selon :"
++msgstr "SÈparer en fichier selon :"
+ 
+ #: ../src/TrackPanel.cpp:4872
+ #, c-format
+ msgid "Split stereo track '%s'"
+-msgstr "Séparer la piste stéréo '%s'"
++msgstr "SÈparer la piste stÈrÈo '%s'"
+ 
+ #: ../src/Menus.cpp:2062
+ #, fuzzy
+@@ -5001,11 +5001,11 @@
+ #: ../src/Menus.cpp:2308
+ #, fuzzy, c-format
+ msgid "Split-deleted %.2f seconds at t=%.2f"
+-msgstr "Effacé de  %.2f secondes à %.2f"
++msgstr "EffacÈ de  %.2f secondes ‡ %.2f"
+ 
+ #: ../src/effects/ToneGen.cpp:56
+ msgid "Square"
+-msgstr "Carré"
++msgstr "CarrÈ"
+ 
+ #: ../src/effects/Phaser.cpp:471
+ msgid "Stages:"
+@@ -5013,7 +5013,7 @@
+ 
+ #: ../src/FreqWindow.cpp:130
+ msgid "Standard Autocorrelation"
+-msgstr "Autocorrélation standard"
++msgstr "AutocorrÈlation standard"
+ 
+ #: ../src/effects/ChangeSpeed.cpp:348
+ msgid "Standard Vinyl RPM:   from"
+@@ -5022,20 +5022,20 @@
+ #: ../src/ControlToolBar.cpp:515
+ #, fuzzy
+ msgid "Start"
+-msgstr "Régler le taux"
++msgstr "RÈgler le taux"
+ 
+ #: ../src/widgets/Meter.cpp:330
+ #, fuzzy
+ msgid "Start Monitoring"
+-msgstr "Visualiser l'entrée"
++msgstr "Visualiser l'entrÈe"
+ 
+ #: ../src/import/ImportRaw.cpp:376
+ msgid "Start offset:"
+-msgstr "Décalage de début :"
++msgstr "DÈcalage de dÈbut :"
+ 
+ #: ../src/Menus.cpp:337
+ msgid "Start to Cursor"
+-msgstr "Du début jusqu'au curseur"
++msgstr "Du dÈbut jusqu'au curseur"
+ 
+ #: ../src/effects/NoiseRemoval.cpp:539
+ msgid "Step 1"
+@@ -5049,7 +5049,7 @@
+ #: ../src/Menus.cpp:318 ../src/Menus.cpp:447 ../src/effects/StereoToMono.h:23
+ #, fuzzy
+ msgid "Stereo To Mono"
+-msgstr "Stéréo,"
++msgstr "StÈrÈo,"
+ 
+ #: ../src/BatchCommands.cpp:291
+ msgid "Stereo To Mono Effect not found"
+@@ -5057,7 +5057,7 @@
+ 
+ #: ../src/TrackPanel.cpp:4828
+ msgid "Stereo, "
+-msgstr "Stéréo,"
++msgstr "StÈrÈo,"
+ 
+ #: ../src/ControlToolBar.cpp:520 ../src/ControlToolBar.cpp:529
+ msgid "Stop"
+@@ -5070,16 +5070,16 @@
+ #: ../src/widgets/Meter.cpp:328
+ #, fuzzy
+ msgid "Stop Monitoring"
+-msgstr "Visualiser l'entrée"
++msgstr "Visualiser l'entrÈe"
+ 
+ #: ../src/export/ExportMultiple.cpp:463 ../src/export/ExportMultiple.cpp:571
+ #, c-format
+ msgid "Successfully exported %d files."
+-msgstr " %d fichiers exportés avec succès."
++msgstr " %d fichiers exportÈs avec succËs."
+ 
+ #: ../src/prefs/DirectoriesPrefs.cpp:52
+ msgid "Temp. Directory"
+-msgstr "Répertoire Temporaire"
++msgstr "RÈpertoire Temporaire"
+ 
+ #: ../src/DirManager.cpp:1294
+ msgid "Temporarily replace missing data with silence [this session only]"
+@@ -5099,7 +5099,7 @@
+ 
+ #: ../src/prefs/SpectrumPrefs.cpp:158
+ msgid "The maximum frequency must be an integer"
+-msgstr "La fréquence maximum doit être une intégrale"
++msgstr "La frÈquence maximum doit Ítre une intÈgrale"
+ 
+ #: ../src/AudacityApp.cpp:858
+ msgid ""
+@@ -5110,13 +5110,13 @@
+ "Use the New or Open commands in the currently running Audacity\n"
+ "process to open multiple projects simultaneously.\n"
+ msgstr ""
+-"Le système a détecté qu'une autre copie d'Audacity était ouverte.\n"
+-"Ouvrir simultanément deux sessions d'Audacity peut provoquer des pertes de "
+-"données\n"
+-"ou provoquer une défaillance du système et n'est donc pas permis\n"
++"Le systËme a dÈtectÈ qu'une autre copie d'Audacity Ètait ouverte.\n"
++"Ouvrir simultanÈment deux sessions d'Audacity peut provoquer des pertes de "
++"donnÈes\n"
++"ou provoquer une dÈfaillance du systËme et n'est donc pas permis\n"
+ "\n"
+ "Utiliser Nouveau ou Ouvrir dans la session actuelle d'Audacity\n"
+-"pour ouvrir plusieurs projets simultanément.\n"
++"pour ouvrir plusieurs projets simultanÈment.\n"
+ 
+ #: ../src/Menus.cpp:3448
+ msgid ""
+@@ -5127,11 +5127,11 @@
+ 
+ #: ../src/Menus.cpp:1799
+ msgid "There are no label tracks to export."
+-msgstr "Il n'y a pas de piste de marqueurs à exporter"
++msgstr "Il n'y a pas de piste de marqueurs ‡ exporter"
+ 
+ #: ../src/Printing.cpp:181
+ msgid "There was a problem printing."
+-msgstr "Il y a eu un problème à l'impression."
++msgstr "Il y a eu un problËme ‡ l'impression."
+ 
+ #: ../src/AudioIO.cpp:174
+ msgid "There was an error initializing the audio i/o layer.\n"
+@@ -5174,9 +5174,9 @@
+ "You are using Audacity %s - you need to upgrade to\n"
+ "a newer version to open this file."
+ msgstr ""
+-"Ce fichier a été enregistré avec  Audacity %s.\n"
++"Ce fichier a ÈtÈ enregistrÈ avec  Audacity %s.\n"
+ "Vous utilisez Audacity %s - vous devez mettre votre version\n"
+-"à jour pour ouvrir ce fichier."
++"‡ jour pour ouvrir ce fichier."
+ 
+ #: ../src/AboutDialog.cpp:160
+ msgid ""
+@@ -5184,11 +5184,11 @@
+ "features.  We depend on your feedback, so please visit our website and give "
+ "us your bug reports and feature requests."
+ msgstr ""
+-"Ce programme est encore en bêta test ! Beaucoup de gens le trouvent très utile "
++"Ce programme est encore en bÍta test ! Beaucoup de gens le trouvent trËs utile "
+ "et suffisamment stable pour une utilisation quotidienne, mais il n'est pas "
+ "fini et n'est fourni avec aucune garantie ! Nous avons besoin de vos "
+-"remarques, SVP visitez notre site web et donnez-nous vos relevés de bogues et "
+-"vos demandes d'améliorations."
++"remarques, SVP visitez notre site web et donnez-nous vos relevÈs de bogues et "
++"vos demandes d'amÈliorations."
+ 
+ #: ../src/AboutDialog.cpp:163
+ #, fuzzy
+@@ -5198,15 +5198,15 @@
+ "order to continue to improve Audacity. For more information, visit our "
+ "website."
+ msgstr ""
+-"Ceci est une version stable et complête d'Audacity. Si toutefois vous décelez "
+-"un bogue ou avez une suggestion, merci de nous contacter. Nous dépendons des "
+-"retours des utilisateurs pour l'amélioration d'Audacity. Pour plus "
+-"d'information, veuillez vous connecter à notre site Internet."
++"Ceci est une version stable et complÍte d'Audacity. Si toutefois vous dÈcelez "
++"un bogue ou avez une suggestion, merci de nous contacter. Nous dÈpendons des "
++"retours des utilisateurs pour l'amÈlioration d'Audacity. Pour plus "
++"d'information, veuillez vous connecter ‡ notre site Internet."
+ 
+ #: ../src/import/Import.cpp:165
+ #, c-format
+ msgid "This version of Audacity was not compiled with %s support."
+-msgstr "Cette version d'Audacity n'a pas été compilée avec le support %s."
++msgstr "Cette version d'Audacity n'a pas ÈtÈ compilÈe avec le support %s."
+ 
+ #: ../src/effects/Compressor.cpp:444
+ msgid "Threshold: "
+@@ -5244,7 +5244,7 @@
+ #: ../src/TrackPanel.cpp:1767
+ #, fuzzy, c-format
+ msgid "Time shifted tracks/clips %s %.02f seconds"
+-msgstr "Décalage de la piste '%s' %s %.02f secondes"
++msgstr "DÈcalage de la piste '%s' %s %.02f secondes"
+ 
+ #: ../src/prefs/MousePrefs.cpp:98 ../src/prefs/MousePrefs.cpp:99
+ #: ../src/prefs/MousePrefs.cpp:100
+@@ -5267,12 +5267,12 @@
+ #: ../src/Menus.cpp:2825
+ msgid "To plot the spectrum, all selected tracks must be the same sample rate."
+ msgstr ""
+-"Pour le tracé du spectre, toutes les pistes sélectionnées doivent avoir le "
+-"même échantillonnage."
++"Pour le tracÈ du spectre, toutes les pistes sÈlectionnÈes doivent avoir le "
++"mÍme Èchantillonnage."
+ 
+ #: ../src/effects/ToneGen.cpp:50
+ msgid "Tone Generator"
+-msgstr "Générateur de son"
++msgstr "GÈnÈrateur de son"
+ 
+ #: ../src/effects/ToneGen.h:39
+ msgid "Tone..."
+@@ -5284,8 +5284,8 @@
+ "Too much audio was selected.  Only the first %.1f seconds of audio will be "
+ "analyzed."
+ msgstr ""
+-"Trop d'audio a été sélectionné. Seules les %.1f premières secondes d'audio seront "
+-"analysées."
++"Trop d'audio a ÈtÈ sÈlectionnÈ. Seules les %.1f premiËres secondes d'audio seront "
++"analysÈes."
+ 
+ #: ../src/prefs/MousePrefs.cpp:84
+ msgid "Tool"
+@@ -5297,7 +5297,7 @@
+ 
+ #: ../src/Tags.cpp:676
+ msgid "Track Number:"
+-msgstr "Numéro de piste :"
++msgstr "NumÈro de piste :"
+ 
+ #: ../src/TrackPanel.cpp:2654
+ msgid "Track Remove"
+@@ -5309,7 +5309,7 @@
+ 
+ #: ../src/effects/Repeat.cpp:62
+ msgid "Tracks are too long to repeat the selection."
+-msgstr "Les pistes sont trop longues pour pouvoir répéter la sélection."
++msgstr "Les pistes sont trop longues pour pouvoir rÈpÈter la sÈlection."
+ 
+ #: ../src/prefs/GUIPrefs.cpp:324
+ msgid "Tracks fit vertically zoomed"
+@@ -5325,20 +5325,20 @@
+ 
+ #: ../src/EditToolBar.cpp:152 ../src/Menus.cpp:2281
+ msgid "Trim"
+-msgstr "Ne garder que la sélection"
++msgstr "Ne garder que la sÈlection"
+ 
+ #: ../src/Menus.cpp:2281
+ msgid "Trim file to selection"
+-msgstr "Couper le fichier vers la sélection"
++msgstr "Couper le fichier vers la sÈlection"
+ 
+ #: ../src/EditToolBar.cpp:152
+ msgid "Trim outside selection"
+-msgstr "Supprimer en dehors de la sélection"
++msgstr "Supprimer en dehors de la sÈlection"
+ 
+ #: ../src/BatchCommands.cpp:102 ../src/effects/TruncSilence.cpp:71
+ #, fuzzy
+ msgid "Truncate Silence"
+-msgstr "Générer du silence"
++msgstr "GÈnÈrer du silence"
+ 
+ #: ../src/effects/TruncSilence.cpp:237
+ msgid "Truncate Silence by Lynn Allan"
+@@ -5347,12 +5347,12 @@
+ #: ../src/effects/TruncSilence.h:29
+ #, fuzzy
+ msgid "Truncate Silence..."
+-msgstr "Générer du silence"
++msgstr "GÈnÈrer du silence"
+ 
+ #: ../src/effects/TruncSilence.h:33
+ #, fuzzy
+ msgid "Truncating Silence..."
+-msgstr "Générer du silence"
++msgstr "GÈnÈrer du silence"
+ 
+ #: ../src/Menus.cpp:382
+ msgid "Turn Grid Snap Off"
+@@ -5364,25 +5364,25 @@
+ 
+ #: ../src/Menus.cpp:380
+ msgid "Turn Snap-To Off"
+-msgstr "Passer en sélection libre"
++msgstr "Passer en sÈlection libre"
+ 
+ #: ../src/Menus.cpp:379
+ msgid "Turn Snap-To On"
+-msgstr "Passer en sélection par bloc"
++msgstr "Passer en sÈlection par bloc"
+ 
+ #: ../src/prefs/DirectoriesPrefs.cpp:114
+ msgid "Unable to determine"
+-msgstr "Impossible à déterminer"
++msgstr "Impossible ‡ dÈterminer"
+ 
+ #: ../src/Menus.cpp:3596 ../src/export/Export.cpp:124
+ #, fuzzy
+ msgid "Unable to export"
+-msgstr "Impossible à déterminer"
++msgstr "Impossible ‡ dÈterminer"
+ 
+ #: ../src/Menus.cpp:3672
+ #, fuzzy
+ msgid "Unable to import"
+-msgstr "Portion à importer :"
++msgstr "Portion ‡ importer :"
+ 
+ #: ../src/xml/XMLFileReader.cpp:75
+ msgid "Unable to open project file."
+@@ -5390,7 +5390,7 @@
+ 
+ #: ../src/export/ExportMP3.cpp:1339 ../src/export/ExportOGG.cpp:55
+ msgid "Unable to open target file for writing"
+-msgstr "Impossible d'ouvrir le fichier cible en écriture"
++msgstr "Impossible d'ouvrir le fichier cible en Ècriture"
+ 
+ #: ../src/UploadDialog.cpp:829
+ msgid "Unable to retrieve directory contents."
+@@ -5398,7 +5398,7 @@
+ 
+ #: ../src/prefs/FileFormatPrefs.cpp:93
+ msgid "Uncompressed Export Format"
+-msgstr "Format d'exportation non compressé"
++msgstr "Format d'exportation non compressÈ"
+ 
+ #: ../src/EditToolBar.cpp:157
+ msgid "Undo"
+@@ -5432,7 +5432,7 @@
+ 
+ #: ../src/TrackPanel.cpp:411
+ msgid "Up Octave"
+-msgstr "Octave supérieure"
++msgstr "Octave supÈrieure"
+ 
+ #: ../src/prefs/GUIPrefs.cpp:312
+ msgid "Update spectrogram while playing"
+@@ -5474,7 +5474,7 @@
+ 
+ #: ../src/effects/VST/VSTEffect.cpp:410
+ msgid "VST Plug-in parameters:"
+-msgstr "Paramètres des modules VST (plugins)"
++msgstr "ParamËtres des modules VST (plugins)"
+ 
+ #: ../src/effects/AvcCompressor.cpp:369 ../src/effects/AvcCompressor.cpp:406
+ #: ../src/effects/AvcCompressor.cpp:431 ../src/effects/AvcCompressor.cpp:438
+@@ -5484,11 +5484,11 @@
+ #: ../src/effects/AvcCompressor.cpp:368
+ #, c-format
+ msgid "Value must be from %d to %d."
+-msgstr "La valeur doit être comprise entre % et %d."
++msgstr "La valeur doit Ítre comprise entre % et %d."
+ 
+ #: ../src/effects/AvcCompressor.cpp:430 ../src/effects/AvcCompressor.cpp:437
+ msgid "Values in columns must be in ascending order."
+-msgstr "Les valeurs dans les colonnes doivent être dans l'ordre ascendant"
++msgstr "Les valeurs dans les colonnes doivent Ítre dans l'ordre ascendant"
+ 
+ #: ../src/widgets/Meter.cpp:335
+ msgid "Vertical Stereo"
+@@ -5510,7 +5510,7 @@
+ "the same effect as clicking no."
+ msgstr ""
+ "ATTENTION : on va vous demander d'enregistrer votre travail. Cliquer "
+-"\"Annuler\" aura le même effet que cliquer \"Non\"."
++"\"Annuler\" aura le mÍme effet que cliquer \"Non\"."
+ 
+ #: ../src/effects/Phaser.cpp:499
+ msgid "WET"
+@@ -5518,7 +5518,7 @@
+ 
+ #: ../src/effects/Wahwah.cpp:547
+ msgid "Wah Frequency Offset (%):"
+-msgstr "Fréquence Wah (%):"
++msgstr "FrÈquence Wah (%):"
+ 
+ #: ../src/effects/Wahwah.cpp:57
+ msgid "Wahwah"
+@@ -5544,8 +5544,8 @@
+ "Warning: there is very little free disk space left on this volume.\n"
+ "Please select another temporary directory in your preferences."
+ msgstr ""
+-"Attention : il reste très peu d'espace libre sur ce volume. Veuillez "
+-"sélectionner un autre répertoire temporaire dans vos préférences."
++"Attention : il reste trËs peu d'espace libre sur ce volume. Veuillez "
++"sÈlectionner un autre rÈpertoire temporaire dans vos prÈfÈrences."
+ 
+ #: ../src/TrackPanel.cpp:390
+ msgid "Waveform"
+@@ -5565,17 +5565,17 @@
+ 
+ #: ../src/prefs/FileFormatPrefs.cpp:68
+ msgid "When importing uncompressed audio files into Audacity"
+-msgstr "Lors de l'importation de fichiers audio non compressés"
++msgstr "Lors de l'importation de fichiers audio non compressÈs"
+ 
+ #. i18n-hint: It's asking for the location of a file, for
+ #: ../src/export/ExportMP3.cpp:113
+ #, c-format
+ msgid "Where is %s?"
+-msgstr "Où se trouve  %s ?"
++msgstr "O˘ se trouve  %s ?"
+ 
+ #: ../src/Help.cpp:62
+ msgid "Where is audacity-1.2-help.htb?"
+-msgstr "Où se trouve la documentation \"audacity-1.2help.htb\" ?"
++msgstr "O˘ se trouve la documentation \"audacity-1.2help.htb\" ?"
+ 
+ #: ../src/export/ExportMultiple.cpp:274
+ msgid "Where is the mp3 encoder TOMPG.EXE located?"
+@@ -5595,11 +5595,11 @@
+ 
+ #: ../src/Tags.cpp:484
+ msgid "Year"
+-msgstr "Année :"
++msgstr "AnnÈe :"
+ 
+ #: ../src/Tags.cpp:686
+ msgid "Year:"
+-msgstr "Année :"
++msgstr "AnnÈe :"
+ 
+ #: ../src/export/Export.cpp:243
+ #, c-format
+@@ -5613,17 +5613,17 @@
+ "Normalement, ces fichiers se terminent par %s, et plusieurs programmes ne "
+ "peuvent ouvrir de fichiers \n"
+ "ayant des extensions non standard.\n"
+-"Etes-vous sûr(e) de vouloir sauvegarder le fichier sous ce nom ?"
++"Etes-vous s˚r(e) de vouloir sauvegarder le fichier sous ce nom ?"
+ 
+ #: ../src/TrackPanel.cpp:2301
+ msgid ""
+ "You are not zoomed in enough. Zoom in until you can see the individual "
+ "samples."
+-msgstr "Le zoom est insuffisant. Zoomer jusqu'à voir les formes d'ondes."
++msgstr "Le zoom est insuffisant. Zoomer jusqu'‡ voir les formes d'ondes."
+ 
+ #: ../src/Menus.cpp:1648
+ msgid "You must select a track first."
+-msgstr "Sélectionner d'abord une piste"
++msgstr "SÈlectionner d'abord une piste"
+ 
+ #: ../src/effects/Leveller.cpp:207
+ msgid ""
+@@ -5650,12 +5650,12 @@
+ #: ../src/export/Export.cpp:147
+ msgid ""
+ "Your tracks will be mixed down to a single mono channel in the exported file."
+-msgstr "Dans le fichier exporté, vos pistes seront mélangées en un canal mono "
++msgstr "Dans le fichier exportÈ, vos pistes seront mÈlangÈes en un canal mono "
+ 
+ #: ../src/export/Export.cpp:143
+ msgid ""
+ "Your tracks will be mixed down to two stereo channels in the exported file."
+-msgstr "Dans le fichier exporté, vos pistes seront mélangées en deux canaux stéréo"
++msgstr "Dans le fichier exportÈ, vos pistes seront mÈlangÈes en deux canaux stÈrÈo"
+ 
+ #: ../src/prefs/MousePrefs.cpp:93 ../src/prefs/MousePrefs.cpp:94
+ #: ../src/prefs/MousePrefs.cpp:95 ../src/prefs/MousePrefs.cpp:96
+@@ -5672,7 +5672,7 @@
+ 
+ #: ../src/Menus.cpp:407
+ msgid "Zoom &Out\tCtrl+3"
+-msgstr "Zoom a&rrière\tCtrl+3"
++msgstr "Zoom a&rriËre\tCtrl+3"
+ 
+ #: ../src/EditToolBar.cpp:162
+ msgid "Zoom In"
+@@ -5680,7 +5680,7 @@
+ 
+ #: ../src/EditToolBar.cpp:164
+ msgid "Zoom Out"
+-msgstr "Zoom arrière"
++msgstr "Zoom arriËre"
+ 
+ #: ../src/EditToolBar.cpp:168
+ msgid "Zoom Toggle"
+@@ -5701,15 +5701,15 @@
+ #: ../src/prefs/MousePrefs.cpp:94 ../src/prefs/MousePrefs.cpp:96
+ #: ../src/prefs/MousePrefs.cpp:112
+ msgid "Zoom in on a Range"
+-msgstr "Zoomer sur la sélection"
++msgstr "Zoomer sur la sÈlection"
+ 
+ #: ../src/prefs/MousePrefs.cpp:115
+ msgid "Zoom in or out"
+-msgstr "Zoom avant/arrière"
++msgstr "Zoom avant/arriËre"
+ 
+ #: ../src/prefs/MousePrefs.cpp:95 ../src/prefs/MousePrefs.cpp:111
+ msgid "Zoom out one step"
+-msgstr "Zoom arrière d'un cran"
++msgstr "Zoom arriËre d'un cran"
+ 
+ #: ../src/ControlToolBar.cpp:399
+ #, fuzzy
+@@ -5754,7 +5754,7 @@
+ #: ../src/widgets/TimeTextCtrl.cpp:155
+ #, fuzzy
+ msgid "hh:mm:ss + samples"
+-msgstr "min:sec (à l'échantillon près)"
++msgstr "min:sec (‡ l'Èchantillon prËs)"
+ 
+ #: ../src/Menus.cpp:1803
+ msgid "labels.txt"
+@@ -5788,17 +5788,17 @@
+ #: ../src/prefs/MousePrefs.cpp:96
+ #, fuzzy
+ msgid "same as left-drag"
+-msgstr "Comme glisser à gauche"
++msgstr "Comme glisser ‡ gauche"
+ 
+ #: ../src/prefs/MousePrefs.cpp:94
+ #, fuzzy
+ msgid "same as right-drag"
+-msgstr "Comme glisser à gauche"
++msgstr "Comme glisser ‡ gauche"
+ 
+ #: ../src/prefs/MousePrefs.cpp:109 ../src/prefs/MousePrefs.cpp:110
+ #, fuzzy
+ msgid "same as select tool"
+-msgstr "Comme l'outil de sélection"
++msgstr "Comme l'outil de sÈlection"
+ 
+ #: ../src/prefs/MousePrefs.cpp:111 ../src/prefs/MousePrefs.cpp:112
+ #, fuzzy
+@@ -5835,11 +5835,11 @@
+ 
+ #: ../src/Menus.cpp:349
+ msgid "to Selection End"
+-msgstr "Curseur à la fin de la sélection"
++msgstr "Curseur ‡ la fin de la sÈlection"
+ 
+ #: ../src/Menus.cpp:348
+ msgid "to Selection Start"
+-msgstr "Curseur au début de la sélection"
++msgstr "Curseur au dÈbut de la sÈlection"
+ 
+ #: ../src/Menus.cpp:354
+ msgid "to Track End"
+@@ -5847,14 +5847,14 @@
+ 
+ #: ../src/Menus.cpp:353
+ msgid "to Track Start"
+-msgstr "Curseur en début de piste"
++msgstr "Curseur en dÈbut de piste"
+ 
+ #. i18n-hint: The translation of "translator_credits" will appear
+ #: ../src/AboutDialog.cpp:173 ../src/AboutDialog.cpp:175
+ msgid "translator_credits"
+ msgstr ""
+-"Traduction française de Christian Brochec (CDDP 22) christian.brochec@ac-"
+-"rennes.fraprès Lionel Allorge et Ollivier Ballestraz"
++"Traduction franÁaise de Christian Brochec (CDDP 22) christian.brochec@ac-"
++"rennes.fraprËs Lionel Allorge et Ollivier Ballestraz"
+ 
+ #: ../src/TrackPanel.cpp:5124 ../src/effects/ChangePitch.cpp:283
+ msgid "up"
+@@ -5875,7 +5875,7 @@
+ #~ "An error occurred while opening the project file.\n"
+ #~ "Some audio may not have been retrieved."
+ #~ msgstr ""
+-#~ "Erreur à l'ouverture du projet.\n"
++#~ "Erreur ‡ l'ouverture du projet.\n"
+ #~ "Perte possible d'audio."
+ 
+ #~ msgid "Can't import project file"
+@@ -5929,41 +5929,41 @@
+ #~ "Samples]"
+ #~ msgstr ""
+ #~ "Curseur: %i+%04i CDDA secteurs+octets (2352 octets par secteur)   "
+-#~ "(à l'échantillon près)"
++#~ "(‡ l'Èchantillon prËs)"
+ 
+ #~ msgid ""
+ #~ "Cursor: %i+%04i cdda sectors+bytes (2352 bytes per sector)   [Snap-To "
+ #~ "Samples]   Change Project Rate to 44100 for cdda"
+ #~ msgstr ""
+ #~ "Curseurr: %i+%04i CDDA secteurs+octets (2352 octets par secteur)  "
+-#~ "(à l'échantillon près)   Change l'échantillonnage du projet à 44100 pour CDDA"
++#~ "(‡ l'Èchantillon prËs)   Change l'Èchantillonnage du projet ‡ 44100 pour CDDA"
+ 
+ #~ msgid "Cursor: %i+%i sec+samples   [Snap-To Samples]"
+-#~ msgstr "Curseur : %i+%i sec+échantillons (à l'échantillon près)"
++#~ msgstr "Curseur : %i+%i sec+Èchantillons (‡ l'Èchantillon prËs)"
+ 
+ #~ msgid "Cursor: %i:%02i+%i min:sec+samples   [Snap-To Samples]"
+-#~ msgstr "Curseur : %i:%02i+%i min:sec+échantillons  (à l'échantillon près)"
++#~ msgstr "Curseur : %i:%02i+%i min:sec+Èchantillons  (‡ l'Èchantillon prËs)"
+ 
+ #~ msgid "Cursor: %i:%09.6f min:sec   %s"
+ #~ msgstr "Curseur : %i:%09.6f min:sec   %s"
+ 
+ #~ msgid "Cursor: %i:%09.6lf min:sec   [Snap-To Samples]"
+-#~ msgstr "Curseur: %i:%09.6lf min:sec   %s  (à l'échantillon près)"
++#~ msgstr "Curseur: %i:%09.6lf min:sec   %s  (‡ l'Èchantillon prËs)"
+ 
+ #~ msgid "Cursor: %lf sec   %s"
+ #~ msgstr "Curseur : %lf sec   %s"
+ 
+ #~ msgid "Cursor: %lf sec   [Snap-To Samples]"
+-#~ msgstr "Curseur: %lf sec   %s  (à l'échantillon près)"
++#~ msgstr "Curseur: %lf sec   %s  (‡ l'Èchantillon prËs)"
+ 
+ #~ msgid "Cursor: %li samples   [Snap-To Samples]"
+-#~ msgstr "Curseur : %li échantillons  (à l'échantillon près)"
++#~ msgstr "Curseur : %li Èchantillons  (‡ l'Èchantillon prËs)"
+ 
+ #~ msgid "Documentation Writer"
+ #~ msgstr "Auteur de la documentation"
+ 
+ #~ msgid "Enter a rate in Hz (samples per second):"
+-#~ msgstr "Entrer un taux en Hz (échantillons par seconde) :"
++#~ msgstr "Entrer un taux en Hz (Èchantillons par seconde) :"
+ 
+ #~ msgid "Less"
+ #~ msgstr "Moins"
+@@ -5985,7 +5985,7 @@
+ #~ msgstr "PAL h:mm:ss:ii 25 i/s"
+ 
+ #~ msgid "Primary developer"
+-#~ msgstr "Développeur principal"
++#~ msgstr "DÈveloppeur principal"
+ 
+ #~ msgid "Programmer"
+ #~ msgstr "Programmeur"
+@@ -5997,108 +5997,108 @@
+ #~ msgstr "Mix rapide "
+ 
+ #~ msgid "Recording time remaining: %d minutes"
+-#~ msgstr "Durée d'enregistrement restante : %d minutes"
++#~ msgstr "DurÈe d'enregistrement restante : %d minutes"
+ 
+ #~ msgid "Recording time remaining: %d seconds"
+-#~ msgstr "Durée d'enregistrement restante : %d secondes"
++#~ msgstr "DurÈe d'enregistrement restante : %d secondes"
+ 
+ #~ msgid "Selection: %.3lf - %.3lf (%.3lf NTSC frames)   %s"
+-#~ msgstr "Sélection : %.3lf - %.3lf (%.3lf images NTSC)   %s"
++#~ msgstr "SÈlection : %.3lf - %.3lf (%.3lf images NTSC)   %s"
+ 
+ #~ msgid "Selection: %.3lf - %.3lf (%.3lf PAL frames)   %s"
+-#~ msgstr "Sélection : %.3lf - %.3lf (%.3lf images PAL)   %s"
++#~ msgstr "SÈlection : %.3lf - %.3lf (%.3lf images PAL)   %s"
+ 
+ #~ msgid "Selection: %.3lf - %.3lf (%.3lf film frames)   %s"
+-#~ msgstr "Sélection : %.3lf - %.3lf (%.3lf film)   %s"
++#~ msgstr "SÈlection : %.3lf - %.3lf (%.3lf film)   %s"
+ 
+ #~ msgid ""
+ #~ "Selection: %02i:%02i:%06.3lf - %02i:%02i:%06.3lf (%02i:%02i:%06.3lf cdda "
+ #~ "min:sec:frames)   %s"
+ #~ msgstr ""
+-#~ "Sélection : %02i:%02i:%06.3lf - %02i:%02i:%06.3lf (%02i:%02i:%06.3lf cdda "
++#~ "SÈlection : %02i:%02i:%06.3lf - %02i:%02i:%06.3lf (%02i:%02i:%06.3lf cdda "
+ #~ "min:sec:trames)   %s"
+ 
+ #~ msgid ""
+ #~ "Selection: %1i:%02i:%02i:%06.3lf - %1i:%02i:%02i:%06.3lf (%1i:%02i:%02i:%"
+ #~ "06.3lf NTSC drop-frame h:mm:ss:ff) (%.3lf NTSC frames)   %s"
+ #~ msgstr ""
+-#~ "Sélection : %1i:%02i:%02i:%06.3lf - %1i:%02i:%02i:%06.3lf (%1i:%02i:%02i:%"
++#~ "SÈlection : %1i:%02i:%02i:%06.3lf - %1i:%02i:%02i:%06.3lf (%1i:%02i:%02i:%"
+ #~ "06.3lf NTSC drop-frame h:mm:ss:ii) (%.3lf images NTSC)   %s"
+ 
+ #~ msgid ""
+ #~ "Selection: %1i:%02i:%02i:%06.3lf - %1i:%02i:%02i:%06.3lf (%1i:%02i:%02i:%"
+ #~ "06.3lf NTSC non-drop-frame h:mm:ss:ff) (%.3lf NTSC frames)   %s"
+ #~ msgstr ""
+-#~ "Sélection : %1i:%02i:%02i:%06.3lf - %1i:%02i:%02i:%06.3lf (%1i:%02i:%02i:%"
++#~ "SÈlection : %1i:%02i:%02i:%06.3lf - %1i:%02i:%02i:%06.3lf (%1i:%02i:%02i:%"
+ #~ "06.3lf NTSC non-drop-frame h:mm:ss:ii) (%.3lf images NTSC)   %s"
+ 
+ #~ msgid ""
+ #~ "Selection: %1i:%02i:%02i:%06.3lf - %1i:%02i:%02i:%06.3lf (%1i:%02i:%02i:%"
+ #~ "06.3lf PAL h:mm:ss:ff) (%.3lf PAL frames)   %s"
+ #~ msgstr ""
+-#~ "Sélection : %1i:%02i:%02i:%06.3lf - %1i:%02i:%02i:%06.3lf (%1i:%02i:%02i:%"
++#~ "SÈlection : %1i:%02i:%02i:%06.3lf - %1i:%02i:%02i:%06.3lf (%1i:%02i:%02i:%"
+ #~ "06.3lf PAL h:mm:ss:ff) (%.3lf images PAL)   %s"
+ 
+ #~ msgid ""
+ #~ "Selection: %1i:%02i:%02i:%06.3lf - %1i:%02i:%02i:%06.3lf (%1i:%02i:%02i:%"
+ #~ "06.3lf film h:mm:ss:ff) (%.3lf film frames)   %s"
+ #~ msgstr ""
+-#~ "Sélection : %1i:%02i:%02i:%06.3lf - %1i:%02i:%02i:%06.3lf (%1i:%02i:%02i:%"
++#~ "SÈlection : %1i:%02i:%02i:%06.3lf - %1i:%02i:%02i:%06.3lf (%1i:%02i:%02i:%"
+ #~ "06.3lf film h:mm:ss:ff) (%.3lf film)   %s"
+ 
+ #~ msgid ""
+ #~ "Selection: %1i:%02i:%09.6f - %1i:%02i:%09.6f (%1i:%02i:%09.6f hr:min:"
+ #~ "sec)   %s"
+ #~ msgstr ""
+-#~ "Sélection : %1i:%02i:%09.6f - %1i:%02i:%09.6f (%1i:%02i:%09.6f h:min:"
++#~ "SÈlection : %1i:%02i:%09.6f - %1i:%02i:%09.6f (%1i:%02i:%09.6f h:min:"
+ #~ "sec)   %s"
+ 
+ #~ msgid ""
+ #~ "Selection: %i+%04i - %i+%04i (%i+%04i cdda sectors+bytes)   [Snap-To "
+ #~ "Samples]"
+ #~ msgstr ""
+-#~ "Sélection : %i+%04i - %i+%04i (%i+%04i cdda secteurs+octets)   "
+-#~ "[à l'échantillon près]"
++#~ "SÈlection : %i+%04i - %i+%04i (%i+%04i cdda secteurs+octets)   "
++#~ "[‡ l'Èchantillon prËs]"
+ 
+ #~ msgid ""
+ #~ "Selection: %i+%04i - %i+%04i (%i+%04i cdda sectors+bytes)   [Snap-To "
+ #~ "Samples]   Change Project Rate to 44100 for cdda"
+ #~ msgstr ""
+-#~ "Sélection: %i+%04i - %i+%04i (%i+%04i cdda secteurs+octets)    "
+-#~ "[à l'échantillon près]   Change l'échantillonnage du projet à 44100 pour CDDA"
++#~ "SÈlection: %i+%04i - %i+%04i (%i+%04i cdda secteurs+octets)    "
++#~ "[‡ l'Èchantillon prËs]   Change l'Èchantillonnage du projet ‡ 44100 pour CDDA"
+ 
+ #~ msgid "Selection: %i+%i - %i+%i (%i+%i sec+samples)   [Snap-To Samples]"
+ #~ msgstr ""
+-#~ "Sélection: %i+%i - %i+%i (%i+%i sec+échantillons)   [à l'échantillon près]"
++#~ "SÈlection: %i+%i - %i+%i (%i+%i sec+Èchantillons)   [‡ l'Èchantillon prËs]"
+ 
+ #~ msgid ""
+ #~ "Selection: %i:%02i+%i - %i:%02i+%i (%i:%02i+%i min:sec+samples)   [Snap-"
+ #~ "To Samples]"
+ #~ msgstr ""
+-#~ "Sélection: %i:%02i+%i - %i:%02i+%i (%i:%02i+%i min:sec+échantillons)    "
+-#~ "[à l'échantillon près]"
++#~ "SÈlection: %i:%02i+%i - %i:%02i+%i (%i:%02i+%i min:sec+Èchantillons)    "
++#~ "[‡ l'Èchantillon prËs]"
+ 
+ #~ msgid "Selection: %i:%09.6f - %i:%09.6f (%i:%09.6f min:sec)   %s"
+-#~ msgstr "Sélection : %i:%09.6f - %i:%09.6f (%i:%09.6f min:sec)   %s"
++#~ msgstr "SÈlection : %i:%09.6f - %i:%09.6f (%i:%09.6f min:sec)   %s"
+ 
+ #~ msgid ""
+ #~ "Selection: %i:%09.6lf - %i:%09.6lf (%i:%09.6lf min:sec)   [Snap-To "
+ #~ "Samples]"
+ #~ msgstr ""
+-#~ "Sélection : %i:%09.6lf - %i:%09.6lf (%i:%09.6lf min:sec)    [à l'échantillon "
+-#~ "près]"
++#~ "SÈlection : %i:%09.6lf - %i:%09.6lf (%i:%09.6lf min:sec)    [‡ l'Èchantillon "
++#~ "prËs]"
+ 
+ #~ msgid "Selection: %lf - %lf (%lf sec)   %s"
+-#~ msgstr "Sélection : %lf - %lf (%lf sec)   %s"
++#~ msgstr "SÈlection : %lf - %lf (%lf sec)   %s"
+ 
+ #~ msgid "Selection: %lf - %lf (%lf sec)   [Snap-To Samples]"
+-#~ msgstr "Sélection : %lf - %lf (%lf sec)   [à l'échantillon près]"
++#~ msgstr "SÈlection : %lf - %lf (%lf sec)   [‡ l'Èchantillon prËs]"
+ 
+ #~ msgid "Selection: %li - %li (%li samples)   [Snap-To Samples]"
+-#~ msgstr "Sélection : %li - %li (%li échantillons)   [à l'échantillon près]"
++#~ msgstr "SÈlection : %li - %li (%li Èchantillons)   [‡ l'Èchantillon prËs]"
+ 
+ #~ msgid "Set Selection Format"
+-#~ msgstr "Choisir un format de sélection "
++#~ msgstr "Choisir un format de sÈlection "
+ 
+ #~ msgid ""
+ #~ "The VU meters will now be disabled.\n"
+@@ -6106,9 +6106,9 @@
+ #~ "To enable them again, open the Preferences dialog and click on the "
+ #~ "Interface tab."
+ #~ msgstr ""
+-#~ "Les VU mètres vont être désactivés.\n"
++#~ "Les VU mËtres vont Ítre dÈsactivÈs.\n"
+ #~ "\n"
+-#~ "Pour les réactiver, ouvrez la boîte de dialogue Préférences et cliquez sur "
++#~ "Pour les rÈactiver, ouvrez la boÓte de dialogue PrÈfÈrences et cliquez sur "
+ #~ "l'onglet Interface."
+ 
+ #~ msgid ""
+@@ -6118,21 +6118,21 @@
+ #~ "into an existing project.  To open a project file,\n"
+ #~ "select Open from the File menu.\n"
+ #~ msgstr ""
+-#~ "Le fichier sélectionné est un projet Audacity.\n"
++#~ "Le fichier sÈlectionnÈ est un projet Audacity.\n"
+ #~ "\n"
+-#~ "Seuls les fichiers audio peuvent être importés dans un projet existant,\n"
++#~ "Seuls les fichiers audio peuvent Ítre importÈs dans un projet existant,\n"
+ #~ "pas les fichiers Projets.  Pour ouvrir un fichier Projet,\n"
+ #~ "faites Ouvrir dans le menu Fichier.\n"
+ 
+ #~ msgid "Time shift sequence"
+-#~ msgstr "Séquence de calage temporel"
++#~ msgstr "SÈquence de calage temporel"
+ 
+ #  i18n-hint: This snap-to string will appear in the status bar.
+ #~ msgid "[Snap-To Off]"
+-#~ msgstr "[Sélection libre]"
++#~ msgstr "[SÈlection libre]"
+ 
+ #~ msgid "[Snap-To On]"
+-#~ msgstr "[Sélection par bloc]"
++#~ msgstr "[SÈlection par bloc]"
+ 
+ #  i18n-hint: fps is "frames per second",
+ #  cdda is "Compact Disc Digital Audio - don't translate
+@@ -6143,7 +6143,7 @@
+ #  A "sector" is a technical term - don't translate unless you're sure
+ #  you know the correct term.
+ #~ msgid "cdda sectors+bytes (snap to samples)"
+-#~ msgstr "CDDA secteurs+octets (à l'échantillon près)"
++#~ msgstr "CDDA secteurs+octets (‡ l'Èchantillon prËs)"
+ 
+ #~ msgid "film h:mm:ss:ff 24 fps"
+ #~ msgstr "film h:mm:ss:ii 24 i/s"
+@@ -6155,16 +6155,16 @@
+ #~ msgstr "min:sec"
+ 
+ #~ msgid "min:sec+samples (snap to samples)"
+-#~ msgstr "min:sec+échantillons (à l'échantillon près)"
++#~ msgstr "min:sec+Èchantillons (‡ l'Èchantillon prËs)"
+ 
+ #~ msgid "samples (snap to samples)"
+-#~ msgstr "échantillons (à l'échantillon près)"
++#~ msgstr "Èchantillons (‡ l'Èchantillon prËs)"
+ 
+ #~ msgid "sec"
+ #~ msgstr "sec"
+ 
+ #~ msgid "sec (snap to samples)"
+-#~ msgstr "sec (à l'échantillon près)"
++#~ msgstr "sec (‡ l'Èchantillon prËs)"
+ 
+ #~ msgid "sec+samples (snap to samples)"
+-#~ msgstr "sec+échantillons (à l'échantillon près)"
++#~ msgstr "sec+Èchantillons (‡ l'Èchantillon prËs)"
