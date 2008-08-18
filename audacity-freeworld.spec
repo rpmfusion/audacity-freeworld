@@ -37,6 +37,9 @@ Patch112: audacity-1.3.2-allegro-cflags.patch
 Patch113: audacity-1.3.2-libmp3lame-default.patch
 Patch114: audacity-1.3.2-CVE-2007-6061.patch
 
+Provides: audacity-nonfree = %{version}-%{release}
+Obsoletes: audacity-nonfree < %{version}-%{release}
+
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: alsa-lib-devel
 BuildRequires: desktop-file-utils
