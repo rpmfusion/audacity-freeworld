@@ -1,0 +1,32 @@
+diff -Nur audacity-src-1.3.5-beta-orig/lib-src/libvamp/vamp-sdk/PluginAdapter.cpp audacity-src-1.3.5-beta/lib-src/libvamp/vamp-sdk/PluginAdapter.cpp
+--- audacity-src-1.3.5-beta-orig/lib-src/libvamp/vamp-sdk/PluginAdapter.cpp	2008-05-08 07:19:58.000000000 +1000
++++ audacity-src-1.3.5-beta/lib-src/libvamp/vamp-sdk/PluginAdapter.cpp	2008-08-22 00:16:54.000000000 +1000
+@@ -38,6 +38,7 @@
+ 
+ #include <cstring>
+ #include <cstdlib>
++using namespace std;
+ 
+ //#define DEBUG_PLUGIN_ADAPTER 1
+ 
+diff -Nur audacity-src-1.3.5-beta-orig/lib-src/libvamp/vamp-sdk/PluginHostAdapter.cpp audacity-src-1.3.5-beta/lib-src/libvamp/vamp-sdk/PluginHostAdapter.cpp
+--- audacity-src-1.3.5-beta-orig/lib-src/libvamp/vamp-sdk/PluginHostAdapter.cpp	2008-05-08 07:19:58.000000000 +1000
++++ audacity-src-1.3.5-beta/lib-src/libvamp/vamp-sdk/PluginHostAdapter.cpp	2008-08-22 00:20:02.000000000 +1000
+@@ -64,7 +64,7 @@
+     std::vector<std::string> path;
+     std::string envPath;
+ 
+-    char *cpath = getenv("VAMP_PATH");
++    char *cpath = std::getenv("VAMP_PATH");
+     if (cpath) envPath = cpath;
+ 
+ #ifdef _WIN32
+@@ -81,7 +81,7 @@
+ 
+     if (envPath == "") {
+         envPath = DEFAULT_VAMP_PATH;
+-        char *chome = getenv("HOME");
++        char *chome = std::getenv("HOME");
+         if (chome) {
+             std::string home(chome);
+             std::string::size_type f;
