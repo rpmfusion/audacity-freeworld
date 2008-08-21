@@ -3,7 +3,7 @@ Conflicts: %{realname}
 
 Name: audacity-freeworld
 Version: 1.3.5
-Release: 0.3.beta%{?dist}
+Release: 0.4.beta%{?dist}
 Summary: Multitrack audio editor
 Group: Applications/Multimedia
 License: GPLv2
@@ -94,7 +94,7 @@ do
 done
 grep -q -s __RPM_LIB * -R && exit 1
 
-%patch2 -p1 -bu .gcc43
+%patch2 -p1 -b .gcc43
 %patch4 -p1 -b .fr
 
 # Substitute occurences of "libmp3lame.so" with "libmp3lame.so.0".
@@ -244,6 +244,9 @@ update-desktop-database &> /dev/null || :
 
 
 %changelog
+* Thu Aug 22 2008 David Timms <iinet.net.au@dtimms> - 1.3.5-0.4.beta
+- mod patch2 apply command
+
 * Thu Aug 22 2008 David Timms <iinet.net.au@dtimms> - 1.3.5-0.3.beta
 - add Requires lame-libs
 - update 1.3.4-gcc43.patch to suit 1.3.5, since patch mostly upstreamed.
