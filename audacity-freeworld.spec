@@ -2,21 +2,20 @@
 Conflicts: %{realname}
 
 Name: audacity-freeworld
-Version: 1.3.5
-Release: 0.4.beta%{?dist}
+Version: 1.3.6
+Release: 0.1.beta%{?dist}
 Summary: Multitrack audio editor
 Group: Applications/Multimedia
 License: GPLv2
 URL: http://audacity.sourceforge.net
 
-Source0: http://downloads.sf.net/sourceforge/audacity/audacity-src-1.3.5.tar.bz2
+Source0: http://downloads.sf.net/sourceforge/audacity/audacity-src-1.3.6.tar.bz2
 Source1: audacity.png
 Source2: audacity.desktop
 
-Patch1: audacity-1.3.4-libdir.patch
+#Patch1: audacity-1.3.4-libdir.patch
 Patch2: audacity-1.3.5-gcc43.patch
 Patch3: audacity-1.3.4-libmp3lame-default.patch
-Patch4: audacity-1.3.5-fr.patch
 
 # for 1.3.2-beta
 Source100: http://downloads.sf.net/sourceforge/audacity/audacity-src-1.3.2.tar.gz
@@ -79,13 +78,13 @@ Linux/*BSD, MacOS, and Windows.
 %setup -q -a 100 -c
 
 ###
-### 1.3.5-beta
+### 1.3.6
 ###
 
-cd audacity-src-1.3.5-beta
+cd audacity-src-1.3.6
 
 # Substitute hardcoded library paths.
-%patch1 -p1
+#%%patch1 -p1
 %patch3 -p1
 for i in src/effects/ladspa/LoadLadspa.cpp src/export/ExportMP3.cpp src/AudacityApp.cpp lib-src/libvamp/vamp-sdk/PluginHostAdapter.cpp
 do
@@ -95,7 +94,7 @@ done
 grep -q -s __RPM_LIB * -R && exit 1
 
 %patch2 -p1 -b .gcc43
-%patch4 -p1 -b .fr
+#%%patch4 -p1 -b .fr
 
 # Substitute occurences of "libmp3lame.so" with "libmp3lame.so.0".
 for i in locale/*.po src/export/ExportMP3.cpp
@@ -155,7 +154,7 @@ cd -
 
 
 %build
-cd audacity-src-1.3.5-beta
+cd audacity-src-1.3.6
 %configure \
     --with-help \
     --with-libsndfile=system \
@@ -196,7 +195,7 @@ rm -rf ${RPM_BUILD_ROOT}
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/pixmaps
 cp %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/pixmaps
 
-cd audacity-src-1.3.5-beta
+cd audacity-src-1.3.6
 make DESTDIR=${RPM_BUILD_ROOT} install
 cd -
 %{find_lang} %{realname}
@@ -244,6 +243,11 @@ update-desktop-database &> /dev/null || :
 
 
 %changelog
+* Sun Nov 23 2008 David Timms <iinet.net.au@dtimms> - 1.3.6-0.1.beta
+- update to new upstream beta release
+- drop libdir patch for now
+- drop upstreamed fr.po patch
+
 * Thu Aug 22 2008 David Timms <iinet.net.au@dtimms> - 1.3.5-0.4.beta
 - mod patch2 apply command
 
