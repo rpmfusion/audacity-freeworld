@@ -3,7 +3,7 @@ Conflicts: %{realname}
 
 Name: audacity-freeworld
 Version: 1.3.6
-Release: 0.1.beta%{?dist}
+Release: 0.2.beta%{?dist}
 Summary: Multitrack audio editor
 Group: Applications/Multimedia
 License: GPLv2
@@ -15,7 +15,9 @@ Source2: audacity.desktop
 
 #Patch1: audacity-1.3.4-libdir.patch
 Patch2: audacity-1.3.5-gcc43.patch
-Patch3: audacity-1.3.4-libmp3lame-default.patch
+#Patch3: audacity-1.3.4-libmp3lame-default.patch
+Patch4: audacity-1.3.6-ffmpeg-lib-search-path.patch
+Patch5: audacity-1.3.6-portaudio-pulseaudio-rev4-pathfix.patch
 
 # for 1.3.2-beta
 Source100: http://downloads.sf.net/sourceforge/audacity/audacity-src-1.3.2.tar.gz
@@ -43,6 +45,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: alsa-lib-devel
 BuildRequires: desktop-file-utils
 BuildRequires: expat-devel
+BuildRequires: ffmpeg-devel
 BuildRequires: flac-devel
 BuildRequires: gettext
 BuildRequires: jack-audio-connection-kit-devel
@@ -56,14 +59,15 @@ BuildRequires: soundtouch-devel
 BuildRequires: zip
 BuildRequires: zlib-devel
 BuildRequires: libmad-devel
+BuildRequires: lame-devel
 
-# for 1.3.5-beta
+# for 1.3.6-beta
 BuildRequires: wxGTK2-devel
 
 # for 1.3.2-beta
 BuildRequires: compat-wxGTK26-devel
 
-Requires: lame-libs
+##Requires: lame-libs
 
 
 %description
@@ -85,7 +89,7 @@ cd audacity-src-1.3.6
 
 # Substitute hardcoded library paths.
 #%%patch1 -p1
-%patch3 -p1
+#%%patch3 -p1
 for i in src/effects/ladspa/LoadLadspa.cpp src/export/ExportMP3.cpp src/AudacityApp.cpp lib-src/libvamp/vamp-sdk/PluginHostAdapter.cpp
 do
     sed -i -e 's!__RPM_LIBDIR__!%{_libdir}!g' $i
@@ -95,12 +99,23 @@ grep -q -s __RPM_LIB * -R && exit 1
 
 %patch2 -p1 -b .gcc43
 #%%patch4 -p1 -b .fr
+%patch4 -p1 -b .ffmpeg-library-search-path
+
+# apply Kevin Kofler's portaudio-pulseaudio patch
+%patch5 -p1 -b .portaudio-pulseaudio-rev4-pathfix
+
 
 # Substitute occurences of "libmp3lame.so" with "libmp3lame.so.0".
 for i in locale/*.po src/export/ExportMP3.cpp
 do
     sed -i -e 's!libmp3lame.so\([^.]\)!libmp3lame.so.0\1!g' $i
 done
+
+# clear executable permissions on src files that go to -debuginfo
+chmod a-x lib-src/FileDialog/FileDialog.*
+chmod a-x lib-src/FileDialog/gtk/FileDialogPrivate.*
+chmod a-x src/FileIO.* src/UploadDialog.*
+chmod a-x src/widgets/HtmlWindow.cpp src/widgets/ProgressDialog.*
 
 cd -
 
@@ -150,6 +165,12 @@ sed -i -e 's!-msse!!' lib-src/soundtouch/source/SoundTouch/Makefile.*
 # for wxGTK26-compat
 sed -i -e 's!wx-config!wx-2.6-config!g' configure
 
+# clear executable permissions on src files that go to -debuginfo
+chmod a-x lib-src/allegro/allegro.* 
+chmod a-x lib-src/allegro/mfallegro.*
+chmod a-x lib-src/allegro/mfmidi.*
+chmod a-x src/UploadDialog.*
+
 cd -
 
 
@@ -166,7 +187,8 @@ cd audacity-src-1.3.6
     --with-id3tag=system \
     --with-expat=system \
     --with-soundtouch=system \
-    --with-libmad=system
+    --with-libmad=system \
+    --with-ffmpeg=system
 # _smp_mflags cause problems
 make
 cd -
@@ -243,10 +265,15 @@ update-desktop-database &> /dev/null || :
 
 
 %changelog
+* Sun Dec 14 2008 David Timms <iinet.net.au@dtimms> - 1.3.6-0.2.beta
+- add Kevin Koflers portaudio patch to allow output via pulseaudio
+
 * Sun Nov 23 2008 David Timms <iinet.net.au@dtimms> - 1.3.6-0.1.beta
 - update to new upstream beta release
 - drop libdir patch for now
 - drop upstreamed fr.po patch
+- add support for ffmpeg import and export via BR and --with-ffmpeg
+- add patch to allow selection of ffmpeg library on unix.
 
 * Thu Aug 22 2008 David Timms <iinet.net.au@dtimms> - 1.3.5-0.4.beta
 - mod patch2 apply command

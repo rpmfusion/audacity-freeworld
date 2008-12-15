@@ -1,0 +1,134 @@
+--- FFmpeg.h	2008/10/17 06:42:44	1.27
++++ audacity-src-1.3.6/src/FFmpeg.h	2008/12/02 05:07:11	1.33
+@@ -30,14 +30,21 @@
+  * Audacity.h */
+ 
+ #if defined(USE_FFMPEG)
+-	extern "C" {
+-	#ifdef _STDINT_H
++   extern "C" {
++   #ifdef _STDINT_H
+    /* stdint.h has already been included. That's likely to break ffmpeg headers
+-	* as described above so we issue a warning */
+-	#warning "stdint.h included before ffmpeg headers, this may well not compile"
+-	#endif
++    * as described above so we issue a warning */
++   #warning "stdint.h included before ffmpeg headers, this might not compile"
++   #endif
++   #ifdef _STDINT_H_
++   /* as above but for Mac (mainly as a debugging tool) */
++   #warning "stdint.h included before ffmpeg headers, this might not compile"
++   #endif
++
+    #if !defined(__STDC_CONSTANT_MACROS)
+ 	#define __STDC_CONSTANT_MACROS
++    /* also defined on the compiler command line for autotools builds, so 
++	 * should only be here for windows builders */
+    #endif
+ 	#include <libavcodec/avcodec.h>
+ 	#include <libavformat/avformat.h>
+@@ -74,14 +81,14 @@
+ //----------------------------------------------------------------------------
+ wxString GetFFmpegVersion(wxWindow *parent);
+ 
++/* from here on in, this stuff only applies when ffmpeg is available */
++#if defined(USE_FFMPEG)
++
+ //----------------------------------------------------------------------------
+ // Attempt to load and enable/disable FFmpeg at startup
+ //----------------------------------------------------------------------------
+ void FFmpegStartup();
+ 
+-/* from here on in, this stuff only applies when ffmpeg is available */
+-#if defined(USE_FFMPEG)
+-
+ bool LoadFFmpeg(bool showerror);
+ 
+ /// If Audacity failed to load libav*, this dialog
+@@ -242,10 +249,9 @@
+       return wxString::Format(wxT("F(%s),C(%s),U(%s)"),mAVFormatVersion.c_str(),mAVCodecVersion.c_str(),mAVUtilVersion.c_str());
+    }
+ 
+-   /* note these values are for Windows only - Mac and Unix have their own
+-   * sections elsewhere */
+-   //\todo { Section for Mac and *nix }
+ #if defined(__WXMSW__)
++   /* Library names and file filters for Windows only */
++
+    wxString GetLibraryTypeString()
+    {
+       return _("Only avformat.dll|*avformat*.dll|Dynamically Linked Libraries (*.dll)|*.dll|All Files (*.*)|*");
+@@ -260,10 +266,21 @@
+    {
+       return (wxT("avformat-") wxT(AV_STRINGIFY(LIBAVFORMAT_VERSION_MAJOR)) wxT(".dll"));
+    }
+-#else //__WXMSW__
++
++   wxString GetLibAVCodecName()
++   {
++      return (wxT("avcodec-") wxT(AV_STRINGIFY(LIBAVCODEC_VERSION_MAJOR)) wxT(".dll"));
++   }
++
++   wxString GetLibAVUtilName()
++   {
++      return (wxT("avutil-") wxT(AV_STRINGIFY(LIBAVUTIL_VERSION_MAJOR)) wxT(".dll"));
++   }
++#elif defined(__WXMAC__)
++   /* Library names and file filters for Mac OS only */
+    wxString GetLibraryTypeString()
+    {
+-      return _("Only avformat.so|*avformat*.so*|Dynamically Linked Libraries (*.so)|*.so|All Files (*)|*");
++      return _("Only libavformat.*.dylib|libavformat.*.dylib|Dynamically Linked Libraries (*.dylib)|*.dylib|All Files (*)|*");
+    }
+ 
+    wxString GetLibAVFormatPath()
+@@ -273,9 +290,47 @@
+ 
+    wxString GetLibAVFormatName()
+    {
+-      return (wxT("avformat-") wxT(AV_STRINGIFY(LIBAVFORMAT_VERSION_MAJOR)) wxT(".dll"));
++      return (wxT("libavformat.") wxT(AV_STRINGIFY(LIBAVFORMAT_VERSION_MAJOR)) 
++					  wxT(".dylib"));
++   }
++
++   wxString GetLibAVCodecName()
++   {
++      return (wxT("libavcodec.") wxT(AV_STRINGIFY(LIBAVCODEC_VERSION_MAJOR)) wxT(".dylib"));
++   }
++
++   wxString GetLibAVUtilName()
++   {
++      return (wxT("libavutil.") wxT(AV_STRINGIFY(LIBAVUTIL_VERSION_MAJOR)) wxT(".dylib"));
++   }
++#else
++   /* Library names and file filters for other platforms, basically Linux and
++	* other *nix platforms */
++   wxString GetLibraryTypeString()
++   {
++      return _("Only libavformat.so|libavformat.so*|Dynamically Linked Libraries (*.so*)|*.so*|All Files (*)|*");
++   }
++
++   wxString GetLibAVFormatPath()
++   {
++      return wxT("");
++   }
++
++   wxString GetLibAVFormatName()
++   {
++      return (wxT("libavformat.so.") wxT(AV_STRINGIFY(LIBAVFORMAT_VERSION_MAJOR)));
++   }
++
++   wxString GetLibAVCodecName()
++   {
++      return (wxT("libavcodec.so.") wxT(AV_STRINGIFY(LIBAVCODEC_VERSION_MAJOR)));
++   }
++
++   wxString GetLibAVUtilName()
++   {
++      return (wxT("libavutil.so.") wxT(AV_STRINGIFY(LIBAVUTIL_VERSION_MAJOR)));
+    }
+-#endif //__WXMSW__
++#endif // (__WXMAC__) || (__WXMSW__)
+ 
+    /// Ugly reference counting. I thought of using wxStuff for that,
+    /// but decided that wx reference counting is not useful, since
