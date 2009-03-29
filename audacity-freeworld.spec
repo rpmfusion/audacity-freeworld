@@ -3,7 +3,7 @@ Conflicts: %{realname}
 
 Name: audacity-freeworld
 Version: 1.3.6
-Release: 0.3.beta%{?dist}
+Release: 0.4.beta%{?dist}
 Summary: Multitrack audio editor
 Group: Applications/Multimedia
 License: GPLv2
@@ -62,7 +62,7 @@ BuildRequires: libmad-devel
 BuildRequires: lame-devel
 
 # for 1.3.6-beta
-BuildRequires: wxGTK2-devel
+BuildRequires: wxGTK-devel
 
 # for 1.3.2-beta
 BuildRequires: compat-wxGTK26-devel
@@ -265,6 +265,9 @@ update-desktop-database &> /dev/null || :
 
 
 %changelog
+* Sun Mar 29 2009 Julian Sikorski <belegdol@fedoraproject.org> - 1.3.6-0.4.beta
+- wxGTK no longer provides wxGTK2 in Fedora 11
+
 * Sun Mar 29 2009 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 1.3.6-0.3.beta
 - rebuild for new F11 features
 
