@@ -3,7 +3,7 @@ Conflicts: %{realname}
 
 Name: audacity-freeworld
 Version: 1.3.6
-Release: 0.2.beta%{?dist}
+Release: 0.3.beta%{?dist}
 Summary: Multitrack audio editor
 Group: Applications/Multimedia
 License: GPLv2
@@ -265,6 +265,9 @@ update-desktop-database &> /dev/null || :
 
 
 %changelog
+* Sun Mar 29 2009 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 1.3.6-0.3.beta
+- rebuild for new F11 features
+
 * Sun Dec 14 2008 David Timms <iinet.net.au@dtimms> - 1.3.6-0.2.beta
 - add Kevin Koflers portaudio patch to allow output via pulseaudio
 
