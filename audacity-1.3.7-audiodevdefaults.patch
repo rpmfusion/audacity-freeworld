@@ -1,0 +1,77 @@
+diff -Nur audacity-src-1.3.7-orig/src/prefs/AudioIOPrefs.cpp audacity-src-1.3.7/src/prefs/AudioIOPrefs.cpp
+--- audacity-src-1.3.7-orig/src/prefs/AudioIOPrefs.cpp	2009-01-27 21:50:58.000000000 +0100
++++ audacity-src-1.3.7/src/prefs/AudioIOPrefs.cpp	2009-03-02 17:25:17.000000000 +0100
+@@ -71,6 +71,25 @@
+    wxString Name;
+    wxString Label;
+ 
++   mDefaultPlayDeviceName = gPrefs->Read(wxT("/AudioIO/PlaybackDevice"), wxT(""));
++   int playDeviceNum = -1;  // use device name from gPrefs
++   if ( mDefaultPlayDeviceName == wxT("") ) {
++#if USE_PORTAUDIO_V19
++      playDeviceNum = Pa_GetDefaultOutputDevice();
++#else
++      playDeviceNum = Pa_GetDefaultOutputDeviceID();
++#endif
++   }
++   mDefaultRecDeviceName = gPrefs->Read(wxT("/AudioIO/RecordingDevice"), wxT(""));
++   int recDeviceNum = -1;  // use device name from gPrefs
++   if ( mDefaultRecDeviceName == wxT("") ) {
++#if USE_PORTAUDIO_V19
++      recDeviceNum = Pa_GetDefaultInputDevice();
++#else
++      recDeviceNum = Pa_GetDefaultInputDeviceID();
++#endif
++   }
++
+ #if USE_PORTAUDIO_V19
+    int nDevices = Pa_GetDeviceCount();
+ #else
+@@ -85,10 +104,16 @@
+       if (info->maxOutputChannels > 0) {
+          mmPlayNames.Add( Name );
+          mmPlayLabels.Add( Label );
++         if ( playDeviceNum == j ) {
++            mDefaultPlayDeviceName = Name;
++         }
+       }
+       if (info->maxInputChannels > 0) {
+          mmRecordNames.Add( Name );
+          mmRecordLabels.Add( Label );
++         if ( recDeviceNum == j ) {
++            mDefaultRecDeviceName = Name;
++         }
+ //         if (info->maxInputChannels > numChannels)
+ //            numChannels = info->maxInputChannels;
+       }
+@@ -121,7 +146,7 @@
+       S.StartMultiColumn(2, wxEXPAND);
+       S.SetStretchyCol(1);
+       mPlay = S.TieChoice( _("Device") + wxString(wxT(":")), wxT("PlaybackDevice"), 
+-         wxT(""), mmPlayNames, mmPlayLabels );
++         mDefaultPlayDeviceName, mmPlayNames, mmPlayLabels );
+ 
+       S.AddPrompt( _("Using:") );
+       wxString ver = _("Portaudio v");
+@@ -139,7 +164,7 @@
+       S.StartMultiColumn(2, wxEXPAND);
+       S.SetStretchyCol(1);
+       mRec = S.TieChoice( _("Device") + wxString(wxT(":")), wxT("RecordingDevice"), 
+-         wxT(""), mmRecordNames, mmRecordLabels );
++         mDefaultRecDeviceName, mmRecordNames, mmRecordLabels );
+       S.TieChoice( _("Channels") + wxString(wxT(":")), wxT("RecordChannels"), 
+          2, mmChannelNames, mmChannelLabels );
+       S.EndMultiColumn();
+diff -Nur audacity-src-1.3.7-orig/src/prefs/AudioIOPrefs.h audacity-src-1.3.7/src/prefs/AudioIOPrefs.h
+--- audacity-src-1.3.7-orig/src/prefs/AudioIOPrefs.h	2009-01-27 21:50:58.000000000 +0100
++++ audacity-src-1.3.7/src/prefs/AudioIOPrefs.h	2009-03-02 17:25:16.000000000 +0100
+@@ -48,6 +48,9 @@
+ 
+    wxChoice *mPlay;
+    wxChoice *mRec;
++
++   wxString mDefaultPlayDeviceName;
++   wxString mDefaultRecDeviceName;
+ };
+ 
+ #endif

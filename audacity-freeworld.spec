@@ -2,41 +2,30 @@
 Conflicts: %{realname}
 
 Name: audacity-freeworld
-Version: 1.3.6
-Release: 0.4.beta%{?dist}
+Version: 1.3.7
+Release: 0.6.1.beta%{?dist}
 Summary: Multitrack audio editor
 Group: Applications/Multimedia
 License: GPLv2
 URL: http://audacity.sourceforge.net
 
-Source0: http://downloads.sf.net/sourceforge/audacity/audacity-src-1.3.6.tar.bz2
+Source0: http://downloads.sf.net/sourceforge/audacity/audacity-minsrc-1.3.7.tar.bz2
 Source1: audacity.png
 Source2: audacity.desktop
 
+Patch1: audacity-1.3.7-libmp3lame-default.patch
+Patch2: audacity-1.3.7-libdir.patch
+Patch3: audacity-1.3.6-flac-import.patch
+Patch4: audacity-1.3.7-portaudio-non-mmap-alsa.patch
+Patch5: audacity-1.3.7-repeat.patch
+Patch6: audacity-1.3.7-vamp-1.3.patch
+Patch7: audacity-1.3.7-audiodevdefaults.patch
+
 #Patch1: audacity-1.3.4-libdir.patch
-Patch2: audacity-1.3.5-gcc43.patch
+#Patch2: audacity-1.3.5-gcc43.patch
 #Patch3: audacity-1.3.4-libmp3lame-default.patch
-Patch4: audacity-1.3.6-ffmpeg-lib-search-path.patch
-Patch5: audacity-1.3.6-portaudio-pulseaudio-rev4-pathfix.patch
-
-# for 1.3.2-beta
-Source100: http://downloads.sf.net/sourceforge/audacity/audacity-src-1.3.2.tar.gz
-Source101: audacity13.desktop
-
-# iconv on locale/fr.po (MAC to ISO Latin-1)
-Patch102: audacity-1.3.2-fr.patch
-Patch103: audacity-1.3.2-exportmp3.patch
-Patch104: audacity-1.3.2-destdir.patch
-Patch105: audacity-1.3.2-resample.patch
-Patch106: audacity-1.3.2-FLAC.patch
-Patch107: audacity-1.3.2-expat2.patch
-Patch108: audacity-1.3.2-gcc43.patch
-Patch109: audacity-1.3.2-libdir.patch
-Patch110: audacity-1.3.2-jack-api-109.patch
-Patch111: audacity-1.3.2-soundtouch-cxxflags.patch
-Patch112: audacity-1.3.2-allegro-cflags.patch
-Patch113: audacity-1.3.2-libmp3lame-default.patch
-Patch114: audacity-1.3.2-CVE-2007-6061.patch
+#Patch4: audacity-1.3.6-ffmpeg-lib-search-path.patch
+#Patch5: audacity-1.3.6-portaudio-pulseaudio-rev4-pathfix.patch
 
 Provides: audacity-nonfree = %{version}-%{release}
 Obsoletes: audacity-nonfree < %{version}-%{release}
@@ -50,60 +39,54 @@ BuildRequires: flac-devel
 BuildRequires: gettext
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: ladspa-devel
+BuildRequires: lame-devel
 BuildRequires: libid3tag-devel
+BuildRequires: libmad-devel
 BuildRequires: libogg-devel
 BuildRequires: libsamplerate-devel
 BuildRequires: libsndfile-devel
 BuildRequires: libvorbis-devel
 BuildRequires: soundtouch-devel
+%if 0%{?fedora} < 11
+BuildRequires: vamp-plugin-sdk-devel
+%else
+BuildRequires: vamp-plugin-sdk-devel >= 2.0
+%endif
 BuildRequires: zip
 BuildRequires: zlib-devel
-BuildRequires: libmad-devel
-BuildRequires: lame-devel
-
-# for 1.3.6-beta
 BuildRequires: wxGTK-devel
-
-# for 1.3.2-beta
-BuildRequires: compat-wxGTK26-devel
-
-##Requires: lame-libs
 
 
 %description
 Audacity is a cross-platform multitrack audio editor. It allows you to
-record sounds directly or to import Ogg, WAV, AIFF, AU, IRCAM, or MP3
-files. It features a few simple effects, all of the editing features
-you should need, and unlimited undo. The GUI was built with wxWindows
-and the audio I/O currently uses OSS under Linux. Audacity runs on
-Linux/*BSD, MacOS, and Windows.
+record sounds directly or to import files in various formats. It features
+ a few simple effects, all of the editing features you should need, and
+unlimited undo. The GUI was built with wxWidgets and the audio I/O
+supports PulseAudio,  OSS and ALSA under Linux.
+This build has support for mp3 and ffmpeg import/export. 
+
 
 %prep
-%setup -q -a 100 -c
-
-###
-### 1.3.6
-###
-
-cd audacity-src-1.3.6
+%setup -q -n audacity-src-%{version}
 
 # Substitute hardcoded library paths.
-#%%patch1 -p1
-#%%patch3 -p1
-for i in src/effects/ladspa/LoadLadspa.cpp src/export/ExportMP3.cpp src/AudacityApp.cpp lib-src/libvamp/vamp-sdk/PluginHostAdapter.cpp
+%patch1 -p1
+%patch2 -p1
+for i in src/effects/ladspa/LoadLadspa.cpp src/AudacityApp.cpp src/export/ExportMP3.cpp
+#lib-src/libvamp/vamp-hostsdk/PluginHostAdapter.cpp
 do
     sed -i -e 's!__RPM_LIBDIR__!%{_libdir}!g' $i
     sed -i -e 's!__RPM_LIB__!%{_lib}!g' $i
 done
 grep -q -s __RPM_LIB * -R && exit 1
 
-%patch2 -p1 -b .gcc43
-#%%patch4 -p1 -b .fr
-%patch4 -p1 -b .ffmpeg-library-search-path
-
-# apply Kevin Kofler's portaudio-pulseaudio patch
-%patch5 -p1 -b .portaudio-pulseaudio-rev4-pathfix
-
+%patch3 -p1 -b .dumb-flac-import
+%patch4 -p1 -b .pa-non-mmap-alsa
+%patch5 -p1 -b .repeat
+%if 0%{?fedora} < 11
+%patch6 -p1 -b .vamp-1.3
+%endif
+%patch7 -p1 -b .audiodevdefaults
 
 # Substitute occurences of "libmp3lame.so" with "libmp3lame.so.0".
 for i in locale/*.po src/export/ExportMP3.cpp
@@ -112,70 +95,13 @@ do
 done
 
 # clear executable permissions on src files that go to -debuginfo
-chmod a-x lib-src/FileDialog/FileDialog.*
-chmod a-x lib-src/FileDialog/gtk/FileDialogPrivate.*
-chmod a-x src/FileIO.* src/UploadDialog.*
-chmod a-x src/widgets/HtmlWindow.cpp src/widgets/ProgressDialog.*
-
-cd -
-
-
-###
-### 1.3.2-beta
-###
-
-cd audacity-src-1.3.2-beta
-%patch102 -p1 -b .fr
-%patch103 -p1 -b .exportmp3
-%patch104 -p1 -b .destdir
-%patch105 -p1 -b .resample
-%patch106 -p1 -b .FLAC
-%patch107 -p1 -b .expat2
-%patch108 -p1 -b .gcc43
-
-# Substitute hardcoded library paths.
-%patch109 -p1
-%patch113 -p1
-for i in src/effects/ladspa/LoadLadspa.cpp src/export/ExportMP3.cpp src/AudacityApp.cpp
-do
-    sed -i -e 's!__RPM_LIBDIR__!%{_libdir}!g' $i
-    sed -i -e 's!__RPM_LIB__!%{_lib}!g' $i
-done
-grep -q -s __RPM_LIB * -R && exit 1
-
-# F9 devel only
-%if 0%{?fedora} > 8
-%patch110 -p1 -b .jack-api
-%endif
-
-%patch111 -p1 -b .soundtouch-cxxflags
-%patch112 -p1 -b .allegro-cflags
-%patch114 -p1 -b .CVE-2007-6061
-
-# Substitute occurences of "libmp3lame.so" with "libmp3lame.so.0".
-for i in help/wxhelp/audacity.hhk help/wxhelp/exportmp3.htm locale/*.po src/export/ExportMP3.cpp
-do
-    sed -i -e 's!libmp3lame.so\([^.]\)!libmp3lame.so.0\1!g' $i
-done
-
-%ifnarch %{ix86} x86_64
-sed -i -e 's!-msse!!' lib-src/soundtouch/source/SoundTouch/Makefile.*
-%endif
-
-# for wxGTK26-compat
-sed -i -e 's!wx-config!wx-2.6-config!g' configure
-
-# clear executable permissions on src files that go to -debuginfo
-chmod a-x lib-src/allegro/allegro.* 
-chmod a-x lib-src/allegro/mfallegro.*
-chmod a-x lib-src/allegro/mfmidi.*
-chmod a-x src/UploadDialog.*
-
-cd -
+#chmod a-x lib-src/FileDialog/FileDialog.*
+#chmod a-x lib-src/FileDialog/gtk/FileDialogPrivate.*
+#chmod a-x src/FileIO.* src/UploadDialog.*
+#chmod a-x src/widgets/HtmlWindow.cpp src/widgets/ProgressDialog.*
 
 
 %build
-cd audacity-src-1.3.6
 %configure \
     --with-help \
     --with-libsndfile=system \
@@ -187,28 +113,10 @@ cd audacity-src-1.3.6
     --with-id3tag=system \
     --with-expat=system \
     --with-soundtouch=system \
+    --with-ffmpeg=system \
     --with-libmad=system \
-    --with-ffmpeg=system
 # _smp_mflags cause problems
 make
-cd -
-
-cd audacity-src-1.3.2-beta
-%configure \
-    --with-help \
-    --with-libsndfile=system \
-    --without-libresample \
-    --with-libsamplerate=system \
-    --with-libflac=system \
-    --with-ladspa \
-    --with-vorbis=system \
-    --with-id3tag=system \
-    --with-expat=system \
-    --program-suffix=13 \
-    --with-libmad=system
-# _smp_mflags cause problems
-make
-cd -
 
 
 %install
@@ -217,22 +125,15 @@ rm -rf ${RPM_BUILD_ROOT}
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/pixmaps
 cp %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/pixmaps
 
-cd audacity-src-1.3.6
 make DESTDIR=${RPM_BUILD_ROOT} install
-cd -
-%{find_lang} %{realname}
 
-cd audacity-src-1.3.2-beta
-make DESTDIR=${RPM_BUILD_ROOT} install
-cd -
-%{find_lang} %{realname}13
-cat %{realname}13.lang >> %{realname}.lang
+%{find_lang} %{realname}
 
 rm -f $RPM_BUILD_ROOT%{_datadir}/applications/*.desktop
 desktop-file-install \
     --vendor fedora \
     --dir $RPM_BUILD_ROOT%{_datadir}/applications \
-    %{SOURCE2} %{SOURCE101}
+    %{SOURCE2}
 
 
 %clean
@@ -254,9 +155,7 @@ update-desktop-database &> /dev/null || :
 %files -f %{realname}.lang
 %defattr(-,root,root,-)
 %{_bindir}/%{realname}
-%{_bindir}/%{realname}13
 %{_datadir}/%{realname}/
-%{_datadir}/%{realname}13/
 %{_mandir}/man*/*
 %{_datadir}/applications/*
 %{_datadir}/pixmaps/*
@@ -265,11 +164,21 @@ update-desktop-database &> /dev/null || :
 
 
 %changelog
+* Tue May 26 2009 David Timms <iinet.net.au@dtimms> - 1.3.7-0.6.1.beta
+- match the 1.3.7.beta version in fedora proper
+- include new and updated patches from mschwendt
+- del no longer required patches
+
 * Sun Mar 29 2009 Julian Sikorski <belegdol@fedoraproject.org> - 1.3.6-0.4.beta
 - wxGTK no longer provides wxGTK2 in Fedora 11
 
 * Sun Mar 29 2009 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 1.3.6-0.3.beta
 - rebuild for new F11 features
+- revert to 1.3.6.beta for now
+
+* Sat Feb  7 2009 David Timms <iinet.net.au@dtimms> - 1.3.7-0.1.beta
+- update to new upstream beta release
+- drop beta release 1.3.2 from package
 
 * Sun Dec 14 2008 David Timms <iinet.net.au@dtimms> - 1.3.6-0.2.beta
 - add Kevin Koflers portaudio patch to allow output via pulseaudio
@@ -429,4 +338,3 @@ update-desktop-database &> /dev/null || :
 
 * Sat Oct 25 2003 Gerard Milmeister <gemi@bluewin.ch> - 0:1.2.0-pre2.fdr.1
 - First Fedora release
-
