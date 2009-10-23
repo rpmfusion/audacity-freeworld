@@ -3,7 +3,7 @@ Conflicts: %{realname}
 
 Name: audacity-freeworld
 Version: 1.3.7
-Release: 0.6.1.beta%{?dist}
+Release: 0.6.2.beta%{?dist}
 Summary: Multitrack audio editor
 Group: Applications/Multimedia
 License: GPLv2
@@ -164,6 +164,9 @@ update-desktop-database &> /dev/null || :
 
 
 %changelog
+* Fri Oct 23 2009 Orcan Ogetbil <oged[DOT]fedora[AT]gmail[DOT]com> - 1.3.7-0.6.2.beta
+- Update desktop file according to F-12 FedoraStudio feature
+
 * Tue May 26 2009 David Timms <iinet.net.au@dtimms> - 1.3.7-0.6.1.beta
 - match the 1.3.7.beta version in fedora proper
 - include new and updated patches from mschwendt

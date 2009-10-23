@@ -7,5 +7,5 @@ Icon=audacity
 Terminal=false
 Comment=A multitrack audio editor
 MimeType=audio/x-wav;application/ogg;audio/x-aiff;audio/x-aiffc;audio/x-aifc;audio/basic;application/x-audacity-project;
-Categories=AudioVideo;GNOME;
+Categories=AudioVideo;GNOME;Sequencer;X-Jack;AudioVideoEditing;
 StartupWMClass=Audacity
