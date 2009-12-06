@@ -1,31 +1,25 @@
+%define tartopdir audacity-src-1.3.10
+
+Name: audacity-freeworld
+
 %define realname audacity
 Conflicts: %{realname}
 
-Name: audacity-freeworld
-Version: 1.3.7
-Release: 0.6.2.beta%{?dist}
+Version: 1.3.10
+Release: 0.1.1.beta%{?dist}
 Summary: Multitrack audio editor
 Group: Applications/Multimedia
 License: GPLv2
 URL: http://audacity.sourceforge.net
 
-Source0: http://downloads.sf.net/sourceforge/audacity/audacity-minsrc-1.3.7.tar.bz2
+Source0: http://downloads.sf.net/sourceforge/audacity/audacity-minsrc-%{version}.tar.bz2
 Source1: audacity.png
 Source2: audacity.desktop
 
 Patch1: audacity-1.3.7-libmp3lame-default.patch
-Patch2: audacity-1.3.7-libdir.patch
-Patch3: audacity-1.3.6-flac-import.patch
-Patch4: audacity-1.3.7-portaudio-non-mmap-alsa.patch
-Patch5: audacity-1.3.7-repeat.patch
+Patch2: audacity-1.3.9-libdir.patch
 Patch6: audacity-1.3.7-vamp-1.3.patch
-Patch7: audacity-1.3.7-audiodevdefaults.patch
-
-#Patch1: audacity-1.3.4-libdir.patch
-#Patch2: audacity-1.3.5-gcc43.patch
-#Patch3: audacity-1.3.4-libmp3lame-default.patch
-#Patch4: audacity-1.3.6-ffmpeg-lib-search-path.patch
-#Patch5: audacity-1.3.6-portaudio-pulseaudio-rev4-pathfix.patch
+Patch7: audacity-1.3.9-getmaxpeak.patch
 
 Provides: audacity-nonfree = %{version}-%{release}
 Obsoletes: audacity-nonfree < %{version}-%{release}
@@ -34,14 +28,12 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: alsa-lib-devel
 BuildRequires: desktop-file-utils
 BuildRequires: expat-devel
-BuildRequires: ffmpeg-devel
 BuildRequires: flac-devel
 BuildRequires: gettext
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: ladspa-devel
-BuildRequires: lame-devel
 BuildRequires: libid3tag-devel
-BuildRequires: libmad-devel
+BuildRequires: taglib-devel
 BuildRequires: libogg-devel
 BuildRequires: libsamplerate-devel
 BuildRequires: libsndfile-devel
@@ -55,50 +47,43 @@ BuildRequires: vamp-plugin-sdk-devel >= 2.0
 BuildRequires: zip
 BuildRequires: zlib-devel
 BuildRequires: wxGTK-devel
+BuildRequires: libmad-devel
+BuildRequires: ffmpeg-devel
+BuildRequires: lame-devel
 
 
 %description
 Audacity is a cross-platform multitrack audio editor. It allows you to
 record sounds directly or to import files in various formats. It features
- a few simple effects, all of the editing features you should need, and
+a few simple effects, all of the editing features you should need, and
 unlimited undo. The GUI was built with wxWidgets and the audio I/O
-supports PulseAudio,  OSS and ALSA under Linux.
-This build has support for mp3 and ffmpeg import/export. 
+supports PulseAudio, OSS and ALSA under Linux.
+This build has support for mp3 and ffmpeg import/export.
 
 
 %prep
-%setup -q -n audacity-src-%{version}
+%setup -q -n %{tartopdir}
 
 # Substitute hardcoded library paths.
 %patch1 -p1
 %patch2 -p1
 for i in src/effects/ladspa/LoadLadspa.cpp src/AudacityApp.cpp src/export/ExportMP3.cpp
-#lib-src/libvamp/vamp-hostsdk/PluginHostAdapter.cpp
 do
     sed -i -e 's!__RPM_LIBDIR__!%{_libdir}!g' $i
     sed -i -e 's!__RPM_LIB__!%{_lib}!g' $i
 done
 grep -q -s __RPM_LIB * -R && exit 1
 
-%patch3 -p1 -b .dumb-flac-import
-%patch4 -p1 -b .pa-non-mmap-alsa
-%patch5 -p1 -b .repeat
 %if 0%{?fedora} < 11
 %patch6 -p1 -b .vamp-1.3
 %endif
-%patch7 -p1 -b .audiodevdefaults
+%patch7 -p1 -b .getmaxpeak
 
 # Substitute occurences of "libmp3lame.so" with "libmp3lame.so.0".
 for i in locale/*.po src/export/ExportMP3.cpp
 do
     sed -i -e 's!libmp3lame.so\([^.]\)!libmp3lame.so.0\1!g' $i
 done
-
-# clear executable permissions on src files that go to -debuginfo
-#chmod a-x lib-src/FileDialog/FileDialog.*
-#chmod a-x lib-src/FileDialog/gtk/FileDialogPrivate.*
-#chmod a-x src/FileIO.* src/UploadDialog.*
-#chmod a-x src/widgets/HtmlWindow.cpp src/widgets/ProgressDialog.*
 
 
 %build
@@ -114,7 +99,7 @@ done
     --with-expat=system \
     --with-soundtouch=system \
     --with-ffmpeg=system \
-    --with-libmad=system \
+    --with-libmad=system
 # _smp_mflags cause problems
 make
 
@@ -127,7 +112,12 @@ cp %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/pixmaps
 
 make DESTDIR=${RPM_BUILD_ROOT} install
 
+# Audacity 1.3.8-beta complains if the help/manual directories
+# don't exist.
+mkdir -p $RPM_BUILD_ROOT%{_datadir}/%{name}/help/manual
+
 %{find_lang} %{realname}
+
 
 rm -f $RPM_BUILD_ROOT%{_datadir}/applications/*.desktop
 desktop-file-install \
@@ -164,6 +154,18 @@ update-desktop-database &> /dev/null || :
 
 
 %changelog
+* Sat Dec  5 2009 David Timms <iinet.net.au@dtimms> - 1.3.10-0.1.1.beta
+- upgrade to 1.3.10-beta
+- re-base spec to fedora devel and patches by mschwendt 
+
+* Thu Dec  3 2009 David Timms <iinet.net.au@dtimms> - 1.3.9-0.4.2.beta
+- continue with upgrade to f12 version
+
+* Mon Nov 16 2009 David Timms <iinet.net.au@dtimms> - 1.3.9-0.4.1.beta
+- upgrade to 1.3.9-beta to match Fedora version.
+- resync to include new and updated patches from mschwendt 
+- add conditional freeworld to allow minimal change from Fedora version
+
 * Fri Oct 23 2009 Orcan Ogetbil <oged[DOT]fedora[AT]gmail[DOT]com> - 1.3.7-0.6.2.beta
 - Update desktop file according to F-12 FedoraStudio feature
 
