@@ -1,18 +1,18 @@
-%define tartopdir audacity-src-1.3.10
+%define tartopdir audacity-src-1.3.12-beta
 
 Name: audacity-freeworld
 
 %define realname audacity
 Conflicts: %{realname}
 
-Version: 1.3.10
+Version: 1.3.12
 Release: 0.1.1.beta%{?dist}
 Summary: Multitrack audio editor
-Group: Applications/Multimedia
+Group:   Applications/Multimedia
 License: GPLv2
-URL: http://audacity.sourceforge.net
+URL:     http://audacity.sourceforge.net
 
-Source0: http://downloads.sf.net/sourceforge/audacity/audacity-minsrc-%{version}.tar.bz2
+Source0: http://downloads.sf.net/sourceforge/audacity/audacity-minsrc-%{version}-beta.tar.bz2
 Source1: audacity.png
 Source2: audacity.desktop
 
@@ -77,7 +77,7 @@ grep -q -s __RPM_LIB * -R && exit 1
 %if 0%{?fedora} < 11
 %patch6 -p1 -b .vamp-1.3
 %endif
-%patch7 -p1 -b .getmaxpeak
+#%#patch7 -p1 -b .getmaxpeak
 
 # Substitute occurences of "libmp3lame.so" with "libmp3lame.so.0".
 for i in locale/*.po src/export/ExportMP3.cpp
@@ -149,11 +149,16 @@ update-desktop-database &> /dev/null || :
 %{_mandir}/man*/*
 %{_datadir}/applications/*
 %{_datadir}/pixmaps/*
+%{_datadir}/icons/hicolor/*/apps/%{name}.*
 %{_datadir}/mime/packages/*
 %doc %{_datadir}/doc/*
 
 
 %changelog
+* Mon Jun 28 2010 David Timms <iinet.net.au@dtimms> - 1.3.12-0.1.1.beta
+- upgrade to 1.3.12-beta
+- package new icons found in icons/hicolor
+
 * Sat Dec  5 2009 David Timms <iinet.net.au@dtimms> - 1.3.10-0.1.1.beta
 - upgrade to 1.3.10-beta
 - re-base spec to fedora devel and patches by mschwendt 
