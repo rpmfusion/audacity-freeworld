@@ -6,7 +6,7 @@ Name: audacity-freeworld
 Conflicts: %{realname}
 
 Version: 1.3.12
-Release: 0.1.1.beta%{?dist}
+Release: 0.1.3.beta%{?dist}
 Summary: Multitrack audio editor
 Group:   Applications/Multimedia
 License: GPLv2
@@ -149,13 +149,17 @@ update-desktop-database &> /dev/null || :
 %{_mandir}/man*/*
 %{_datadir}/applications/*
 %{_datadir}/pixmaps/*
-%{_datadir}/icons/hicolor/*/apps/%{name}.*
+%{_datadir}/icons/hicolor/*/apps/%{realname}.*
 %{_datadir}/mime/packages/*
 %doc %{_datadir}/doc/*
 
 
 %changelog
-* Mon Jun 28 2010 David Timms <iinet.net.au@dtimms> - 1.3.12-0.1.1.beta
+* Mon Jun 28 2010 David Timms <iinet.net.au@dtimms> - 1.3.12-0.1.3.beta
+- fix icons glob to use realname
+- add more supported mimetypes and categories to the desktop file
+
+* Mon Jun 28 2010 David Timms <iinet.net.au@dtimms> - 1.3.12-0.1.2.beta
 - upgrade to 1.3.12-beta
 - package new icons found in icons/hicolor
 
