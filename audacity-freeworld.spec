@@ -1,25 +1,27 @@
-%define tartopdir audacity-src-1.3.10
-
 Name: audacity-freeworld
 
+Version: 1.3.12
+Release: 0.6.beta%{?dist}
+Summary: Multitrack audio editor
+Group:   Applications/Multimedia
+License: GPLv2
+URL:     http://audacity.sourceforge.net
+
+%define tartopdir audacity-src-%{version}-beta
 %define realname audacity
 Conflicts: %{realname}
 
-Version: 1.3.10
-Release: 0.1.1.beta%{?dist}
-Summary: Multitrack audio editor
-Group: Applications/Multimedia
-License: GPLv2
-URL: http://audacity.sourceforge.net
-
-Source0: http://downloads.sf.net/sourceforge/audacity/audacity-minsrc-%{version}.tar.bz2
+Source0: http://downloads.sf.net/sourceforge/audacity/audacity-minsrc-%{version}-beta.tar.bz2
 Source1: audacity.png
 Source2: audacity.desktop
 
 Patch1: audacity-1.3.7-libmp3lame-default.patch
 Patch2: audacity-1.3.9-libdir.patch
-Patch6: audacity-1.3.7-vamp-1.3.patch
-Patch7: audacity-1.3.9-getmaxpeak.patch
+# add audio/x-flac
+# remove audio/mpeg, audio/x-mp3
+# enable startup notification
+# add categories Sequencer X-Jack AudioVideoEditing for F-12 Studio feature
+Patch3: audacity-1.3.10-desktop.patch
 
 Provides: audacity-nonfree = %{version}-%{release}
 Obsoletes: audacity-nonfree < %{version}-%{release}
@@ -74,10 +76,7 @@ do
 done
 grep -q -s __RPM_LIB * -R && exit 1
 
-%if 0%{?fedora} < 11
-%patch6 -p1 -b .vamp-1.3
-%endif
-%patch7 -p1 -b .getmaxpeak
+%patch3 -p1 -b .old-desktop-file
 
 # Substitute occurences of "libmp3lame.so" with "libmp3lame.so.0".
 for i in locale/*.po src/export/ExportMP3.cpp
@@ -118,12 +117,11 @@ mkdir -p $RPM_BUILD_ROOT%{_datadir}/%{name}/help/manual
 
 %{find_lang} %{realname}
 
-
-rm -f $RPM_BUILD_ROOT%{_datadir}/applications/*.desktop
 desktop-file-install \
     --vendor fedora \
     --dir $RPM_BUILD_ROOT%{_datadir}/applications \
-    %{SOURCE2}
+    --delete-original \
+    $RPM_BUILD_ROOT%{_datadir}/applications/audacity.desktop
 
 
 %clean
@@ -149,11 +147,32 @@ update-desktop-database &> /dev/null || :
 %{_mandir}/man*/*
 %{_datadir}/applications/*
 %{_datadir}/pixmaps/*
+%{_datadir}/icons/hicolor/*/apps/%{realname}.*
 %{_datadir}/mime/packages/*
 %doc %{_datadir}/doc/*
 
 
 %changelog
+* Thu Jul 15 2010 David Timms <iinet.net.au@dtimms> - 1.3.12-0.6.beta
+- drop vamp-plugin path patch to suit updated vamp-plugin-sdk-2.1
+
+* Mon Jun 28 2010 David Timms <iinet.net.au@dtimms> - 1.3.12-0.4.beta
+- mods to ease diffs between builds for fedora and full
+
+* Mon Jun 28 2010 David Timms <iinet.net.au@dtimms> - 1.3.12-0.3.beta
+- really package new icons found in icons/hicolor
+
+* Mon Jun 28 2010 David Timms <iinet.net.au@dtimms> - 1.3.12-0.2.beta
+- mod tartopdir to use package version macro
+
+* Mon Jun 28 2010 David Timms <iinet.net.au@dtimms> - 1.3.12-0.1.3.beta
+- fix icons glob to use realname
+- add more supported mimetypes and categories to the desktop file
+
+* Mon Jun 28 2010 David Timms <iinet.net.au@dtimms> - 1.3.12-0.1.2.beta
+- upgrade to 1.3.12-beta
+- package new icons found in icons/hicolor
+
 * Sat Dec  5 2009 David Timms <iinet.net.au@dtimms> - 1.3.10-0.1.1.beta
 - upgrade to 1.3.10-beta
 - re-base spec to fedora devel and patches by mschwendt 
