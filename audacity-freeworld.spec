@@ -1,7 +1,7 @@
 Name: audacity-freeworld
 
 Version: 1.3.12
-Release: 0.6.beta%{?dist}
+Release: 0.7.beta%{?dist}
 Summary: Multitrack audio editor
 Group:   Applications/Multimedia
 License: GPLv2
@@ -22,6 +22,8 @@ Patch2: audacity-1.3.9-libdir.patch
 # enable startup notification
 # add categories Sequencer X-Jack AudioVideoEditing for F-12 Studio feature
 Patch3: audacity-1.3.10-desktop.patch
+# ffmpeg-0.6: utils.c changed match_ext() to av_match_ext(). 
+Patch4: audacity-1.3.12-ffmpeg-0.6-apichange-av_match_ext.patch
 
 Provides: audacity-nonfree = %{version}-%{release}
 Obsoletes: audacity-nonfree < %{version}-%{release}
@@ -77,6 +79,7 @@ done
 grep -q -s __RPM_LIB * -R && exit 1
 
 %patch3 -p1 -b .old-desktop-file
+%patch4 -p1 -b .ffmpeg-0.6-apichange-av_match_ext
 
 # Substitute occurences of "libmp3lame.so" with "libmp3lame.so.0".
 for i in locale/*.po src/export/ExportMP3.cpp
@@ -153,6 +156,10 @@ update-desktop-database &> /dev/null || :
 
 
 %changelog
+* Sat Aug  7 2010 David Timms <iinet.net.au@dtimms> - 1.3.12-0.7.beta
+- patch to suit APIChange introduced in ffmpeg-0.6. Resolves rfbz #1356.
+  fixes ffmpeg import/export.
+
 * Thu Jul 15 2010 David Timms <iinet.net.au@dtimms> - 1.3.12-0.6.beta
 - drop vamp-plugin path patch to suit updated vamp-plugin-sdk-2.1
 
