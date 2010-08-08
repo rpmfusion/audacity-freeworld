@@ -1,0 +1,17 @@
+diff -Nur audacity-src-1.3.10-orig/src/audacity.desktop audacity-src-1.3.10/src/audacity.desktop
+--- audacity-src-1.3.10-orig/src/audacity.desktop	2009-12-01 20:32:08.000000000 +0100
++++ audacity-src-1.3.10/src/audacity.desktop	2010-01-21 10:29:58.667825990 +0100
+@@ -12,9 +12,10 @@
+ Icon=audacity
+ 
+ Type=Application
+-Categories=AudioVideo;Audio;AudioVideoEditing;
++Categories=AudioVideo;Audio;AudioVideoEditing;Sequencer;X-Jack;
+ 
+ Exec=audacity
+-StartupNotify=false
++StartupNotify=true
++StartupWMClass=Audacity
+ Terminal=false
+-MimeType=application/ogg;audio/basic;audio/mpeg;audio/x-aiff;audio/x-mp3;audio/x-wav;application/x-audacity-project;
++MimeType=application/ogg;audio/basic;audio/x-aiff;audio/x-wav;application/x-audacity-project;audio/x-flac;
