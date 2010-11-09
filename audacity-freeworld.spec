@@ -1,7 +1,7 @@
 Name: audacity-freeworld
 
 Version: 1.3.12
-Release: 0.9.beta%{?dist}
+Release: 0.10.beta%{?dist}
 Summary: Multitrack audio editor
 Group:   Applications/Multimedia
 License: GPLv2
@@ -25,7 +25,7 @@ Patch3: audacity-1.3.10-desktop.patch
 # ffmpeg-0.6: utils.c changed match_ext() to av_match_ext(). 
 Patch4: audacity-1.3.12-ffmpeg-0.6-apichange-av_match_ext.patch
 Patch7: audacity-1.3.12-fix-minimum-playspeed.patch
-Patch8: audacity-1.3.12-portmixer-configure-from-trunk.patch
+Patch8: audacity-1.3.12-portmixer-autoreconf.patch
 
 Provides: audacity-nonfree = %{version}-%{release}
 Obsoletes: audacity-nonfree < %{version}-%{release}
@@ -84,7 +84,7 @@ grep -q -s __RPM_LIB * -R && exit 1
 %patch4 -p1 -b .ffmpeg-0.6-apichange-av_match_ext
 
 %patch7 -p1 -b .fix-minimum-playspeed
-%patch8 -p1 -b .portmixer-configure-from-trunk
+%patch8 -p1 -b .portmixer-autoreconf-from-svn
 
 # Substitute occurences of "libmp3lame.so" with "libmp3lame.so.0".
 for i in locale/*.po src/export/ExportMP3.cpp
@@ -161,6 +161,11 @@ update-desktop-database &> /dev/null || :
 
 
 %changelog
+* Wed Nov 10 2010 David Timms <iinet.net.au@dtimms> - 1.3.12-0.10.beta
+- fix build failure in portmixer due to "Missing support in pa_mac_core.h"
+      Applied svn trunk portmixer configure changes.
+- del previous patch attempt (unsuccessful)
+
 * Mon Oct 31 2010 David Timms <iinet.net.au@dtimms> - 1.3.12-0.9.beta
 - fix build failure due to portmixer configure problems
 
