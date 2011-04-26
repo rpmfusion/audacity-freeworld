@@ -1,7 +1,7 @@
 Name: audacity-freeworld
 
 Version: 1.3.13
-Release: 0.1.beta%{?dist}
+Release: 0.2.beta%{?dist}
 Summary: Multitrack audio editor
 Group:   Applications/Multimedia
 License: GPLv2
@@ -12,7 +12,6 @@ URL:     http://audacity.sourceforge.net
 Conflicts: %{realname}
 
 Source0: http://downloads.sf.net/sourceforge/audacity/audacity-minsrc-%{version}-beta.tar.bz2
-Source1: http://manual.audacityteam.org/help.zip
 
 Patch1: audacity-1.3.7-libmp3lame-default.patch
 Patch2: audacity-1.3.9-libdir.patch
@@ -149,7 +148,10 @@ update-desktop-database &> /dev/null || :
 
 
 %changelog
-* Sun Apr 24 2011 David Timms <iinet.net.au@dtimms> - 1.3.13-0.1.beta
+* Tue Apr 26 2011 David Timms <iinet.net.au@dtimms> - 1.3.13-0.2.beta
+- delete help file Source reference; will be done in Fedora instead.
+
+* Sun Apr 24 2011 David Timms <iinet.net.au@dtimms> - 1.3.13-0.2.beta
 - upgrade to 1.3.13-beta
 - drop patches included in upstream release
 - convert desktop file to a patch against new upstream .desktop file.
