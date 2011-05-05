@@ -1,7 +1,7 @@
 Name: audacity-freeworld
 
 Version: 1.3.13
-Release: 0.2.beta%{?dist}
+Release: 0.4.beta%{?dist}
 Summary: Multitrack audio editor
 Group:   Applications/Multimedia
 License: GPLv2
@@ -138,7 +138,10 @@ update-desktop-database &> /dev/null || :
 %files -f %{realname}.lang
 %defattr(-,root,root,-)
 %{_bindir}/%{realname}
-%{_datadir}/%{realname}/
+%dir %{_datadir}/%{realname}
+%{_datadir}/%{realname}/EQDefaultCurves.xml
+%{_datadir}/%{realname}/nyquist/
+%{_datadir}/%{realname}/plug-ins/
 %{_mandir}/man*/*
 %{_datadir}/applications/*
 %{_datadir}/pixmaps/*
@@ -148,6 +151,10 @@ update-desktop-database &> /dev/null || :
 
 
 %changelog
+
+* Sat Apr 30 2011 David Timms <iinet.net.au@dtimms> - 1.3.13-0.4.beta
+- fix files and dir ownership including -manual files in the main package
+
 * Tue Apr 26 2011 David Timms <iinet.net.au@dtimms> - 1.3.13-0.2.beta
 - delete help file Source reference; will be done in Fedora instead.
 
