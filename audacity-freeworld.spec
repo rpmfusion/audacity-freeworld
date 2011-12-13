@@ -4,7 +4,7 @@
 Name: audacity-freeworld
 
 Version: 1.3.14
-Release: 0.4%{?dist}
+Release: 0.5%{?dist}
 Summary: Multitrack audio editor
 Group:   Applications/Multimedia
 License: GPLv2
@@ -21,9 +21,6 @@ Source0: http://audacity.googlecode.com/files/audacity-minsrc-1.3.14-beta.tar.bz
 # use for svn snapshot: [see package README for generation process]
 #Source0: audacity-minsrc-1.3.14-alpha-20111101.tar.bz2
 #%#define tartopdir audacity-src-%{version}-alpha-20111101
-
-# The manual is not versioned; it is essentially a work in progress
-Source1: http://manual.audacityteam.org/help.zip
 
 Patch1: audacity-1.3.7-libmp3lame-default.patch
 Patch2: audacity-1.3.9-libdir.patch
@@ -167,6 +164,9 @@ update-desktop-database &> /dev/null || :
 
 
 %changelog
+* Tue Dec 13 2011 David Timms <iinet.net.au@dtimms> - 1.3.14-0.5
+- fix Source1 help reference (again).
+
 * Tue Dec 13 2011 David Timms <iinet.net.au@dtimms> - 1.3.14-0.4
 - update to 1.3.14 beta release
 
