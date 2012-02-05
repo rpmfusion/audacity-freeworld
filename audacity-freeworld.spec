@@ -3,8 +3,8 @@
 
 Name: audacity-freeworld
 
-Version: 1.3.14
-Release: 0.5%{?dist}
+Version: 2.0.0
+Release: 0.1.alpha20120205svn11456%{?dist}
 Summary: Multitrack audio editor
 Group:   Applications/Multimedia
 License: GPLv2
@@ -14,13 +14,13 @@ URL:     http://audacity.sourceforge.net
 Conflicts: %{realname}
 
 # use for upstream source releases:
-#Source0: http://downloads.sf.net/sourceforge/audacity/audacity-minsrc-%{version}-beta.tar.bz2
-Source0: http://audacity.googlecode.com/files/audacity-minsrc-1.3.14-beta.tar.bz2
-%define tartopdir audacity-src-%{version}-beta
+#Source0: http://downloads.sf.net/sourceforge/audacity/audacity-minsrc-%#{version}-beta.tar.bz2
+#Source0: http://audacity.googlecode.com/files/audacity-minsrc-1.3.14-beta.tar.bz2
+#%#define tartopdir audacity-src-%#{version}-beta
 
 # use for svn snapshot: [see package README for generation process]
-#Source0: audacity-minsrc-1.3.14-alpha-20111101.tar.bz2
-#%#define tartopdir audacity-src-%{version}-alpha-20111101
+Source0: audacity-minsrc-2.0.0-alpha-20120205.tar.bz2
+%define tartopdir audacity-src-%{version}-alpha-20120205
 
 Patch1: audacity-1.3.7-libmp3lame-default.patch
 Patch2: audacity-1.3.9-libdir.patch
@@ -30,7 +30,6 @@ Patch2: audacity-1.3.9-libdir.patch
 # add categories Sequencer X-Jack AudioVideoEditing for F-12 Studio feature
 Patch3: audacity-1.3.13-desktop.in.patch
 Patch4: audacity-1.3.14-gtypes.patch
-Patch5: audacity-1.3.14-ffmpeg-0.8.patch
 
 Provides: audacity-nonfree = %{version}-%{release}
 Obsoletes: audacity-nonfree < %{version}-%{release}
@@ -93,7 +92,6 @@ done
 
 %patch3 -b .desktop.old
 %patch4 -b .gtypes
-%patch5 -b .ffmpeg.old
 
 
 %build
@@ -164,6 +162,10 @@ update-desktop-database &> /dev/null || :
 
 
 %changelog
+* Sun Feb  5 2012 David Timms <iinet.net.au@dtimms> - 2.0.0-0.1.alpha20120205svn11456
+- update to 2.0.0 alpha svn snapshot
+- delete accepted ffmpeg-0.8.y patch
+
 * Tue Dec 13 2011 David Timms <iinet.net.au@dtimms> - 1.3.14-0.5
 - fix Source1 help reference (again).
 
