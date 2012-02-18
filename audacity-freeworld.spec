@@ -4,7 +4,7 @@
 Name: audacity-freeworld
 
 Version: 2.0.0
-Release: 0.1.alpha20120205svn11456%{?dist}
+Release: 0.2.rc1.20120218svn11513%{?dist}
 Summary: Multitrack audio editor
 Group:   Applications/Multimedia
 License: GPLv2
@@ -19,8 +19,8 @@ Conflicts: %{realname}
 #%#define tartopdir audacity-src-%#{version}-beta
 
 # use for svn snapshot: [see package README for generation process]
-Source0: audacity-minsrc-2.0.0-alpha-20120205.tar.bz2
-%define tartopdir audacity-src-%{version}-alpha-20120205
+Source0: audacity-minsrc-2.0.0-rc1-20120218.tar.bz2
+%define tartopdir audacity-src-%{version}
 
 Patch1: audacity-1.3.7-libmp3lame-default.patch
 Patch2: audacity-1.3.9-libdir.patch
@@ -162,6 +162,9 @@ update-desktop-database &> /dev/null || :
 
 
 %changelog
+* Sat Feb 18 2012 David Timms <iinet.net.au@dtimms> - 2.0.0-0.2.rc1.20120218svn11513
+- update to release candidate from svn snapshot
+
 * Sun Feb  5 2012 David Timms <iinet.net.au@dtimms> - 2.0.0-0.1.alpha20120205svn11456
 - update to 2.0.0 alpha svn snapshot
 - delete accepted ffmpeg-0.8.y patch
