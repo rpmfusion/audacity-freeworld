@@ -4,7 +4,7 @@
 Name: audacity-freeworld
 
 Version: 2.0.0
-Release: 0.2.rc1.20120218svn11513%{?dist}
+Release: 0.3.rc3%{?dist}
 Summary: Multitrack audio editor
 Group:   Applications/Multimedia
 License: GPLv2
@@ -15,12 +15,12 @@ Conflicts: %{realname}
 
 # use for upstream source releases:
 #Source0: http://downloads.sf.net/sourceforge/audacity/audacity-minsrc-%#{version}-beta.tar.bz2
-#Source0: http://audacity.googlecode.com/files/audacity-minsrc-1.3.14-beta.tar.bz2
-#%#define tartopdir audacity-src-%#{version}-beta
+Source0: http://audacity.googlecode.com/files/audacity-minsrc-%{version}rc3.tar.bz2
+%define tartopdir audacity-src-%{version}
 
 # use for svn snapshot: [see package README for generation process]
-Source0: audacity-minsrc-2.0.0-rc1-20120218.tar.bz2
-%define tartopdir audacity-src-%{version}
+#S#ource0: audacity-minsrc-2.0.0-rc1-20120218.tar.bz2
+#%#define tartopdir audacity-src-%{version}
 
 Patch1: audacity-1.3.7-libmp3lame-default.patch
 Patch2: audacity-1.3.9-libdir.patch
@@ -162,6 +162,9 @@ update-desktop-database &> /dev/null || :
 
 
 %changelog
+* Wed Feb 22 2012 David Timms <iinet.net.au@dtimms> - 2.0.0-0.3.rc3
+- update to 2.0.0 release candidate 3
+
 * Sat Feb 18 2012 David Timms <iinet.net.au@dtimms> - 2.0.0-0.2.rc1.20120218svn11513
 - update to release candidate from svn snapshot
 
