@@ -4,7 +4,7 @@
 Name: audacity-freeworld
 
 Version: 2.0.0
-Release: 0.2.rc1.20120218svn11513%{?dist}
+Release: 0.3.rc1.20120218svn11513%{?dist}
 Summary: Multitrack audio editor
 Group:   Applications/Multimedia
 License: GPLv2
@@ -162,6 +162,9 @@ update-desktop-database &> /dev/null || :
 
 
 %changelog
+* Fri Mar 02 2012 Nicolas Chauvet <kwizart@gmail.com> - 2.0.0-0.3.rc1.20120218svn11513
+- Rebuilt for c++ ABI breakage
+
 * Sat Feb 18 2012 David Timms <iinet.net.au@dtimms> - 2.0.0-0.2.rc1.20120218svn11513
 - update to release candidate from svn snapshot
 
