@@ -4,7 +4,7 @@
 Name: audacity-freeworld
 
 Version: 2.0.0
-Release: 0.8.rc8%{?dist}
+Release: 1%{?dist}
 Summary: Multitrack audio editor
 Group:   Applications/Multimedia
 License: GPLv2
@@ -15,12 +15,8 @@ Conflicts: %{realname}
 
 # use for upstream source releases:
 #Source0: http://downloads.sf.net/sourceforge/audacity/audacity-minsrc-%#{version}-beta.tar.bz2
-Source0: http://audacity.googlecode.com/files/audacity-minsrc-%{version}rc8.tar.bz2
+Source0: http://audacity.googlecode.com/files/audacity-minsrc-%{version}.tar.bz2
 %define tartopdir audacity-src-%{version}
-
-# use for svn snapshot: [see package README for generation process]
-#S#ource0: audacity-minsrc-2.0.0-rc1-20120218.tar.bz2
-#%#define tartopdir audacity-src-%{version}
 
 Patch1: audacity-1.3.7-libmp3lame-default.patch
 Patch2: audacity-1.3.9-libdir.patch
@@ -29,7 +25,6 @@ Patch2: audacity-1.3.9-libdir.patch
 # enable startup notification
 # add categories Sequencer X-Jack AudioVideoEditing for F-12 Studio feature
 Patch3: audacity-1.3.13-desktop.in.patch
-Patch4: audacity-1.3.14-gtypes.patch
 
 Provides: audacity-nonfree = %{version}-%{release}
 Obsoletes: audacity-nonfree < %{version}-%{release}
@@ -91,7 +86,6 @@ do
 done
 
 %patch3 -b .desktop.old
-%patch4 -b .gtypes
 
 
 %build
@@ -162,6 +156,13 @@ update-desktop-database &> /dev/null || :
 
 
 %changelog
+* Wed Mar 14 2012 David Timms <iinet.net.au@dtimms> - 2.0.0-1
+- update to 2.0.0 final
+
+* Sun Mar 11 2012 David Timms <iinet.net.au@dtimms> - 2.0.0-0.9.rc9
+- update to 2.0.0 release candidate 9
+- drop upstreamed glib2 include patch
+
 * Tue Mar  6 2012 David Timms <iinet.net.au@dtimms> - 2.0.0-0.8.rc8
 - update to 2.0.0 release candidate 8 for testing only
 
