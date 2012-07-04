@@ -1,5 +1,5 @@
---- src/audacity.desktop.in.orig	2011-04-07 09:35:51.000000000 +1000
-+++ src/audacity.desktop.in	2011-04-24 23:03:04.226793699 +1000
+--- audacity-src-2.0.1/src/audacity.desktop.in	2012-06-26 07:27:46.000000000 +1000
++++ audacity-src-2.0.0/src/audacity.desktop.in	2012-07-04 22:11:31.000000000 +1000
 @@ -5,16 +5,17 @@
  GenericName=Sound Editor
  GenericName[de]=Audio-Editor
@@ -15,7 +15,7 @@
 -Categories=AudioVideo;Audio;AudioVideoEditing;
 +Categories=AudioVideo;Audio;GTK;GNOME;Sequencer;X-Jack;AudioVideoEditing;
  
- Exec=@AUDACITY_NAME@
+ Exec=@AUDACITY_NAME@ %F
 -StartupNotify=false
 +StartupNotify=true
 +StartupWMClass=Audacity
