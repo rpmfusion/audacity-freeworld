@@ -3,8 +3,8 @@
 
 Name: audacity-freeworld
 
-Version: 2.0.0
-Release: 1%{?dist}
+Version: 2.0.2
+Release: 0.1.rc2%{?dist}
 Summary: Multitrack audio editor
 Group:   Applications/Multimedia
 License: GPLv2
@@ -15,16 +15,16 @@ Conflicts: %{realname}
 
 # use for upstream source releases:
 #Source0: http://downloads.sf.net/sourceforge/audacity/audacity-minsrc-%#{version}-beta.tar.bz2
-Source0: http://audacity.googlecode.com/files/audacity-minsrc-%{version}.tar.bz2
+Source0: http://audacity.googlecode.com/files/audacity-minsrc-%{version}rc2.tar.bz2
 %define tartopdir audacity-src-%{version}
 
-Patch1: audacity-1.3.7-libmp3lame-default.patch
+Patch1: audacity-2.0.1-libmp3lame-default.patch
 Patch2: audacity-1.3.9-libdir.patch
 # add audio/x-flac
 # remove audio/mpeg, audio/x-mp3
 # enable startup notification
 # add categories Sequencer X-Jack AudioVideoEditing for F-12 Studio feature
-Patch3: audacity-1.3.13-desktop.in.patch
+Patch3: audacity-2.0.1-desktop.in.patch
 
 Provides: audacity-nonfree = %{version}-%{release}
 Obsoletes: audacity-nonfree < %{version}-%{release}
@@ -85,7 +85,7 @@ do
     sed -i -e 's!libmp3lame.so\([^.]\)!libmp3lame.so.0\1!g' $i
 done
 
-%patch3 -b .desktop.old
+%patch3 -p1 -b .desktop.old
 
 
 %build
@@ -156,6 +156,17 @@ update-desktop-database &> /dev/null || :
 
 
 %changelog
+* Mon Aug 13 2012 David Timms <iinet.net.au@dtimms> - 2.0.2-0.1.rc2
+- update to 2.0.2 release candidate 2
+
+* Tue Jul  3 2012 David Timms <iinet.net.au@dtimms> - 2.0.1-1
+- update to 2.0.1 final
+- rebase libmp3lame-default.patch
+- rebase desktop.in.patch
+
+* Wed Jun 26 2012 David Timms <iinet.net.au@dtimms> - 2.0.1-0.1.rc2
+- update to 2.0.1 release candidate 2
+
 * Wed Mar 14 2012 David Timms <iinet.net.au@dtimms> - 2.0.0-1
 - update to 2.0.0 final
 
