@@ -1,5 +1,5 @@
---- audacity-src-2.0.1/src/audacity.desktop.in	2012-06-26 07:27:46.000000000 +1000
-+++ audacity-src-2.0.0/src/audacity.desktop.in	2012-07-04 22:11:31.000000000 +1000
+--- src/audacity.desktop.in.orig
++++ src/audacity.desktop.in
 @@ -5,16 +5,17 @@
  GenericName=Sound Editor
  GenericName[de]=Audio-Editor
@@ -20,5 +20,4 @@
 +StartupNotify=true
 +StartupWMClass=Audacity
  Terminal=false
--MimeType=application/ogg;audio/basic;audio/mpeg;audio/x-aiff;audio/x-mp3;audio/x-wav;application/x-audacity-project;
-+MimeType=application/ogg;audio/basic;audio/mpeg;audio/x-aiff;audio/x-aiffc;audio/x-aifc;audio/x-mp3;audio/x-wav;application/x-audacity-project;audio/midi;audio/x-flac;
+ MimeType=application/x-audacity-project;@MIMETYPES@audio/x-aifc;audio/x-mp3;audio/midi;
