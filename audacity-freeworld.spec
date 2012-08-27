@@ -4,7 +4,7 @@
 Name: audacity-freeworld
 
 Version: 2.0.2
-Release: 0.2.rc4%{?dist}
+Release: 1%{?dist}
 Summary: Multitrack audio editor
 Group:   Applications/Multimedia
 License: GPLv2
@@ -15,7 +15,7 @@ Conflicts: %{realname}
 
 # use for upstream source releases:
 #Source0: http://downloads.sf.net/sourceforge/audacity/audacity-minsrc-%#{version}-beta.tar.bz2
-Source0: http://audacity.googlecode.com/files/audacity-minsrc-%{version}rc4.tar.bz2
+Source0: http://audacity.googlecode.com/files/audacity-minsrc-%{version}.tar.bz2
 %define tartopdir audacity-src-%{version}
 
 Patch1: audacity-2.0.1-libmp3lame-default.patch
@@ -156,6 +156,9 @@ update-desktop-database &> /dev/null || :
 
 
 %changelog
+* Mon Aug 27 2012 David Timms <iinet.net.au@dtimms> - 2.0.2-1
+- update to 2.0.2 final
+
 * Tue Aug 21 2012 David Timms <iinet.net.au@dtimms> - 2.0.2-0.3.rc4
 - update to 2.0.2 release candidate 4
 
