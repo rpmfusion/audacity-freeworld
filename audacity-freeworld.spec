@@ -4,7 +4,7 @@
 Name: audacity-freeworld
 
 Version: 2.0.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Multitrack audio editor
 Group:   Applications/Multimedia
 License: GPLv2
@@ -156,6 +156,9 @@ update-desktop-database &> /dev/null || :
 
 
 %changelog
+* Sun Mar 03 2013 Nicolas Chauvet <kwizart@gmail.com> - 2.0.1-2
+- Mass rebuilt for Fedora 19 Features
+
 * Tue Jul  3 2012 David Timms <iinet.net.au@dtimms> - 2.0.1-1
 - update to 2.0.1 final
 - rebase libmp3lame-default.patch
