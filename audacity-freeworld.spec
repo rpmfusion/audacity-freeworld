@@ -1,10 +1,7 @@
-# Compile options:
-# --with mp3          : enable mp3 support
-
 Name: audacity-freeworld
 
-Version: 2.0.1
-Release: 2%{?dist}
+Version: 2.0.3
+Release: 1%{?dist}
 Summary: Multitrack audio editor
 Group:   Applications/Multimedia
 License: GPLv2
@@ -15,7 +12,7 @@ Conflicts: %{realname}
 
 # use for upstream source releases:
 #Source0: http://downloads.sf.net/sourceforge/audacity/audacity-minsrc-%#{version}-beta.tar.bz2
-Source0: http://audacity.googlecode.com/files/audacity-minsrc-%{version}.tar.bz2
+Source0: http://audacity.googlecode.com/files/audacity-minsrc-%{version}.tar.xz
 %define tartopdir audacity-src-%{version}
 
 Patch1: audacity-2.0.1-libmp3lame-default.patch
@@ -24,12 +21,12 @@ Patch2: audacity-1.3.9-libdir.patch
 # remove audio/mpeg, audio/x-mp3
 # enable startup notification
 # add categories Sequencer X-Jack AudioVideoEditing for F-12 Studio feature
-Patch3: audacity-2.0.1-desktop.in.patch
+Patch3: audacity-2.0.2-desktop.in.patch
+Patch4: audacity-2.0.3-non-dl-ffmpeg.patch
 
 Provides: audacity-nonfree = %{version}-%{release}
 Obsoletes: audacity-nonfree < %{version}-%{release}
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: alsa-lib-devel
 BuildRequires: desktop-file-utils
 BuildRequires: expat-devel
@@ -40,22 +37,21 @@ BuildRequires: ladspa-devel
 BuildRequires: libid3tag-devel
 BuildRequires: taglib-devel
 BuildRequires: libogg-devel
-BuildRequires: libsamplerate-devel
 BuildRequires: libsndfile-devel
 BuildRequires: libvorbis-devel
+BuildRequires: portaudio-devel >= 19-16
 BuildRequires: soundtouch-devel
-%if 0%{?fedora} < 11
-BuildRequires: vamp-plugin-sdk-devel
-%else
+BuildRequires: soxr-devel
 BuildRequires: vamp-plugin-sdk-devel >= 2.0
-%endif
 BuildRequires: zip
 BuildRequires: zlib-devel
 BuildRequires: wxGTK-devel
 BuildRequires: libmad-devel
-BuildRequires: ffmpeg-devel
+BuildRequires: ffmpeg-compat-devel
 BuildRequires: lame-devel
-
+BuildRequires: twolame-devel
+# For new symbols in portaudio
+Requires:      portaudio%{?_isa} >= 19-16
 
 %description
 Audacity is a cross-platform multitrack audio editor. It allows you to
@@ -85,31 +81,49 @@ do
     sed -i -e 's!libmp3lame.so\([^.]\)!libmp3lame.so.0\1!g' $i
 done
 
-%patch3 -p1 -b .desktop.old
+%patch3 -b .desktop.old
+%patch4 -p1
 
 
 %build
+export PKG_CONFIG_PATH=%{_libdir}/ffmpeg-compat/pkgconfig/
 %configure \
+    --disable-dynamic-loading \
     --with-help \
     --with-libsndfile=system \
+    --with-libsoxr=system \
     --without-libresample \
-    --with-libsamplerate=system \
+    --without-libsamplerate \
     --with-libflac=system \
     --with-ladspa \
     --with-vorbis=system \
     --with-id3tag=system \
     --with-expat=system \
     --with-soundtouch=system \
+    --with-libvamp=system \
+    --with-portaudio=system \
     --with-ffmpeg=system \
-    --with-libmad=system
+    --with-libmad=system \
+    --with-libtwolame=system \
+    --with-lame=system \
+%ifnarch %{ix86} x86_64
+    --disable-sse \
+%else
+    %{nil}
+%endif
+
+# ensure we use the system headers for these, note we do this after
+# configure as it wants to run sub-configures in these dirs
+for i in ffmpeg libresample libsoxr libvamp portaudio-v19; do
+   rm -rf lib-src/$i
+done
+
 # _smp_mflags cause problems
 make
 
 
 %install
-rm -rf ${RPM_BUILD_ROOT}
-
-make DESTDIR=${RPM_BUILD_ROOT} install
+%make_install
 
 # Audacity 1.3.8-beta complains if the help/manual directories
 # don't exist.
@@ -117,31 +131,33 @@ mkdir -p $RPM_BUILD_ROOT%{_datadir}/%{name}/help/manual
 
 %{find_lang} %{realname}
 
-desktop-file-install \
-    --vendor fedora \
-    --delete-original \
-    --dir $RPM_BUILD_ROOT%{_datadir}/applications \
-    $RPM_BUILD_ROOT%{_datadir}/applications/audacity.desktop
-
-
-%clean
-rm -rf ${RPM_BUILD_ROOT}
+desktop-file-install --dir $RPM_BUILD_ROOT%{_datadir}/applications \
+%if 0%{?fedora} && 0%{?fedora} < 19
+        --vendor fedora --delete-original                          \
+%endif
+        $RPM_BUILD_ROOT%{_datadir}/applications/audacity.desktop
 
 
 %post
 umask 022
 update-mime-database %{_datadir}/mime &> /dev/null || :
 update-desktop-database &> /dev/null || :
-
+touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
 
 %postun
 umask 022
 update-mime-database %{_datadir}/mime &> /dev/null || :
 update-desktop-database &> /dev/null || :
+if [ $1 -eq 0 ] ; then
+    touch --no-create %{_datadir}/icons/hicolor &>/dev/null
+    gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
+fi
+
+%posttrans
+gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %files -f %{realname}.lang
-%defattr(-,root,root,-)
 %{_bindir}/%{realname}
 %dir %{_datadir}/%{realname}
 %{_datadir}/%{realname}/EQDefaultCurves.xml
@@ -156,6 +172,11 @@ update-desktop-database &> /dev/null || :
 
 
 %changelog
+* Sat May  4 2013 Hans de Goede <j.w.r.degoede@gmail.com> - 2.0.3-1
+- New upstream release 2.0.3
+- Fix FTBFS by using ffmpeg-compat (rf#2707)
+- Disable dynamic loading to force proper Requires for the used libs
+
 * Sun Mar 03 2013 Nicolas Chauvet <kwizart@gmail.com> - 2.0.1-2
 - Mass rebuilt for Fedora 19 Features
 
@@ -164,7 +185,7 @@ update-desktop-database &> /dev/null || :
 - rebase libmp3lame-default.patch
 - rebase desktop.in.patch
 
-* Wed Jun 26 2012 David Timms <iinet.net.au@dtimms> - 2.0.1-0.1.rc2
+* Tue Jun 26 2012 David Timms <iinet.net.au@dtimms> - 2.0.1-0.1.rc2
 - update to 2.0.1 release candidate 2
 
 * Wed Mar 14 2012 David Timms <iinet.net.au@dtimms> - 2.0.0-1
@@ -219,10 +240,10 @@ update-desktop-database &> /dev/null || :
       Applied svn trunk portmixer configure changes.
 - del previous patch attempt (unsuccessful)
 
-* Mon Oct 31 2010 David Timms <iinet.net.au@dtimms> - 1.3.12-0.9.beta
+* Sun Oct 31 2010 David Timms <iinet.net.au@dtimms> - 1.3.12-0.9.beta
 - fix build failure due to portmixer configure problems
 
-* Mon Oct 31 2010 David Timms <iinet.net.au@dtimms> - 1.3.12-0.8.beta
+* Sun Oct 31 2010 David Timms <iinet.net.au@dtimms> - 1.3.12-0.8.beta
 - fix hang when play at speed with ratio less than 0.09 is used (#637347)
 
 * Sat Aug  7 2010 David Timms <iinet.net.au@dtimms> - 1.3.12-0.7.beta
@@ -290,10 +311,10 @@ update-desktop-database &> /dev/null || :
 - add support for ffmpeg import and export via BR and --with-ffmpeg
 - add patch to allow selection of ffmpeg library on unix.
 
-* Thu Aug 22 2008 David Timms <iinet.net.au@dtimms> - 1.3.5-0.4.beta
+* Fri Aug 22 2008 David Timms <iinet.net.au@dtimms> - 1.3.5-0.4.beta
 - mod patch2 apply command
 
-* Thu Aug 22 2008 David Timms <iinet.net.au@dtimms> - 1.3.5-0.3.beta
+* Fri Aug 22 2008 David Timms <iinet.net.au@dtimms> - 1.3.5-0.3.beta
 - add Requires lame-libs
 - update 1.3.4-gcc43.patch to suit 1.3.5, since patch mostly upstreamed.
 
