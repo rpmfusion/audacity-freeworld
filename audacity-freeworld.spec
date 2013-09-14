@@ -1,6 +1,6 @@
 Name: audacity-freeworld
 
-Version: 2.0.3
+Version: 2.0.4
 Release: 1%{?dist}
 Summary: Multitrack audio editor
 Group:   Applications/Multimedia
@@ -15,7 +15,7 @@ Conflicts: %{realname}
 Source0: http://audacity.googlecode.com/files/audacity-minsrc-%{version}.tar.xz
 %define tartopdir audacity-src-%{version}
 
-Patch1: audacity-2.0.1-libmp3lame-default.patch
+Patch1: audacity-2.0.4-libmp3lame-default.patch
 Patch2: audacity-1.3.9-libdir.patch
 # add audio/x-flac
 # remove audio/mpeg, audio/x-mp3
@@ -66,7 +66,7 @@ This build has support for mp3 and ffmpeg import/export.
 %setup -q -n %{tartopdir}
 
 # Substitute hardcoded library paths.
-%patch1 -p1 -b .libmp3lame-default
+%patch1 -b .libmp3lame-default
 %patch2 -p1 -b .libdir
 for i in src/effects/ladspa/LoadLadspa.cpp src/AudacityApp.cpp src/export/ExportMP3.cpp
 do
@@ -172,6 +172,10 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Sat Sep 14 2013 David Timms <iinet.net.au@dtimms> - 2.0.4-1
+- update to upstream release 2.0.4
+- rebase audacity-2.0.1-libmp3lame-default
+
 * Sat May  4 2013 Hans de Goede <j.w.r.degoede@gmail.com> - 2.0.3-1
 - New upstream release 2.0.3
 - Fix FTBFS by using ffmpeg-compat (rf#2707)
