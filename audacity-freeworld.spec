@@ -1,7 +1,7 @@
 Name: audacity-freeworld
 
 Version: 2.0.4
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Multitrack audio editor
 Group:   Applications/Multimedia
 License: GPLv2
@@ -23,6 +23,7 @@ Patch2: audacity-1.3.9-libdir.patch
 # add categories Sequencer X-Jack AudioVideoEditing for F-12 Studio feature
 Patch3: audacity-2.0.2-desktop.in.patch
 Patch4: audacity-2.0.3-non-dl-ffmpeg.patch
+Patch5: audacity-2.0.4-equalization-segfault.patch
 
 Provides: audacity-nonfree = %{version}-%{release}
 Obsoletes: audacity-nonfree < %{version}-%{release}
@@ -82,7 +83,8 @@ do
 done
 
 %patch3 -b .desktop.old
-%patch4 -p1
+%patch4 -p1 -b .2.0.3-non-dl-ffmpeg
+%patch5 -b .2.0.4-equalization-segfault
 
 
 %build
@@ -169,9 +171,13 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %{_datadir}/icons/hicolor/*/apps/%{realname}.*
 %{_datadir}/mime/packages/*
 %doc %{_datadir}/doc/*
+%doc lib-src/libnyquist/nyquist/license.txt lib-src/libnyquist/nyquist/Readme.txt
 
 
 %changelog
+* Sun Sep 22 2013 David Timms <iinet.net.au@dtimms> - 2.0.4-2
+- Add upstream patch to avoid segfault when starting Effects|Equalization
+
 * Sat Sep 14 2013 David Timms <iinet.net.au@dtimms> - 2.0.4-1
 - update to upstream release 2.0.4
 - rebase audacity-2.0.1-libmp3lame-default
