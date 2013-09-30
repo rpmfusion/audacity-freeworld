@@ -1,7 +1,7 @@
 Name: audacity-freeworld
 
 Version: 2.0.4
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: Multitrack audio editor
 Group:   Applications/Multimedia
 License: GPLv2
@@ -175,6 +175,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Mon Sep 30 2013 Nicolas Chauvet <kwizart@gmail.com> - 2.0.4-3
+- Rebuilt
+
 * Sun Sep 22 2013 David Timms <iinet.net.au@dtimms> - 2.0.4-2
 - Add upstream patch to avoid segfault when starting Effects|Equalization
 
