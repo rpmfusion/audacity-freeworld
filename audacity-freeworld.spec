@@ -1,7 +1,7 @@
 Name: audacity-freeworld
 
 Version: 2.0.4
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: Multitrack audio editor
 Group:   Applications/Multimedia
 License: GPLv2
@@ -175,6 +175,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Sat Aug 30 2014 Sérgio Basto <sergio@serjux.com> - 2.0.4-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
+
 * Mon Sep 30 2013 Nicolas Chauvet <kwizart@gmail.com> - 2.0.4-3
 - Rebuilt
 
