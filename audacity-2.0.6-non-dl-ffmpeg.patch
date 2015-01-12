@@ -1,0 +1,10 @@
+--- audacity-src-2.0.6/src/FFmpeg.h.orig	2015-01-11 19:53:49.892024743 +1100
++++ audacity-src-2.0.6/src/FFmpeg.h	2015-01-11 19:56:22.301395755 +1100
+@@ -42,6 +42,7 @@
+ 
+    #include <libavcodec/avcodec.h>
+    #include <libavformat/avformat.h>
++   #include <libavformat/avio.h>
+    #include <libavutil/fifo.h>
+    #include <libavutil/mathematics.h>
+ 
