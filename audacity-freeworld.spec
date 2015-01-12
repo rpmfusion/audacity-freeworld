@@ -1,7 +1,7 @@
 Name: audacity-freeworld
 
-Version: 2.0.4
-Release: 4%{?dist}
+Version: 2.0.6
+Release: 1%{?dist}
 Summary: Multitrack audio editor
 Group:   Applications/Multimedia
 License: GPLv2
@@ -12,18 +12,19 @@ Conflicts: %{realname}
 
 # use for upstream source releases:
 #Source0: http://downloads.sf.net/sourceforge/audacity/audacity-minsrc-%#{version}-beta.tar.bz2
-Source0: http://audacity.googlecode.com/files/audacity-minsrc-%{version}.tar.xz
+Source0: http://downloads.sourceforge.net/audacity/audacity-minsrc-%{version}.tar.xz
 %define tartopdir audacity-src-%{version}
 
 Patch1: audacity-2.0.4-libmp3lame-default.patch
-Patch2: audacity-1.3.9-libdir.patch
+# Patch2: audacity-1.3.9-libdir.patch
 # add audio/x-flac
 # remove audio/mpeg, audio/x-mp3
 # enable startup notification
 # add categories Sequencer X-Jack AudioVideoEditing for F-12 Studio feature
 Patch3: audacity-2.0.2-desktop.in.patch
-Patch4: audacity-2.0.3-non-dl-ffmpeg.patch
-Patch5: audacity-2.0.4-equalization-segfault.patch
+Patch4: audacity-2.0.6-non-dl-ffmpeg.patch
+# BZ#1076795:
+# Patch5: audacity-2.0.4-equalization-segfault.patch 
 
 Provides: audacity-nonfree = %{version}-%{release}
 Obsoletes: audacity-nonfree < %{version}-%{release}
@@ -48,7 +49,8 @@ BuildRequires: zip
 BuildRequires: zlib-devel
 BuildRequires: wxGTK-devel
 BuildRequires: libmad-devel
-BuildRequires: ffmpeg-compat-devel
+#B#uildRequires: ffmpeg-compat-devel
+BuildRequires: ffmpeg-devel
 BuildRequires: lame-devel
 BuildRequires: twolame-devel
 # For new symbols in portaudio
@@ -68,7 +70,7 @@ This build has support for mp3 and ffmpeg import/export.
 
 # Substitute hardcoded library paths.
 %patch1 -b .libmp3lame-default
-%patch2 -p1 -b .libdir
+# %patch2 -p1 -b .libdir
 for i in src/effects/ladspa/LoadLadspa.cpp src/AudacityApp.cpp src/export/ExportMP3.cpp
 do
     sed -i -e 's!__RPM_LIBDIR__!%{_libdir}!g' $i
@@ -83,8 +85,8 @@ do
 done
 
 %patch3 -b .desktop.old
-%patch4 -p1 -b .2.0.3-non-dl-ffmpeg
-%patch5 -b .2.0.4-equalization-segfault
+%patch4 -p1 -b .2.0.6-non-dl-ffmpeg
+# %patch5 -b .2.0.4-equalization-segfault
 
 
 %build
@@ -142,21 +144,25 @@ desktop-file-install --dir $RPM_BUILD_ROOT%{_datadir}/applications \
 
 %post
 umask 022
-update-mime-database %{_datadir}/mime &> /dev/null || :
+# update-mime-database %{_datadir}/mime &> /dev/null || :
 update-desktop-database &> /dev/null || :
 touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
+touch --no-create %{_datadir}/mime/packages &> /dev/null || :
 
 %postun
 umask 022
-update-mime-database %{_datadir}/mime &> /dev/null || :
+# update-mime-database %{_datadir}/mime &> /dev/null || :
 update-desktop-database &> /dev/null || :
 if [ $1 -eq 0 ] ; then
     touch --no-create %{_datadir}/icons/hicolor &>/dev/null
     gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
+    touch --no-create %{_datadir}/mime/packages &> /dev/null || :
+    update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
 fi
 
 %posttrans
 gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
+update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
 
 
 %files -f %{realname}.lang
@@ -167,6 +173,7 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %{_datadir}/%{realname}/plug-ins/
 %{_mandir}/man*/*
 %{_datadir}/applications/*
+%{_datadir}/appdata/%{realname}.appdata.xml
 %{_datadir}/pixmaps/*
 %{_datadir}/icons/hicolor/*/apps/%{realname}.*
 %{_datadir}/mime/packages/*
@@ -175,6 +182,10 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Mon Jan 12 2015 David Timms <iinet.net.au@dtimms> - 2.0.6-1
+- update to upstream release 2.0.6
+- update non-dl-ffmpeg.patch to match this version
+
 * Sat Aug 30 2014 Sérgio Basto <sergio@serjux.com> - 2.0.4-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
 
