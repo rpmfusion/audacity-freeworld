@@ -1,7 +1,12 @@
+# Compile options:
+%bcond_with mp3
+%global commit dea351aa4820efd7ce8c2254930f942a6590472b
+%global shortcommit %(c=%{commit}; echo ${c:0:7})
+
 Name: audacity-freeworld
 
-Version: 2.0.6
-Release: 1%{?dist}
+Version: 2.1.1
+Release: 0.1.%{shortcommit}%{?dist}
 Summary: Multitrack audio editor
 Group:   Applications/Multimedia
 License: GPLv2
@@ -10,21 +15,29 @@ URL:     http://audacity.sourceforge.net
 %define realname audacity
 Conflicts: %{realname}
 
-# use for upstream source releases:
-#Source0: http://downloads.sf.net/sourceforge/audacity/audacity-minsrc-%#{version}-beta.tar.bz2
-Source0: http://downloads.sourceforge.net/audacity/audacity-minsrc-%{version}.tar.xz
-%define tartopdir audacity-src-%{version}
+# use for upstream source releases (git now):
+Source0: https://github.com/audacity/%{realname}/archive/%{commit}/%{realname}-%{commit}.tar.gz
+# ie https://github.com/audacity/audacity/archive/dea351aa4820efd7ce8c2254930f942a6590472b/audacity-dea351aa4820efd7ce8c2254930f942a6590472b.tar.xz
+#Source0: http://downloads.sf.net/sourceforge/audacity/audacity-minsrc-%{version}.tar.xz
+#Source0: http://audacity.googlecode.com/files/audacity-minsrc-%{version}.tar.xz
+#%define tartopdir audacity-minsrc-%{version}
+%define tartopdir audacity-%{commit}
+
+# temporary use earlier manual version:
+Source1: http://downloads.sf.net/sourceforge/audacity/audacity-manual-2.1.0.zip
+#Source1: http://downloads.sf.net/sourceforge/audacity/audacity-manual-%{version}.zip
+#Source1: http://audacity.googlecode.com/files/audacity-manual-%{version}.zip
 
 Patch1: audacity-2.0.4-libmp3lame-default.patch
-# Patch2: audacity-1.3.9-libdir.patch
+Patch2: audacity-1.3.9-libdir.patch
 # add audio/x-flac
 # remove audio/mpeg, audio/x-mp3
 # enable startup notification
 # add categories Sequencer X-Jack AudioVideoEditing for F-12 Studio feature
-Patch3: audacity-2.0.2-desktop.in.patch
+# Patch3: audacity-2.0.2-desktop.in.patch
 Patch4: audacity-2.0.6-non-dl-ffmpeg.patch
 # BZ#1076795:
-# Patch5: audacity-2.0.4-equalization-segfault.patch 
+# Patch5: audacity-2.0.4-equalization-segfault.patch# BZ#1076795
 
 Provides: audacity-nonfree = %{version}-%{release}
 Obsoletes: audacity-nonfree < %{version}-%{release}
@@ -48,11 +61,13 @@ BuildRequires: vamp-plugin-sdk-devel >= 2.0
 BuildRequires: zip
 BuildRequires: zlib-devel
 BuildRequires: wxGTK-devel
-BuildRequires: libmad-devel
+%if 0%{?rhel} >= 8 || 0%{?fedora} 
+BuildRequires: libappstream-glib
+%endif
+%{?_with_mp3:BuildRequires: libmad-devel twolame-devel}
 #B#uildRequires: ffmpeg-compat-devel
 BuildRequires: ffmpeg-devel
 BuildRequires: lame-devel
-BuildRequires: twolame-devel
 # For new symbols in portaudio
 Requires:      portaudio%{?_isa} >= 19-16
 
@@ -69,9 +84,9 @@ This build has support for mp3 and ffmpeg import/export.
 %setup -q -n %{tartopdir}
 
 # Substitute hardcoded library paths.
-%patch1 -b .libmp3lame-default
-# %patch2 -p1 -b .libdir
-for i in src/effects/ladspa/LoadLadspa.cpp src/AudacityApp.cpp src/export/ExportMP3.cpp
+#%patch1 -b .libmp3lame-default
+#%patch2 -p1 -b .libdir
+for i in src/AudacityApp.cpp src/export/ExportMP3.cpp
 do
     sed -i -e 's!__RPM_LIBDIR__!%{_libdir}!g' $i
     sed -i -e 's!__RPM_LIB__!%{_lib}!g' $i
@@ -84,7 +99,7 @@ do
     sed -i -e 's!libmp3lame.so\([^.]\)!libmp3lame.so.0\1!g' $i
 done
 
-%patch3 -b .desktop.old
+#%patch3 -b .desktop.old
 %patch4 -p1 -b .2.0.6-non-dl-ffmpeg
 # %patch5 -b .2.0.4-equalization-segfault
 
@@ -109,6 +124,8 @@ export PKG_CONFIG_PATH=%{_libdir}/ffmpeg-compat/pkgconfig/
     --with-ffmpeg=system \
     --with-libmad=system \
     --with-libtwolame=system \
+    %{?_with_mp3:--with-libmad=system --with-libtwolame=system} \
+    %{!?_with_mp3:--without-libmad --without-libtwolame} \
     --with-lame=system \
 %ifnarch %{ix86} x86_64
     --disable-sse \
@@ -128,6 +145,20 @@ make
 
 %install
 %make_install
+rm -Rf $RPM_BUILD_ROOT%{_datadir}/%{realname}/include
+
+%if 0%{?rhel} >= 8 || 0%{?fedora} 
+if appstream-util --help | grep -q replace-screenshots ; then
+# Update the screenshot shown in the software center
+#
+# NOTE: It would be *awesome* if this file was pushed upstream.
+#
+# See http://people.freedesktop.org/~hughsient/appdata/#screenshots for more details.
+#
+appstream-util replace-screenshots $RPM_BUILD_ROOT%{_datadir}/appdata/audacity.appdata.xml \
+  https://raw.githubusercontent.com/hughsie/fedora-appstream/master/screenshots-extra/audacity/a.png 
+fi
+%endif
 
 # Audacity 1.3.8-beta complains if the help/manual directories
 # don't exist.
@@ -143,14 +174,14 @@ desktop-file-install --dir $RPM_BUILD_ROOT%{_datadir}/applications \
 
 
 %post
-umask 022
+##umask 022
 # update-mime-database %{_datadir}/mime &> /dev/null || :
 update-desktop-database &> /dev/null || :
 touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
 touch --no-create %{_datadir}/mime/packages &> /dev/null || :
 
 %postun
-umask 022
+##umask 022
 # update-mime-database %{_datadir}/mime &> /dev/null || :
 update-desktop-database &> /dev/null || :
 if [ $1 -eq 0 ] ; then
@@ -182,6 +213,11 @@ update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
 
 
 %changelog
+* Wed Jun 24 2015 David Timms <iinet.net.au@dtimms> - 2.1.1-0.1.dea351a
+- Update to 2.1.1 pre-release git snapshot to prepare for release.
+- Conditionalize AppData out of EPEL <=7 release.
+- Use better AppData screenshots.
+
 * Mon Jan 12 2015 David Timms <iinet.net.au@dtimms> - 2.0.6-1
 - update to upstream release 2.0.6
 - update non-dl-ffmpeg.patch to match this version
