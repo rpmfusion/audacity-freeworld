@@ -6,7 +6,7 @@
 Name: audacity-freeworld
 
 Version: 2.1.1
-Release: 0.1.%{shortcommit}%{?dist}
+Release: 0.2.%{shortcommit}%{?dist}
 Summary: Multitrack audio editor
 Group:   Applications/Multimedia
 License: GPLv2
@@ -23,10 +23,8 @@ Source0: https://github.com/audacity/%{realname}/archive/%{commit}/%{realname}-%
 #%define tartopdir audacity-minsrc-%{version}
 %define tartopdir audacity-%{commit}
 
-# temporary use earlier manual version:
-Source1: http://downloads.sf.net/sourceforge/audacity/audacity-manual-2.1.0.zip
+# manual can be installed from the base Fedora audacity package.
 #Source1: http://downloads.sf.net/sourceforge/audacity/audacity-manual-%{version}.zip
-#Source1: http://audacity.googlecode.com/files/audacity-manual-%{version}.zip
 
 Patch1: audacity-2.0.4-libmp3lame-default.patch
 Patch2: audacity-1.3.9-libdir.patch
@@ -213,6 +211,9 @@ update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
 
 
 %changelog
+* Sun Jun 28 2015 David Timms <iinet.net.au@dtimms> - 2.1.1-0.2.dea351a
+- remove Source1 reference to manual (available in Fedora audacity build).
+
 * Wed Jun 24 2015 David Timms <iinet.net.au@dtimms> - 2.1.1-0.1.dea351a
 - Update to 2.1.1 pre-release git snapshot to prepare for release.
 - Conditionalize AppData out of EPEL <=7 release.
