@@ -1,12 +1,12 @@
 # Compile options:
 %bcond_with mp3
-%global commit dea351aa4820efd7ce8c2254930f942a6590472b
-%global shortcommit %(c=%{commit}; echo ${c:0:7})
+#%#global commit dea351aa4820efd7ce8c2254930f942a6590472b
+#%#global shortcommit %(c=%#{commit}; echo ${c:0:7})
 
 Name: audacity-freeworld
 
 Version: 2.1.1
-Release: 0.2.%{shortcommit}%{?dist}
+Release: 1%{?dist}
 Summary: Multitrack audio editor
 Group:   Applications/Multimedia
 License: GPLv2
@@ -15,16 +15,16 @@ URL:     http://audacity.sourceforge.net
 %define realname audacity
 Conflicts: %{realname}
 
-# use for upstream source releases (git now):
-Source0: https://github.com/audacity/%{realname}/archive/%{commit}/%{realname}-%{commit}.tar.gz
+Source0: http://www.fosshub.com/Audacity.html/%{realname}-minsrc-%{version}.tar.xz
+# For alpha git snapshots for testing use the github archive as upstream source:
+#Source0: https://github.com/audacity/%#{name}/archive/%#{commit}/%#{name}-%#{commit}.tar.gz
 # ie https://github.com/audacity/audacity/archive/dea351aa4820efd7ce8c2254930f942a6590472b/audacity-dea351aa4820efd7ce8c2254930f942a6590472b.tar.xz
-#Source0: http://downloads.sf.net/sourceforge/audacity/audacity-minsrc-%{version}.tar.xz
-#Source0: http://audacity.googlecode.com/files/audacity-minsrc-%{version}.tar.xz
-#%define tartopdir audacity-minsrc-%{version}
-%define tartopdir audacity-%{commit}
+#Source0: http://downloads.sf.net/sourceforge/audacity/audacity-minsrc-%#{version}.tar.xz
+%define tartopdir audacity-minsrc-%{version}
+#%#define tartopdir audacity-%#{commit}
 
 # manual can be installed from the base Fedora audacity package.
-#Source1: http://downloads.sf.net/sourceforge/audacity/audacity-manual-%{version}.zip
+#S#ource1: http://www.fosshub.com/Audacity.html/%{realname}-manual-%{version}.zip
 
 Patch1: audacity-2.0.4-libmp3lame-default.patch
 Patch2: audacity-1.3.9-libdir.patch
@@ -211,6 +211,9 @@ update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
 
 
 %changelog
+* Sun Jul 19 2015 David Timms <iinet.net.au@dtimms> - 2.1.1-1
+- Release of Audacity 2.1.1.
+
 * Sun Jun 28 2015 David Timms <iinet.net.au@dtimms> - 2.1.1-0.2.dea351a
 - remove Source1 reference to manual (available in Fedora audacity build).
 
