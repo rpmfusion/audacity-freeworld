@@ -5,7 +5,7 @@
 
 Name: audacity-freeworld
 
-Version: 2.1.1
+Version: 2.1.2
 Release: 1%{?dist}
 Summary: Multitrack audio editor
 Group:   Applications/Multimedia
@@ -15,19 +15,19 @@ URL:     http://audacity.sourceforge.net
 %define realname audacity
 Conflicts: %{realname}
 
-Source0: http://www.fosshub.com/Audacity.html/%{realname}-minsrc-%{version}.tar.xz
+Source0: http://www.fosshub.com/Audacity/download/%{realname}-minsrc-%{version}.tar.xz
 # For alpha git snapshots for testing use the github archive as upstream source:
 #Source0: https://github.com/audacity/%#{name}/archive/%#{commit}/%#{name}-%#{commit}.tar.gz
 # ie https://github.com/audacity/audacity/archive/dea351aa4820efd7ce8c2254930f942a6590472b/audacity-dea351aa4820efd7ce8c2254930f942a6590472b.tar.xz
 #Source0: http://downloads.sf.net/sourceforge/audacity/audacity-minsrc-%#{version}.tar.xz
 %define tartopdir audacity-minsrc-%{version}
-#%#define tartopdir audacity-%#{commit}
+#define tartopdir audacity-%#{commit}
 
 # manual can be installed from the base Fedora audacity package.
 #S#ource1: http://www.fosshub.com/Audacity.html/%{realname}-manual-%{version}.zip
 
-Patch1: audacity-2.0.4-libmp3lame-default.patch
-Patch2: audacity-1.3.9-libdir.patch
+# Patch1: audacity-2.0.4-libmp3lame-default.patch
+# Patch2: audacity-1.3.9-libdir.patch
 # add audio/x-flac
 # remove audio/mpeg, audio/x-mp3
 # enable startup notification
@@ -58,7 +58,7 @@ BuildRequires: soxr-devel
 BuildRequires: vamp-plugin-sdk-devel >= 2.0
 BuildRequires: zip
 BuildRequires: zlib-devel
-BuildRequires: wxGTK-devel
+BuildRequires: wxGTK3-devel
 %if 0%{?rhel} >= 8 || 0%{?fedora} 
 BuildRequires: libappstream-glib
 %endif
@@ -82,8 +82,8 @@ This build has support for mp3 and ffmpeg import/export.
 %setup -q -n %{tartopdir}
 
 # Substitute hardcoded library paths.
-#%patch1 -b .libmp3lame-default
-#%patch2 -p1 -b .libdir
+#patch1 -b .libmp3lame-default
+#patch2 -p1 -b .libdir
 for i in src/AudacityApp.cpp src/export/ExportMP3.cpp
 do
     sed -i -e 's!__RPM_LIBDIR__!%{_libdir}!g' $i
@@ -97,9 +97,9 @@ do
     sed -i -e 's!libmp3lame.so\([^.]\)!libmp3lame.so.0\1!g' $i
 done
 
-#%patch3 -b .desktop.old
+#patch3 -b .desktop.old
 %patch4 -p1 -b .2.0.6-non-dl-ffmpeg
-# %patch5 -b .2.0.4-equalization-segfault
+#patch5 -b .2.0.4-equalization-segfault
 
 
 %build
@@ -211,6 +211,9 @@ update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
 
 
 %changelog
+* Thu Mar 03 2016 Sérgio Basto <sergio@serjux.com> - 2.1.2-1
+- Update audacity to 2.1.2 final
+
 * Sun Jul 19 2015 David Timms <iinet.net.au@dtimms> - 2.1.1-1
 - Release of Audacity 2.1.1.
 
