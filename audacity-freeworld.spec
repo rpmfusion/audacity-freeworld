@@ -6,7 +6,7 @@
 Name: audacity-freeworld
 
 Version: 2.1.2
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Multitrack audio editor
 Group:   Applications/Multimedia
 License: GPLv2
@@ -26,6 +26,7 @@ Source0: http://www.fosshub.com/Audacity/download/%{realname}-minsrc-%{version}.
 # manual can be installed from the base Fedora audacity package.
 #S#ource1: http://www.fosshub.com/Audacity.html/%{realname}-manual-%{version}.zip
 
+Patch1: audacity-60f2322055756e8cacfe96530a12c63e9694482c.patch
 # Patch1: audacity-2.0.4-libmp3lame-default.patch
 # Patch2: audacity-1.3.9-libdir.patch
 # add audio/x-flac
@@ -80,6 +81,7 @@ This build has support for mp3 and ffmpeg import/export.
 
 %prep
 %setup -q -n %{tartopdir}
+%patch1 -p1 -b .gcc6
 
 # Substitute hardcoded library paths.
 #patch1 -b .libmp3lame-default
@@ -211,6 +213,9 @@ update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
 
 
 %changelog
+* Wed Jun 22 2016 Nicolas Chauvet <kwizart@gmail.com> - 2.1.2-2
+- Backport fix for gcc6
+
 * Thu Mar 03 2016 Sérgio Basto <sergio@serjux.com> - 2.1.2-1
 - Update audacity to 2.1.2 final
 
