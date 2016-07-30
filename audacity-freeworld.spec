@@ -6,7 +6,7 @@
 Name: audacity-freeworld
 
 Version: 2.1.2
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: Multitrack audio editor
 Group:   Applications/Multimedia
 License: GPLv2
@@ -213,6 +213,9 @@ update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
 
 
 %changelog
+* Sat Jul 30 2016 Julian Sikorski <belegdol@fedoraproject.org> - 2.1.2-3
+- Rebuilt for ffmpeg-3.1.1
+
 * Wed Jun 22 2016 Nicolas Chauvet <kwizart@gmail.com> - 2.1.2-2
 - Backport fix for gcc6
 
