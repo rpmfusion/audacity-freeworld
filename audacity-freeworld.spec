@@ -1,12 +1,12 @@
 # Compile options:
 %bcond_with mp3
-#%#global commit dea351aa4820efd7ce8c2254930f942a6590472b
-#%#global shortcommit %(c=%#{commit}; echo ${c:0:7})
+%global commit0 53a5c930a4b5b053ab06a8b975458fc51cf41f6c
+%global shortcommit0 %(c=%#{commit0}; echo ${c:0:7})
 
 Name: audacity-freeworld
 
-Version: 2.1.2
-Release: 3%{?dist}
+Version: 2.1.3
+Release: 0.7.20161109git53a5c93%{?dist}
 Summary: Multitrack audio editor
 Group:   Applications/Multimedia
 License: GPLv2
@@ -15,28 +15,27 @@ URL:     http://audacity.sourceforge.net
 %define realname audacity
 Conflicts: %{realname}
 
-Source0: http://www.fosshub.com/Audacity/download/%{realname}-minsrc-%{version}.tar.xz
+#Source0: http://www.fosshub.com/Audacity.html/%{realname}-minsrc-%{version}.tar.xz
 # For alpha git snapshots for testing use the github archive as upstream source:
-#Source0: https://github.com/audacity/%#{name}/archive/%#{commit}/%#{name}-%#{commit}.tar.gz
-# ie https://github.com/audacity/audacity/archive/dea351aa4820efd7ce8c2254930f942a6590472b/audacity-dea351aa4820efd7ce8c2254930f942a6590472b.tar.xz
+Source0: https://github.com/audacity/%{realname}/archive/%{commit0}/%{realname}-%{commit0}.tar.gz
+#Source0: https://github.com/audacity/%#{realname}/archive/%#{commit0}/%#{realname}-%#{commit0}.tar.gz
+# ie wget https://github.com/audacity/audacity/archive/ecdb1d81c9312789c6233aba2190572344b22188/audacity-ecdb1d81c9312789c6233aba2190572344b22188.tar.gz
 #Source0: http://downloads.sf.net/sourceforge/audacity/audacity-minsrc-%#{version}.tar.xz
-%define tartopdir audacity-minsrc-%{version}
-#define tartopdir audacity-%#{commit}
 
-# manual can be installed from the base Fedora audacity package.
-#S#ource1: http://www.fosshub.com/Audacity.html/%{realname}-manual-%{version}.zip
+#%#define tartopdir audacity-minsrc-%{version}
+#%#define tartopdir audacity-%#{commit0}
+%define tartopdir audacity-%{commit0}
 
-Patch1: audacity-60f2322055756e8cacfe96530a12c63e9694482c.patch
+# manual can be installed from the base Fedora Audacity package.
+
 # Patch1: audacity-2.0.4-libmp3lame-default.patch
 # Patch2: audacity-1.3.9-libdir.patch
 # add audio/x-flac
 # remove audio/mpeg, audio/x-mp3
 # enable startup notification
 # add categories Sequencer X-Jack AudioVideoEditing for F-12 Studio feature
-# Patch3: audacity-2.0.2-desktop.in.patch
+Patch3: audacity-2.0.2-desktop.in.patch
 Patch4: audacity-2.0.6-non-dl-ffmpeg.patch
-# BZ#1076795:
-# Patch5: audacity-2.0.4-equalization-segfault.patch# BZ#1076795
 
 Provides: audacity-nonfree = %{version}-%{release}
 Obsoletes: audacity-nonfree < %{version}-%{release}
@@ -59,16 +58,20 @@ BuildRequires: soxr-devel
 BuildRequires: vamp-plugin-sdk-devel >= 2.0
 BuildRequires: zip
 BuildRequires: zlib-devel
+# We need /usr/bin/wx-config so that configure can detect the wx-config version:
 BuildRequires: wxGTK3-devel
+# But we will actually use the --toolkit=gtk2 version using --with-wx-version
+BuildRequires: compat-wxGTK3-gtk2-devel
 %if 0%{?rhel} >= 8 || 0%{?fedora} 
 BuildRequires: libappstream-glib
 %endif
-%{?_with_mp3:BuildRequires: libmad-devel twolame-devel}
+%{?_with mp3:BuildRequires: libmad-devel twolame-devel}
 #B#uildRequires: ffmpeg-compat-devel
 BuildRequires: ffmpeg-devel
 BuildRequires: lame-devel
 # For new symbols in portaudio
 Requires:      portaudio%{?_isa} >= 19-16
+
 
 %description
 Audacity is a cross-platform multitrack audio editor. It allows you to
@@ -81,11 +84,10 @@ This build has support for mp3 and ffmpeg import/export.
 
 %prep
 %setup -q -n %{tartopdir}
-%patch1 -p1 -b .gcc6
 
 # Substitute hardcoded library paths.
-#patch1 -b .libmp3lame-default
-#patch2 -p1 -b .libdir
+# %#patch1 -b .libmp3lame-default
+# %#patch2 -p1 -b .libdir
 for i in src/AudacityApp.cpp src/export/ExportMP3.cpp
 do
     sed -i -e 's!__RPM_LIBDIR__!%{_libdir}!g' $i
@@ -99,9 +101,8 @@ do
     sed -i -e 's!libmp3lame.so\([^.]\)!libmp3lame.so.0\1!g' $i
 done
 
-#patch3 -b .desktop.old
+# %#patch3 -b .desktop.old
 %patch4 -p1 -b .2.0.6-non-dl-ffmpeg
-#patch5 -b .2.0.4-equalization-segfault
 
 
 %build
@@ -109,6 +110,7 @@ export PKG_CONFIG_PATH=%{_libdir}/ffmpeg-compat/pkgconfig/
 %configure \
     --disable-dynamic-loading \
     --with-help \
+    --with-wx-version=3.0-gtk2 \
     --with-libsndfile=system \
     --with-libsoxr=system \
     --without-libresample \
@@ -124,8 +126,8 @@ export PKG_CONFIG_PATH=%{_libdir}/ffmpeg-compat/pkgconfig/
     --with-ffmpeg=system \
     --with-libmad=system \
     --with-libtwolame=system \
-    %{?_with_mp3:--with-libmad=system --with-libtwolame=system} \
-    %{!?_with_mp3:--without-libmad --without-libtwolame} \
+    %{?_with mp3:--with-libmad=system --with-libtwolame=system} \
+    %{!?_with mp3:--without-libmad --without-libtwolame} \
     --with-lame=system \
 %ifnarch %{ix86} x86_64
     --disable-sse \
@@ -174,15 +176,11 @@ desktop-file-install --dir $RPM_BUILD_ROOT%{_datadir}/applications \
 
 
 %post
-##umask 022
-# update-mime-database %{_datadir}/mime &> /dev/null || :
 update-desktop-database &> /dev/null || :
 touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
 touch --no-create %{_datadir}/mime/packages &> /dev/null || :
 
 %postun
-##umask 022
-# update-mime-database %{_datadir}/mime &> /dev/null || :
 update-desktop-database &> /dev/null || :
 if [ $1 -eq 0 ] ; then
     touch --no-create %{_datadir}/icons/hicolor &>/dev/null
@@ -213,6 +211,9 @@ update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
 
 
 %changelog
+* Wed Nov  9 2016 David Timms <iinet.net.au@dtimms> - 2.1.3-0.7.20161109git53a5c93
+- 2.1.3 Alpha git snapshot 2016-11-09.
+
 * Sat Jul 30 2016 Julian Sikorski <belegdol@fedoraproject.org> - 2.1.2-3
 - Rebuilt for ffmpeg-3.1.1
 
