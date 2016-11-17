@@ -1,12 +1,19 @@
-# Compile options:
-%bcond_with mp3
+# invoke with: rpmbuild --without mp3 audacity-freeworld.spec to undefine mp3.
+%bcond_without mp3
+%if %{without mp3}
+# user passed [--without mp3]. Yes, rpm logic seems wrong!
+%define mp3importexport 0
+%else
+%define mp3importexport 1
+%endif
+
 %global commit0 53a5c930a4b5b053ab06a8b975458fc51cf41f6c
 %global shortcommit0 %(c=%#{commit0}; echo ${c:0:7})
 
 Name: audacity-freeworld
 
 Version: 2.1.3
-Release: 0.7.20161109git53a5c93%{?dist}
+Release: 0.8.20161109git53a5c93%{?dist}
 Summary: Multitrack audio editor
 Group:   Applications/Multimedia
 License: GPLv2
@@ -34,7 +41,7 @@ Source0: https://github.com/audacity/%{realname}/archive/%{commit0}/%{realname}-
 # remove audio/mpeg, audio/x-mp3
 # enable startup notification
 # add categories Sequencer X-Jack AudioVideoEditing for F-12 Studio feature
-Patch3: audacity-2.0.2-desktop.in.patch
+# Patch3: audacity-2.0.2-desktop.in.patch
 Patch4: audacity-2.0.6-non-dl-ffmpeg.patch
 
 Provides: audacity-nonfree = %{version}-%{release}
@@ -65,7 +72,10 @@ BuildRequires: compat-wxGTK3-gtk2-devel
 %if 0%{?rhel} >= 8 || 0%{?fedora} 
 BuildRequires: libappstream-glib
 %endif
-%{?_with mp3:BuildRequires: libmad-devel twolame-devel}
+%if 0%{mp3importexport}
+BuildRequires: libmad-devel
+BuildRequires: twolame-devel
+%endif
 #B#uildRequires: ffmpeg-compat-devel
 BuildRequires: ffmpeg-devel
 BuildRequires: lame-devel
@@ -126,8 +136,13 @@ export PKG_CONFIG_PATH=%{_libdir}/ffmpeg-compat/pkgconfig/
     --with-ffmpeg=system \
     --with-libmad=system \
     --with-libtwolame=system \
-    %{?_with mp3:--with-libmad=system --with-libtwolame=system} \
-    %{!?_with mp3:--without-libmad --without-libtwolame} \
+%if 0%{mp3importexport}
+    --with-libmad=system \
+    --with-libtwolame=system \
+%else
+    --without-libmad \
+    --without-libtwolame \
+%endif
     --with-lame=system \
 %ifnarch %{ix86} x86_64
     --disable-sse \
@@ -211,6 +226,9 @@ update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
 
 
 %changelog
+* Thu Nov 17 2016 David Timms <iinet.net.au@dtimms> - 2.1.3-0.8.20161109git53a5c93
+- fix mp3 build parameter by defining mp3importexport conditional.
+
 * Wed Nov  9 2016 David Timms <iinet.net.au@dtimms> - 2.1.3-0.7.20161109git53a5c93
 - 2.1.3 Alpha git snapshot 2016-11-09.
 
