@@ -1,11 +1,5 @@
 # invoke with: rpmbuild --without mp3 audacity-freeworld.spec to undefine mp3.
 %bcond_without mp3
-%if %{without mp3}
-# user passed [--without mp3]. Yes, rpm logic seems wrong!
-%define mp3importexport 0
-%else
-%define mp3importexport 1
-%endif
 
 %global commit0 53a5c930a4b5b053ab06a8b975458fc51cf41f6c
 %global shortcommit0 %(c=%#{commit0}; echo ${c:0:7})
@@ -13,7 +7,7 @@
 Name: audacity-freeworld
 
 Version: 2.1.3
-Release: 0.8.20161109git53a5c93%{?dist}
+Release: 0.9.20161109git53a5c93%{?dist}
 Summary: Multitrack audio editor
 Group:   Applications/Multimedia
 License: GPLv2
@@ -65,14 +59,13 @@ BuildRequires: soxr-devel
 BuildRequires: vamp-plugin-sdk-devel >= 2.0
 BuildRequires: zip
 BuildRequires: zlib-devel
-# We need /usr/bin/wx-config so that configure can detect the wx-config version:
-BuildRequires: wxGTK3-devel
+#BuildRequires: wxGTK3-devel
 # But we will actually use the --toolkit=gtk2 version using --with-wx-version
 BuildRequires: compat-wxGTK3-gtk2-devel
-%if 0%{?rhel} >= 8 || 0%{?fedora} 
+%if 0%{?rhel} >= 8 || 0%{?fedora}
 BuildRequires: libappstream-glib
 %endif
-%if 0%{mp3importexport}
+%if %{with mp3}
 BuildRequires: libmad-devel
 BuildRequires: twolame-devel
 %endif
@@ -96,8 +89,8 @@ This build has support for mp3 and ffmpeg import/export.
 %setup -q -n %{tartopdir}
 
 # Substitute hardcoded library paths.
-# %#patch1 -b .libmp3lame-default
-# %#patch2 -p1 -b .libdir
+#patch1 -b .libmp3lame-default
+#patch2 -p1 -b .libdir
 for i in src/AudacityApp.cpp src/export/ExportMP3.cpp
 do
     sed -i -e 's!__RPM_LIBDIR__!%{_libdir}!g' $i
@@ -111,12 +104,14 @@ do
     sed -i -e 's!libmp3lame.so\([^.]\)!libmp3lame.so.0\1!g' $i
 done
 
-# %#patch3 -b .desktop.old
+#patch3 -b .desktop.old
 %patch4 -p1 -b .2.0.6-non-dl-ffmpeg
 
 
 %build
-export PKG_CONFIG_PATH=%{_libdir}/ffmpeg-compat/pkgconfig/
+#export PKG_CONFIG_PATH=%{_libdir}/ffmpeg-compat/pkgconfig/
+export WX_CONFIG=wx-config-3.0-gtk2
+
 %configure \
     --disable-dynamic-loading \
     --with-help \
@@ -134,9 +129,7 @@ export PKG_CONFIG_PATH=%{_libdir}/ffmpeg-compat/pkgconfig/
     --with-libvamp=system \
     --with-portaudio=system \
     --with-ffmpeg=system \
-    --with-libmad=system \
-    --with-libtwolame=system \
-%if 0%{mp3importexport}
+%if %{with mp3}
     --with-libmad=system \
     --with-libtwolame=system \
 %else
@@ -226,6 +219,10 @@ update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
 
 
 %changelog
+* Tue Nov 22 2016 Sérgio Basto <sergio@serjux.com> - 2.1.3-0.9.20161109git53a5c93
+- Use bcond_without correctly, fix wx-config-3.0-gtk2 detection, also simplify
+  some comments
+
 * Thu Nov 17 2016 David Timms <iinet.net.au@dtimms> - 2.1.3-0.8.20161109git53a5c93
 - fix mp3 build parameter by defining mp3importexport conditional.
 
