@@ -7,7 +7,7 @@
 Name: audacity-freeworld
 
 Version: 2.1.3
-Release: 0.9.20161109git53a5c93%{?dist}
+Release: 0.10.20161109git53a5c93%{?dist}
 Summary: Multitrack audio editor
 Group:   Applications/Multimedia
 License: GPLv2
@@ -219,6 +219,9 @@ update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
 
 
 %changelog
+* Sat Mar 18 2017 RPM Fusion Release Engineering <kwizart@rpmfusion.org> - 2.1.3-0.10.20161109git53a5c93
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
+
 * Tue Nov 22 2016 Sérgio Basto <sergio@serjux.com> - 2.1.3-0.9.20161109git53a5c93
 - Use bcond_without correctly, fix wx-config-3.0-gtk2 detection, also simplify
   some comments
