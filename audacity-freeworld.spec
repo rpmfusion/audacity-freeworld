@@ -1,13 +1,13 @@
 # invoke with: rpmbuild --without mp3 audacity-freeworld.spec to undefine mp3.
 %bcond_without mp3
 
-%global commit0 53a5c930a4b5b053ab06a8b975458fc51cf41f6c
-%global shortcommit0 %(c=%#{commit0}; echo ${c:0:7})
+#%#global commit0 53a5c930a4b5b053ab06a8b975458fc51cf41f6c
+#%#global shortcommit0 %(c=%#{commit0}; echo ${c:0:7})
 
 Name: audacity-freeworld
 
 Version: 2.1.3
-Release: 0.10.20161109git53a5c93%{?dist}
+Release: 1%{?dist}
 Summary: Multitrack audio editor
 Group:   Applications/Multimedia
 License: GPLv2
@@ -16,16 +16,13 @@ URL:     http://audacity.sourceforge.net
 %define realname audacity
 Conflicts: %{realname}
 
-#Source0: http://www.fosshub.com/Audacity.html/%{realname}-minsrc-%{version}.tar.xz
+Source0: http://www.fosshub.com/Audacity.html/%{realname}-minsrc-%{version}.tar.xz
 # For alpha git snapshots for testing use the github archive as upstream source:
-Source0: https://github.com/audacity/%{realname}/archive/%{commit0}/%{realname}-%{commit0}.tar.gz
-#Source0: https://github.com/audacity/%#{realname}/archive/%#{commit0}/%#{realname}-%#{commit0}.tar.gz
+#Source0: https://github.com/audacity/%{realname}/archive/%{commit0}/%{realname}-%{commit0}.tar.gz
 # ie wget https://github.com/audacity/audacity/archive/ecdb1d81c9312789c6233aba2190572344b22188/audacity-ecdb1d81c9312789c6233aba2190572344b22188.tar.gz
-#Source0: http://downloads.sf.net/sourceforge/audacity/audacity-minsrc-%#{version}.tar.xz
 
-#%#define tartopdir audacity-minsrc-%{version}
+%define tartopdir audacity-minsrc-%{version}
 #%#define tartopdir audacity-%#{commit0}
-%define tartopdir audacity-%{commit0}
 
 # manual can be installed from the base Fedora Audacity package.
 
@@ -219,6 +216,9 @@ update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
 
 
 %changelog
+* Fri Mar 24 2017 Leigh Scott <leigh123linux@googlemail.com> - 2.1.3-1
+- 2.1.3 release.
+
 * Sat Mar 18 2017 RPM Fusion Release Engineering <kwizart@rpmfusion.org> - 2.1.3-0.10.20161109git53a5c93
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
 
