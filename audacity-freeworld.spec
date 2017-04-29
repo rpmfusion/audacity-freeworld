@@ -7,7 +7,7 @@
 Name: audacity-freeworld
 
 Version: 2.1.3
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Multitrack audio editor
 Group:   Applications/Multimedia
 License: GPLv2
@@ -216,6 +216,9 @@ update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
 
 
 %changelog
+* Sat Apr 29 2017 Leigh Scott <leigh123linux@googlemail.com> - 2.1.3-2
+- Rebuild for ffmpeg update
+
 * Fri Mar 24 2017 Leigh Scott <leigh123linux@googlemail.com> - 2.1.3-1
 - 2.1.3 release.
 
