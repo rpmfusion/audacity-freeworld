@@ -111,7 +111,9 @@ export WX_CONFIG=wx-config-3.0-gtk2
 
 %configure \
     --with-help \
+%if (0%{?fedora} && 0%{?fedora} < 28)
     --with-wx-version=3.0-gtk2 \
+%endif
     --with-libsndfile=system \
     --with-libsoxr=system \
     --without-libresample \
