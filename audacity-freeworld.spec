@@ -7,7 +7,7 @@
 Name: audacity-freeworld
 
 Version: 2.1.3
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: Multitrack audio editor
 Group:   Applications/Multimedia
 License: GPLv2
@@ -216,6 +216,9 @@ update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
 
 
 %changelog
+* Sun Oct 08 2017 Sérgio Basto <sergio@serjux.com> - 2.1.3-4
+- Rebuild for soundtouch 2.0.0
+
 * Thu Aug 31 2017 RPM Fusion Release Engineering <kwizart@rpmfusion.org> - 2.1.3-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Mass_Rebuild
 
