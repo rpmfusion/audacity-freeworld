@@ -1,8 +1,8 @@
 # invoke with: rpmbuild --without mp3 audacity-freeworld.spec to undefine mp3.
 %bcond_without mp3
 
-#%#global commit0 53a5c930a4b5b053ab06a8b975458fc51cf41f6c
-#%#global shortcommit0 %(c=%#{commit0}; echo ${c:0:7})
+#global commit0 53a5c930a4b5b053ab06a8b975458fc51cf41f6c
+#global shortcommit0 %(c=%#{commit0}; echo ${c:0:7})
 
 Name: audacity-freeworld
 
@@ -46,6 +46,7 @@ BuildRequires: gettext
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: ladspa-devel
 BuildRequires: libid3tag-devel
+BuildRequires: libmad-devel
 BuildRequires: taglib-devel
 BuildRequires: libogg-devel
 BuildRequires: libsndfile-devel
@@ -63,10 +64,8 @@ BuildRequires: compat-wxGTK3-gtk2-devel
 BuildRequires: libappstream-glib
 %endif
 %if %{with mp3}
-BuildRequires: libmad-devel
 BuildRequires: twolame-devel
 %endif
-#B#uildRequires: ffmpeg-compat-devel
 BuildRequires: ffmpeg-devel
 BuildRequires: lame-devel
 # For new symbols in portaudio
@@ -106,11 +105,11 @@ done
 
 
 %build
-#export PKG_CONFIG_PATH=%{_libdir}/ffmpeg-compat/pkgconfig/
+%if (0%{?fedora} && 0%{?fedora} < 28)
 export WX_CONFIG=wx-config-3.0-gtk2
+%endif
 
 %configure \
-    --disable-dynamic-loading \
     --with-help \
     --with-wx-version=3.0-gtk2 \
     --with-libsndfile=system \
@@ -126,11 +125,10 @@ export WX_CONFIG=wx-config-3.0-gtk2
     --with-libvamp=system \
     --with-portaudio=system \
     --with-ffmpeg=system \
-%if %{with mp3}
     --with-libmad=system \
+%if %{with mp3}
     --with-libtwolame=system \
 %else
-    --without-libmad \
     --without-libtwolame \
 %endif
     --with-lame=system \
@@ -218,6 +216,8 @@ update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
 %changelog
 * Sun Oct 08 2017 Sérgio Basto <sergio@serjux.com> - 2.1.3-4
 - Rebuild for soundtouch 2.0.0
+- Fix build for new wxBase
+- Sync with Fedora proper
 
 * Thu Aug 31 2017 RPM Fusion Release Engineering <kwizart@rpmfusion.org> - 2.1.3-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Mass_Rebuild
