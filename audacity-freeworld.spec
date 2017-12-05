@@ -51,7 +51,7 @@ BuildRequires: taglib-devel
 BuildRequires: libogg-devel
 BuildRequires: libsndfile-devel
 BuildRequires: libvorbis-devel
-BuildRequires: portaudio-devel >= 19-16
+#BuildRequires: portaudio-devel >= 19-16
 BuildRequires: soundtouch-devel
 BuildRequires: soxr-devel
 BuildRequires: vamp-plugin-sdk-devel >= 2.0
@@ -125,7 +125,6 @@ export WX_CONFIG=wx-config-3.0-gtk2
     --with-expat=system \
     --with-soundtouch=system \
     --with-libvamp=system \
-    --with-portaudio=system \
     --with-ffmpeg=system \
     --with-libmad=system \
 %if %{with mp3}
@@ -142,7 +141,7 @@ export WX_CONFIG=wx-config-3.0-gtk2
 
 # ensure we use the system headers for these, note we do this after
 # configure as it wants to run sub-configures in these dirs
-for i in ffmpeg libresample libsoxr libvamp portaudio-v19; do
+for i in ffmpeg libresample libsoxr libvamp; do
    rm -rf lib-src/$i
 done
 
