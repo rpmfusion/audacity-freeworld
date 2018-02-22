@@ -1,12 +1,13 @@
 # invoke with: rpmbuild --without mp3 audacity-freeworld.spec to undefine mp3.
 %bcond_without mp3
+%bcond_without ffmpeg
 
 #global commit0 53a5c930a4b5b053ab06a8b975458fc51cf41f6c
 #global shortcommit0 %(c=%#{commit0}; echo ${c:0:7})
 
 Name: audacity-freeworld
 
-Version: 2.2.0
+Version: 2.2.2
 Release: 1%{?dist}
 Summary: Multitrack audio editor
 Group:   Applications/Multimedia
@@ -21,19 +22,20 @@ Source0: http://www.fosshub.com/Audacity.html/%{realname}-minsrc-%{version}.tar.
 #Source0: https://github.com/audacity/%{realname}/archive/%{commit0}/%{realname}-%{commit0}.tar.gz
 # ie wget https://github.com/audacity/audacity/archive/ecdb1d81c9312789c6233aba2190572344b22188/audacity-ecdb1d81c9312789c6233aba2190572344b22188.tar.gz
 
-%define tartopdir audacity-minsrc-%{version}
-#%#define tartopdir audacity-%#{commit0}
+%define tartopdir audacity-minsrc-%{version}-rc1
+#define tartopdir audacity-%#{commit0}
 
 # manual can be installed from the base Fedora Audacity package.
 
-# Patch1: audacity-2.0.4-libmp3lame-default.patch
-# Patch2: audacity-1.3.9-libdir.patch
+Patch1: audacity-2.0.4-libmp3lame-default.patch
+Patch2: audacity-1.3.9-libdir.patch
 # add audio/x-flac
 # remove audio/mpeg, audio/x-mp3
 # enable startup notification
 # add categories Sequencer X-Jack AudioVideoEditing for F-12 Studio feature
-# Patch3: audacity-2.0.2-desktop.in.patch
+Patch3: audacity-2.0.2-desktop.in.patch
 Patch4: audacity-2.0.6-non-dl-ffmpeg.patch
+Patch5: audacity-2.2.0-no-local-includes.patch
 
 Provides: audacity-nonfree = %{version}-%{release}
 Obsoletes: audacity-nonfree < %{version}-%{release}
@@ -46,12 +48,19 @@ BuildRequires: gettext
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: ladspa-devel
 BuildRequires: libid3tag-devel
-BuildRequires: libmad-devel
 BuildRequires: taglib-devel
 BuildRequires: libogg-devel
 BuildRequires: libsndfile-devel
 BuildRequires: libvorbis-devel
+#checking for LV2... no
+#configure: LV2 libraries are NOT available as system libraries
+#BuildRequires: lv2-devel
+# system portaudio fails to build
+# http://rglinuxtech.com/?p=2093
 #BuildRequires: portaudio-devel >= 19-16
+#checking for PORTMIDI... no
+#configure: portmidi library is NOT available as system library
+BuildRequires: portmidi-devel
 BuildRequires: soundtouch-devel
 BuildRequires: soxr-devel
 BuildRequires: vamp-plugin-sdk-devel >= 2.0
@@ -65,9 +74,12 @@ BuildRequires: libappstream-glib
 %endif
 %if %{with mp3}
 BuildRequires: twolame-devel
-%endif
-BuildRequires: ffmpeg-devel
 BuildRequires: lame-devel
+BuildRequires: libmad-devel
+%endif
+%if %{with ffmpeg}
+BuildRequires: ffmpeg-devel
+%endif
 # For new symbols in portaudio
 Requires:      portaudio%{?_isa} >= 19-16
 
@@ -100,8 +112,21 @@ do
     sed -i -e 's!libmp3lame.so\([^.]\)!libmp3lame.so.0\1!g' $i
 done
 
-#patch3 -b .desktop.old
+%patch3 -p1 -b .desktop
 %patch4 -p1 -b .2.0.6-non-dl-ffmpeg
+%patch5 -p1 -b .nolocal
+
+# ensure we use the system headers for these, note we do this after
+# configure as it wants to run sub-configures in these dirs
+#in ffmpeg FileDialog lame libnyquist libsndfile libsoxr libvamp lv2 portburn portmidi portmixer portsmf sbsms twolame; do
+
+# http://rglinuxtech.com/?p=2093
+#--enable-shared --with-ffmpeg --with-lame --with-libflac --with-libid3tag --with-libmad --with-libtwolame
+#--with-libvorbis --with-lv2 --with-portaudio=local --with-midi --with-portmidi
+
+for i in ffmpeg lame libsndfile libsoxr libvamp twolame; do
+   rm -r lib-src/$i
+done
 
 
 %build
@@ -125,25 +150,29 @@ export WX_CONFIG=wx-config-3.0-gtk2
     --with-expat=system \
     --with-soundtouch=system \
     --with-libvamp=system \
+    --with-lv2 \
+    --with-portaudio=local \
+    --with-midi \
+    --with-portmidi \
+%if %{with ffmpeg}
     --with-ffmpeg=system \
-    --with-libmad=system \
-%if %{with mp3}
-    --with-libtwolame=system \
 %else
-    --without-libtwolame \
+    --without-ffmpeg \
 %endif
+%if %{with mp3}
+    --with-libmad=system \
+    --with-libtwolame=system \
     --with-lame=system \
+%else
+    --without-libmad \
+    --without-libtwolame \
+    --without-lame \
+%endif
 %ifnarch %{ix86} x86_64
     --disable-sse \
 %else
     %{nil}
 %endif
-
-# ensure we use the system headers for these, note we do this after
-# configure as it wants to run sub-configures in these dirs
-for i in ffmpeg libresample libsoxr libvamp; do
-   rm -rf lib-src/$i
-done
 
 # _smp_mflags cause problems
 make
@@ -215,6 +244,12 @@ update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
 
 
 %changelog
+* Thu Feb 22 2018 Sérgio Basto <sergio@serjux.com> - 2.2.2-1
+- Update to 2.2.2
+
+* Thu Feb 01 2018 Sérgio Basto <sergio@serjux.com> - 2.2.1-1
+- Update to 2.2.1
+
 * Sun Dec 03 2017 Sérgio Basto <sergio@serjux.com> - 2.2.0-1
 - Update to 2.2.0
 
