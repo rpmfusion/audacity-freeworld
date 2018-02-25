@@ -1,14 +1,21 @@
 # invoke with: rpmbuild --without mp3 audacity-freeworld.spec to undefine mp3.
-%bcond_without mp3
-%bcond_without ffmpeg
+%bcond_without  mp3
+%bcond_without  ffmpeg
+%bcond_with     local_ffmpeg
+
+%if 0%{?fedora} > 27
+%bcond_without  compat_ffmpeg
+%else
+%bcond_with     compat_ffmpeg
+%endif
 
 #global commit0 53a5c930a4b5b053ab06a8b975458fc51cf41f6c
-#global shortcommit0 %(c=%#{commit0}; echo ${c:0:7})
+#global shortcommit0 #(c=#{commit0}; echo ${c:0:7})
 
 Name: audacity-freeworld
 
 Version: 2.2.2
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Multitrack audio editor
 Group:   Applications/Multimedia
 License: GPLv2
@@ -19,7 +26,7 @@ Conflicts: %{realname}
 
 Source0: http://www.fosshub.com/Audacity.html/%{realname}-minsrc-%{version}.tar.xz
 # For alpha git snapshots for testing use the github archive as upstream source:
-#Source0: https://github.com/audacity/%{realname}/archive/%{commit0}/%{realname}-%{commit0}.tar.gz
+#Source0: https://github.com/audacity/#{realname}/archive/#{commit0}/#{realname}-#{commit0}.tar.gz
 # ie wget https://github.com/audacity/audacity/archive/ecdb1d81c9312789c6233aba2190572344b22188/audacity-ecdb1d81c9312789c6233aba2190572344b22188.tar.gz
 
 %define tartopdir audacity-minsrc-%{version}-rc1
@@ -27,8 +34,8 @@ Source0: http://www.fosshub.com/Audacity.html/%{realname}-minsrc-%{version}.tar.
 
 # manual can be installed from the base Fedora Audacity package.
 
-Patch1: audacity-2.0.4-libmp3lame-default.patch
-Patch2: audacity-1.3.9-libdir.patch
+Patch1: audacity-2.2.1-libmp3lame-default.patch
+Patch2: audacity-2.2.1-libdir.patch
 # add audio/x-flac
 # remove audio/mpeg, audio/x-mp3
 # enable startup notification
@@ -40,6 +47,10 @@ Patch5: audacity-2.2.0-no-local-includes.patch
 Provides: audacity-nonfree = %{version}-%{release}
 Obsoletes: audacity-nonfree < %{version}-%{release}
 
+BuildRequires: automake
+BuildRequires: autoconf
+BuildRequires: gettext-devel
+BuildRequires: libtool
 BuildRequires: alsa-lib-devel
 BuildRequires: desktop-file-utils
 BuildRequires: expat-devel
@@ -78,7 +89,13 @@ BuildRequires: lame-devel
 BuildRequires: libmad-devel
 %endif
 %if %{with ffmpeg}
+%if ! %{with local_ffmpeg}
+%if %{with compat_ffmpeg}
+BuildRequires: compat-ffmpeg28-devel
+%else
 BuildRequires: ffmpeg-devel
+%endif
+%endif
 %endif
 # For new symbols in portaudio
 Requires:      portaudio%{?_isa} >= 19-16
@@ -97,23 +114,30 @@ This build has support for mp3 and ffmpeg import/export.
 %setup -q -n %{tartopdir}
 
 # Substitute hardcoded library paths.
-#patch1 -b .libmp3lame-default
-#patch2 -p1 -b .libdir
-for i in src/AudacityApp.cpp src/export/ExportMP3.cpp
+%patch1 -p1 -b .libmp3lame-default
+%patch2 -p1 -b .libdir
+for i in src/AudacityApp.cpp src/effects/ladspa/LadspaEffect.cpp
 do
+    cp $i $i.tmp
     sed -i -e 's!__RPM_LIBDIR__!%{_libdir}!g' $i
     sed -i -e 's!__RPM_LIB__!%{_lib}!g' $i
+    diff $i.tmp $i -s || :
+    rm $i.tmp
 done
+echo grep
 grep -q -s __RPM_LIB * -R && exit 1
 
 # Substitute occurences of "libmp3lame.so" with "libmp3lame.so.0".
 for i in locale/*.po src/export/ExportMP3.cpp
 do
+    cp $i $i.tmp
     sed -i -e 's!libmp3lame.so\([^.]\)!libmp3lame.so.0\1!g' $i
+    diff $i.tmp $i -s || :
+    rm $i.tmp
 done
 
 %patch3 -p1 -b .desktop
-%patch4 -p1 -b .2.0.6-non-dl-ffmpeg
+%patch4 -p1 -b .non-dl-ffmpeg
 %patch5 -p1 -b .nolocal
 
 # ensure we use the system headers for these, note we do this after
@@ -124,7 +148,7 @@ done
 #--enable-shared --with-ffmpeg --with-lame --with-libflac --with-libid3tag --with-libmad --with-libtwolame
 #--with-libvorbis --with-lv2 --with-portaudio=local --with-midi --with-portmidi
 
-for i in ffmpeg lame libsndfile libsoxr libvamp twolame; do
+for i in %{!?with_local_ffmpeg:ffmpeg} lame libsndfile libsoxr libvamp twolame; do
    rm -r lib-src/$i
 done
 
@@ -134,7 +158,15 @@ done
 export WX_CONFIG=wx-config-3.0-gtk2
 %endif
 
+%if %{with compat_ffmpeg}
+export PKG_CONFIG_PATH=%{_libdir}/compat-ffmpeg28/pkgconfig
+%endif
+
+aclocal -I m4
+autoconf
+
 %configure \
+    --disable-dynamic-loading \
     --with-help \
 %if (0%{?fedora} && 0%{?fedora} < 28)
     --with-wx-version=3.0-gtk2 \
@@ -155,7 +187,9 @@ export WX_CONFIG=wx-config-3.0-gtk2
     --with-midi \
     --with-portmidi \
 %if %{with ffmpeg}
+%if ! %{with local_ffmpeg}
     --with-ffmpeg=system \
+%endif
 %else
     --without-ffmpeg \
 %endif
@@ -174,15 +208,14 @@ export WX_CONFIG=wx-config-3.0-gtk2
     %{nil}
 %endif
 
-# _smp_mflags cause problems
-make
+%make_build
 
 
 %install
 %make_install
 rm -Rf $RPM_BUILD_ROOT%{_datadir}/%{realname}/include
 
-%if 0%{?rhel} >= 8 || 0%{?fedora} 
+%if 0%{?rhel} >= 8 || 0%{?fedora}
 if appstream-util --help | grep -q replace-screenshots ; then
 # Update the screenshot shown in the software center
 #
@@ -195,10 +228,6 @@ appstream-util replace-screenshots $RPM_BUILD_ROOT%{_datadir}/appdata/audacity.a
 fi
 %endif
 
-# Audacity 1.3.8-beta complains if the help/manual directories
-# don't exist.
-mkdir -p $RPM_BUILD_ROOT%{_datadir}/%{name}/help/manual
-
 %{find_lang} %{realname}
 
 desktop-file-install --dir $RPM_BUILD_ROOT%{_datadir}/applications \
@@ -207,6 +236,10 @@ desktop-file-install --dir $RPM_BUILD_ROOT%{_datadir}/applications \
 %endif
         $RPM_BUILD_ROOT%{_datadir}/applications/audacity.desktop
 
+mkdir %{buildroot}%{_datadir}/doc/%{realname}/nyquist
+cp -pr lib-src/libnyquist/nyquist/license.txt %{buildroot}%{_datadir}/doc/%{realname}/nyquist
+cp -pr lib-src/libnyquist/nyquist/Readme.txt %{buildroot}%{_datadir}/doc/%{realname}/nyquist
+rm %{buildroot}%{_datadir}/doc/%{realname}/LICENSE.txt
 
 %post
 update-desktop-database &> /dev/null || :
@@ -239,13 +272,26 @@ update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
 %{_datadir}/pixmaps/*
 %{_datadir}/icons/hicolor/*/apps/%{realname}.*
 %{_datadir}/mime/packages/*
-%doc %{_datadir}/doc/*
-%doc lib-src/libnyquist/nyquist/license.txt lib-src/libnyquist/nyquist/Readme.txt
+%{_datadir}/doc/%{realname}
+%license LICENSE.txt
 
 
 %changelog
+* Sun Feb 25 2018 Sérgio Basto <sergio@serjux.com> - 2.2.2-2
+- Use compat-ffmpeg28
+- Also add conditionals to be possible build with local ffmpeg (not in use)
+- Use autoconf before ./configure
+- Readd libmp3lame-default.patch and libdir.patch
+- Readd to configure --disable-dynamic-loading
+- General review of spec
+
 * Thu Feb 22 2018 Sérgio Basto <sergio@serjux.com> - 2.2.2-1
 - Update to 2.2.2
+- Readd no-local-includes.patch
+- Reorganize conditonal with_mp3, now have twolame, lame and libmad
+- Readd desktop.in.patch
+- Add to configure --with-lv2 --with-midi --with-portmidi with some commentaries
+- Temporary fix to portaudio became permanent (--with-portaudio=local)
 
 * Thu Feb 01 2018 Sérgio Basto <sergio@serjux.com> - 2.2.1-1
 - Update to 2.2.1

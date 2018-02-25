@@ -1,0 +1,11 @@
+--- ./src/effects/ladspa/LadspaEffect.cpp.orig	2018-02-25 02:49:21.270199818 +0000
++++ ./src/effects/ladspa/LadspaEffect.cpp	2018-02-25 02:54:23.311154018 +0000
+@@ -315,7 +315,7 @@ wxArrayString LadspaEffectsModule::GetSe
+ #else
+    
+    pathList.Add(wxGetHomeDir() + wxFILE_SEP_PATH + wxT(".ladspa"));
+-   pathList.Add(wxT("/usr/local/lib/ladspa"));
++   pathList.Add(wxT("/usr/__RPM_LIB__/ladspa"));
+    pathList.Add(wxT("/usr/lib/ladspa"));
+    pathList.Add(wxT(LIBDIR) wxT("/ladspa"));
+ 
