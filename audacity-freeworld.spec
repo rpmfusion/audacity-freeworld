@@ -42,7 +42,6 @@ Patch2: audacity-2.2.1-libdir.patch
 # add categories Sequencer X-Jack AudioVideoEditing for F-12 Studio feature
 Patch3: audacity-2.0.2-desktop.in.patch
 Patch4: audacity-2.0.6-non-dl-ffmpeg.patch
-Patch5: audacity-2.2.0-no-local-includes.patch
 
 Provides: audacity-nonfree = %{version}-%{release}
 Obsoletes: audacity-nonfree < %{version}-%{release}
@@ -71,7 +70,7 @@ BuildRequires: libvorbis-devel
 #BuildRequires: portaudio-devel >= 19-16
 #checking for PORTMIDI... no
 #configure: portmidi library is NOT available as system library
-BuildRequires: portmidi-devel
+#BuildRequires: portmidi-devel
 BuildRequires: soundtouch-devel
 BuildRequires: soxr-devel
 BuildRequires: vamp-plugin-sdk-devel >= 2.0
@@ -138,7 +137,6 @@ done
 
 %patch3 -p1 -b .desktop
 %patch4 -p1 -b .non-dl-ffmpeg
-%patch5 -p1 -b .nolocal
 
 # ensure we use the system headers for these, note we do this after
 # configure as it wants to run sub-configures in these dirs
@@ -284,6 +282,7 @@ update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
 - Readd libmp3lame-default.patch and libdir.patch
 - Readd to configure --disable-dynamic-loading
 - General review of spec
+- Comment BR portmidi-devel and remove no-local-includes.patch
 
 * Thu Feb 22 2018 Sérgio Basto <sergio@serjux.com> - 2.2.2-1
 - Update to 2.2.2
