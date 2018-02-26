@@ -144,7 +144,7 @@ done
 export WX_CONFIG=wx-config-3.0-gtk2
 %endif
 
-%if %{with compat_ffmpeg}
+%if %{with ffmpeg} && %{with compat_ffmpeg}
 export PKG_CONFIG_PATH=%{_libdir}/compat-ffmpeg28/pkgconfig
 %endif
 
@@ -238,25 +238,6 @@ cp -pr lib-src/libnyquist/nyquist/license.txt %{buildroot}%{_datadir}/doc/%{real
 cp -pr lib-src/libnyquist/nyquist/Readme.txt %{buildroot}%{_datadir}/doc/%{realname}/nyquist
 rm %{buildroot}%{_datadir}/doc/%{realname}/LICENSE.txt
 
-%post
-update-desktop-database &> /dev/null || :
-touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
-touch --no-create %{_datadir}/mime/packages &> /dev/null || :
-
-%postun
-update-desktop-database &> /dev/null || :
-if [ $1 -eq 0 ] ; then
-    touch --no-create %{_datadir}/icons/hicolor &>/dev/null
-    gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
-    touch --no-create %{_datadir}/mime/packages &> /dev/null || :
-    update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
-fi
-
-%posttrans
-gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
-update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
-
-
 %files -f %{realname}.lang
 %{_bindir}/%{realname}
 %dir %{_datadir}/%{realname}
@@ -276,6 +257,7 @@ update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
 %changelog
 * Mon Feb 26 2018 Sérgio Basto <sergio@serjux.com> - 2.2.2-3
 - Restore remove after configure
+- Remove obsolete scriptlets
 
 * Sun Feb 25 2018 Sérgio Basto <sergio@serjux.com> - 2.2.2-2
 - Use compat-ffmpeg28 on Fedora 28+
