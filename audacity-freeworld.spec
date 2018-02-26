@@ -15,7 +15,7 @@
 Name: audacity-freeworld
 
 Version: 2.2.2
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: Multitrack audio editor
 Group:   Applications/Multimedia
 License: GPLv2
@@ -138,18 +138,6 @@ done
 %patch3 -p1 -b .desktop
 %patch4 -p1 -b .non-dl-ffmpeg
 
-# ensure we use the system headers for these, note we do this after
-# configure as it wants to run sub-configures in these dirs
-#in ffmpeg FileDialog lame libnyquist libsndfile libsoxr libvamp lv2 portburn portmidi portmixer portsmf sbsms twolame; do
-
-# http://rglinuxtech.com/?p=2093
-#--enable-shared --with-ffmpeg --with-lame --with-libflac --with-libid3tag --with-libmad --with-libtwolame
-#--with-libvorbis --with-lv2 --with-portaudio=local --with-midi --with-portmidi
-
-for i in %{!?with_local_ffmpeg:ffmpeg} lame libsndfile libsoxr libvamp twolame; do
-   rm -r lib-src/$i
-done
-
 
 %build
 %if (0%{?fedora} && 0%{?fedora} < 28)
@@ -205,6 +193,17 @@ autoconf
 %else
     %{nil}
 %endif
+
+# http://rglinuxtech.com/?p=2093
+#--enable-shared --with-ffmpeg --with-lame --with-libflac --with-libid3tag --with-libmad --with-libtwolame
+#--with-libvorbis --with-lv2 --with-portaudio=local --with-midi --with-portmidi
+
+# ensure we use the system headers for these, note we do this after
+# configure as it wants to run sub-configures in these dirs
+#in ffmpeg FileDialog lame libnyquist libsndfile libsoxr libvamp lv2 portburn portmidi portmixer portsmf sbsms twolame; do
+for i in %{!?with_local_ffmpeg:ffmpeg} lame libsndfile libsoxr libvamp twolame; do
+   rm -r lib-src/$i
+done
 
 %make_build
 
@@ -275,8 +274,11 @@ update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
 
 
 %changelog
+* Mon Feb 26 2018 Sérgio Basto <sergio@serjux.com> - 2.2.2-3
+- Restore remove after configure
+
 * Sun Feb 25 2018 Sérgio Basto <sergio@serjux.com> - 2.2.2-2
-- Use compat-ffmpeg28
+- Use compat-ffmpeg28 on Fedora 28+
 - Also add conditionals to be possible build with local ffmpeg (not in use)
 - Use autoconf before ./configure
 - Readd libmp3lame-default.patch and libdir.patch
