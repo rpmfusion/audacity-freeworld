@@ -123,7 +123,6 @@ do
     diff $i.tmp $i -s || :
     rm $i.tmp
 done
-echo grep
 grep -q -s __RPM_LIB * -R && exit 1
 
 # Substitute occurences of "libmp3lame.so" with "libmp3lame.so.0".
