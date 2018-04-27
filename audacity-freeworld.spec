@@ -3,19 +3,13 @@
 %bcond_without  ffmpeg
 %bcond_with     local_ffmpeg
 
-%if 0%{?fedora} > 27
-%bcond_without  compat_ffmpeg
-%else
-%bcond_with     compat_ffmpeg
-%endif
-
 #global commit0 53a5c930a4b5b053ab06a8b975458fc51cf41f6c
 #global shortcommit0 #(c=#{commit0}; echo ${c:0:7})
 
 Name: audacity-freeworld
 
 Version: 2.2.2
-Release: 4%{?dist}
+Release: 5%{?dist}
 Summary: Multitrack audio editor
 Group:   Applications/Multimedia
 License: GPLv2
@@ -88,13 +82,7 @@ BuildRequires: lame-devel
 BuildRequires: libmad-devel
 %endif
 %if %{with ffmpeg}
-%if ! %{with local_ffmpeg}
-%if %{with compat_ffmpeg}
-BuildRequires: compat-ffmpeg28-devel
-%else
 BuildRequires: ffmpeg-devel
-%endif
-%endif
 %endif
 # For new symbols in portaudio
 Requires:      portaudio%{?_isa} >= 19-16
@@ -141,10 +129,6 @@ done
 %build
 %if (0%{?fedora} && 0%{?fedora} < 28)
 export WX_CONFIG=wx-config-3.0-gtk2
-%endif
-
-%if %{with ffmpeg} && %{with compat_ffmpeg}
-export PKG_CONFIG_PATH=%{_libdir}/compat-ffmpeg28/pkgconfig
 %endif
 
 aclocal -I m4
@@ -254,6 +238,9 @@ rm %{buildroot}%{_datadir}/doc/%{realname}/LICENSE.txt
 
 
 %changelog
+* Fri Apr 27 2018 Leigh Scott <leigh123linux@googlemail.com> - 2.2.2-5
+- Revert 'Use compat-ffmpeg28 on Fedora 28+'
+
 * Thu Mar 08 2018 RPM Fusion Release Engineering <leigh123linux@googlemail.com> - 2.2.2-4
 - Rebuilt for new ffmpeg snapshot
 
