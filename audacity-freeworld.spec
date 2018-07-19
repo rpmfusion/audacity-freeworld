@@ -15,7 +15,7 @@
 Name: audacity-freeworld
 
 Version: 2.2.2
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: Multitrack audio editor
 Group:   Applications/Multimedia
 License: GPLv2
@@ -254,6 +254,9 @@ rm %{buildroot}%{_datadir}/doc/%{realname}/LICENSE.txt
 
 
 %changelog
+* Thu Jul 19 2018 Leigh Scott <leigh123linux@googlemail.com> - 2.2.2-4
+- Rebuild for new soundtouch version
+
 * Mon Feb 26 2018 Sérgio Basto <sergio@serjux.com> - 2.2.2-3
 - Restore remove after configure
 - Remove obsolete scriptlets
