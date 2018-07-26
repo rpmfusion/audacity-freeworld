@@ -9,7 +9,7 @@
 Name: audacity-freeworld
 
 Version: 2.2.2
-Release: 5%{?dist}
+Release: 6%{?dist}
 Summary: Multitrack audio editor
 Group:   Applications/Multimedia
 License: GPLv2
@@ -238,6 +238,9 @@ rm %{buildroot}%{_datadir}/doc/%{realname}/LICENSE.txt
 
 
 %changelog
+* Thu Jul 26 2018 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 2.2.2-6
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
+
 * Fri Apr 27 2018 Leigh Scott <leigh123linux@googlemail.com> - 2.2.2-5
 - Revert 'Use compat-ffmpeg28 on Fedora 28+'
 
