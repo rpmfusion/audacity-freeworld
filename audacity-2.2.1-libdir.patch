@@ -5,7 +5,7 @@
     
     pathList.Add(wxGetHomeDir() + wxFILE_SEP_PATH + wxT(".ladspa"));
 -   pathList.Add(wxT("/usr/local/lib/ladspa"));
-+   pathList.Add(wxT("/usr/__RPM_LIB__/ladspa"));
++   pathList.Add(wxT("/usr/%{_lib}/ladspa"));
     pathList.Add(wxT("/usr/lib/ladspa"));
     pathList.Add(wxT(LIBDIR) wxT("/ladspa"));
  

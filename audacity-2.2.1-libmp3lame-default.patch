@@ -4,7 +4,7 @@
  
        //JKC: Would like to put module loading here.
  
-+      gPrefs->Write(wxT("/MP3/MP3LibPath"),wxT("__RPM_LIBDIR__/libmp3lame.so.0"));
++      gPrefs->Write(wxT("/MP3/MP3LibPath"),wxT("%{_libdir}/libmp3lame.so.0"));
 +
        // More initialization
  

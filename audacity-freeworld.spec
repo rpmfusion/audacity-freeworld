@@ -1,5 +1,5 @@
-# invoke with: rpmbuild --without mp3 audacity-freeworld.spec to undefine mp3.
-%bcond_without  mp3
+# Compile options:
+
 %bcond_without  ffmpeg
 %bcond_with     local_ffmpeg
 
@@ -8,8 +8,8 @@
 
 Name: audacity-freeworld
 
-Version: 2.2.2
-Release: 6%{?dist}
+Version: 2.3.0
+Release: 1%{?dist}
 Summary: Multitrack audio editor
 Group:   Applications/Multimedia
 License: GPLv2
@@ -23,8 +23,8 @@ Source0: http://www.fosshub.com/Audacity.html/%{realname}-minsrc-%{version}.tar.
 #Source0: https://github.com/audacity/#{realname}/archive/#{commit0}/#{realname}-#{commit0}.tar.gz
 # ie wget https://github.com/audacity/audacity/archive/ecdb1d81c9312789c6233aba2190572344b22188/audacity-ecdb1d81c9312789c6233aba2190572344b22188.tar.gz
 
-%define tartopdir audacity-minsrc-%{version}-rc1
-#define tartopdir audacity-%#{commit0}
+%define tartopdir audacity-minsrc-%{version}
+#define tartopdir audacity-#{commit0}
 
 # manual can be installed from the base Fedora Audacity package.
 
@@ -43,6 +43,8 @@ Obsoletes: audacity-nonfree < %{version}-%{release}
 BuildRequires: automake
 BuildRequires: autoconf
 BuildRequires: gettext-devel
+BuildRequires: gcc
+BuildRequires: gcc-c++
 BuildRequires: libtool
 BuildRequires: alsa-lib-devel
 BuildRequires: desktop-file-utils
@@ -51,8 +53,11 @@ BuildRequires: flac-devel
 BuildRequires: gettext
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: ladspa-devel
+BuildRequires: lame-devel
 BuildRequires: libid3tag-devel
+BuildRequires: libmad-devel
 BuildRequires: taglib-devel
+BuildRequires: twolame-devel
 BuildRequires: libogg-devel
 BuildRequires: libsndfile-devel
 BuildRequires: libvorbis-devel
@@ -76,11 +81,7 @@ BuildRequires: compat-wxGTK3-gtk2-devel
 %if 0%{?rhel} >= 8 || 0%{?fedora}
 BuildRequires: libappstream-glib
 %endif
-%if %{with mp3}
-BuildRequires: twolame-devel
-BuildRequires: lame-devel
-BuildRequires: libmad-devel
-%endif
+
 %if %{with ffmpeg}
 BuildRequires: ffmpeg-devel
 %endif
@@ -103,24 +104,14 @@ This build has support for mp3 and ffmpeg import/export.
 # Substitute hardcoded library paths.
 %patch1 -p1 -b .libmp3lame-default
 %patch2 -p1 -b .libdir
-for i in src/AudacityApp.cpp src/effects/ladspa/LadspaEffect.cpp
-do
-    cp $i $i.tmp
-    sed -i -e 's!__RPM_LIBDIR__!%{_libdir}!g' $i
-    sed -i -e 's!__RPM_LIB__!%{_lib}!g' $i
-    diff $i.tmp $i -s || :
-    rm $i.tmp
-done
-grep -q -s __RPM_LIB * -R && exit 1
+grep  -s __RPM_LIB * -R && exit 1
 
 # Substitute occurences of "libmp3lame.so" with "libmp3lame.so.0".
 for i in locale/*.po src/export/ExportMP3.cpp
 do
-    cp $i $i.tmp
     sed -i -e 's!libmp3lame.so\([^.]\)!libmp3lame.so.0\1!g' $i
-    diff $i.tmp $i -s || :
-    rm $i.tmp
 done
+grep -q -s libmp3lame.so\| * -R && exit 1
 
 %patch3 -p1 -b .desktop
 %patch4 -p1 -b .non-dl-ffmpeg
@@ -130,6 +121,8 @@ done
 %if (0%{?fedora} && 0%{?fedora} < 28)
 export WX_CONFIG=wx-config-3.0-gtk2
 %endif
+
+export PKG_CONFIG_PATH=%{_libdir}/compat-ffmpeg28/pkgconfig
 
 aclocal -I m4
 autoconf
@@ -144,10 +137,13 @@ autoconf
     --with-libsoxr=system \
     --without-libresample \
     --without-libsamplerate \
+    --with-lame=system \
+    --with-libmad=system \
+    --with-libtwolame=system \
     --with-libflac=system \
     --with-ladspa \
     --with-vorbis=system \
-    --with-id3tag=system \
+    --with-libid3tag=system \
     --with-expat=system \
     --with-soundtouch=system \
     --with-libvamp=system \
@@ -162,22 +158,13 @@ autoconf
 %else
     --without-ffmpeg \
 %endif
-%if %{with mp3}
-    --with-libmad=system \
-    --with-libtwolame=system \
-    --with-lame=system \
-%else
-    --without-libmad \
-    --without-libtwolame \
-    --without-lame \
-%endif
 %ifnarch %{ix86} x86_64
     --disable-sse \
 %else
     %{nil}
 %endif
 
-# http://rglinuxtech.com/?p=2093
+# portaudio use local: http://rglinuxtech.com/?p=2093
 #--enable-shared --with-ffmpeg --with-lame --with-libflac --with-libid3tag --with-libmad --with-libtwolame
 #--with-libvorbis --with-lv2 --with-portaudio=local --with-midi --with-portmidi
 
@@ -238,6 +225,14 @@ rm %{buildroot}%{_datadir}/doc/%{realname}/LICENSE.txt
 
 
 %changelog
+* Mon Oct  1 2018 David Timms <iinet.net.au@dtimms> - 2.3.0-1
+- Update to Audacity 2.3.0 release.
+- change mp3 capability to be always present rather than a compile option.
+- Modify audacity-2.2.1-libdir.patch and audacity-2.2.1-libmp3lame-default.patch
+    to apply the rpm macro path directly.
+- Add grep check to fail if RPMLIB is found in modified source.
+- Fix libid3tag configure option.
+
 * Thu Jul 26 2018 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 2.2.2-6
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
 
