@@ -233,9 +233,6 @@ rm %{buildroot}%{_datadir}/doc/%{realname}/LICENSE.txt
 - Add grep check to fail if RPMLIB is found in modified source.
 - Fix libid3tag configure option.
 
-* Thu Jul 26 2018 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 2.2.2-6
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
-
 * Fri Apr 27 2018 Leigh Scott <leigh123linux@googlemail.com> - 2.2.2-5
 - Revert 'Use compat-ffmpeg28 on Fedora 28+'
 
