@@ -1,9 +1,8 @@
 Name: audacity-freeworld
 
 Version: 2.0.6
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Multitrack audio editor
-Group:   Applications/Multimedia
 License: GPLv2
 URL:     http://audacity.sourceforge.net
 
@@ -34,6 +33,7 @@ BuildRequires: desktop-file-utils
 BuildRequires: expat-devel
 BuildRequires: flac-devel
 BuildRequires: gettext
+BuildRequires: gcc, gcc-c++
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: ladspa-devel
 BuildRequires: libid3tag-devel
@@ -110,6 +110,7 @@ export PKG_CONFIG_PATH=%{_libdir}/ffmpeg-compat/pkgconfig/
     --with-libmad=system \
     --with-libtwolame=system \
     --with-lame=system \
+    --docdir=%{_pkgdocdir} \
 %ifnarch %{ix86} x86_64
     --disable-sse \
 %else
@@ -141,6 +142,7 @@ desktop-file-install --dir $RPM_BUILD_ROOT%{_datadir}/applications \
 %endif
         $RPM_BUILD_ROOT%{_datadir}/applications/audacity.desktop
 
+rm -f $RPM_BUILD_ROOT%{_pkgdocdir}/LICENSE.txt
 
 %post
 umask 022
@@ -177,11 +179,16 @@ update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
 %{_datadir}/pixmaps/*
 %{_datadir}/icons/hicolor/*/apps/%{realname}.*
 %{_datadir}/mime/packages/*
-%doc %{_datadir}/doc/*
-%doc lib-src/libnyquist/nyquist/license.txt lib-src/libnyquist/nyquist/Readme.txt
+%license lib-src/libnyquist/nyquist/license.txt LICENSE.txt
+%{_pkgdocdir}/
 
 
 %changelog
+* Tue Nov 13 2018 Antonio Trande <sagitter@fedoraproject.org> - 2.0.6-2
+- Rebuild for ffmpeg-3.4.5 on el7
+- Use %%license tag
+- Use %%{_pkgdocdir}
+
 * Mon Jan 12 2015 David Timms <iinet.net.au@dtimms> - 2.0.6-1
 - update to upstream release 2.0.6
 - update non-dl-ffmpeg.patch to match this version
