@@ -11,9 +11,8 @@ Name: audacity-freeworld
 Version: 2.3.0
 Release: 1%{?dist}
 Summary: Multitrack audio editor
-Group:   Applications/Multimedia
 License: GPLv2
-URL:     http://audacity.sourceforge.net
+URL:     https://www.audacityteam.org
 
 %define realname audacity
 Conflicts: %{realname}
