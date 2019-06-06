@@ -1,0 +1,11 @@
+--- ./src/effects/ladspa/LadspaEffect.cpp	2019-05-05 21:08:56.000000000 +1000
++++ ./src/effects/ladspa/LadspaEffect.cpp.orig	2019-06-03 21:45:30.059886205 +1000
+@@ -358,7 +358,7 @@
+ #else
+    
+    pathList.push_back(wxGetHomeDir() + wxFILE_SEP_PATH + wxT(".ladspa"));
+-   pathList.push_back(wxT("/usr/local/lib/ladspa"));
++   pathList.push_back(wxT("/usr/%{_lib}/ladspa"));
+    pathList.push_back(wxT("/usr/lib/ladspa"));
+    pathList.push_back(wxT(LIBDIR) wxT("/ladspa"));
+ 
