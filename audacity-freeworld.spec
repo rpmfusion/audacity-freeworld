@@ -8,7 +8,7 @@
 
 Name: audacity-freeworld
 
-Version: 2.3.1
+Version: 2.3.2
 Release: 1%{?dist}
 Summary: Multitrack audio editor
 License: GPLv2
@@ -28,7 +28,7 @@ Source0: http://www.fosshub.com/Audacity.html/%{realname}-minsrc-%{version}.tar.
 # manual can be installed from the base Fedora Audacity package.
 
 Patch1: audacity-2.2.1-libmp3lame-default.patch
-Patch2: audacity-2.2.1-libdir.patch
+Patch2: audacity-2.3.2-libdir.patch
 # add audio/x-flac
 # remove audio/mpeg, audio/x-mp3
 # enable startup notification
@@ -62,7 +62,8 @@ BuildRequires: libsndfile-devel
 BuildRequires: libvorbis-devel
 #checking for LV2... no
 #configure: LV2 libraries are NOT available as system libraries
-#BuildRequires: lv2-devel
+#fresh check for system libraries:
+BuildRequires: lv2-devel
 # system portaudio fails to build
 # http://rglinuxtech.com/?p=2093
 #BuildRequires: portaudio-devel >= 19-16
@@ -224,6 +225,10 @@ rm %{buildroot}%{_datadir}/doc/%{realname}/LICENSE.txt
 
 
 %changelog
+* Tue Jun  4 2019 David Timms <iinet.net.au@dtimms> - 2.3.2-1
+- Update to Audacity 2.3.2 release.
+- Rebase audacity-2.3.2-libdir.patch.
+
 * Mon Mar 18 2019 Leigh Scott <leigh123linux@googlemail.com> - 2.3.1-1
 - Update to Audacity 2.3.1 release
 - Fixes Audacity 2.3.0 broken release (rfbz#5077)
