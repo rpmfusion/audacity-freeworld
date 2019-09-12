@@ -80,6 +80,7 @@ BuildRequires: zlib-devel
 BuildRequires: compat-wxGTK3-gtk2-devel
 %if 0%{?rhel} >= 8 || 0%{?fedora}
 BuildRequires: libappstream-glib
+BuildRequires: python2
 %endif
 
 %if %{with ffmpeg}
