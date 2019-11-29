@@ -134,9 +134,8 @@ export WX_CONFIG=wx-config-3.0-gtk2
 export WX_CONFIG=wx-config-3.0
 %endif
 
-%if %{with ffmpeg} && %{with compat_ffmpeg}
 export PKG_CONFIG_PATH=%{_libdir}/compat-ffmpeg28/pkgconfig
-%endif
+
 
 %if 0%{?rhel} == 7
 . /opt/rh/devtoolset-7/enable
