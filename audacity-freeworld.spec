@@ -8,8 +8,8 @@
 
 Name: audacity-freeworld
 
-Version: 2.3.2
-Release: 2%{?dist}
+Version: 2.3.3
+Release: 1%{?dist}
 Summary: Multitrack audio editor
 License: GPLv2
 URL:     https://www.audacityteam.org
@@ -28,7 +28,7 @@ Source0: http://www.fosshub.com/Audacity.html/%{realname}-minsrc-%{version}.tar.
 # manual can be installed from the base Fedora Audacity package.
 
 Patch1: audacity-2.2.1-libmp3lame-default.patch
-Patch2: audacity-2.3.2-libdir.patch
+Patch2: audacity-2.3.3-libdir.patch
 # add audio/x-flac
 # remove audio/mpeg, audio/x-mp3
 # enable startup notification
@@ -42,6 +42,9 @@ Obsoletes: audacity-nonfree < %{version}-%{release}
 BuildRequires: automake
 BuildRequires: autoconf
 BuildRequires: gettext-devel
+%if 0%{?rhel} == 7
+BuildRequires: devtoolset-7-toolchain, devtoolset-7-libatomic-devel
+%endif
 BuildRequires: gcc
 BuildRequires: gcc-c++
 BuildRequires: libtool
@@ -56,7 +59,11 @@ BuildRequires: lame-devel
 BuildRequires: libid3tag-devel
 BuildRequires: libmad-devel
 BuildRequires: taglib-devel
+%if 0%{?rhel} && 0%{?rhel} == 8
+#note: epel-8 currently doesn't have twolame-devel.
+%else
 BuildRequires: twolame-devel
+%endif
 BuildRequires: libogg-devel
 BuildRequires: libsndfile-devel
 BuildRequires: libvorbis-devel
@@ -75,12 +82,13 @@ BuildRequires: soxr-devel
 BuildRequires: vamp-plugin-sdk-devel >= 2.0
 BuildRequires: zip
 BuildRequires: zlib-devel
+BuildRequires: python2
 #BuildRequires: wxGTK3-devel
 # But we will actually use the --toolkit=gtk2 version using --with-wx-version
-BuildRequires: compat-wxGTK3-gtk2-devel
+#BuildRequires: compat-wxGTK3-gtk2-devel
+BuildRequires: wxGTK3-devel
 %if 0%{?rhel} >= 8 || 0%{?fedora}
 BuildRequires: libappstream-glib
-BuildRequires: python2
 %endif
 
 %if %{with ffmpeg}
@@ -122,8 +130,17 @@ grep -q -s libmp3lame.so\| * -R && exit 1
 %if (0%{?fedora} && 0%{?fedora} < 28)
 export WX_CONFIG=wx-config-3.0-gtk2
 %endif
+%if 0%{?rhel} == 7
+export WX_CONFIG=wx-config-3.0
+%endif
 
+%if %{with ffmpeg} && %{with compat_ffmpeg}
 export PKG_CONFIG_PATH=%{_libdir}/compat-ffmpeg28/pkgconfig
+%endif
+
+%if 0%{?rhel} == 7
+. /opt/rh/devtoolset-7/enable
+%endif
 
 aclocal -I m4
 autoconf
@@ -140,7 +157,11 @@ autoconf
     --without-libsamplerate \
     --with-lame=system \
     --with-libmad=system \
+%if 0%{?rhel} == 8
+    --without-libtwolame \
+%else
     --with-libtwolame=system \
+%endif
     --with-libflac=system \
     --with-ladspa \
     --with-vorbis=system \
@@ -226,6 +247,13 @@ rm %{buildroot}%{_datadir}/doc/%{realname}/LICENSE.txt
 
 
 %changelog
+* Sat Nov 23 2019 David Timms <iinet.net.au@dtimms> - 2.3.3-1
+- Update to Audacity 2.3.3.
+- Modify wxWidgets build require to wxGTK3 (gtk3 version).
+- Modify libdir patch for 2.3.3.
+- Fix -manual file archive dropping the leading help/ in path.
+- Disable twolame for EPEL-8 as the -devel package isn't available.
+
 * Wed Aug 07 2019 Leigh Scott <leigh123linux@gmail.com> - 2.3.2-2
 - Rebuild for new ffmpeg version
 
