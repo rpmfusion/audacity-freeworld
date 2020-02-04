@@ -9,7 +9,7 @@
 Name: audacity-freeworld
 
 Version: 2.3.3
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Multitrack audio editor
 License: GPLv2
 URL:     https://www.audacityteam.org
@@ -247,6 +247,9 @@ rm %{buildroot}%{_datadir}/doc/%{realname}/LICENSE.txt
 
 
 %changelog
+* Tue Feb 04 2020 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 2.3.3-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
+
 * Sat Nov 23 2019 David Timms <iinet.net.au@dtimms> - 2.3.3-1
 - Update to Audacity 2.3.3.
 - Modify wxWidgets build require to wxGTK3 (gtk3 version).
