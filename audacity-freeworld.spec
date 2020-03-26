@@ -9,7 +9,7 @@
 Name: audacity-freeworld
 
 Version: 2.3.3
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: Multitrack audio editor
 License: GPLv2
 URL:     https://www.audacityteam.org
@@ -35,6 +35,8 @@ Patch2: audacity-2.3.3-libdir.patch
 # add categories Sequencer X-Jack AudioVideoEditing for F-12 Studio feature
 Patch3: audacity-2.0.2-desktop.in.patch
 Patch4: audacity-2.0.6-non-dl-ffmpeg.patch
+# Based on https://github.com/audacity/audacity/commit/bd6ec9c0ed9fe94ae2f6e171969ae8a9fe45c11d
+Patch5: Fix-gcc-10-compile-issue.patch
 
 Provides: audacity-nonfree = %{version}-%{release}
 Obsoletes: audacity-nonfree < %{version}-%{release}
@@ -124,6 +126,7 @@ grep -q -s libmp3lame.so\| * -R && exit 1
 
 %patch3 -p1 -b .desktop
 %patch4 -p1 -b .non-dl-ffmpeg
+%patch5 -p1 -b .gcc10
 
 
 %build
@@ -247,6 +250,9 @@ rm %{buildroot}%{_datadir}/doc/%{realname}/LICENSE.txt
 
 
 %changelog
+* Thu Mar 26 2020 leigh123linux <leigh123linux@googlemail.com> - 2.3.3-3
+- Fix gcc-10 compile issue
+
 * Tue Feb 04 2020 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 2.3.3-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
 
