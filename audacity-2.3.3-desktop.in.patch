@@ -1,6 +1,6 @@
---- ./src/audacity.desktop.in.orig	2018-02-11 03:16:28.828537405 +0000
-+++ ./src/audacity.desktop.in	2018-02-11 03:18:24.112709701 +0000
-@@ -16,7 +16,7 @@ GenericName[ru]=Редактор зву�
+--- src/audacity.desktop.in.original	2020-05-03 12:35:11.935438397 +0100
++++ src/audacity.desktop.in	2020-05-03 12:49:40.221602525 +0100
+@@ -20,7 +20,7 @@
  GenericName[uk]=Редактор звукових файлів
  GenericName[zh_CN]=音频编辑器
  GenericName[zh_TW]=音訊編輯器
@@ -9,14 +9,15 @@
  Comment[ar]=سجل و حرر ملفات صوت
  Comment[ca]=Enregistreu i editeu els fitxers d'àudio
  Comment[da]=Optag og rediger lydfiler
-@@ -36,9 +36,9 @@ Comment[zh_TW]=錄音和編輯音訊檔�
+@@ -44,9 +44,9 @@
  Icon=@AUDACITY_NAME@
  
  Type=Application
 -Categories=AudioVideo;Audio;AudioVideoEditing;
 +Categories=AudioVideo;Audio;GTK;GNOME;Sequencer;X-Jack;AudioVideoEditing;
  
- Exec=env UBUNTU_MENUPROXY=0 @AUDACITY_NAME@ %F
+-Exec=env UBUNTU_MENUPROXY=0 @AUDACITY_NAME@ %F
++Exec=env GDK_BACKEND=x11 UBUNTU_MENUPROXY=0 @AUDACITY_NAME@ %F
  StartupNotify=false
  Terminal=false
 -MimeType=application/x-audacity-project;@MIMETYPES@

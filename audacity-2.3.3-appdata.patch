@@ -1,0 +1,12 @@
+--- help/audacity.appdata.xml.orig	2018-11-02 16:56:11.000000000 +0000
++++ help/audacity.appdata.xml	2020-06-15 10:47:33.359600935 +0100
+@@ -1,7 +1,8 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <component type="desktop">
+   <id>org.audacityteam.Audacity</id>
+-  <launchable type="desktop">audacity.desktop</launchable>
++  <launchable type="desktop-id">audacity.desktop</launchable>
++  <content_rating type="oars-1.1" />
+   <project_license>GPL-2.0 and CC-BY-3.0</project_license>
+   <metadata_license>CC0-1.0</metadata_license>
+   <name>Audacity</name>
