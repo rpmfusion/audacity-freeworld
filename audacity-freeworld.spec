@@ -257,7 +257,7 @@ rm %{buildroot}%{_datadir}/doc/%{realname}/LICENSE.txt
 %changelog
 * Wed Sep 02 2020 Leigh Scott <leigh123linux@gmail.com> - 2.3.3-5
 - Add GDK_BACKEND=x11 to audacity.desktop exec line (rfbz#5551)
-- Fix incorrect appdata.xml type tag (rfbz#5679)
+- Fix incorrect appdata.xml type tag (bug #1810509)
 
 * Mon Aug 17 2020 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 2.3.3-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
