@@ -9,7 +9,7 @@
 Name: audacity-freeworld
 
 Version: 2.3.3
-Release: 1%{?dist}
+Release: 5%{?dist}
 Summary: Multitrack audio editor
 License: GPLv2
 URL:     https://www.audacityteam.org
@@ -29,12 +29,18 @@ Source0: http://www.fosshub.com/Audacity.html/%{realname}-minsrc-%{version}.tar.
 
 Patch1: audacity-2.2.1-libmp3lame-default.patch
 Patch2: audacity-2.3.3-libdir.patch
-# add audio/x-flac
+# add audio/x-flac (bug #557335)
 # remove audio/mpeg, audio/x-mp3
-# enable startup notification
 # add categories Sequencer X-Jack AudioVideoEditing for F-12 Studio feature
-Patch3: audacity-2.0.2-desktop.in.patch
+# Add GDK_BACKEND=x11 to exec line (bug #1798987)
+Patch3: audacity-2.3.3-desktop.in.patch
 Patch4: audacity-2.0.6-non-dl-ffmpeg.patch
+# Based on https://github.com/audacity/audacity/commit/bd6ec9c0ed9fe94ae2f6e171969ae8a9fe45c11d
+Patch5: Fix-gcc-10-compile-issue.patch
+# Fix launchable type in the appdata file (BZ #1810509)
+# This has been fixed by upstream in version 2.4.2
+Patch6: audacity-2.3.3-appdata.patch
+ 
 
 Provides: audacity-nonfree = %{version}-%{release}
 Obsoletes: audacity-nonfree < %{version}-%{release}
@@ -122,8 +128,10 @@ do
 done
 grep -q -s libmp3lame.so\| * -R && exit 1
 
-%patch3 -p1 -b .desktop
+%patch3 -b .desktop
 %patch4 -p1 -b .non-dl-ffmpeg
+%patch5 -p1 -b .gcc10
+%patch6 -b .appdata
 
 
 %build
@@ -212,7 +220,7 @@ if appstream-util --help | grep -q replace-screenshots ; then
 # See http://people.freedesktop.org/~hughsient/appdata/#screenshots for more details.
 #
 appstream-util replace-screenshots $RPM_BUILD_ROOT%{_datadir}/appdata/audacity.appdata.xml \
-  https://raw.githubusercontent.com/hughsie/fedora-appstream/master/screenshots-extra/audacity/a.png 
+  https://raw.githubusercontent.com/hughsie/fedora-appstream/master/screenshots-extra/audacity/a.png
 fi
 %endif
 
@@ -246,6 +254,19 @@ rm %{buildroot}%{_datadir}/doc/%{realname}/LICENSE.txt
 
 
 %changelog
+* Wed Sep 02 2020 Leigh Scott <leigh123linux@gmail.com> - 2.3.3-5
+- Add GDK_BACKEND=x11 to audacity.desktop exec line (rfbz#5551)
+- Fix incorrect appdata.xml type tag (bug #1810509)
+
+* Mon Aug 17 2020 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 2.3.3-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
+
+* Thu Mar 26 2020 leigh123linux <leigh123linux@googlemail.com> - 2.3.3-3
+- Fix gcc-10 compile issue
+
+* Tue Feb 04 2020 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 2.3.3-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
+
 * Sat Nov 23 2019 David Timms <iinet.net.au@dtimms> - 2.3.3-1
 - Update to Audacity 2.3.3.
 - Modify wxWidgets build require to wxGTK3 (gtk3 version).
