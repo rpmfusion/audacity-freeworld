@@ -74,6 +74,7 @@ BuildRequires: lilv-devel
 #configure: LV2 libraries are NOT available as system libraries
 #fresh check for system libraries:
 BuildRequires: lv2-devel
+BuildRequires: nasm
 # system portaudio fails to build
 # http://rglinuxtech.com/?p=2093
 BuildRequires: portaudio-devel >= 19-16
