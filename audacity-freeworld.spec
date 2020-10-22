@@ -8,8 +8,8 @@
 
 Name: audacity-freeworld
 
-Version: 2.3.3
-Release: 5%{?dist}
+Version: 2.4.2
+Release: 1%{?dist}
 Summary: Multitrack audio editor
 License: GPLv2
 URL:     https://www.audacityteam.org
@@ -27,33 +27,33 @@ Source0: http://www.fosshub.com/Audacity.html/%{realname}-minsrc-%{version}.tar.
 
 # manual can be installed from the base Fedora Audacity package.
 
-Patch1: audacity-2.2.1-libmp3lame-default.patch
-Patch2: audacity-2.3.3-libdir.patch
 # add audio/x-flac (bug #557335)
 # remove audio/mpeg, audio/x-mp3
 # add categories Sequencer X-Jack AudioVideoEditing for F-12 Studio feature
 # Add GDK_BACKEND=x11 to exec line (bug #1798987)
-Patch3: audacity-2.3.3-desktop.in.patch
-Patch4: audacity-2.0.6-non-dl-ffmpeg.patch
-# Based on https://github.com/audacity/audacity/commit/bd6ec9c0ed9fe94ae2f6e171969ae8a9fe45c11d
-Patch5: Fix-gcc-10-compile-issue.patch
-# Fix launchable type in the appdata file (BZ #1810509)
-# This has been fixed by upstream in version 2.4.2
-Patch6: audacity-2.3.3-appdata.patch
- 
+Patch0: audacity-2.3.3-desktop.in.patch
+#fix build with system portaudio
+Patch1:		audacity-2.3.3-Fix-building-against-the-system-portaudio-library.patch
+# add missed revision ident (to be derived from git)
+# use:
+# cd src; git show -s --format="#define REV_LONG \"%H\"%n#define REV_TIME \"%cd\"%n" | tee ../src/RevisionIdent.h
+Patch2:		audacity-2.4.2-provide-missed-RevisionIdent.patch
+# Fix libmp3lame detection from cmake
+Patch3:	audacity-2.4.2-fix-libmp3lame-as-system.patch
+# Fix portmidi detection from cmake
+Patch4: audacity-2.4.2-fix-portmidi-as-system.patch
 
 Provides: audacity-nonfree = %{version}-%{release}
 Obsoletes: audacity-nonfree < %{version}-%{release}
 
-BuildRequires: automake
-BuildRequires: autoconf
+BuildRequires: cmake3
 BuildRequires: gettext-devel
 %if 0%{?rhel} == 7
 BuildRequires: devtoolset-7-toolchain, devtoolset-7-libatomic-devel
 %endif
 BuildRequires: gcc
 BuildRequires: gcc-c++
-BuildRequires: libtool
+BuildRequires: ninja-build
 BuildRequires: alsa-lib-devel
 BuildRequires: desktop-file-utils
 BuildRequires: expat-devel
@@ -65,14 +65,11 @@ BuildRequires: lame-devel
 BuildRequires: libid3tag-devel
 BuildRequires: libmad-devel
 BuildRequires: taglib-devel
-%if 0%{?rhel} && 0%{?rhel} == 8
-#note: epel-8 currently doesn't have twolame-devel.
-%else
 BuildRequires: twolame-devel
-%endif
 BuildRequires: libogg-devel
 BuildRequires: libsndfile-devel
 BuildRequires: libvorbis-devel
+BuildRequires: lilv-devel
 #checking for LV2... no
 #configure: LV2 libraries are NOT available as system libraries
 #fresh check for system libraries:
@@ -83,15 +80,17 @@ BuildRequires: portaudio-devel >= 19-16
 #checking for PORTMIDI... no
 #configure: portmidi library is NOT available as system library
 BuildRequires: portmidi-devel
+BuildRequires: python3
+BuildRequires: serd-devel
+BuildRequires: sord-devel
 BuildRequires: soundtouch-devel
 BuildRequires: soxr-devel
+BuildRequires: sratom-devel
+BuildRequires: suil-devel
 BuildRequires: vamp-plugin-sdk-devel >= 2.0
 BuildRequires: zip
 BuildRequires: zlib-devel
 BuildRequires: python2
-#BuildRequires: wxGTK3-devel
-# But we will actually use the --toolkit=gtk2 version using --with-wx-version
-#BuildRequires: compat-wxGTK3-gtk2-devel
 BuildRequires: wxGTK3-devel
 %if 0%{?rhel} >= 8 || 0%{?fedora}
 BuildRequires: libappstream-glib
@@ -116,101 +115,43 @@ This build has support for mp3 and ffmpeg import/export.
 %prep
 %setup -q -n %{tartopdir}
 
-# Substitute hardcoded library paths.
-%patch1 -p1 -b .libmp3lame-default
-%patch2 -p1 -b .libdir
-grep  -s __RPM_LIB * -R && exit 1
-
-# Substitute occurences of "libmp3lame.so" with "libmp3lame.so.0".
-for i in locale/*.po src/export/ExportMP3.cpp
-do
-    sed -i -e 's!libmp3lame.so\([^.]\)!libmp3lame.so.0\1!g' $i
-done
-grep -q -s libmp3lame.so\| * -R && exit 1
-
-%patch3 -b .desktop
-%patch4 -p1 -b .non-dl-ffmpeg
-%patch5 -p1 -b .gcc10
-%patch6 -b .appdata
+%patch0 -b .desktop
+%patch1 -p1 -b .system-portaudio
+%patch2 -p1 -b .revision-ident
+%patch3 -p1 -b .pkgconfig
+%patch4 -p1 -b .pkgconfig
 
 
 %build
-%if (0%{?fedora} && 0%{?fedora} < 28)
-export WX_CONFIG=wx-config-3.0-gtk2
-%endif
 %if 0%{?rhel} == 7
 export WX_CONFIG=wx-config-3.0
-%endif
-
-%if %{with ffmpeg} && %{with compat_ffmpeg}
-export PKG_CONFIG_PATH=%{_libdir}/compat-ffmpeg28/pkgconfig
 %endif
 
 %if 0%{?rhel} == 7
 . /opt/rh/devtoolset-7/enable
 %endif
 
-aclocal -I m4
-autoconf
+# fix system lame detection
+export PKG_CONFIG_PATH=$(pwd):$PKG_CONFIG_PATH
 
-%configure \
-    --disable-dynamic-loading \
-    --with-help \
-%if (0%{?fedora} && 0%{?fedora} < 28)
-    --with-wx-version=3.0-gtk2 \
-%endif
-    --with-libsndfile=system \
-    --with-libsoxr=system \
-    --without-libresample \
-    --without-libsamplerate \
-    --with-lame=system \
-    --with-libmad=system \
-%if 0%{?rhel} == 8
-    --without-libtwolame \
-%else
-    --with-libtwolame=system \
-%endif
-    --with-libflac=system \
-    --with-ladspa \
-    --with-vorbis=system \
-    --with-libid3tag=system \
-    --with-expat=system \
-    --with-soundtouch=system \
-    --with-libvamp=system \
-    --with-lv2 \
-    --with-portaudio=local \
-    --with-midi \
-    --with-portmidi \
+%cmake3 -GNinja \
 %if %{with ffmpeg}
 %if ! %{with local_ffmpeg}
-    --with-ffmpeg=system \
+    -Daudacity_use_ffmpeg=linked \
 %endif
 %else
-    --without-ffmpeg \
+    -Daudacity_use_ffmpeg=off \
 %endif
 %ifnarch %{ix86} x86_64
-    --disable-sse \
-%else
-    %{nil}
+    -DHAVE_SSE=OFF \
+    -DHAVE_SSE2=OFF \
 %endif
 
-# portaudio use local: http://rglinuxtech.com/?p=2093
-#--enable-shared --with-ffmpeg --with-lame --with-libflac --with-libid3tag --with-libmad --with-libtwolame
-#--with-libvorbis --with-lv2 --with-portaudio=local --with-midi --with-portmidi
-
-# ensure we use the system headers for these, note we do this after
-# configure as it wants to run sub-configures in these dirs
-#in ffmpeg FileDialog lame libnyquist libsndfile libsoxr libvamp lv2 portburn portmidi portmixer portsmf sbsms twolame; do
-for i in %{!?with_local_ffmpeg:ffmpeg} lame libsndfile libsoxr libvamp twolame; do
-   rm -r lib-src/$i
-done
-
-%make_build
+%cmake3_build
 
 
 %install
-%make_install
-rm -Rf $RPM_BUILD_ROOT%{_datadir}/%{realname}/include
+%cmake3_install
 
 %if 0%{?rhel} >= 8 || 0%{?fedora}
 if appstream-util --help | grep -q replace-screenshots ; then
@@ -228,9 +169,6 @@ fi
 %{find_lang} %{realname}
 
 desktop-file-install --dir $RPM_BUILD_ROOT%{_datadir}/applications \
-%if 0%{?fedora} && 0%{?fedora} < 19
-        --vendor fedora --delete-original                          \
-%endif
         $RPM_BUILD_ROOT%{_datadir}/applications/audacity.desktop
 
 mkdir %{buildroot}%{_datadir}/doc/%{realname}/nyquist
@@ -238,10 +176,12 @@ cp -pr lib-src/libnyquist/nyquist/license.txt %{buildroot}%{_datadir}/doc/%{real
 cp -pr lib-src/libnyquist/nyquist/Readme.txt %{buildroot}%{_datadir}/doc/%{realname}/nyquist
 rm %{buildroot}%{_datadir}/doc/%{realname}/LICENSE.txt
 
+
 %files -f %{realname}.lang
 %{_bindir}/%{realname}
 %dir %{_datadir}/%{realname}
 %{_datadir}/%{realname}/EQDefaultCurves.xml
+%{_datadir}/%{realname}/modules/
 %{_datadir}/%{realname}/nyquist/
 %{_datadir}/%{realname}/plug-ins/
 %{_mandir}/man*/*
@@ -249,12 +189,16 @@ rm %{buildroot}%{_datadir}/doc/%{realname}/LICENSE.txt
 %{_datadir}/appdata/%{realname}.appdata.xml
 %{_datadir}/pixmaps/*
 %{_datadir}/icons/hicolor/*/apps/%{realname}.*
+%{_datadir}/icons/hicolor/*/%{realname}.*
 %{_datadir}/mime/packages/*
 %{_datadir}/doc/%{realname}
 %license LICENSE.txt
 
 
 %changelog
+* Wed Oct 21 2020 Leigh Scott <leigh123linux@gmail.com> - 2.4.2-1
+- Update to Audacity 2.4.2
+
 * Wed Sep 02 2020 Leigh Scott <leigh123linux@gmail.com> - 2.3.3-5
 - Add GDK_BACKEND=x11 to audacity.desktop exec line (rfbz#5551)
 - Fix incorrect appdata.xml type tag (bug #1810509)

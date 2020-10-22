@@ -1,0 +1,14 @@
+--- audacity-minsrc-2.4.2/portmidi.pc.pkgconfig
++++ audacity-minsrc-2.4.2/portmidi.pc
+@@ -0,0 +1,11 @@
++prefix=/usr
++exec_prefix=/usr
++libdir=${exec_prefix}/lib64
++includedir=${prefix}/include
++
++Name: portmidi
++Description: Portmedia PortMidi library
++Requires: 
++Version: 0.1
++Libs: -L${libdir} -lportmidi
++Cflags: -I${includedir}

@@ -1,0 +1,16 @@
+5diff -up audacity-minsrc-2.4.2/lame.pc.pkgconfig audacity-minsrc-2.4.2/lame.pc
+--- audacity-minsrc-2.4.2/lame.pc.pkgconfig	2020-06-30 12:56:27.217655068 +0200
++++ audacity-minsrc-2.4.2/lame.pc	2020-06-30 12:56:27.216655059 +0200
+@@ -0,0 +1,12 @@
++prefix=/usr
++exec_prefix=/usr
++libdir=${exec_prefix}/lib64
++includedir=${prefix}/include/lame
++
++Name: lame
++Description: High quality MPEG Audio Layer III (MP3) encoder
++URL: http://lame.sourceforge.net
++Version: 3.100
++Libs: -L${libdir} -lmp3lame
++Libs.private: -lm
++Cflags: -I${includedir}
