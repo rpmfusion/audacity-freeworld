@@ -9,7 +9,7 @@
 Name: audacity-freeworld
 
 Version: 2.4.2
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Multitrack audio editor
 License: GPLv2
 URL:     https://www.audacityteam.org
@@ -197,6 +197,9 @@ rm %{buildroot}%{_datadir}/doc/%{realname}/LICENSE.txt
 
 
 %changelog
+* Fri Jan  1 2021 Leigh Scott <leigh123linux@gmail.com> - 2.4.2-2
+- Rebuilt for new ffmpeg snapshot
+
 * Wed Oct 21 2020 Leigh Scott <leigh123linux@gmail.com> - 2.4.2-1
 - Update to Audacity 2.4.2
 
