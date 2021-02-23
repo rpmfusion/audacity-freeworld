@@ -67,11 +67,7 @@ BuildRequires: lame-devel
 BuildRequires: libid3tag-devel
 BuildRequires: libmad-devel
 BuildRequires: taglib-devel
-%if 0%{?rhel} && 0%{?rhel} == 8
-#note: epel-8 currently doesn't have twolame-devel.
-%else
 BuildRequires: twolame-devel
-%endif
 BuildRequires: libogg-devel
 BuildRequires: libsndfile-devel
 BuildRequires: libvorbis-devel
