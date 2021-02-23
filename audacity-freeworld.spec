@@ -1,5 +1,5 @@
 # Compile options:
-
+# invoke with: rpmbuild --with ffmpeg --with local_ffmpeg audacity.spec to use local ffmpeg
 %bcond_without  ffmpeg
 %bcond_with     local_ffmpeg
 
@@ -9,7 +9,7 @@
 Name: audacity-freeworld
 
 Version: 2.4.2
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: Multitrack audio editor
 License: GPLv2
 URL:     https://www.audacityteam.org
@@ -48,9 +48,11 @@ Obsoletes: audacity-nonfree < %{version}-%{release}
 
 BuildRequires: cmake3
 BuildRequires: gettext-devel
+
 %if 0%{?rhel} == 7
 BuildRequires: devtoolset-7-toolchain, devtoolset-7-libatomic-devel
 %endif
+
 BuildRequires: gcc
 BuildRequires: gcc-c++
 BuildRequires: ninja-build
@@ -65,7 +67,11 @@ BuildRequires: lame-devel
 BuildRequires: libid3tag-devel
 BuildRequires: libmad-devel
 BuildRequires: taglib-devel
+%if 0%{?rhel} && 0%{?rhel} == 8
+#note: epel-8 currently doesn't have twolame-devel.
+%else
 BuildRequires: twolame-devel
+%endif
 BuildRequires: libogg-devel
 BuildRequires: libsndfile-devel
 BuildRequires: libvorbis-devel
@@ -81,7 +87,6 @@ BuildRequires: portaudio-devel >= 19-16
 #checking for PORTMIDI... no
 #configure: portmidi library is NOT available as system library
 BuildRequires: portmidi-devel
-BuildRequires: python3
 BuildRequires: serd-devel
 BuildRequires: sord-devel
 BuildRequires: soundtouch-devel
@@ -91,7 +96,7 @@ BuildRequires: suil-devel
 BuildRequires: vamp-plugin-sdk-devel >= 2.0
 BuildRequires: zip
 BuildRequires: zlib-devel
-BuildRequires: python2
+BuildRequires: python3
 BuildRequires: wxGTK3-devel
 %if 0%{?rhel} >= 8 || 0%{?fedora}
 BuildRequires: libappstream-glib
@@ -197,6 +202,9 @@ rm %{buildroot}%{_datadir}/doc/%{realname}/LICENSE.txt
 
 
 %changelog
+* Tue Feb 23 2021 Sérgio Basto <sergio@serjux.com> - 2.4.2-4
+- partial fedora sync
+
 * Wed Feb 03 2021 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 2.4.2-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_34_Mass_Rebuild
 
