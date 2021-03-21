@@ -1,3 +1,6 @@
+
+%global __requires_exclude ^libwx_baseu-3.1.so|^libwx_baseu_net-3.1.so|^libwx_baseu_xml-3.1.so|^libwx_gtk2u_core-3.1.so|^libwx_gtk2u_html-3.1.so|^libwx_gtk2u_qa-3.1.so
+
 # Compile options:
 # invoke with: rpmbuild --with ffmpeg --with local_ffmpeg audacity.spec to use local ffmpeg
 %bcond_without  ffmpeg
@@ -8,11 +11,11 @@
 
 Name: audacity-freeworld
 
-Version: 2.4.2
-Release: 4%{?dist}
+Version: 3.0.0
+Release: 1%{?dist}
 Summary: Multitrack audio editor
 License: GPLv2
-URL:     https://www.audacityteam.org
+URL:     http://audacity.sourceforge.net
 
 %define realname audacity
 Conflicts: %{realname}
@@ -21,89 +24,77 @@ Source0: http://www.fosshub.com/Audacity.html/%{realname}-minsrc-%{version}.tar.
 # For alpha git snapshots for testing use the github archive as upstream source:
 #Source0: https://github.com/audacity/#{realname}/archive/#{commit0}/#{realname}-#{commit0}.tar.gz
 # ie wget https://github.com/audacity/audacity/archive/ecdb1d81c9312789c6233aba2190572344b22188/audacity-ecdb1d81c9312789c6233aba2190572344b22188.tar.gz
+Source1: https://github.com/audacity/wxWidgets/archive/Audacity-2.4.2.tar.gz#/%{realname}-wxWidgets.tar.gz
+
 
 %define tartopdir audacity-minsrc-%{version}
 #define tartopdir audacity-#{commit0}
 
 # manual can be installed from the base Fedora Audacity package.
 
-# add audio/x-flac (bug #557335)
-# remove audio/mpeg, audio/x-mp3
-# add categories Sequencer X-Jack AudioVideoEditing for F-12 Studio feature
-# Add GDK_BACKEND=x11 to exec line (bug #1798987)
-Patch0: audacity-2.3.3-desktop.in.patch
-#fix build with system portaudio
-Patch1:		audacity-2.3.3-Fix-building-against-the-system-portaudio-library.patch
-# add missed revision ident (to be derived from git)
-# use:
-# cd src; git show -s --format="#define REV_LONG \"%H\"%n#define REV_TIME \"%cd\"%n" | tee ../src/RevisionIdent.h
-Patch2:		audacity-2.4.2-provide-missed-RevisionIdent.patch
-# Fix libmp3lame detection from cmake
-Patch3:	audacity-2.4.2-fix-libmp3lame-as-system.patch
+# Remove the pathetic wxwidgets check
+Patch0: system-wx.patch
 # Fix portmidi detection from cmake
-Patch4: audacity-2.4.2-fix-portmidi-as-system.patch
+Patch1: audacity-2.4.2-fix-portmidi-as-system.patch
+# Fix libmp3lame detection from cmake
+Patch2:	audacity-2.4.2-fix-libmp3lame-as-system.patch
 
-Provides: audacity-nonfree = %{version}-%{release}
-Obsoletes: audacity-nonfree < %{version}-%{release}
-
-BuildRequires: cmake3
+BuildRequires: cmake
 BuildRequires: gettext-devel
 
 %if 0%{?rhel} == 7
 BuildRequires: devtoolset-7-toolchain, devtoolset-7-libatomic-devel
 %endif
-
 BuildRequires: gcc
 BuildRequires: gcc-c++
-BuildRequires: ninja-build
+
 BuildRequires: alsa-lib-devel
 BuildRequires: desktop-file-utils
 BuildRequires: expat-devel
 BuildRequires: flac-devel
-BuildRequires: gettext
+BuildRequires: git
+BuildRequires: gtk2-devel
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: ladspa-devel
 BuildRequires: lame-devel
 BuildRequires: libid3tag-devel
+BuildRequires: libjpeg-devel
 BuildRequires: libmad-devel
 BuildRequires: taglib-devel
 BuildRequires: twolame-devel
 BuildRequires: libogg-devel
 BuildRequires: libsndfile-devel
 BuildRequires: libvorbis-devel
+BuildRequires: libX11-devel
+BuildRequires: libXext-devel
 BuildRequires: lilv-devel
-#checking for LV2... no
-#configure: LV2 libraries are NOT available as system libraries
-#fresh check for system libraries:
 BuildRequires: lv2-devel
-BuildRequires: nasm
-# system portaudio fails to build
-# http://rglinuxtech.com/?p=2093
 BuildRequires: portaudio-devel >= 19-16
-#checking for PORTMIDI... no
-#configure: portmidi library is NOT available as system library
 BuildRequires: portmidi-devel
 BuildRequires: serd-devel
 BuildRequires: sord-devel
 BuildRequires: soundtouch-devel
 BuildRequires: soxr-devel
+BuildRequires: sqlite-devel
 BuildRequires: sratom-devel
 BuildRequires: suil-devel
 BuildRequires: vamp-plugin-sdk-devel >= 2.0
 BuildRequires: zip
 BuildRequires: zlib-devel
 BuildRequires: python3
-BuildRequires: wxGTK3-devel
 %if 0%{?rhel} >= 8 || 0%{?fedora}
 BuildRequires: libappstream-glib
 %endif
 
 %if %{with ffmpeg}
+%if ! %{with local_ffmpeg}
 BuildRequires: ffmpeg-devel
+%endif
 %endif
 # For new symbols in portaudio
 Requires:      portaudio%{?_isa} >= 19-16
 
+ExcludeArch: s390x
 
 %description
 Audacity is a cross-platform multitrack audio editor. It allows you to
@@ -116,13 +107,12 @@ This build has support for mp3 and ffmpeg import/export.
 
 %prep
 %setup -q -n %{tartopdir}
+mkdir -p %{_vpath_builddir}/cmake-proxies/wxWidgets/wxwidgets
+tar -xvf %{SOURCE1} -C %{_vpath_builddir}/cmake-proxies/wxWidgets/wxwidgets --strip 1
 
-%patch0 -b .desktop
-%patch1 -p1 -b .system-portaudio
-%patch2 -p1 -b .revision-ident
-%patch3 -p1 -b .pkgconfig
-%patch4 -p1 -b .pkgconfig
-
+%patch0 -p0
+%patch1 -p1
+%patch2 -p1
 
 %build
 %if 0%{?rhel} == 7
@@ -136,24 +126,35 @@ export WX_CONFIG=wx-config-3.0
 # fix system lame detection
 export PKG_CONFIG_PATH=$(pwd):$PKG_CONFIG_PATH
 
-%cmake3 -GNinja \
+%cmake \
+    -Daudacity_use_sndfile=system \
+    -Daudacity_use_soxr=system \
+    -Daudacity_use_lame=system \
+    -Daudacity_use_twolame=system \
+    -Daudacity_use_flac=system \
+    -Daudacity_use_ladspa=on \
+    -Daudacity_use_vorbis=system \
+    -Daudacity_use_id3tag=system \
+    -Daudacity_use_expat=system \
+    -Daudacity_use_soundtouch=system \
+    -Daudacity_use_vamp=system \
+    -Daudacity_use_lv2=system \
+    -Daudacity_use_midi=system \
+    -Daudacity_use_ogg=system \
 %if %{with ffmpeg}
 %if ! %{with local_ffmpeg}
     -Daudacity_use_ffmpeg=linked \
 %endif
 %else
-    -Daudacity_use_ffmpeg=off \
+    -Daudacity_use_fmmpeg=off \
 %endif
-%ifnarch %{ix86} x86_64
-    -DHAVE_SSE=OFF \
-    -DHAVE_SSE2=OFF \
-%endif
+    -Daudacity_use_wxwidgets=local 
 
-%cmake3_build
+%cmake_build
 
 
 %install
-%cmake3_install
+%cmake_install
 
 %if 0%{?rhel} >= 8 || 0%{?fedora}
 if appstream-util --help | grep -q replace-screenshots ; then
@@ -181,6 +182,7 @@ rm %{buildroot}%{_datadir}/doc/%{realname}/LICENSE.txt
 
 %files -f %{realname}.lang
 %{_bindir}/%{realname}
+%{_libdir}/%{realname}/
 %dir %{_datadir}/%{realname}
 %{_datadir}/%{realname}/EQDefaultCurves.xml
 %{_datadir}/%{realname}/modules/
@@ -190,14 +192,17 @@ rm %{buildroot}%{_datadir}/doc/%{realname}/LICENSE.txt
 %{_datadir}/applications/*
 %{_datadir}/appdata/%{realname}.appdata.xml
 %{_datadir}/pixmaps/*
-%{_datadir}/icons/hicolor/*/apps/%{realname}.*
-%{_datadir}/icons/hicolor/*/%{realname}.*
+%{_datadir}/icons/hicolor/*/%{realname}.png
+%{_datadir}/icons/hicolor/scalable/apps/%{realname}.svg
 %{_datadir}/mime/packages/*
 %{_datadir}/doc/%{realname}
 %license LICENSE.txt
 
-
 %changelog
+* Thu Mar 18 2021 Leigh Scott <leigh123linux@gmail.com> - 3.0.0-1
+- 3.0.0
+- Use local wxwidgets, audacity isn't usable with gtk3
+
 * Tue Feb 23 2021 Sérgio Basto <sergio@serjux.com> - 2.4.2-4
 - partial fedora sync
 

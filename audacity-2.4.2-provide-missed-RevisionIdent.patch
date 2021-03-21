@@ -1,7 +1,0 @@
-diff -up audacity-minsrc-2.4.2/src/RevisionIdent.h.missed audacity-minsrc-2.4.2/src/RevisionIdent.h
---- audacity-minsrc-2.4.2/src/RevisionIdent.h.missed	2020-06-30 03:05:23.094201740 +0200
-+++ audacity-minsrc-2.4.2/src/RevisionIdent.h	2020-06-30 03:04:02.300641780 +0200
-@@ -0,0 +1,3 @@
-+#define REV_LONG "16d52f63a4183bba77ef7305d14622958dc0d1d5"
-+#define REV_TIME "Fri Jun 19 16:16:47 2020 +0100"
-+
