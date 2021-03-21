@@ -12,7 +12,7 @@
 Name: audacity-freeworld
 
 Version: 3.0.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Multitrack audio editor
 License: GPLv2
 URL:     http://audacity.sourceforge.net
@@ -75,7 +75,8 @@ BuildRequires: serd-devel
 BuildRequires: sord-devel
 BuildRequires: soundtouch-devel
 BuildRequires: soxr-devel
-BuildRequires: sqlite-devel
+# Use local sqlite as system fails
+#BuildRequires: sqlite-devel
 BuildRequires: sratom-devel
 BuildRequires: suil-devel
 BuildRequires: vamp-plugin-sdk-devel >= 2.0
@@ -108,7 +109,7 @@ This build has support for mp3 and ffmpeg import/export.
 %prep
 %setup -q -n %{tartopdir}
 mkdir -p %{_vpath_builddir}/cmake-proxies/wxWidgets/wxwidgets
-tar -xvf %{SOURCE1} -C %{_vpath_builddir}/cmake-proxies/wxWidgets/wxwidgets --strip 1
+tar -xf %{SOURCE1} -C %{_vpath_builddir}/cmake-proxies/wxWidgets/wxwidgets --strip 1
 
 %patch0 -p0
 %patch1 -p1
@@ -199,6 +200,9 @@ rm %{buildroot}%{_datadir}/doc/%{realname}/LICENSE.txt
 %license LICENSE.txt
 
 %changelog
+* Sun Mar 21 2021 Leigh Scott <leigh123linux@gmail.com> - 3.0.0-2
+- Use local sqlite as system fails
+
 * Thu Mar 18 2021 Leigh Scott <leigh123linux@gmail.com> - 3.0.0-1
 - 3.0.0
 - Use local wxwidgets, audacity isn't usable with gtk3
