@@ -165,15 +165,15 @@ if appstream-util --help | grep -q replace-screenshots ; then
 #
 # See http://people.freedesktop.org/~hughsient/appdata/#screenshots for more details.
 #
-appstream-util replace-screenshots $RPM_BUILD_ROOT%{_datadir}/appdata/audacity.appdata.xml \
+appstream-util replace-screenshots %{buildroot}%{_datadir}/appdata/audacity.appdata.xml \
   https://raw.githubusercontent.com/hughsie/fedora-appstream/master/screenshots-extra/audacity/a.png
 fi
 %endif
 
 %{find_lang} %{realname}
 
-desktop-file-install --dir $RPM_BUILD_ROOT%{_datadir}/applications \
-        $RPM_BUILD_ROOT%{_datadir}/applications/audacity.desktop
+desktop-file-install --dir %{buildroot}%{_datadir}/applications \
+        %{buildroot}%{_datadir}/applications/audacity.desktop
 
 mkdir %{buildroot}%{_datadir}/doc/%{realname}/nyquist
 cp -pr lib-src/libnyquist/nyquist/license.txt %{buildroot}%{_datadir}/doc/%{realname}/nyquist
