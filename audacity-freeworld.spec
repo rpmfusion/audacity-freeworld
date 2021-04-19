@@ -11,8 +11,8 @@
 
 Name: audacity-freeworld
 
-Version: 3.0.0
-Release: 2%{?dist}
+Version: 3.0.2
+Release: 1%{?dist}
 Summary: Multitrack audio editor
 License: GPLv2
 URL:     http://audacity.sourceforge.net
@@ -24,7 +24,7 @@ Source0: http://www.fosshub.com/Audacity.html/%{realname}-minsrc-%{version}.tar.
 # For alpha git snapshots for testing use the github archive as upstream source:
 #Source0: https://github.com/audacity/#{realname}/archive/#{commit0}/#{realname}-#{commit0}.tar.gz
 # ie wget https://github.com/audacity/audacity/archive/ecdb1d81c9312789c6233aba2190572344b22188/audacity-ecdb1d81c9312789c6233aba2190572344b22188.tar.gz
-Source1: https://github.com/audacity/wxWidgets/archive/Audacity-2.4.2.tar.gz#/%{realname}-wxWidgets.tar.gz
+Source1: https://github.com/audacity/wxWidgets/archive/Audacity-2.4.2.tar.gz#/%{realname}-wxWidgets-2.4.2.tar.gz
 
 
 %define tartopdir audacity-minsrc-%{version}
@@ -200,6 +200,9 @@ rm %{buildroot}%{_datadir}/doc/%{realname}/LICENSE.txt
 %license LICENSE.txt
 
 %changelog
+* Mon Apr 19 2021 Leigh Scott <leigh123linux@gmail.com> - 3.0.2-1
+- 3.0.2
+
 * Sun Mar 21 2021 Leigh Scott <leigh123linux@gmail.com> - 3.0.0-2
 - Use local sqlite as system fails
 
