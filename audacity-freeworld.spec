@@ -1,3 +1,5 @@
+# Disable rpath checking until upstream fixes the rpath: https://github.com/audacity/audacity/issues/1008
+%global __brp_check_rpaths %{nil}
 
 %global __requires_exclude ^libwx_baseu-3.1.so|^libwx_baseu_net-3.1.so|^libwx_baseu_xml-3.1.so|^libwx_gtk2u_core-3.1.so|^libwx_gtk2u_html-3.1.so|^libwx_gtk2u_qa-3.1.so
 
@@ -12,7 +14,7 @@
 Name: audacity-freeworld
 
 Version: 3.0.2
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: Multitrack audio editor
 License: GPLv2
 URL:     http://audacity.sourceforge.net
@@ -38,6 +40,10 @@ Patch0: system-wx.patch
 Patch1: audacity-2.4.2-fix-portmidi-as-system.patch
 # Fix libmp3lame detection from cmake
 Patch2:	audacity-2.4.2-fix-libmp3lame-as-system.patch
+# Fix CMake find of the Jack module (RHBZ 1972963) - Remove for 3.0.3 (backported from master branch - https://github.com/audacity/audacity/commit/b4b5cc812483b311627bba48e26b91ae389ce713)
+Patch3: find-jack.patch
+# Fix CVE-2020-1867 - Remove for 3.0.3 (backported from https://github.com/audacity/audacity/pull/700)
+Patch4: permissions-fix.patch
 
 BuildRequires: cmake
 BuildRequires: gettext-devel
@@ -114,6 +120,8 @@ tar -xf %{SOURCE1} -C %{_vpath_builddir}/cmake-proxies/wxWidgets/wxwidgets --str
 %patch0 -p0
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
+%patch4 -p1
 
 %build
 %if 0%{?rhel} == 7
@@ -200,6 +208,9 @@ rm %{buildroot}%{_datadir}/doc/%{realname}/LICENSE.txt
 %license LICENSE.txt
 
 %changelog
+* Sat Oct 02 2021 Leigh Scott <leigh123linux@gmail.com> - 3.0.2-3
+- Add Fedora patches
+
 * Mon Aug 02 2021 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 3.0.2-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_35_Mass_Rebuild
 

@@ -1,0 +1,11 @@
+--- src/AudacityApp.cpp 2021-04-11 11:29:19.000000000 +0100
++++ src/AudacityApp.cpp 2021-06-17 23:41:43.333628774 +0100
+@@ -1692,7 +1692,7 @@
+    // The permissions don't always seem to be set on
+    // some platforms.  Hopefully this fixes it...
+    #ifdef __UNIX__
+-   chmod(OSFILENAME(temp), 0755);
++   chmod(OSFILENAME(temp), 0700);
+    #endif
+ 
+    TempDirectory::ResetTempDir();
