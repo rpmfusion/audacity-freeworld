@@ -106,7 +106,7 @@ ExcludeArch: s390x
 %description
 Audacity is a cross-platform multitrack audio editor. It allows you to
 record sounds directly or to import files in various formats. It features
-a few simple effects, all of the editing features you should need, and
+a few s0mple effects, all of the editing features you should need, and
 unlimited undo. The GUI was built with wxWidgets and the audio I/O
 supports PulseAudio, OSS and ALSA under Linux.
 This build has support for mp3 and ffmpeg import/export.
@@ -121,7 +121,7 @@ tar -xf %{SOURCE1} -C %{_vpath_builddir}/cmake-proxies/wxWidgets/wxwidgets --str
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
-%patch4 -p1
+%patch4 -p0
 
 %build
 %if 0%{?rhel} == 7
