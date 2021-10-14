@@ -1,8 +1,6 @@
 # Disable rpath checking until upstream fixes the rpath: https://github.com/audacity/audacity/issues/1008
 %global __brp_check_rpaths %{nil}
 
-%global __requires_exclude ^libwx_baseu-3.1.so|^libwx_baseu_net-3.1.so|^libwx_baseu_xml-3.1.so|^libwx_gtk2u_core-3.1.so|^libwx_gtk2u_html-3.1.so|^libwx_gtk2u_qa-3.1.so
-
 # Compile options:
 # invoke with: rpmbuild --with ffmpeg --with local_ffmpeg audacity.spec to use local ffmpeg
 %bcond_without  ffmpeg
@@ -13,8 +11,8 @@
 
 Name: audacity-freeworld
 
-Version: 3.0.2
-Release: 3%{?dist}
+Version: 3.0.5
+Release: 1%{?dist}
 Summary: Multitrack audio editor
 License: GPLv2
 URL:     http://audacity.sourceforge.net
@@ -22,11 +20,7 @@ URL:     http://audacity.sourceforge.net
 %define realname audacity
 Conflicts: %{realname}
 
-Source0: http://www.fosshub.com/Audacity.html/%{realname}-minsrc-%{version}.tar.xz
-# For alpha git snapshots for testing use the github archive as upstream source:
-#Source0: https://github.com/audacity/#{realname}/archive/#{commit0}/#{realname}-#{commit0}.tar.gz
-# ie wget https://github.com/audacity/audacity/archive/ecdb1d81c9312789c6233aba2190572344b22188/audacity-ecdb1d81c9312789c6233aba2190572344b22188.tar.gz
-Source1: https://github.com/audacity/wxWidgets/archive/Audacity-2.4.2.tar.gz#/%{realname}-wxWidgets-2.4.2.tar.gz
+Source0: https://github.com/audacity/audacity/archive/Audacity-%{version}.tar.gz
 
 
 %define tartopdir audacity-minsrc-%{version}
@@ -34,32 +28,24 @@ Source1: https://github.com/audacity/wxWidgets/archive/Audacity-2.4.2.tar.gz#/%{
 
 # manual can be installed from the base Fedora Audacity package.
 
-# Remove the pathetic wxwidgets check
-Patch0: system-wx.patch
 # Fix portmidi detection from cmake
-Patch1: audacity-2.4.2-fix-portmidi-as-system.patch
+Patch0: audacity-2.4.2-fix-portmidi-as-system.patch
 # Fix libmp3lame detection from cmake
-Patch2:	audacity-2.4.2-fix-libmp3lame-as-system.patch
-# Fix CMake find of the Jack module (RHBZ 1972963) - Remove for 3.0.3 (backported from master branch - https://github.com/audacity/audacity/commit/b4b5cc812483b311627bba48e26b91ae389ce713)
-Patch3: find-jack.patch
-# Fix CVE-2020-1867 - Remove for 3.0.3 (backported from https://github.com/audacity/audacity/pull/700)
-Patch4: permissions-fix.patch
+Patch1:	audacity-2.4.2-fix-libmp3lame-as-system.patch
+Patch2: 0001-Adds-an-option-to-disable-Conan.patch
+Patch3: 0001-Scope-libraries-required-by-the-optional-features.patch
+Patch4: 0001-Fixes-wxwidgets-fixup-script.patch
+Patch5: Fixes-GCC11-compatibility.patch
 
 BuildRequires: cmake
 BuildRequires: gettext-devel
-
-%if 0%{?rhel} == 7
-BuildRequires: devtoolset-7-toolchain, devtoolset-7-libatomic-devel
-%endif
-BuildRequires: gcc
 BuildRequires: gcc-c++
-
 BuildRequires: alsa-lib-devel
 BuildRequires: desktop-file-utils
 BuildRequires: expat-devel
 BuildRequires: flac-devel
 BuildRequires: git
-BuildRequires: gtk2-devel
+BuildRequires: gtk3-devel
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: ladspa-devel
 BuildRequires: lame-devel
@@ -70,6 +56,7 @@ BuildRequires: taglib-devel
 BuildRequires: twolame-devel
 BuildRequires: libogg-devel
 BuildRequires: libsndfile-devel
+BuildRequires: libuuid-devel
 BuildRequires: libvorbis-devel
 BuildRequires: libX11-devel
 BuildRequires: libXext-devel
@@ -86,6 +73,7 @@ BuildRequires: soxr-devel
 BuildRequires: sratom-devel
 BuildRequires: suil-devel
 BuildRequires: vamp-plugin-sdk-devel >= 2.0
+BuildRequires: wxGTK-devel
 BuildRequires: zip
 BuildRequires: zlib-devel
 BuildRequires: python3
@@ -113,29 +101,35 @@ This build has support for mp3 and ffmpeg import/export.
 
 
 %prep
-%setup -q -n %{tartopdir}
-mkdir -p %{_vpath_builddir}/cmake-proxies/wxWidgets/wxwidgets
-tar -xf %{SOURCE1} -C %{_vpath_builddir}/cmake-proxies/wxWidgets/wxwidgets --strip 1
+%setup -q -n %{realname}-Audacity-%{version}
 
-%patch0 -p0
+%patch0 -p1
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
-%patch4 -p0
+%patch4 -p1
+%patch5 -p1
+
+# Make sure we use the system versions.
+rm -rf lib-src/{expat,libvamp,libsoxr,ffmpeg,lame}/
+
+#Included in src/AboutDialog.cpp but not supplied
+touch include/RevisionIdent.h
 
 %build
-%if 0%{?rhel} == 7
-export WX_CONFIG=wx-config-3.0
-%endif
 
-%if 0%{?rhel} == 7
-. /opt/rh/devtoolset-7/enable
-%endif
 
 # fix system lame detection
 export PKG_CONFIG_PATH=$(pwd):$PKG_CONFIG_PATH
+export CFLAGS="%{optflags} -fno-strict-aliasing -ggdb $(wx-config --cflags)"
+export CXXFLAGS="$CFLAGS -std=gnu++11"
 
 %cmake \
+    -DCMAKE_MODULE_LINKER_FLAGS:STRING="$(wx-config --libs)" \
+    -DCMAKE_SHARED_LINKER_FLAGS:STRING="$(wx-config --libs)" \
+    -Daudacity_conan_enabled=Off \
+    -Daudacity_has_networking:BOOL=Off \
+    -Daudacity_lib_preference:STRING=system \
     -Daudacity_use_sndfile=system \
     -Daudacity_use_soxr=system \
     -Daudacity_use_lame=system \
@@ -155,9 +149,8 @@ export PKG_CONFIG_PATH=$(pwd):$PKG_CONFIG_PATH
     -Daudacity_use_ffmpeg=linked \
 %endif
 %else
-    -Daudacity_use_fmmpeg=off \
+    -Daudacity_use_fmmpeg=off
 %endif
-    -Daudacity_use_wxwidgets=local 
 
 %cmake_build
 
@@ -173,7 +166,7 @@ if appstream-util --help | grep -q replace-screenshots ; then
 #
 # See http://people.freedesktop.org/~hughsient/appdata/#screenshots for more details.
 #
-appstream-util replace-screenshots %{buildroot}%{_datadir}/appdata/audacity.appdata.xml \
+appstream-util replace-screenshots %{buildroot}%{_metainfodir}/audacity.appdata.xml \
   https://raw.githubusercontent.com/hughsie/fedora-appstream/master/screenshots-extra/audacity/a.png
 fi
 %endif
@@ -187,6 +180,7 @@ mkdir %{buildroot}%{_datadir}/doc/%{realname}/nyquist
 cp -pr lib-src/libnyquist/nyquist/license.txt %{buildroot}%{_datadir}/doc/%{realname}/nyquist
 cp -pr lib-src/libnyquist/nyquist/Readme.txt %{buildroot}%{_datadir}/doc/%{realname}/nyquist
 rm %{buildroot}%{_datadir}/doc/%{realname}/LICENSE.txt
+rm -f %{buildroot}%{_prefix}/%{realname}
 
 
 %files -f %{realname}.lang
@@ -194,12 +188,11 @@ rm %{buildroot}%{_datadir}/doc/%{realname}/LICENSE.txt
 %{_libdir}/%{realname}/
 %dir %{_datadir}/%{realname}
 %{_datadir}/%{realname}/EQDefaultCurves.xml
-%{_datadir}/%{realname}/modules/
 %{_datadir}/%{realname}/nyquist/
 %{_datadir}/%{realname}/plug-ins/
 %{_mandir}/man*/*
 %{_datadir}/applications/*
-%{_datadir}/appdata/%{realname}.appdata.xml
+%{_metainfodir}/%{realname}.appdata.xml
 %{_datadir}/pixmaps/*
 %{_datadir}/icons/hicolor/*/%{realname}.png
 %{_datadir}/icons/hicolor/scalable/apps/%{realname}.svg
@@ -208,6 +201,9 @@ rm %{buildroot}%{_datadir}/doc/%{realname}/LICENSE.txt
 %license LICENSE.txt
 
 %changelog
+* Thu Oct 14 2021 Leigh Scott <leigh123linux@gmail.com> - 3.0.5-1
+- 3.0.5
+
 * Sat Oct 02 2021 Leigh Scott <leigh123linux@gmail.com> - 3.0.2-3
 - Add Fedora patches
 
