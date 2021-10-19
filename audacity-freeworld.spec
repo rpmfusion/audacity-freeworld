@@ -1,3 +1,6 @@
+%global __requires_exclude ^lib-string-utils.so|^lib-strings.so|^lib-utility.so|^lib-uuid.so
+%global __provides_exclude ^lib-string-utils.so|^lib-strings.so|^lib-utility.so|^lib-uuid.so
+
 # Disable rpath checking until upstream fixes the rpath: https://github.com/audacity/audacity/issues/1008
 %global __brp_check_rpaths %{nil}
 
@@ -12,7 +15,7 @@
 Name: audacity-freeworld
 
 Version: 3.0.5
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Multitrack audio editor
 License: GPLv2
 URL:     http://audacity.sourceforge.net
@@ -201,6 +204,9 @@ rm -f %{buildroot}%{_prefix}/%{realname}
 %license LICENSE.txt
 
 %changelog
+* Tue Oct 19 2021 Leigh Scott <leigh123linux@gmail.com> - 3.0.5-2
+- Filter internal libs from provides and requires (rfbz#6112)
+
 * Thu Oct 14 2021 Leigh Scott <leigh123linux@gmail.com> - 3.0.5-1
 - 3.0.5
 
