@@ -15,7 +15,7 @@
 Name: audacity-freeworld
 
 Version: 3.0.5
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: Multitrack audio editor
 License: GPLv2
 URL:     http://audacity.sourceforge.net
@@ -39,6 +39,7 @@ Patch2: 0001-Adds-an-option-to-disable-Conan.patch
 Patch3: 0001-Scope-libraries-required-by-the-optional-features.patch
 Patch4: 0001-Fixes-wxwidgets-fixup-script.patch
 Patch5: Fixes-GCC11-compatibility.patch
+Patch6: Fix_lang.patch
 
 BuildRequires: cmake
 BuildRequires: gettext-devel
@@ -112,6 +113,7 @@ This build has support for mp3 and ffmpeg import/export.
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
+%patch6 -p1
 
 # Make sure we use the system versions.
 rm -rf lib-src/{expat,libvamp,libsoxr,ffmpeg,lame}/
@@ -204,6 +206,9 @@ rm -f %{buildroot}%{_prefix}/%{realname}
 %license LICENSE.txt
 
 %changelog
+* Tue Oct 26 2021 Leigh Scott <leigh123linux@gmail.com> - 3.0.5-3
+- Fix lang (rfbz#6117)
+
 * Tue Oct 19 2021 Leigh Scott <leigh123linux@gmail.com> - 3.0.5-2
 - Filter internal libs from provides and requires (rfbz#6112)
 
