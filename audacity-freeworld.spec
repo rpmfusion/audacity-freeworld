@@ -15,7 +15,7 @@
 Name: audacity-freeworld
 
 Version: 3.0.5
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: Multitrack audio editor
 License: GPLv2
 URL:     http://audacity.sourceforge.net
@@ -132,6 +132,7 @@ export CXXFLAGS="$CFLAGS -std=gnu++11"
 %cmake \
     -DCMAKE_MODULE_LINKER_FLAGS:STRING="$(wx-config --libs)" \
     -DCMAKE_SHARED_LINKER_FLAGS:STRING="$(wx-config --libs)" \
+    -DAUDACITY_BUILD_LEVEL:STRING=2 \
     -Daudacity_conan_enabled=Off \
     -Daudacity_has_networking:BOOL=Off \
     -Daudacity_lib_preference:STRING=system \
@@ -206,6 +207,9 @@ rm -f %{buildroot}%{_prefix}/%{realname}
 %license LICENSE.txt
 
 %changelog
+* Tue Oct 26 2021 Leigh Scott <leigh123linux@gmail.com> - 3.0.5-4
+- Fix build level
+
 * Tue Oct 26 2021 Leigh Scott <leigh123linux@gmail.com> - 3.0.5-3
 - Fix lang (rfbz#6117)
 
