@@ -14,8 +14,8 @@
 
 Name: audacity-freeworld
 
-Version: 3.0.5
-Release: 5%{?dist}
+Version: 3.1.0
+Release: 1%{?dist}
 Summary: Multitrack audio editor
 License: GPLv2
 URL:     http://audacity.sourceforge.net
@@ -35,11 +35,6 @@ Source0: https://github.com/audacity/audacity/archive/Audacity-%{version}.tar.gz
 Patch0: audacity-2.4.2-fix-portmidi-as-system.patch
 # Fix libmp3lame detection from cmake
 Patch1:	audacity-2.4.2-fix-libmp3lame-as-system.patch
-Patch2: 0001-Adds-an-option-to-disable-Conan.patch
-Patch3: 0001-Scope-libraries-required-by-the-optional-features.patch
-Patch4: 0001-Fixes-wxwidgets-fixup-script.patch
-Patch5: Fixes-GCC11-compatibility.patch
-Patch6: Fix_lang.patch
 
 BuildRequires: cmake
 BuildRequires: gettext-devel
@@ -109,14 +104,9 @@ This build has support for mp3 and ffmpeg import/export.
 
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
-%patch6 -p1
 
 # Make sure we use the system versions.
-rm -rf lib-src/{expat,libvamp,libsoxr,ffmpeg,lame}/
+rm -rf lib-src/{libvamp,libsoxr}/
 
 #Included in src/AboutDialog.cpp but not supplied
 touch include/RevisionIdent.h
@@ -152,7 +142,7 @@ export CXXFLAGS="$CFLAGS -std=gnu++11"
     -Daudacity_use_ogg=system \
 %if %{with ffmpeg}
 %if ! %{with local_ffmpeg}
-    -Daudacity_use_ffmpeg=linked \
+    -Daudacity_use_ffmpeg=loaded \
 %endif
 %else
     -Daudacity_use_fmmpeg=off
@@ -207,6 +197,9 @@ rm -f %{buildroot}%{_prefix}/%{realname}
 %license LICENSE.txt
 
 %changelog
+* Wed Nov 10 2021 Leigh Scott <leigh123linux@gmail.com> - 3.1.0-1
+- 3.1.0
+
 * Wed Nov 10 2021 Leigh Scott <leigh123linux@gmail.com> - 3.0.5-5
 - Rebuilt for new ffmpeg snapshot
 
