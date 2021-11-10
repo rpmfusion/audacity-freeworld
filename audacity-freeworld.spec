@@ -125,6 +125,7 @@ export CXXFLAGS="$CFLAGS -std=gnu++11"
     -DAUDACITY_BUILD_LEVEL:STRING=2 \
     -Daudacity_conan_enabled=Off \
     -Daudacity_has_networking:BOOL=Off \
+    -Daudacity_has_updates_check:BOOL=Off \
     -Daudacity_lib_preference:STRING=system \
     -Daudacity_use_sndfile=system \
     -Daudacity_use_soxr=system \
