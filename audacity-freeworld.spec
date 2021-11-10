@@ -15,7 +15,7 @@
 Name: audacity-freeworld
 
 Version: 3.0.5
-Release: 4%{?dist}
+Release: 5%{?dist}
 Summary: Multitrack audio editor
 License: GPLv2
 URL:     http://audacity.sourceforge.net
@@ -207,6 +207,9 @@ rm -f %{buildroot}%{_prefix}/%{realname}
 %license LICENSE.txt
 
 %changelog
+* Wed Nov 10 2021 Leigh Scott <leigh123linux@gmail.com> - 3.0.5-5
+- Rebuilt for new ffmpeg snapshot
+
 * Tue Oct 26 2021 Leigh Scott <leigh123linux@gmail.com> - 3.0.5-4
 - Fix build level
 
