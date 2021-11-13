@@ -1,20 +1,11 @@
-%global __requires_exclude ^lib-string-utils.so|^lib-strings.so|^lib-utility.so|^lib-uuid.so
-%global __provides_exclude ^lib-string-utils.so|^lib-strings.so|^lib-utility.so|^lib-uuid.so
+%global __requires_exclude ^lib-audio-devices.so|^lib-basic-ui.so|^lib-components.so|^lib-exceptions.so|^lib-ffmpeg-support.so|^lib-files.so|^lib-math.so|^lib-preferences.so|^lib-project-rate.so|^lib-project.so|^lib-registries.so|^lib-screen-geometry.so|^lib-string-utils.so|^lib-strings.so|^lib-theme.so|^lib-utility.so|^lib-uuid.so|^lib-xml.so
+%global __provides_exclude ^lib-audio-devices.so|^lib-basic-ui.so|^lib-components.so|^lib-exceptions.so|^lib-ffmpeg-support.so|^lib-files.so|^lib-math.so|^lib-preferences.so|^lib-project-rate.so|^lib-project.so|^lib-registries.so|^lib-screen-geometry.so|^lib-string-utils.so|^lib-strings.so|^lib-theme.so|^lib-utility.so|^lib-uuid.so|^lib-xml.so
 
 # Disable rpath checking until upstream fixes the rpath: https://github.com/audacity/audacity/issues/1008
 %global __brp_check_rpaths %{nil}
 
-# Compile options:
-# invoke with: rpmbuild --with ffmpeg --with local_ffmpeg audacity.spec to use local ffmpeg
-%bcond_without  ffmpeg
-%bcond_with     local_ffmpeg
-
-#global commit0 53a5c930a4b5b053ab06a8b975458fc51cf41f6c
-#global shortcommit0 #(c=#{commit0}; echo ${c:0:7})
-
-Name: audacity-freeworld
-
-Version: 3.1.0
+Name:    audacity-freeworld
+Version: 3.1.1
 Release: 1%{?dist}
 Summary: Multitrack audio editor
 License: GPLv2
@@ -24,10 +15,6 @@ URL:     http://audacity.sourceforge.net
 Conflicts: %{realname}
 
 Source0: https://github.com/audacity/audacity/archive/Audacity-%{version}.tar.gz
-
-
-%define tartopdir audacity-minsrc-%{version}
-#define tartopdir audacity-#{commit0}
 
 # manual can be installed from the base Fedora Audacity package.
 
@@ -76,19 +63,14 @@ BuildRequires: wxGTK-devel
 BuildRequires: zip
 BuildRequires: zlib-devel
 BuildRequires: python3
-%if 0%{?rhel} >= 8 || 0%{?fedora}
 BuildRequires: libappstream-glib
-%endif
 
-%if %{with ffmpeg}
-%if ! %{with local_ffmpeg}
-BuildRequires: ffmpeg-devel
-%endif
-%endif
+Recommends:    ffmpeg-libs
+
 # For new symbols in portaudio
 Requires:      portaudio%{?_isa} >= 19-16
 
-ExcludeArch: s390x
+ExcludeArch:   s390x
 
 %description
 Audacity is a cross-platform multitrack audio editor. It allows you to
@@ -100,10 +82,7 @@ This build has support for mp3 and ffmpeg import/export.
 
 
 %prep
-%setup -q -n %{realname}-Audacity-%{version}
-
-%patch0 -p1
-%patch1 -p1
+%autosetup -p1 -n %{realname}-Audacity-%{version}
 
 # Make sure we use the system versions.
 rm -rf lib-src/{libvamp,libsoxr}/
@@ -141,32 +120,16 @@ export CXXFLAGS="$CFLAGS -std=gnu++11"
     -Daudacity_use_lv2=system \
     -Daudacity_use_midi=system \
     -Daudacity_use_ogg=system \
-%if %{with ffmpeg}
-%if ! %{with local_ffmpeg}
-    -Daudacity_use_ffmpeg=loaded \
-%endif
-%else
-    -Daudacity_use_fmmpeg=off
-%endif
-
+    -Daudacity_use_ffmpeg=loaded
 %cmake_build
-
 
 %install
 %cmake_install
 
-%if 0%{?rhel} >= 8 || 0%{?fedora}
 if appstream-util --help | grep -q replace-screenshots ; then
-# Update the screenshot shown in the software center
-#
-# NOTE: It would be *awesome* if this file was pushed upstream.
-#
-# See http://people.freedesktop.org/~hughsient/appdata/#screenshots for more details.
-#
 appstream-util replace-screenshots %{buildroot}%{_metainfodir}/audacity.appdata.xml \
   https://raw.githubusercontent.com/hughsie/fedora-appstream/master/screenshots-extra/audacity/a.png
 fi
-%endif
 
 %{find_lang} %{realname}
 
@@ -178,7 +141,6 @@ cp -pr lib-src/libnyquist/nyquist/license.txt %{buildroot}%{_datadir}/doc/%{real
 cp -pr lib-src/libnyquist/nyquist/Readme.txt %{buildroot}%{_datadir}/doc/%{realname}/nyquist
 rm %{buildroot}%{_datadir}/doc/%{realname}/LICENSE.txt
 rm -f %{buildroot}%{_prefix}/%{realname}
-
 
 %files -f %{realname}.lang
 %{_bindir}/%{realname}
@@ -198,6 +160,9 @@ rm -f %{buildroot}%{_prefix}/%{realname}
 %license LICENSE.txt
 
 %changelog
+* Sat Nov 13 2021 Leigh Scott <leigh123linux@gmail.com> - 3.1.1-1
+- 3.1.1
+
 * Wed Nov 10 2021 Leigh Scott <leigh123linux@gmail.com> - 3.1.0-1
 - 3.1.0
 
