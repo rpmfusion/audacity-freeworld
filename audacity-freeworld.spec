@@ -5,7 +5,7 @@
 %global __brp_check_rpaths %{nil}
 
 Name:    audacity-freeworld
-Version: 3.1.2
+Version: 3.1.3
 Release: 1%{?dist}
 Summary: Multitrack audio editor
 License: GPLv2
@@ -160,6 +160,9 @@ rm -f %{buildroot}%{_prefix}/%{realname}
 %license LICENSE.txt
 
 %changelog
+* Thu Dec 23 2021 Leigh Scott <leigh123linux@gmail.com> - 3.1.3-1
+- 3.1.3
+
 * Sun Dec 12 2021 Leigh Scott <leigh123linux@gmail.com> - 3.1.2-1
 - 3.1.2
 
