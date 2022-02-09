@@ -6,7 +6,7 @@
 
 Name:    audacity-freeworld
 Version: 3.1.3
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Multitrack audio editor
 License: GPLv2
 URL:     http://audacity.sourceforge.net
@@ -160,6 +160,9 @@ rm -f %{buildroot}%{_prefix}/%{realname}
 %license LICENSE.txt
 
 %changelog
+* Wed Feb 09 2022 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 3.1.3-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_36_Mass_Rebuild
+
 * Thu Dec 23 2021 Leigh Scott <leigh123linux@gmail.com> - 3.1.3-1
 - 3.1.3
 
