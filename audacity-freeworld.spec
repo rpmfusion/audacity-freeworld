@@ -6,7 +6,7 @@
 
 Name:    audacity-freeworld
 Version: 3.1.3
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: Multitrack audio editor
 License: GPLv2
 URL:     http://audacity.sourceforge.net
@@ -65,7 +65,11 @@ BuildRequires: zlib-devel
 BuildRequires: python3
 BuildRequires: libappstream-glib
 
+%if 0%{?fedora} && 0%{?fedora} > 35
+Recommends:    compat-ffmpeg4
+%else
 Recommends:    ffmpeg-libs
+%endif
 
 # For new symbols in portaudio
 Requires:      portaudio%{?_isa} >= 19-16
@@ -160,6 +164,9 @@ rm -f %{buildroot}%{_prefix}/%{realname}
 %license LICENSE.txt
 
 %changelog
+* Thu Feb 24 2022 Leigh Scott <leigh123linux@gmail.com> - 3.1.3-3
+- Use compat-ffmpeg4 for f36+
+
 * Wed Feb 09 2022 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 3.1.3-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_36_Mass_Rebuild
 
