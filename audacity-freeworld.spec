@@ -22,6 +22,10 @@ Source0: https://github.com/audacity/audacity/archive/Audacity-%{version}.tar.gz
 Patch0: audacity-2.4.2-fix-portmidi-as-system.patch
 # Fix libmp3lame detection from cmake
 Patch1:	audacity-2.4.2-fix-libmp3lame-as-system.patch
+# Patches needed to compile against wxWidgets 3.1.6.
+# Sent upstream in https://github.com/audacity/audacity/pull/2776
+Patch2: wx316_bitmaps.patch
+Patch3: wx316_customLanguages.patch
 
 BuildRequires: cmake
 BuildRequires: gettext-devel
