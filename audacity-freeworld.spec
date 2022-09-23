@@ -1,12 +1,12 @@
-%global __requires_exclude ^lib-audio-devices.so|^lib-basic-ui.so|^lib-components.so|^lib-exceptions.so|^lib-ffmpeg-support.so|^lib-files.so|^lib-math.so|^lib-preferences.so|^lib-project-rate.so|^lib-project.so|^lib-registries.so|^lib-screen-geometry.so|^lib-string-utils.so|^lib-strings.so|^lib-theme.so|^lib-utility.so|^lib-uuid.so|^lib-xml.so
-%global __provides_exclude ^lib-audio-devices.so|^lib-basic-ui.so|^lib-components.so|^lib-exceptions.so|^lib-ffmpeg-support.so|^lib-files.so|^lib-math.so|^lib-preferences.so|^lib-project-rate.so|^lib-project.so|^lib-registries.so|^lib-screen-geometry.so|^lib-string-utils.so|^lib-strings.so|^lib-theme.so|^lib-utility.so|^lib-uuid.so|^lib-xml.so
+%global __requires_exclude ^lib-audio-devices.so|^lib-basic-ui.so|^lib-components.so|^lib-exceptions.so|^lib-ffmpeg-support.so|^lib-files.so|^lib-math.so|^lib-preferences.so|^lib-project-rate.so|^lib-project.so|^lib-registries.so|^lib-screen-geometry.so|^lib-string-utils.so|^lib-strings.so|^lib-theme.so|^lib-utility.so|^lib-uuid.so|^lib-xml.so|^lib-audio-graph.so|^lib-graphics.so|^lib-ipc.so|^lib-module-manager.so|^lib-project-history.so|^lib-sample-track.so|^lib-theme-resources.so|^lib-track.so|^lib-transactions.so
+%global __provides_exclude ^lib-audio-devices.so|^lib-basic-ui.so|^lib-components.so|^lib-exceptions.so|^lib-ffmpeg-support.so|^lib-files.so|^lib-math.so|^lib-preferences.so|^lib-project-rate.so|^lib-project.so|^lib-registries.so|^lib-screen-geometry.so|^lib-string-utils.so|^lib-strings.so|^lib-theme.so|^lib-utility.so|^lib-uuid.so|^lib-xml.so|^lib-audio-graph.so|^lib-graphics.so|^lib-ipc.so|^lib-module-manager.so|^lib-project-history.so|^lib-sample-track.so|^lib-theme-resources.so|^lib-track.so|^lib-transactions.so
 
 # Disable rpath checking until upstream fixes the rpath: https://github.com/audacity/audacity/issues/1008
 %global __brp_check_rpaths %{nil}
 
 Name:    audacity-freeworld
-Version: 3.1.3
-Release: 4%{?dist}
+Version: 3.2.0
+Release: 1%{?dist}
 Summary: Multitrack audio editor
 License: GPLv2
 URL:     http://audacity.sourceforge.net
@@ -22,10 +22,6 @@ Source0: https://github.com/audacity/audacity/archive/Audacity-%{version}.tar.gz
 Patch0: audacity-2.4.2-fix-portmidi-as-system.patch
 # Fix libmp3lame detection from cmake
 Patch1:	audacity-2.4.2-fix-libmp3lame-as-system.patch
-# Patches needed to compile against wxWidgets 3.1.6.
-# Sent upstream in https://github.com/audacity/audacity/pull/2776
-Patch2: wx316_bitmaps.patch
-Patch3: wx316_customLanguages.patch
 
 BuildRequires: cmake
 BuildRequires: gettext-devel
@@ -52,6 +48,7 @@ BuildRequires: libX11-devel
 BuildRequires: libXext-devel
 BuildRequires: lilv-devel
 BuildRequires: lv2-devel
+BuildRequires: mpg123-devel
 BuildRequires: portaudio-devel >= 19-16
 BuildRequires: portmidi-devel
 BuildRequires: serd-devel
@@ -63,17 +60,14 @@ BuildRequires: soxr-devel
 BuildRequires: sratom-devel
 BuildRequires: suil-devel
 BuildRequires: vamp-plugin-sdk-devel >= 2.0
+BuildRequires: wavpack-devel
 BuildRequires: wxGTK-devel
 BuildRequires: zip
 BuildRequires: zlib-devel
 BuildRequires: python3
 BuildRequires: libappstream-glib
 
-%if 0%{?fedora} && 0%{?fedora} > 35
-Recommends:    compat-ffmpeg4
-%else
 Recommends:    ffmpeg-libs
-%endif
 
 # For new symbols in portaudio
 Requires:      portaudio%{?_isa} >= 19-16
@@ -128,6 +122,7 @@ export CXXFLAGS="$CFLAGS -std=gnu++11"
     -Daudacity_use_lv2=system \
     -Daudacity_use_midi=system \
     -Daudacity_use_ogg=system \
+    -Daudacity_has_vst3:BOOL=Off \
     -Daudacity_use_ffmpeg=loaded
 %cmake_build
 
@@ -154,7 +149,7 @@ rm -f %{buildroot}%{_prefix}/%{realname}
 %{_bindir}/%{realname}
 %{_libdir}/%{realname}/
 %dir %{_datadir}/%{realname}
-%{_datadir}/%{realname}/EQDefaultCurves.xml
+%{_datadir}/%{realname}/EffectsMenuDefaults.xml
 %{_datadir}/%{realname}/nyquist/
 %{_datadir}/%{realname}/plug-ins/
 %{_mandir}/man*/*
@@ -168,6 +163,9 @@ rm -f %{buildroot}%{_prefix}/%{realname}
 %license LICENSE.txt
 
 %changelog
+* Fri Sep 23 2022 Leigh Scott <leigh123linux@gmail.com> - 3.2.0-1
+- 3.2.0
+
 * Sat Aug 06 2022 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 3.1.3-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_37_Mass_Rebuild and ffmpeg
   5.1
