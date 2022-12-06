@@ -5,11 +5,11 @@
 %global __brp_check_rpaths %{nil}
 
 Name:    audacity-freeworld
-Version: 3.2.1
+Version: 3.2.2
 Release: 1%{?dist}
 Summary: Multitrack audio editor
 License: GPLv2
-URL:     http://audacity.sourceforge.net
+URL:     https://audacity.sourceforge.net
 
 %define realname audacity
 Conflicts: %{realname}
@@ -163,6 +163,9 @@ rm -f %{buildroot}%{_prefix}/%{realname}
 %license LICENSE.txt
 
 %changelog
+* Tue Dec 06 2022 Leigh Scott <leigh123linux@gmail.com> - 3.2.2-1
+- 3.2.2
+
 * Thu Oct 06 2022 Leigh Scott <leigh123linux@gmail.com> - 3.2.1-1
 - 3.2.1
 
