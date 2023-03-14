@@ -4,8 +4,10 @@
 # Disable rpath checking until upstream fixes the rpath: https://github.com/audacity/audacity/issues/1008
 %global __brp_check_rpaths %{nil}
 
+%global toolchain clang
+
 Name:    audacity-freeworld
-Version: 3.2.2
+Version: 3.2.5
 Release: 1%{?dist}
 Summary: Multitrack audio editor
 License: GPLv2
@@ -22,10 +24,11 @@ Source0: https://github.com/audacity/audacity/archive/Audacity-%{version}.tar.gz
 Patch0: audacity-2.4.2-fix-portmidi-as-system.patch
 # Fix libmp3lame detection from cmake
 Patch1:	audacity-2.4.2-fix-libmp3lame-as-system.patch
+Patch2: audacity-3.2.1-compile.patch
 
 BuildRequires: cmake
 BuildRequires: gettext-devel
-BuildRequires: gcc-c++
+BuildRequires: clang
 BuildRequires: alsa-lib-devel
 BuildRequires: desktop-file-utils
 BuildRequires: expat-devel
@@ -67,7 +70,11 @@ BuildRequires: zlib-devel
 BuildRequires: python3
 BuildRequires: libappstream-glib
 
+%if 0%{?fedora} < 38
 Recommends:    ffmpeg-libs
+%else
+Recommends:    compat-ffmpeg4
+%endif
 
 # For new symbols in portaudio
 Requires:      portaudio%{?_isa} >= 19-16
@@ -163,6 +170,10 @@ rm -f %{buildroot}%{_prefix}/%{realname}
 %license LICENSE.txt
 
 %changelog
+* Tue Mar 14 2023 Leigh Scott <leigh123linux@gmail.com> - 3.2.5-1
+- 3.2.5
+- Use clang
+
 * Tue Dec 06 2022 Leigh Scott <leigh123linux@gmail.com> - 3.2.2-1
 - 3.2.2
 

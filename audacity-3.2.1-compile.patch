@@ -1,0 +1,12 @@
+diff -up audacity-sources-3.2.1/src/effects/RealtimeEffectState.cpp.omv~ audacity-sources-3.2.1/src/effects/RealtimeEffectState.cpp
+--- audacity-sources-3.2.1/src/effects/RealtimeEffectState.cpp.omv~	2022-10-26 22:48:22.434333601 +0200
++++ audacity-sources-3.2.1/src/effects/RealtimeEffectState.cpp	2022-10-26 22:50:32.197225244 +0200
+@@ -223,7 +223,7 @@ struct RealtimeEffectState::Access final
+       if (auto pOther = dynamic_cast<const Access*>(&other)) {
+          auto &mine = mwState;
+          auto &theirs = pOther->mwState;
+-         auto less = std::owner_less{};
++         auto less = std::owner_less<void>{};
+          return !(less(mine, theirs) || less(theirs, mine));
+       }
+       return false;
