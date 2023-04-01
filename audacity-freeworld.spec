@@ -20,10 +20,11 @@ Source0: https://github.com/audacity/audacity/archive/Audacity-%{version}.tar.gz
 # Fix portmidi detection from cmake
 Patch0: audacity-2.4.2-fix-portmidi-as-system.patch
 # Fix libmp3lame detection from cmake
-Patch1:	audacity-2.4.2-fix-libmp3lame-as-system.patch
+Patch1: audacity-2.4.2-fix-libmp3lame-as-system.patch
 Patch2: audacity-install-rpath.patch
-Patch3: audacity-3.2.1-compile.patch
-Patch4: https://github.com/audacity/audacity/commit/deaa833a4253699493443e2fee68e8d2a9bde646.patch#/ffmpeg6.patch
+Patch3: audacity-non-x86.patch
+Patch4: audacity-3.2.1-compile.patch
+Patch5: https://github.com/audacity/audacity/commit/deaa833a4253699493443e2fee68e8d2a9bde646.patch#/ffmpeg6.patch
 
 BuildRequires: cmake
 BuildRequires: gettext-devel
