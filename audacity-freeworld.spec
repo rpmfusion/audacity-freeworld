@@ -1,6 +1,9 @@
 %global __requires_exclude ^lib-audio-devices.so|^lib-basic-ui.so|^lib-components.so|^lib-exceptions.so|^lib-ffmpeg-support.so|^lib-files.so|^lib-math.so|^lib-preferences.so|^lib-project-rate.so|^lib-project.so|^lib-registries.so|^lib-screen-geometry.so|^lib-string-utils.so|^lib-strings.so|^lib-theme.so|^lib-utility.so|^lib-uuid.so|^lib-xml.so|^lib-audio-graph.so|^lib-graphics.so|^lib-ipc.so|^lib-module-manager.so|^lib-project-history.so|^lib-sample-track.so|^lib-theme-resources.so|^lib-track.so|^lib-transactions.so
 %global __provides_exclude ^lib-audio-devices.so|^lib-basic-ui.so|^lib-components.so|^lib-exceptions.so|^lib-ffmpeg-support.so|^lib-files.so|^lib-math.so|^lib-preferences.so|^lib-project-rate.so|^lib-project.so|^lib-registries.so|^lib-screen-geometry.so|^lib-string-utils.so|^lib-strings.so|^lib-theme.so|^lib-utility.so|^lib-uuid.so|^lib-xml.so|^lib-audio-graph.so|^lib-graphics.so|^lib-ipc.so|^lib-module-manager.so|^lib-project-history.so|^lib-sample-track.so|^lib-theme-resources.so|^lib-track.so|^lib-transactions.so
 
+# Disable rpath checking until upstream fixes the rpath: https://github.com/audacity/audacity/issues/1008
+%global __brp_check_rpaths %{nil}
+
 %global toolchain clang
 
 Name:    audacity-freeworld
@@ -21,9 +24,8 @@ Source0: https://github.com/audacity/audacity/archive/Audacity-%{version}.tar.gz
 Patch0: audacity-2.4.2-fix-portmidi-as-system.patch
 # Fix libmp3lame detection from cmake
 Patch1:	audacity-2.4.2-fix-libmp3lame-as-system.patch
-Patch2: audacity-install-rpath.patch
-Patch3: audacity-3.2.1-compile.patch
-Patch4: https://github.com/audacity/audacity/commit/deaa833a4253699493443e2fee68e8d2a9bde646.patch#/ffmpeg6.patch
+Patch2: audacity-3.2.1-compile.patch
+Patch3: https://github.com/audacity/audacity/commit/deaa833a4253699493443e2fee68e8d2a9bde646.patch#/ffmpeg6.patch
 
 BuildRequires: cmake
 BuildRequires: gettext-devel
@@ -95,6 +97,7 @@ rm -rf lib-src/{libvamp,libsoxr}/
 touch include/RevisionIdent.h
 
 %build
+
 # fix system lame detection
 export PKG_CONFIG_PATH=$(pwd):$PKG_CONFIG_PATH
 export CFLAGS="%{optflags} -fno-strict-aliasing -ggdb $(wx-config --cflags)"
