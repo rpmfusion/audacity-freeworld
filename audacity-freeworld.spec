@@ -95,6 +95,11 @@ rm -rf lib-src/{libvamp,libsoxr}/
 touch include/RevisionIdent.h
 
 %build
+# fix system lame detection
+export PKG_CONFIG_PATH=$(pwd):$PKG_CONFIG_PATH
+export CFLAGS="%{optflags} -fno-strict-aliasing -ggdb $(wx-config --cflags)"
+export CXXFLAGS="$CFLAGS -std=gnu++11"
+
 %cmake \
     -DCMAKE_MODULE_LINKER_FLAGS:STRING="$(wx-config --libs)" \
     -DCMAKE_SHARED_LINKER_FLAGS:STRING="$(wx-config --libs)" \
