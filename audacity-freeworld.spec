@@ -1,11 +1,11 @@
-%global __requires_exclude ^lib-audio-devices.so|^lib-basic-ui.so|^lib-components.so|^lib-exceptions.so|^lib-ffmpeg-support.so|^lib-files.so|^lib-math.so|^lib-preferences.so|^lib-project-rate.so|^lib-project.so|^lib-registries.so|^lib-screen-geometry.so|^lib-string-utils.so|^lib-strings.so|^lib-theme.so|^lib-utility.so|^lib-uuid.so|^lib-xml.so|^lib-audio-graph.so|^lib-graphics.so|^lib-ipc.so|^lib-module-manager.so|^lib-project-history.so|^lib-sample-track.so|^lib-theme-resources.so|^lib-track.so|^lib-transactions.so
-%global __provides_exclude ^lib-audio-devices.so|^lib-basic-ui.so|^lib-components.so|^lib-exceptions.so|^lib-ffmpeg-support.so|^lib-files.so|^lib-math.so|^lib-preferences.so|^lib-project-rate.so|^lib-project.so|^lib-registries.so|^lib-screen-geometry.so|^lib-string-utils.so|^lib-strings.so|^lib-theme.so|^lib-utility.so|^lib-uuid.so|^lib-xml.so|^lib-audio-graph.so|^lib-graphics.so|^lib-ipc.so|^lib-module-manager.so|^lib-project-history.so|^lib-sample-track.so|^lib-theme-resources.so|^lib-track.so|^lib-transactions.so
+%global __requires_exclude ^lib-audio-devices.so|^lib-audio-io.so|^lib-basic-ui.so|^lib-command-parameters.so|^lib-components.so|^lib-effects.so|^lib-exceptions.so|^lib-ffmpeg-support.so|^lib-files.so|^lib-math.so|^lib-numeric-formats.so|^lib-preferences.so|^lib-project-file-io.so|^lib-project-rate.so|^lib-project.so|^lib-realtime-effects.so|^lib-registries.so|^lib-screen-geometry.so|^lib-shuttlegui.so|^lib-snapping.so|^lib-string-utils.so|^lib-strings.so|^lib-tags.so|^lib-time-frequency-selection.so|^lib-theme.so|^lib-time-track.so|^lib-track-selection.so|^lib-utility.so|^lib-uuid.so|^lib-xml.so|^lib-audio-graph.so|^lib-graphics.so|^lib-ipc.so|^lib-module-manager.so|^lib-project-history.so|^lib-sample-track.so|^lib-theme-resources.so|^lib-track.so|^lib-transactions.so|^lib-wave-track.so|^lib-wx-init.so|^lib-wx-wrappers.so
+%global __provides_exclude ^lib-audio-devices.so|^lib-audio-io.so|^lib-basic-ui.so|^lib-command-parameters.so|^lib-components.so|^lib-effects.so|^lib-exceptions.so|^lib-ffmpeg-support.so|^lib-files.so|^lib-math.so|^lib-numeric-formats.so|^lib-preferences.so|^lib-project-file-io.so|^lib-project-rate.so|^lib-project.so|^lib-realtime-effects.so|^lib-registries.so|^lib-screen-geometry.so|^lib-shuttlegui.so|^lib-snapping.so|^lib-string-utils.so|^lib-strings.so|^lib-tags.so|^lib-time-frequency-selection.so|^lib-theme.so|^lib-time-track.so|^lib-track-selection.so|^lib-utility.so|^lib-uuid.so|^lib-xml.so|^lib-audio-graph.so|^lib-graphics.so|^lib-ipc.so|^lib-module-manager.so|^lib-project-history.so|^lib-sample-track.so|^lib-theme-resources.so|^lib-track.so|^lib-transactions.so|^lib-wave-track.so|^lib-wx-init.so|^lib-wx-wrappers.so
 
-%global toolchain clang
+#global toolchain clang
 
 Name:    audacity-freeworld
-Version: 3.2.5
-Release: 2%{?dist}
+Version: 3.3.0
+Release: 1%{?dist}
 Summary: Multitrack audio editor
 License: GPLv2
 URL:     https://audacity.sourceforge.net
@@ -21,14 +21,12 @@ Source0: https://github.com/audacity/audacity/archive/Audacity-%{version}.tar.gz
 Patch0: audacity-2.4.2-fix-portmidi-as-system.patch
 # Fix libmp3lame detection from cmake
 Patch1: audacity-2.4.2-fix-libmp3lame-as-system.patch
-Patch2: audacity-install-rpath.patch
-Patch3: audacity-non-x86.patch
-Patch4: audacity-3.2.1-compile.patch
-Patch5: https://github.com/audacity/audacity/commit/deaa833a4253699493443e2fee68e8d2a9bde646.patch#/ffmpeg6.patch
+Patch2: audacity-non-x86.patch
+Patch3: audacity-3.2.1-compile.patch
 
 BuildRequires: cmake
 BuildRequires: gettext-devel
-BuildRequires: clang
+BuildRequires: gcc-c++
 BuildRequires: alsa-lib-devel
 BuildRequires: desktop-file-utils
 BuildRequires: expat-devel
@@ -159,6 +157,9 @@ rm -f %{buildroot}%{_prefix}/%{realname}
 %license LICENSE.txt
 
 %changelog
+* Mon Apr 24 2023 Leigh Scott <leigh123linux@gmail.com> - 3.3.0-1
+- 3.3.0
+
 * Sat Apr 01 2023 Leigh Scott <leigh123linux@gmail.com> - 3.2.5-2
 - Add ffmpeg-6 support
 
