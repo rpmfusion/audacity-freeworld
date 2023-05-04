@@ -5,7 +5,7 @@
 
 Name:    audacity-freeworld
 Version: 3.3.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Multitrack audio editor
 License: GPLv2
 URL:     https://audacity.sourceforge.net
@@ -23,6 +23,7 @@ Patch0: audacity-2.4.2-fix-portmidi-as-system.patch
 Patch1: audacity-2.4.2-fix-libmp3lame-as-system.patch
 Patch2: audacity-non-x86.patch
 Patch3: audacity-3.2.1-compile.patch
+Patch4: https://github.com/audacity/audacity/pull/4644.patch
 
 BuildRequires: cmake
 BuildRequires: gettext-devel
@@ -157,6 +158,9 @@ rm -f %{buildroot}%{_prefix}/%{realname}
 %license LICENSE.txt
 
 %changelog
+* Thu May 04 2023 Leigh Scott <leigh123linux@gmail.com> - 3.3.1-2
+- Fix crash on startup (rfbz#6669)
+
 * Fri Apr 28 2023 Leigh Scott <leigh123linux@gmail.com> - 3.3.1-1
 - 3.3.1
 
