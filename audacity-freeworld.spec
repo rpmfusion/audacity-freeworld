@@ -8,7 +8,7 @@ Version: 3.3.2
 Release: 1%{?dist}
 Summary: Multitrack audio editor
 License: GPLv2
-URL:     https://audacity.sourceforge.net
+URL:     https://www.audacityteam.org/
 
 %define realname audacity
 Conflicts: %{realname}
