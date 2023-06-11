@@ -4,7 +4,7 @@
 #global toolchain clang
 
 Name:    audacity-freeworld
-Version: 3.3.2
+Version: 3.3.3
 Release: 1%{?dist}
 Summary: Multitrack audio editor
 License: GPLv2
@@ -157,6 +157,9 @@ rm -f %{buildroot}%{_prefix}/%{realname}
 %license LICENSE.txt
 
 %changelog
+* Sun Jun 11 2023 Leigh Scott <leigh123linux@gmail.com> - 3.3.3-1
+- 3.3.3
+
 * Sun May 07 2023 Leigh Scott <leigh123linux@gmail.com> - 3.3.2-1
 - 3.3.2
 
