@@ -1,11 +1,11 @@
-%global __requires_exclude ^lib-audio-devices.so|^lib-audio-io.so|^lib-basic-ui.so|^lib-command-parameters.so|^lib-components.so|^lib-effects.so|^lib-exceptions.so|^lib-ffmpeg-support.so|^lib-files.so|^lib-math.so|^lib-numeric-formats.so|^lib-preferences.so|^lib-project-file-io.so|^lib-project-rate.so|^lib-project.so|^lib-realtime-effects.so|^lib-registries.so|^lib-screen-geometry.so|^lib-shuttlegui.so|^lib-snapping.so|^lib-string-utils.so|^lib-strings.so|^lib-tags.so|^lib-time-frequency-selection.so|^lib-theme.so|^lib-time-track.so|^lib-track-selection.so|^lib-utility.so|^lib-uuid.so|^lib-xml.so|^lib-audio-graph.so|^lib-graphics.so|^lib-ipc.so|^lib-module-manager.so|^lib-project-history.so|^lib-sample-track.so|^lib-theme-resources.so|^lib-track.so|^lib-transactions.so|^lib-wave-track.so|^lib-wx-init.so|^lib-wx-wrappers.so
-%global __provides_exclude ^lib-audio-devices.so|^lib-audio-io.so|^lib-basic-ui.so|^lib-command-parameters.so|^lib-components.so|^lib-effects.so|^lib-exceptions.so|^lib-ffmpeg-support.so|^lib-files.so|^lib-math.so|^lib-numeric-formats.so|^lib-preferences.so|^lib-project-file-io.so|^lib-project-rate.so|^lib-project.so|^lib-realtime-effects.so|^lib-registries.so|^lib-screen-geometry.so|^lib-shuttlegui.so|^lib-snapping.so|^lib-string-utils.so|^lib-strings.so|^lib-tags.so|^lib-time-frequency-selection.so|^lib-theme.so|^lib-time-track.so|^lib-track-selection.so|^lib-utility.so|^lib-uuid.so|^lib-xml.so|^lib-audio-graph.so|^lib-graphics.so|^lib-ipc.so|^lib-module-manager.so|^lib-project-history.so|^lib-sample-track.so|^lib-theme-resources.so|^lib-track.so|^lib-transactions.so|^lib-wave-track.so|^lib-wx-init.so|^lib-wx-wrappers.so
+%global __requires_exclude ^lib-.*.so            
+%global __provides_exclude ^lib-.*.so
 
 #global toolchain clang
 
 Name:    audacity-freeworld
-Version: 3.3.3
-Release: 2%{?dist}
+Version: 3.4.0
+Release: 1%{?dist}
 Summary: Multitrack audio editor
 License: GPLv2
 URL:     https://www.audacityteam.org/
@@ -23,7 +23,6 @@ Patch0: audacity-2.4.2-fix-portmidi-as-system.patch
 Patch1: audacity-2.4.2-fix-libmp3lame-as-system.patch
 Patch2: audacity-non-x86.patch
 Patch3: audacity-3.2.1-compile.patch
-Patch4: https://github.com/audacity/audacity/commit/e181ee115e727b4754619b04aa6e8ad872113592.patch
 
 BuildRequires: cmake
 BuildRequires: gettext-devel
@@ -51,8 +50,10 @@ BuildRequires: libXext-devel
 BuildRequires: lilv-devel
 BuildRequires: lv2-devel
 BuildRequires: mpg123-devel
+BuildRequires: opusfile-devel
 BuildRequires: portaudio-devel >= 19-16
 BuildRequires: portmidi-devel
+BuildRequires: rapidjson-devel
 BuildRequires: serd-devel
 BuildRequires: sord-devel
 BuildRequires: soundtouch-devel
@@ -158,6 +159,9 @@ rm -f %{buildroot}%{_prefix}/%{realname}
 %license LICENSE.txt
 
 %changelog
+* Fri Nov 03 2023 Leigh Scott <leigh123linux@gmail.com> - 3.4.0-1
+- 3.4.0
+
 * Wed Aug 02 2023 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 3.3.3-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_39_Mass_Rebuild
 
