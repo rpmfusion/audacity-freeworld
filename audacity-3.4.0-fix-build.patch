@@ -1,0 +1,11 @@
+--- a/libraries/lib-time-and-pitch/StaffPad/SimdTypes_neon.h
++++ b/libraries/lib-time-and-pitch/StaffPad/SimdTypes_neon.h
+@@ -45,7 +45,7 @@ struct float_x4
+     s.n128_f32[2] = v2;
+     s.n128_f32[3] = v3;
+ #else
+-    s = {v0, v1, v2, v3};
++    s = float32x4_t{v0, v1, v2, v3};
+ #endif
+   }
+ 

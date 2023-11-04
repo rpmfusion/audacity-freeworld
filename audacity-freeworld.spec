@@ -23,6 +23,7 @@ Patch0: audacity-2.4.2-fix-portmidi-as-system.patch
 Patch1: audacity-2.4.2-fix-libmp3lame-as-system.patch
 Patch2: audacity-non-x86.patch
 Patch3: audacity-3.2.1-compile.patch
+Patch4: audacity-3.4.0-fix-build.patch
 
 BuildRequires: cmake
 BuildRequires: gettext-devel
