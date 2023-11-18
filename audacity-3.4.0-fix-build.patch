@@ -1,11 +1,26 @@
+From bd2ef6d1bf7302964742ed307861ab51bc19f65c Mon Sep 17 00:00:00 2001
+From: Dmitry Vedenko <dmitry@crsib.me>
+Date: Mon, 6 Nov 2023 13:14:20 +0300
+Subject: [PATCH] Fixes the GCC build when targeting ARM CPUs with NEON support
+
+---
+ libraries/lib-time-and-pitch/StaffPad/SimdTypes_neon.h | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/libraries/lib-time-and-pitch/StaffPad/SimdTypes_neon.h b/libraries/lib-time-and-pitch/StaffPad/SimdTypes_neon.h
+index 7bc3c3d49533..7bf36aceda57 100644
 --- a/libraries/lib-time-and-pitch/StaffPad/SimdTypes_neon.h
 +++ b/libraries/lib-time-and-pitch/StaffPad/SimdTypes_neon.h
-@@ -45,7 +45,7 @@ struct float_x4
+@@ -44,8 +44,11 @@ struct float_x4
+     s.n128_f32[1] = v1;
      s.n128_f32[2] = v2;
      s.n128_f32[3] = v3;
- #else
--    s = {v0, v1, v2, v3};
-+    s = float32x4_t{v0, v1, v2, v3};
+-#else
++#elif __clang__
+     s = {v0, v1, v2, v3};
++#else
++    float f[4] = {v0, v1, v2, v3};
++    s = vld1q_f32(f);
  #endif
    }
  

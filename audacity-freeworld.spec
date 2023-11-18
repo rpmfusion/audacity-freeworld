@@ -1,10 +1,10 @@
 %global __requires_exclude ^lib-.*.so            
 %global __provides_exclude ^lib-.*.so
 
-#global toolchain clang
+%global toolchain clang
 
 Name:    audacity-freeworld
-Version: 3.4.0
+Version: 3.4.2
 Release: 1%{?dist}
 Summary: Multitrack audio editor
 License: GPLv2
@@ -23,11 +23,11 @@ Patch0: audacity-2.4.2-fix-portmidi-as-system.patch
 Patch1: audacity-2.4.2-fix-libmp3lame-as-system.patch
 Patch2: audacity-non-x86.patch
 Patch3: audacity-3.2.1-compile.patch
-Patch4: audacity-3.4.0-fix-build.patch
+Patch4: clang_fix.patch
 
 BuildRequires: cmake
 BuildRequires: gettext-devel
-BuildRequires: gcc-c++
+BuildRequires: clang
 BuildRequires: alsa-lib-devel
 BuildRequires: desktop-file-utils
 BuildRequires: expat-devel
@@ -56,6 +56,7 @@ BuildRequires: portaudio-devel >= 19-16
 BuildRequires: portmidi-devel
 BuildRequires: rapidjson-devel
 BuildRequires: serd-devel
+BuildRequires: shared-mime-info
 BuildRequires: sord-devel
 BuildRequires: soundtouch-devel
 BuildRequires: soxr-devel
@@ -160,6 +161,9 @@ rm -f %{buildroot}%{_prefix}/%{realname}
 %license LICENSE.txt
 
 %changelog
+* Fri Nov 17 2023 Leigh Scott <leigh123linux@gmail.com> - 3.4.2-1
+- 3.4.2
+
 * Fri Nov 03 2023 Leigh Scott <leigh123linux@gmail.com> - 3.4.0-1
 - 3.4.0
 

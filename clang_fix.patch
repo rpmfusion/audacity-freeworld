@@ -1,0 +1,11 @@
+--- a/src/ListNavigationPanel.h
++++ b/src/ListNavigationPanel.h
+@@ -13,8 +13,6 @@
+ #include <wx/window.h>
+ #include <wx/containr.h>
+ 
+-extern template class WXDLLIMPEXP_CORE wxNavigationEnabled<wxWindow>;
+-
+ #include "ListNavigationEnabled.h"
+ 
+ //!Focusable widget container.
