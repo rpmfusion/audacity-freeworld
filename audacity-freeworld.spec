@@ -1,11 +1,9 @@
 %global __requires_exclude ^lib-.*.so            
 %global __provides_exclude ^lib-.*.so
 
-%global toolchain clang
-
 Name:    audacity-freeworld
-Version: 3.4.2
-Release: 2%{?dist}
+Version: 3.5.1
+Release: 1%{?dist}
 Summary: Multitrack audio editor
 License: GPLv2
 URL:     https://www.audacityteam.org/
@@ -17,17 +15,11 @@ Source0: https://github.com/audacity/audacity/archive/Audacity-%{version}.tar.gz
 
 # manual can be installed from the base Fedora Audacity package.
 
-# Fix portmidi detection from cmake
-Patch0: audacity-2.4.2-fix-portmidi-as-system.patch
-# Fix libmp3lame detection from cmake
-Patch1: audacity-2.4.2-fix-libmp3lame-as-system.patch
-Patch2: audacity-non-x86.patch
-Patch3: audacity-3.2.1-compile.patch
-Patch4: clang_fix.patch
-
 BuildRequires: cmake
 BuildRequires: gettext-devel
-BuildRequires: clang
+BuildRequires: chrpath
+BuildRequires: gcc
+BuildRequires: gcc-c++
 BuildRequires: alsa-lib-devel
 BuildRequires: desktop-file-utils
 BuildRequires: expat-devel
@@ -38,7 +30,7 @@ BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: ladspa-devel
 BuildRequires: lame-devel
 BuildRequires: libid3tag-devel
-BuildRequires: libjpeg-devel
+BuildRequires: libjpeg-turbo-devel turbojpeg
 BuildRequires: libmad-devel
 BuildRequires: taglib-devel
 BuildRequires: twolame-devel
@@ -103,29 +95,61 @@ touch include/RevisionIdent.h
     -DCMAKE_SHARED_LINKER_FLAGS:STRING="$(wx-config --libs)" \
     -DAUDACITY_BUILD_LEVEL:STRING=2 \
     -Daudacity_conan_enabled=Off \
-    -Daudacity_has_networking:BOOL=Off \
-    -Daudacity_has_updates_check:BOOL=Off \
+    -Daudacity_has_networking=Off \
+    -Daudacity_has_crashreports=Off \
+    -Daudacity_has_updates_check=Off \
+    -Daudacity_has_sentry_reporting=Off \
     -Daudacity_lib_preference:STRING=system \
-    -Daudacity_use_sndfile=system \
+    -Daudacity_use_libsndfile=system \
     -Daudacity_use_soxr=system \
     -Daudacity_use_lame=system \
     -Daudacity_use_twolame=system \
-    -Daudacity_use_flac=system \
+    -Daudacity_use_libflac=system \
     -Daudacity_use_ladspa=on \
-    -Daudacity_use_vorbis=system \
-    -Daudacity_use_id3tag=system \
+    -Daudacity_use_libvorbis=system \
+    -Daudacity_use_libid3tag=system \
     -Daudacity_use_expat=system \
     -Daudacity_use_soundtouch=system \
     -Daudacity_use_vamp=system \
     -Daudacity_use_lv2=system \
     -Daudacity_use_midi=system \
-    -Daudacity_use_ogg=system \
+    -Daudacity_use_libogg=system \
     -Daudacity_has_vst3:BOOL=Off \
     -Daudacity_use_ffmpeg=loaded
 %cmake_build
 
 %install
 %cmake_install
+
+	
+# Remove the RPATH from all the private libraries provided with Audacity and
+# make them all executable so that debug symbol extraction happens.
+# CMake could do this on its own using the install target for the library,
+# but the Audacity build system manually copies around the libraries so it
+# doesn't use the install target. This is very involved to fix in the code,
+# so this work around is easier and more maintainable than patching the build
+# system.
+pushd %{buildroot}%{_libdir}/%{realname}
+for libFile in *;
+do
+    if [[ ! -d $libFile ]];
+    then
+        chrpath --delete $libFile
+        chmod 755 $libFile
+    fi
+done
+popd
+ 
+pushd %{buildroot}%{_libdir}/%{realname}/modules
+for libFile in *;
+do
+    if [[ ! -d $libFile ]];
+    then
+        chrpath --delete $libFile
+        chmod 755 $libFile
+    fi
+done
+popd
 
 if appstream-util --help | grep -q replace-screenshots ; then
 appstream-util replace-screenshots %{buildroot}%{_metainfodir}/audacity.appdata.xml \
@@ -161,6 +185,9 @@ rm -f %{buildroot}%{_prefix}/%{realname}
 %license LICENSE.txt
 
 %changelog
+* Fri Apr 26 2024 Leigh Scott <leigh123linux@gmail.com> - 3.5.1-1
+- Update to 3.5.1
+
 * Sat Feb 03 2024 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 3.4.2-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_40_Mass_Rebuild
 
