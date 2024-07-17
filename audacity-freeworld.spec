@@ -2,7 +2,7 @@
 %global __provides_exclude ^lib-.*.so
 
 Name:    audacity-freeworld
-Version: 3.5.1
+Version: 3.6.0
 Release: 1%{?dist}
 Summary: Multitrack audio editor
 License: GPLv2
@@ -53,7 +53,7 @@ BuildRequires: sord-devel
 BuildRequires: soundtouch-devel
 BuildRequires: soxr-devel
 # Use local sqlite as system fails
-#BuildRequires: sqlite-devel
+BuildRequires: sqlite-devel
 BuildRequires: sratom-devel
 BuildRequires: suil-devel
 BuildRequires: vamp-plugin-sdk-devel >= 2.0
@@ -185,6 +185,9 @@ rm -f %{buildroot}%{_prefix}/%{realname}
 %license LICENSE.txt
 
 %changelog
+* Wed Jul 17 2024 Leigh Scott <leigh123linux@gmail.com> - 3.6.0-1
+- Update to 3.6.0
+
 * Fri Apr 26 2024 Leigh Scott <leigh123linux@gmail.com> - 3.5.1-1
 - Update to 3.5.1
 
