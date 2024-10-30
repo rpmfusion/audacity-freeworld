@@ -2,7 +2,7 @@
 %global __provides_exclude ^lib-.*.so
 
 Name:    audacity-freeworld
-Version: 3.6.3
+Version: 3.7.0
 Release: 1%{?dist}
 Summary: Multitrack audio editor
 License: GPLv2
@@ -11,7 +11,7 @@ URL:     https://www.audacityteam.org/
 %define realname audacity
 Conflicts: %{realname}
 
-Source0: https://github.com/audacity/audacity/archive/Audacity-%{version}.tar.gz
+Source0: https://github.com/audacity/audacity/releases/download/Audacity-%{version}/audacity-sources-%{version}.tar.gz
 
 # manual can be installed from the base Fedora Audacity package.
 
@@ -81,7 +81,7 @@ This build has support for mp3 and ffmpeg import/export.
 
 
 %prep
-%autosetup -p1 -n %{realname}-Audacity-%{version}
+%autosetup -p1 -n %{realname}-sources-%{version}
 
 # Make sure we use the system versions.
 rm -rf lib-src/{libvamp,libsoxr}/
@@ -185,6 +185,9 @@ rm -f %{buildroot}%{_prefix}/%{realname}
 %license LICENSE.txt
 
 %changelog
+* Wed Oct 30 2024 Leigh Scott <leigh123linux@gmail.com> - 3.7.0-1
+- Update to 3.7.0
+
 * Sat Sep 14 2024 Leigh Scott <leigh123linux@gmail.com> - 3.6.3-1
 - Update to 3.6.3
 
