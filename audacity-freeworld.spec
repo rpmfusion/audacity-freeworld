@@ -90,6 +90,7 @@ rm -rf lib-src/{libvamp,libsoxr}/
 touch include/RevisionIdent.h
 
 %build
+export CFLAGS="$RPM_OPT_FLAGS -std=gnu17"
 %cmake \
     -DCMAKE_MODULE_LINKER_FLAGS:STRING="$(wx-config --libs)" \
     -DCMAKE_SHARED_LINKER_FLAGS:STRING="$(wx-config --libs)" \
