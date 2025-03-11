@@ -2,8 +2,8 @@
 %global __provides_exclude ^lib-.*.so
 
 Name:    audacity-freeworld
-Version: 3.7.1
-Release: 2%{?dist}
+Version: 3.7.2
+Release: 1%{?dist}
 Summary: Multitrack audio editor
 License: GPLv2
 URL:     https://www.audacityteam.org/
@@ -186,6 +186,9 @@ rm -f %{buildroot}%{_prefix}/%{realname}
 %license LICENSE.txt
 
 %changelog
+* Tue Mar 11 2025 Leigh Scott <leigh123linux@gmail.com> - 3.7.2-1
+- Update to 3.7.2
+
 * Tue Jan 28 2025 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 3.7.1-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_42_Mass_Rebuild
 
