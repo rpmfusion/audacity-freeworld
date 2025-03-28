@@ -2,7 +2,7 @@
 %global __provides_exclude ^lib-.*.so
 
 Name:    audacity-freeworld
-Version: 3.7.2
+Version: 3.7.3
 Release: 1%{?dist}
 Summary: Multitrack audio editor
 License: GPLv2
@@ -186,6 +186,9 @@ rm -f %{buildroot}%{_prefix}/%{realname}
 %license LICENSE.txt
 
 %changelog
+* Fri Mar 28 2025 Leigh Scott <leigh123linux@gmail.com> - 3.7.3-1
+- Update to 3.7.3
+
 * Tue Mar 11 2025 Leigh Scott <leigh123linux@gmail.com> - 3.7.2-1
 - Update to 3.7.2
 
