@@ -3,7 +3,7 @@
 
 Name:    audacity-freeworld
 Version: 3.7.3
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Multitrack audio editor
 License: GPLv2
 URL:     https://www.audacityteam.org/
@@ -186,6 +186,9 @@ rm -f %{buildroot}%{_prefix}/%{realname}
 %license LICENSE.txt
 
 %changelog
+* Fri May 30 2025 Leigh Scott <leigh123linux@gmail.com> - 3.7.3-2
+- Rebuild for new flac .so version
+
 * Fri Mar 28 2025 Leigh Scott <leigh123linux@gmail.com> - 3.7.3-1
 - Update to 3.7.3
 
