@@ -3,7 +3,7 @@
 
 Name:    audacity-freeworld
 Version: 3.7.4
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Multitrack audio editor
 License: GPLv2
 URL:     https://www.audacityteam.org/
@@ -12,6 +12,7 @@ URL:     https://www.audacityteam.org/
 Conflicts: %{realname}
 
 Source0: https://github.com/audacity/audacity/releases/download/Audacity-%{version}/audacity-sources-%{version}.tar.gz
+Patch0:  rapidjson_buildfix.patch
 
 # manual can be installed from the base Fedora Audacity package.
 
@@ -92,6 +93,7 @@ touch include/RevisionIdent.h
 %build
 export CFLAGS="$RPM_OPT_FLAGS -std=gnu17"
 %cmake \
+    -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_MODULE_LINKER_FLAGS:STRING="$(wx-config --libs)" \
     -DCMAKE_SHARED_LINKER_FLAGS:STRING="$(wx-config --libs)" \
     -DAUDACITY_BUILD_LEVEL:STRING=2 \
@@ -186,6 +188,9 @@ rm -f %{buildroot}%{_prefix}/%{realname}
 %license LICENSE.txt
 
 %changelog
+* Wed Jul 23 2025 Leigh Scott <leigh123linux@gmail.com> - 3.7.4-2
+- Use release build type (rfbz#7056)
+
 * Tue Jun 10 2025 Leigh Scott <leigh123linux@gmail.com> - 3.7.4-1
 - Update to 3.7.4
 
