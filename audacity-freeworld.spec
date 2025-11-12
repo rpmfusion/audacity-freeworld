@@ -1,9 +1,9 @@
-%global __requires_exclude ^lib-.*.so            
+%global __requires_exclude ^lib-.*.so
 %global __provides_exclude ^lib-.*.so
 
 Name:    audacity-freeworld
 Version: 3.7.5
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Multitrack audio editor
 License: GPLv2
 URL:     https://www.audacityteam.org/
@@ -13,6 +13,7 @@ Conflicts: %{realname}
 
 Source0: https://github.com/audacity/audacity/releases/download/Audacity-%{version}/audacity-sources-%{version}.tar.gz
 Patch0:  rapidjson_buildfix.patch
+Patch1:  ffmpeg-8.patch
 
 # manual can be installed from the base Fedora Audacity package.
 
@@ -124,7 +125,7 @@ export CFLAGS="$RPM_OPT_FLAGS -std=gnu17"
 %install
 %cmake_install
 
-	
+
 # Remove the RPATH from all the private libraries provided with Audacity and
 # make them all executable so that debug symbol extraction happens.
 # CMake could do this on its own using the install target for the library,
@@ -142,7 +143,7 @@ do
     fi
 done
 popd
- 
+
 pushd %{buildroot}%{_libdir}/%{realname}/modules
 for libFile in *;
 do
@@ -188,6 +189,9 @@ rm -f %{buildroot}%{_prefix}/%{realname}
 %license LICENSE.txt
 
 %changelog
+* Wed Nov 12 2025 Leigh Scott <leigh123linux@gmail.com> - 3.7.5-2
+- Add ffmpeg-8 support
+
 * Sun Aug 10 2025 Leigh Scott <leigh123linux@gmail.com> - 3.7.5-1
 - Update to 3.7.5
 
@@ -583,14 +587,14 @@ rm -f %{buildroot}%{_prefix}/%{realname}
 
 * Sat Dec  5 2009 David Timms <iinet.net.au@dtimms> - 1.3.10-0.1.1.beta
 - upgrade to 1.3.10-beta
-- re-base spec to fedora devel and patches by mschwendt 
+- re-base spec to fedora devel and patches by mschwendt
 
 * Thu Dec  3 2009 David Timms <iinet.net.au@dtimms> - 1.3.9-0.4.2.beta
 - continue with upgrade to f12 version
 
 * Mon Nov 16 2009 David Timms <iinet.net.au@dtimms> - 1.3.9-0.4.1.beta
 - upgrade to 1.3.9-beta to match Fedora version.
-- resync to include new and updated patches from mschwendt 
+- resync to include new and updated patches from mschwendt
 - add conditional freeworld to allow minimal change from Fedora version
 
 * Fri Oct 23 2009 Orcan Ogetbil <oged[DOT]fedora[AT]gmail[DOT]com> - 1.3.7-0.6.2.beta
@@ -657,7 +661,7 @@ rm -f %{buildroot}%{_prefix}/%{realname}
   same package -- users may stick to the older one, but please help
   with evaluating the newer one
 - merge packaging changes from my 1.3.3/1.3.4 test packages:
-- build newer release with wxGTK 2.8.x  
+- build newer release with wxGTK 2.8.x
 - BR soundtouch-devel  and  --with-soundtouch=system
 - drop obsolete patches: resample, mp3 export, destdir, FLAC, fr
 
@@ -687,9 +691,9 @@ rm -f %{buildroot}%{_prefix}/%{realname}
   broken/empty files)
 
 * Tue Feb 20 2007 Michael Schwendt <mschwendt@users.sf.net> - 1.3.2-0.3.beta
-- patch app init to set a default location for libmp3lame.so.0 
+- patch app init to set a default location for libmp3lame.so.0
 - fix the libmp3lame.so.0 subst
-- subst _libdir in libmp3lame search 
+- subst _libdir in libmp3lame search
 - use sed instead of perl
 
 * Sun Feb 18 2007 Michael Schwendt <mschwendt@users.sf.net> - 1.3.2-0.2.beta
@@ -697,7 +701,7 @@ rm -f %{buildroot}%{_prefix}/%{realname}
 
 * Thu Feb 15 2007 Michael Schwendt <mschwendt@users.sf.net> - 1.3.2-0.1.beta
 - sync with Fedora Extras 6 upgrade to 1.3.2-beta
-- add BR expat-devel jack-audio-connection-kit-devel alsa-lib-devel 
+- add BR expat-devel jack-audio-connection-kit-devel alsa-lib-devel
 - built-in/patched: nyquist soundtouch
 - built-in/patched, n/a: twolame
 - adjust configure options accordingly
