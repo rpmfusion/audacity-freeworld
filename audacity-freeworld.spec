@@ -2,8 +2,8 @@
 %global __provides_exclude ^lib-.*.so
 
 Name:    audacity-freeworld
-Version: 3.7.5
-Release: 2%{?dist}
+Version: 3.7.7
+Release: 1%{?dist}
 Summary: Multitrack audio editor
 License: GPLv2
 URL:     https://www.audacityteam.org/
@@ -13,7 +13,6 @@ Conflicts: %{realname}
 
 Source0: https://github.com/audacity/audacity/releases/download/Audacity-%{version}/audacity-sources-%{version}.tar.gz
 Patch0:  rapidjson_buildfix.patch
-Patch1:  ffmpeg-8.patch
 
 # manual can be installed from the base Fedora Audacity package.
 
@@ -189,6 +188,9 @@ rm -f %{buildroot}%{_prefix}/%{realname}
 %license LICENSE.txt
 
 %changelog
+* Sun Dec 14 2025 Leigh Scott <leigh123linux@gmail.com> - 3.7.7-1
+- Update to 3.7.7
+
 * Wed Nov 12 2025 Leigh Scott <leigh123linux@gmail.com> - 3.7.5-2
 - Add ffmpeg-8 support
 
