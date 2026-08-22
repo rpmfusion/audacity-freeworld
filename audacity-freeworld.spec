@@ -13,6 +13,7 @@ Conflicts: %{realname}
 
 Source0: https://github.com/audacity/audacity/releases/download/Audacity-%{version}/audacity-sources-%{version}.tar.gz
 Patch0:  rapidjson_buildfix.patch
+Patch1:  https://github.com/audacity/audacity/commit/c1310b121599e8e03bf8dd4296a1c0ec68b6cbfc.patch#/ffmpeg9.patch
 
 # manual can be installed from the base Fedora Audacity package.
 
