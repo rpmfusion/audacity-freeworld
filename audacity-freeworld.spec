@@ -11,6 +11,7 @@ URL:     https://www.audacityteam.org/
 Conflicts: %{realname}
 Source0: https://github.com/audacity/audacity/releases/download/Audacity-%{version}/audacity-sources-%{version}.tar.xz
 Patch0:  audacity-4.0.0-desktop-name.patch
+Patch1:  audacity-soxr-conditional-simd32-sources.patch
 
 # manual can be installed from the base Fedora Audacity package.
 
