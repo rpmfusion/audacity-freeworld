@@ -1,4 +1,8 @@
 %define majmin %(echo %{version}|cut -d. -f1-2)
+# The ppc64le builders don't have enough RAM for linking
+%ifarch ppc64le
+%global _lto_cflags %{nil}
+%endif
 
 Name:    audacity-freeworld
 Version: 4.0.0
