@@ -1,72 +1,78 @@
-%global __requires_exclude ^lib-.*.so
-%global __provides_exclude ^lib-.*.so
+%define majmin %(echo %{version}|cut -d. -f1-2)
 
 Name:    audacity-freeworld
-Version: 3.7.8
-Release: 3%{?dist}
+Version: 4.0.0
+Release: 1%{?dist}
 Summary: Multitrack audio editor
-License: GPLv2
+License: GPL-2.0-only AND GPL-3.0-only AND CC-BY-3.0
 URL:     https://www.audacityteam.org/
 
 %define realname audacity
 Conflicts: %{realname}
-
-Source0: https://github.com/audacity/audacity/releases/download/Audacity-%{version}/audacity-sources-%{version}.tar.gz
-Patch0:  rapidjson_buildfix.patch
-Patch1:  https://github.com/audacity/audacity/commit/c1310b121599e8e03bf8dd4296a1c0ec68b6cbfc.patch#/ffmpeg9.patch
+Source0: https://github.com/audacity/audacity/releases/download/Audacity-%{version}/audacity-sources-%{version}.tar.xz
+Patch0:  audacity-4.0.0-desktop-name.patch
 
 # manual can be installed from the base Fedora Audacity package.
 
-BuildRequires: cmake
-BuildRequires: gettext-devel
 BuildRequires: chrpath
+BuildRequires: cmake
+BuildRequires: desktop-file-utils
 BuildRequires: gcc
 BuildRequires: gcc-c++
-BuildRequires: alsa-lib-devel
-BuildRequires: desktop-file-utils
-BuildRequires: expat-devel
-BuildRequires: flac-devel
-BuildRequires: git
-BuildRequires: gtk3-devel
-BuildRequires: jack-audio-connection-kit-devel
-BuildRequires: ladspa-devel
-BuildRequires: lame-devel
-BuildRequires: libid3tag-devel
-BuildRequires: libjpeg-turbo-devel turbojpeg
-BuildRequires: libmad-devel
-BuildRequires: taglib-devel
-BuildRequires: twolame-devel
-BuildRequires: libogg-devel
-BuildRequires: libsndfile-devel
-BuildRequires: libuuid-devel
-BuildRequires: libvorbis-devel
-BuildRequires: libX11-devel
-BuildRequires: libXext-devel
-BuildRequires: lilv-devel
-BuildRequires: lv2-devel
-BuildRequires: mpg123-devel
-BuildRequires: opusfile-devel
-BuildRequires: portaudio-devel >= 19-16
-BuildRequires: portmidi-devel
-BuildRequires: rapidjson-devel
-BuildRequires: serd-devel
-BuildRequires: shared-mime-info
-BuildRequires: sord-devel
-BuildRequires: soundtouch-devel
-BuildRequires: soxr-devel
-# Use local sqlite as system fails
-BuildRequires: sqlite-devel
-BuildRequires: sratom-devel
-BuildRequires: suil-devel
-BuildRequires: vamp-plugin-sdk-devel >= 2.0
-BuildRequires: wavpack-devel
-BuildRequires: wxGTK-devel
-BuildRequires: zip
-BuildRequires: zlib-devel
-BuildRequires: python3
+BuildRequires: gettext-devel
+BuildRequires: git-core
 BuildRequires: libappstream-glib
 
-Recommends:    ffmpeg-libs
+BuildRequires: cmake(Qt6Core)
+BuildRequires: cmake(Qt6Gui)
+BuildRequires: cmake(Qt6CorePrivate)
+BuildRequires: cmake(Qt6GuiPrivate)
+BuildRequires: cmake(Qt6Widgets)
+BuildRequires: cmake(Qt6Network)
+BuildRequires: cmake(Qt6NetworkAuth)
+BuildRequires: cmake(Qt6Qml)
+BuildRequires: cmake(Qt6Quick)
+BuildRequires: cmake(Qt6QuickControls2)
+BuildRequires: cmake(Qt6QuickWidgets)
+BuildRequires: cmake(Qt6Svg)
+BuildRequires: cmake(Qt6Xml)
+BuildRequires: cmake(Qt6DBus)
+BuildRequires: cmake(Qt6Concurrent)
+BuildRequires: cmake(Qt6PrintSupport)
+BuildRequires: cmake(Qt6ShaderTools)
+BuildRequires: cmake(Qt6Core5Compat)
+BuildRequires: cmake(Qt6LinguistTools)
+BuildRequires: cmake(Qt6StateMachine)
+BuildRequires: cmake(Qt6Test)
+BuildRequires: cmake(utf8cpp)
+BuildRequires: pkgconfig(alsa)
+BuildRequires: pkgconfig(expat)
+BuildRequires: pkgconfig(flac)
+BuildRequires: pkgconfig(flac++)
+BuildRequires: pkgconfig(freetype2)
+BuildRequires: pkgconfig(gl)
+BuildRequires: pkgconfig(harfbuzz)
+BuildRequires: pkgconfig(jack)
+BuildRequires: pkgconfig(libmpg123)
+BuildRequires: pkgconfig(libpng)
+BuildRequires: pkgconfig(libudev)
+BuildRequires: pkgconfig(ogg)
+BuildRequires: pkgconfig(opus)
+BuildRequires: pkgconfig(opusfile)
+BuildRequires: pkgconfig(pugixml)
+BuildRequires: pkgconfig(portaudio-2.0)
+BuildRequires: pkgconfig(sndfile)
+BuildRequires: pkgconfig(vorbis)
+BuildRequires: pkgconfig(wavpack) >= 5.2.0
+BuildRequires: pkgconfig(xkbcommon)
+BuildRequires: pkgconfig(zlib)
+BuildRequires: lame-devel
+BuildRequires: wxGTK-devel
+
+Recommends:    ffmpeg-libs%{?_isa}
+
+Requires:      qt6-qtdeclarative%{?_isa}
+Requires:      qt6-qtimageformats%{?_isa}
 
 # For new symbols in portaudio
 Requires:      portaudio%{?_isa} >= 19-16
@@ -83,112 +89,59 @@ This build has support for mp3 and ffmpeg import/export.
 
 
 %prep
-%autosetup -p1 -n %{realname}-sources-%{version}
-
-# Make sure we use the system versions.
-rm -rf lib-src/{libvamp,libsoxr}/
-
-#Included in src/AboutDialog.cpp but not supplied
-touch include/RevisionIdent.h
+%autosetup -p1 -n %{realname}-%{version}
 
 %build
-export CFLAGS="$RPM_OPT_FLAGS -std=gnu17"
 %cmake \
     -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_MODULE_LINKER_FLAGS:STRING="$(wx-config --libs)" \
-    -DCMAKE_SHARED_LINKER_FLAGS:STRING="$(wx-config --libs)" \
-    -DAUDACITY_BUILD_LEVEL:STRING=2 \
-    -Daudacity_conan_enabled=Off \
-    -Daudacity_has_networking=Off \
-    -Daudacity_has_crashreports=Off \
-    -Daudacity_has_updates_check=Off \
-    -Daudacity_has_sentry_reporting=Off \
-    -Daudacity_lib_preference:STRING=system \
-    -Daudacity_use_libsndfile=system \
-    -Daudacity_use_soxr=system \
-    -Daudacity_use_lame=system \
-    -Daudacity_use_twolame=system \
-    -Daudacity_use_libflac=system \
-    -Daudacity_use_ladspa=on \
-    -Daudacity_use_libvorbis=system \
-    -Daudacity_use_libid3tag=system \
-    -Daudacity_use_expat=system \
-    -Daudacity_use_soundtouch=system \
-    -Daudacity_use_vamp=system \
-    -Daudacity_use_lv2=system \
-    -Daudacity_use_midi=system \
-    -Daudacity_use_libogg=system \
-    -Daudacity_has_vst3:BOOL=Off \
-    -Daudacity_use_ffmpeg=loaded
+    -DEXTDEPS_OVERRIDE_ALL=SYSTEM \
+    -DEXTDEPS_CACHE=offline-deps/ \
+    -DAU4_BUILD_MODE=release \
+    -DAU4_BUILD_CONFIGURATION=app \
+    -DMUSE_ENABLE_UNIT_TESTS:BOOL=OFF \
+    -DMUSE_MODULE_DIAGNOSTICS_CRASHPAD_CLIENT:BOOL=OFF \
+    -DMUSE_MODULE_UPDATE:BOOL=OFF \
+    -DAU_BUILD_USAGEINFO_MODULE:BOOL=OFF \
+    -DAU_USE_SBSMS:BOOL=ON \
+    -DAU_USE_SOUNDTOUCH:BOOL=ON
 %cmake_build
 
 %install
 %cmake_install
+chrpath --delete %{buildroot}%{_bindir}/%{realname}
 
+%{find_lang} %{realname} --with-qt
 
-# Remove the RPATH from all the private libraries provided with Audacity and
-# make them all executable so that debug symbol extraction happens.
-# CMake could do this on its own using the install target for the library,
-# but the Audacity build system manually copies around the libraries so it
-# doesn't use the install target. This is very involved to fix in the code,
-# so this work around is easier and more maintainable than patching the build
-# system.
-pushd %{buildroot}%{_libdir}/%{realname}
-for libFile in *;
-do
-    if [[ ! -d $libFile ]];
-    then
-        chrpath --delete $libFile
-        chmod 755 $libFile
-    fi
-done
-popd
-
-pushd %{buildroot}%{_libdir}/%{realname}/modules
-for libFile in *;
-do
-    if [[ ! -d $libFile ]];
-    then
-        chrpath --delete $libFile
-        chmod 755 $libFile
-    fi
-done
-popd
-
+%check
 if appstream-util --help | grep -q replace-screenshots ; then
-appstream-util replace-screenshots %{buildroot}%{_metainfodir}/audacity.appdata.xml \
+appstream-util replace-screenshots %{buildroot}%{_metainfodir}/org.audacityteam.Audacity.appdata.xml \
   https://raw.githubusercontent.com/hughsie/fedora-appstream/master/screenshots-extra/audacity/a.png
 fi
 
-%{find_lang} %{realname}
-
 desktop-file-install --dir %{buildroot}%{_datadir}/applications \
-        %{buildroot}%{_datadir}/applications/audacity.desktop
+        %{buildroot}%{_datadir}/applications/org.audacityteam.Audacity.desktop
 
-mkdir %{buildroot}%{_datadir}/doc/%{realname}/nyquist
-cp -pr lib-src/libnyquist/nyquist/license.txt %{buildroot}%{_datadir}/doc/%{realname}/nyquist
-cp -pr lib-src/libnyquist/nyquist/Readme.txt %{buildroot}%{_datadir}/doc/%{realname}/nyquist
-rm %{buildroot}%{_datadir}/doc/%{realname}/LICENSE.txt
-rm -f %{buildroot}%{_prefix}/%{realname}
 
 %files -f %{realname}.lang
-%{_bindir}/%{realname}
-%{_libdir}/%{realname}/
-%dir %{_datadir}/%{realname}
-%{_datadir}/%{realname}/EffectsMenuDefaults.xml
-%{_datadir}/%{realname}/nyquist/
-%{_datadir}/%{realname}/plug-ins/
-%{_mandir}/man*/*
-%{_datadir}/applications/*
-%{_metainfodir}/%{realname}.appdata.xml
-%{_datadir}/pixmaps/*
-%{_datadir}/icons/hicolor/*/%{realname}.png
-%{_datadir}/icons/hicolor/scalable/apps/%{realname}.svg
-%{_datadir}/mime/packages/*
-%{_datadir}/doc/%{realname}
+%doc README.md
 %license LICENSE.txt
+%{_bindir}/%{realname}
+%{_datadir}/%{realname}
+%dir %{_datadir}/%{realname}-%{majmin}/
+%dir %{_datadir}/%{realname}-%{majmin}/locale/
+%{_datadir}/%{realname}-%{majmin}/locale/languages.json
+%{_datadir}/%{realname}-%{majmin}/workspaces/
+%{_datadir}/applications/org.audacityteam.Audacity.desktop
+%{_metainfodir}/org.audacityteam.Audacity.appdata.xml
+%{_datadir}/icons/hicolor/*/apps/audacity.png
+%{_datadir}/icons/hicolor/512x512/mimetypes/application-x-audacity.png
+%{_datadir}/icons/hicolor/scalable/mimetypes/application-x-audacity.svg
+%{_datadir}/mime/packages/audacity.xml
 
 %changelog
+* Sat Sep 05 2026 Leigh Scott <leigh123linux@gmail.com> - 4.0.0-1
+- Update to 4.0.0
+
 * Sat Aug 22 2026 Leigh Scott <leigh123linux@gmail.com> - 3.7.8-3
 - Rebuild for new ffmpeg
 
