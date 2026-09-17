@@ -6,7 +6,7 @@
 
 Name:    audacity-freeworld
 Version: 4.0.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Multitrack audio editor
 License: GPL-2.0-only AND GPL-3.0-only AND CC-BY-3.0
 URL:     https://www.audacityteam.org/
@@ -144,6 +144,9 @@ desktop-file-install --dir %{buildroot}%{_datadir}/applications \
 %{_datadir}/mime/packages/audacity.xml
 
 %changelog
+* Thu Sep 17 2026 Leigh Scott <leigh123linux@gmail.com> - 4.0.0-2
+- Rebuild for f45 ffmpeg9
+
 * Sat Sep 05 2026 Leigh Scott <leigh123linux@gmail.com> - 4.0.0-1
 - Update to 4.0.0
 
