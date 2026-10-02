@@ -1,0 +1,68 @@
+--- a/src/effects/builtin_collection/CMakeLists.txt
++++ b/src/effects/builtin_collection/CMakeLists.txt
+@@ -122,13 +122,6 @@
+     ${CMAKE_CURRENT_LIST_DIR}/silencegen/silencegenerator.h
+     ${CMAKE_CURRENT_LIST_DIR}/silencegen/silenceviewmodel.h
+ 
+-    ${CMAKE_CURRENT_LIST_DIR}/slidingstretch/slidingstretcheffect.cpp
+-    ${CMAKE_CURRENT_LIST_DIR}/slidingstretch/slidingstretcheffect.h
+-    ${CMAKE_CURRENT_LIST_DIR}/slidingstretch/slidingstretchviewmodel.cpp
+-    ${CMAKE_CURRENT_LIST_DIR}/slidingstretch/slidingstretchviewmodel.h
+-    ${CMAKE_CURRENT_LIST_DIR}/slidingstretch/slidingstretchsettingmodel.cpp
+-    ${CMAKE_CURRENT_LIST_DIR}/slidingstretch/slidingstretchsettingmodel.h
+-
+     ${CMAKE_CURRENT_LIST_DIR}/noisegen/noisegenerator.cpp
+     ${CMAKE_CURRENT_LIST_DIR}/noisegen/noisegenerator.h
+     ${CMAKE_CURRENT_LIST_DIR}/noisegen/noiseviewmodel.cpp
+@@ -193,3 +186,14 @@
+ 
+-set(MODULE_LINK au3wrap libsbsms shared)
++set(MODULE_LINK au3wrap shared)
++if(AU_USE_SBSMS)
++    list(APPEND MODULE_LINK libsbsms)
++    list(APPEND MODULE_SRC
++        ${CMAKE_CURRENT_LIST_DIR}/slidingstretch/slidingstretcheffect.cpp
++        ${CMAKE_CURRENT_LIST_DIR}/slidingstretch/slidingstretcheffect.h
++        ${CMAKE_CURRENT_LIST_DIR}/slidingstretch/slidingstretchviewmodel.cpp
++        ${CMAKE_CURRENT_LIST_DIR}/slidingstretch/slidingstretchviewmodel.h
++        ${CMAKE_CURRENT_LIST_DIR}/slidingstretch/slidingstretchsettingmodel.cpp
++        ${CMAKE_CURRENT_LIST_DIR}/slidingstretch/slidingstretchsettingmodel.h
++    )
++endif()
+ set(MODULE_LINK_PUBLIC au3-effects au3-builtin-effects)
+--- a/src/effects/builtin_collection/internal/builtincollectionloader.cpp
++++ b/src/effects/builtin_collection/internal/builtincollectionloader.cpp
+@@ -50,9 +50,11 @@
+ #include "dtmfgen/dtmfviewmodel.h"
+ #include "silencegen/silencegenerator.h"
+ #include "silencegen/silenceviewmodel.h"
++#if USE_SBSMS
+ #include "slidingstretch/slidingstretcheffect.h"
+ #include "slidingstretch/slidingstretchviewmodel.h"
+ #include "slidingstretch/slidingstretchsettingmodel.h"
++#endif
+ #include "noisegen/noisegenerator.h"
+ #include "noisegen/noiseviewmodel.h"
+ #include "noisereduction/noisereductioneffect.h"
+@@ -101,7 +103,9 @@ void BuiltinCollectionLoader::preInit()
+     static BuiltinEffectsModule::Registration< BassTrebleEffect > regBassTreble;
+     static BuiltinEffectsModule::Registration< PaulstretchEffect > regPaulstretch;
+     static BuiltinEffectsModule::Registration< SilenceGenerator > regSilence;
++#if USE_SBSMS
+     static BuiltinEffectsModule::Registration< SlidingStretchEffect > regSlidingStretch;
++#endif
+     static BuiltinEffectsModule::Registration< NoiseGenerator > regNoise;
+     static BuiltinEffectsModule::Registration< NoiseReductionEffect > regNoiseReduction;
+     static BuiltinEffectsModule::Registration< DtmfGenerator > regDtmf;
+@@ -178,9 +182,11 @@ void BuiltinCollectionLoader::init()
+     REGISTER_AUDACITY_EFFECTS_SINGLETON_TYPE(SilenceViewModelFactory);
+     regView(SilenceGenerator::Symbol, u"qrc:/silencegen/SilenceView.qml");
+ 
++#if USE_SBSMS
+     REGISTER_AUDACITY_EFFECTS_SINGLETON_TYPE(SlidingStretchViewModelFactory);
+     REGISTER_AUDACITY_EFFECTS_SINGLETON_TYPE(SlidingStretchSettingModelFactory);
+     regView(SlidingStretchEffect::Symbol, u"qrc:/slidingstretch/SlidingStretchView.qml");
++#endif
+ 
+     qmlRegisterType<DynamicsTimeline>("Audacity.BuiltinEffectsCollection", 1, 0, "DynamicsTimeline");
+     qmlRegisterType<TimelineSourceModel>("Audacity.BuiltinEffectsCollection", 1, 0, "TimelineSourceModel");

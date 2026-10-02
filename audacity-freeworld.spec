@@ -5,8 +5,8 @@
 %endif
 
 Name:    audacity-freeworld
-Version: 4.0.0
-Release: 2%{?dist}
+Version: 4.0.1
+Release: 1%{?dist}
 Summary: Multitrack audio editor
 License: GPL-2.0-only AND GPL-3.0-only AND CC-BY-3.0
 URL:     https://www.audacityteam.org/
@@ -14,13 +14,29 @@ URL:     https://www.audacityteam.org/
 %define realname audacity
 Conflicts: %{realname}
 Source0: https://github.com/audacity/audacity/releases/download/Audacity-%{version}/audacity-sources-%{version}.tar.xz
+# audacity needs the .cpp files
+# git clone --recursive https://github.com/steinbergmedia/vst3sdk.git
+# delete the .git directories and tar
+Source1: vst3sdk.tar.xz
 Patch0:  audacity-4.0.0-desktop-name.patch
-Patch1:  audacity-soxr-conditional-simd32-sources.patch
+Patch1:  fix_disable_sbsms.patch
 
 # manual can be installed from the base Fedora Audacity package.
 
+BuildSystem: cmake
+BuildOption(conf): -DCMAKE_BUILD_TYPE=Release
+BuildOption(conf): -DEXTDEPS_OVERRIDE_ALL=SYSTEM
+BuildOption(conf): -DEXTDEPS_CACHE=offline-deps/
+BuildOption(conf): -DAU4_BUILD_MODE=release
+BuildOption(conf): -DAU4_BUILD_CONFIGURATION=app
+BuildOption(conf): -DMUSE_ENABLE_UNIT_TESTS:BOOL=OFF
+BuildOption(conf): -DMUSE_MODULE_DIAGNOSTICS_CRASHPAD_CLIENT:BOOL=OFF
+BuildOption(conf): -DMUSE_MODULE_UPDATE:BOOL=OFF
+BuildOption(conf): -DAU_BUILD_USAGEINFO_MODULE:BOOL=OFF
+BuildOption(conf): -DAU_USE_SBSMS:BOOL=OFF
+BuildOption(conf): -DAU_USE_SOUNDTOUCH:BOOL=ON
+BuildOption(conf): -DVST3SDK=$PWD/vst3sdk
 BuildRequires: chrpath
-BuildRequires: cmake
 BuildRequires: desktop-file-utils
 BuildRequires: gcc
 BuildRequires: gcc-c++
@@ -61,15 +77,24 @@ BuildRequires: pkgconfig(jack)
 BuildRequires: pkgconfig(libmpg123)
 BuildRequires: pkgconfig(libpng)
 BuildRequires: pkgconfig(libudev)
+BuildRequires: pkgconfig(lilv-0)
+BuildRequires: pkgconfig(lv2)
 BuildRequires: pkgconfig(ogg)
 BuildRequires: pkgconfig(opus)
 BuildRequires: pkgconfig(opusfile)
 BuildRequires: pkgconfig(pugixml)
 BuildRequires: pkgconfig(portaudio-2.0)
+BuildRequires: pkgconfig(RapidJSON)
 BuildRequires: pkgconfig(sndfile)
+BuildRequires: pkgconfig(soundtouch)
+BuildRequires: pkgconfig(soxr)
+BuildRequires: pkgconfig(sqlite3)
+BuildRequires: pkgconfig(suil-0)
+BuildRequires: pkgconfig(twolame)
 BuildRequires: pkgconfig(vorbis)
 BuildRequires: pkgconfig(wavpack) >= 5.2.0
 BuildRequires: pkgconfig(xkbcommon)
+BuildRequires: pkgconfig(zix-0)
 BuildRequires: pkgconfig(zlib)
 BuildRequires: lame-devel
 BuildRequires: wxGTK-devel
@@ -94,25 +119,9 @@ This build has support for mp3 and ffmpeg import/export.
 
 
 %prep
-%autosetup -p1 -n %{realname}-%{version}
+%autosetup -p1 -n %{realname}-%{version} -a1
 
-%build
-%cmake \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DEXTDEPS_OVERRIDE_ALL=SYSTEM \
-    -DEXTDEPS_CACHE=offline-deps/ \
-    -DAU4_BUILD_MODE=release \
-    -DAU4_BUILD_CONFIGURATION=app \
-    -DMUSE_ENABLE_UNIT_TESTS:BOOL=OFF \
-    -DMUSE_MODULE_DIAGNOSTICS_CRASHPAD_CLIENT:BOOL=OFF \
-    -DMUSE_MODULE_UPDATE:BOOL=OFF \
-    -DAU_BUILD_USAGEINFO_MODULE:BOOL=OFF \
-    -DAU_USE_SBSMS:BOOL=ON \
-    -DAU_USE_SOUNDTOUCH:BOOL=ON
-%cmake_build
-
-%install
-%cmake_install
+%install -a
 chrpath --delete %{buildroot}%{_bindir}/%{realname}
 
 %{find_lang} %{realname} --with-qt
@@ -144,6 +153,9 @@ desktop-file-install --dir %{buildroot}%{_datadir}/applications \
 %{_datadir}/mime/packages/audacity.xml
 
 %changelog
+* Thu Oct 01 2026 Leigh Scott <leigh123linux@gmail.com> - 4.0.1-1
+- Update to 4.0.1
+
 * Thu Sep 17 2026 Leigh Scott <leigh123linux@gmail.com> - 4.0.0-2
 - Rebuild for f45 ffmpeg9
 
