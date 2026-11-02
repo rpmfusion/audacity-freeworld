@@ -36,6 +36,7 @@ BuildOption(conf): -DAU_BUILD_USAGEINFO_MODULE:BOOL=OFF
 BuildOption(conf): -DAU_USE_SBSMS:BOOL=OFF
 BuildOption(conf): -DAU_USE_SOUNDTOUCH:BOOL=ON
 BuildOption(conf): -DVST3SDK=$PWD/vst3sdk
+BuildOption(conf): -DQT_QML_NO_CACHEGEN=ON
 BuildRequires: chrpath
 BuildRequires: desktop-file-utils
 BuildRequires: gcc
