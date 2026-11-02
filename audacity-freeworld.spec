@@ -5,7 +5,7 @@
 %endif
 
 Name:    audacity-freeworld
-Version: 4.0.1
+Version: 4.0.2
 Release: 1%{?dist}
 Summary: Multitrack audio editor
 License: GPL-2.0-only AND GPL-3.0-only AND CC-BY-3.0
@@ -73,6 +73,7 @@ BuildRequires: pkgconfig(flac++)
 BuildRequires: pkgconfig(freetype2)
 BuildRequires: pkgconfig(gl)
 BuildRequires: pkgconfig(harfbuzz)
+BuildRequires: pkgconfig(id3tag)
 BuildRequires: pkgconfig(jack)
 BuildRequires: pkgconfig(libmpg123)
 BuildRequires: pkgconfig(libpng)
@@ -120,6 +121,7 @@ This build has support for mp3 and ffmpeg import/export.
 
 %prep
 %autosetup -p1 -n %{realname}-%{version} -a1
+sed -i 's/^set(DEP_LIBS libid3tag)/set(DEP_LIBS id3tag)/' muse_deps/recipes/libid3tag/meta.cmake
 
 %install -a
 chrpath --delete %{buildroot}%{_bindir}/%{realname}
@@ -153,6 +155,9 @@ desktop-file-install --dir %{buildroot}%{_datadir}/applications \
 %{_datadir}/mime/packages/audacity.xml
 
 %changelog
+* Mon Nov 02 2026 Leigh Scott <leigh123linux@gmail.com> - 4.0.2-1
+- rebuilt
+
 * Thu Oct 01 2026 Leigh Scott <leigh123linux@gmail.com> - 4.0.1-1
 - Update to 4.0.1
 
